@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:enabled="true"
+        android:icon="@drawable/icon_home"
+        android:iconTint="#31a6d4"
+        android:title="" />
+    <item
+        android:id="@+id/map"
+        android:enabled="true"
+        android:icon="@drawable/icon_compass"
+        android:title="" />
+
+    <item
+        android:id="@+id/favorite"
+        android:enabled="true"
+        android:icon="@drawable/icon_favorite"
+        android:title="" />
+
+    <item
+        android:id="@+id/translate"
+        android:enabled="true"
+        android:icon="@drawable/icon_translate"
+        android:title="" />
+
+    <item
+        android:id="@+id/profile"
+        android:enabled="true"
+        android:icon="@drawable/icon_profile"
+        android:title="" />
+
+</menu>
