@@ -229,18 +229,6 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:orientation="horizontal"-->
-        <!--            android:scrollbars="vertical">-->
-
-        <!--            <ListView-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="match_parent"-->
-        <!--                android:scrollbars="vertical"-->
-        <!--                tools:listitem="@layout/tour_card" />-->
-        <!--        </LinearLayout>-->
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -250,14 +238,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scrollbars="vertical"
-                    tools:listitem="@layout/tour_card" />
+                <!--                <ListView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    android:scrollbars="vertical"-->
+                <!--                    tools:listitem="@layout/tour_card" />-->
+
+                <include layout="@layout/tour_card" />
+
+                <include layout="@layout/tour_card" />
+
+                <include layout="@layout/tour_card" />
+
+                <include layout="@layout/tour_card" />
+
             </LinearLayout>
         </HorizontalScrollView>
 
     </LinearLayout>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_corner"
+        app:menu="@menu/bottom_navigation_menu" />
+
 </LinearLayout>
+
