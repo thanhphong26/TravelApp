@@ -23,7 +23,7 @@
             android:orientation="horizontal">
 
             <include
-                android:id="@+id/imageView5"
+                android:id="@+id/avt"
                 layout="@layout/circular_avt"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -64,7 +64,6 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:src="@tools:sample/avatars"
                         app:srcCompat="@drawable/right_arrow" />
                 </LinearLayout>
 
@@ -92,7 +91,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/profile_user" />
 
                 <LinearLayout
@@ -122,11 +120,10 @@
 
                 <ImageView
                     android:id="@+id/more_profile_img"
-                    android:layout_width="5dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/right_arrow" />
             </LinearLayout>
 
@@ -151,7 +148,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/discount" />
 
                 <LinearLayout
@@ -181,11 +177,10 @@
 
                 <ImageView
                     android:id="@+id/more_discount_img"
-                    android:layout_width="5dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/right_arrow" />
             </LinearLayout>
 
@@ -210,7 +205,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/point" />
 
                 <LinearLayout
@@ -240,11 +234,10 @@
 
                 <ImageView
                     android:id="@+id/more_loyalty_point_img"
-                    android:layout_width="5dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/right_arrow" />
             </LinearLayout>
 
@@ -269,7 +262,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/history" />
 
                 <LinearLayout
@@ -299,11 +291,10 @@
 
                 <ImageView
                     android:id="@+id/more_history_oder_img"
-                    android:layout_width="5dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/right_arrow" />
             </LinearLayout>
 
@@ -329,7 +320,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/rating" />
 
                 <LinearLayout
@@ -359,11 +349,10 @@
 
                 <ImageView
                     android:id="@+id/more_rating_img"
-                    android:layout_width="5dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/right_arrow" />
             </LinearLayout>
 
@@ -388,7 +377,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/language" />
 
                 <LinearLayout
@@ -411,11 +399,10 @@
 
                 <ImageView
                     android:id="@+id/more_language_img"
-                    android:layout_width="5dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/right_arrow" />
             </LinearLayout>
 
@@ -440,7 +427,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/info" />
 
                 <LinearLayout
@@ -463,11 +449,10 @@
 
                 <ImageView
                     android:id="@+id/more_policy_img"
-                    android:layout_width="5dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/right_arrow" />
             </LinearLayout>
 
@@ -493,7 +478,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:padding="10dp"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/logout" />
 
                 <LinearLayout
