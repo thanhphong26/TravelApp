@@ -7,5 +7,5 @@
     <color name="colorPrimaryDark">#04626F</color>
     <color name="gray">#999597</color>
     <color name="yellow">#FFEB3B</color>
-
+    <color name="bg_blue_transparent">#941FD0E8</color>
 </resources>
