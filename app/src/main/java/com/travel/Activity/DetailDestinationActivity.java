@@ -3,10 +3,13 @@ package com.travel.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
+import android.widget.TextView;
 
 import com.travel.R;
 
-public class MainActivity extends AppCompatActivity {
+public class DetailDestinationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
