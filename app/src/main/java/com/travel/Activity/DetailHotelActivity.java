@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.travel.R;
 
-public class MainActivity extends AppCompatActivity {
+public class DetailHotelActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_restaurant);
+        setContentView(R.layout.activity_detail_hotel);
     }
 }
