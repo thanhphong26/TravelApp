@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".Activity.DetailTourActivity">
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
@@ -102,7 +99,7 @@
                                 android:id="@+id/imageView18"
                                 android:layout_width="26dp"
                                 android:layout_height="26dp"
-                                app:srcCompat="@drawable/plane" />
+                                app:srcCompat="@drawable/flight_dep" />
 
                             <EditText
                                 android:id="@+id/edtCurrentPlace"
@@ -132,7 +129,7 @@
                             <ImageView
                                 android:layout_width="26dp"
                                 android:layout_height="26dp"
-                                app:srcCompat="@drawable/plane" />
+                                app:srcCompat="@drawable/flight_arr" />
 
                             <EditText
                                 android:id="@+id/edtDestination"
@@ -243,4 +240,3 @@
             </ScrollView>
         </androidx.core.widget.NestedScrollView>
  </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</LinearLayout>

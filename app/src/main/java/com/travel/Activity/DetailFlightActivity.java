@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.travel.R;
 
-public class MainActivity extends AppCompatActivity {
+public class DetailFlightActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
