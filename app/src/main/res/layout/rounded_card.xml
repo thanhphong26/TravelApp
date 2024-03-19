@@ -5,10 +5,10 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/avt"
-        app:shapeAppearanceOverlay="@style/circular"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/adventure"
+        app:shapeAppearanceOverlay="@style/rounded"
         />
 
 </LinearLayout>
