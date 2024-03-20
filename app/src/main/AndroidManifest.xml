@@ -77,6 +77,12 @@
             android:name=".Activity.DestinationActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.FavoriteActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.MainActivity"
             android:exported="true">
             <intent-filter>
