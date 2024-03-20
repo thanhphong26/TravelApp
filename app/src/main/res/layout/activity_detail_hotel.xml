@@ -283,7 +283,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="5dp"
                         android:orientation="horizontal">
@@ -305,7 +305,7 @@
 
                         <RatingBar
                             android:id="@+id/ratingBar2"
-                            android:layout_width="230dp"
+                            android:layout_width="235dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="-40dp"
                             android:layout_marginTop="-10dp"
@@ -319,7 +319,7 @@
                             android:id="@+id/textView24"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="-15dp"
+                            android:layout_marginLeft="-18dp"
                             android:text="Từ 48 đánh giá" />
                         <ImageView
                             android:id="@+id/imageView12"
