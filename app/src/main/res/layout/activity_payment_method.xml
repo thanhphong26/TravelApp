@@ -41,19 +41,32 @@
             android:layout_marginTop="15dp"
             android:layout_marginLeft="15dp">
         </TextView>
-        <ImageButton
-            android:layout_width="310dp"
-            android:layout_height="45dp"
-            android:src="@drawable/vietcom"
-            android:layout_gravity="center">
-        </ImageButton>
-        <ImageButton
-            android:layout_width="310dp"
-            android:layout_height="45dp"
-            android:src="@drawable/mbbank"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp">
-        </ImageButton>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/vietcom_icon"
+            android:text="Chuyển tiền qua Vietcombank"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:layout_marginTop="5dp"
+            app:backgroundTint="@color/white"
+            android:background="@drawable/button_payment_method"
+            android:textAlignment="textStart"
+            android:layout_marginLeft="20dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/button_payment_method"
+            android:drawableLeft="@drawable/mb_icon"
+            android:text="Chuyển tiền qua MBBank"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            app:backgroundTint="@color/white" />
+
         <TextView
             android:layout_width="310dp"
             android:layout_height="30dp"
@@ -62,12 +75,18 @@
             android:layout_marginTop="15dp"
             android:layout_marginLeft="15dp">
         </TextView>
-        <ImageButton
-            android:layout_width="310dp"
-            android:layout_height="45dp"
-            android:src="@drawable/momo"
-            android:layout_gravity="center">
-        </ImageButton>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/momo_icon"
+            android:text="Chuyển tiền qua MoMo E-Wallet"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:layout_marginTop="5dp"
+            app:backgroundTint="@color/white"
+            android:background="@drawable/button_payment_method"
+            android:textAlignment="textStart"
+            android:layout_marginLeft="20dp"/>
         <TextView
             android:layout_width="310dp"
             android:layout_height="30dp"
@@ -76,11 +95,17 @@
             android:layout_marginTop="15dp"
             android:layout_marginLeft="15dp">
         </TextView>
-        <ImageButton
-            android:layout_width="310dp"
-            android:layout_height="45dp"
-            android:src="@drawable/ggtt"
-            android:layout_gravity="center">
-        </ImageButton>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/gdtt"
+            android:text="Giao dịch tại trực tiếp"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:layout_marginTop="5dp"
+            app:backgroundTint="@color/white"
+            android:background="@drawable/button_payment_method"
+            android:textAlignment="textStart"
+            android:layout_marginLeft="20dp"/>
     </LinearLayout>
 </LinearLayout>
