@@ -29,5 +29,4 @@
         android:enabled="true"
         android:icon="@drawable/icon_profile"
         android:title="" />
-
 </menu>

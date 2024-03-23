@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#BBE7E9">
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:backgroundTint="#BBE7E9"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/back_checkout">
+        </ImageButton>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="18dp"
+            android:text="Chọn phương thức thanh toán"
+            android:textSize="16sp"
+            android:textStyle="normal|bold"
+            android:visibility="visible">
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E8EAEA"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="310dp"
+            android:layout_height="30dp"
+            android:text="Chuyển khoản ngân hàng"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp">
+        </TextView>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/vietcom_icon"
+            android:text="Chuyển tiền qua Vietcombank"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:layout_marginTop="5dp"
+            app:backgroundTint="@color/white"
+            android:background="@drawable/button_payment_method"
+            android:textAlignment="textStart"
+            android:layout_marginLeft="20dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/button_payment_method"
+            android:drawableLeft="@drawable/mb_icon"
+            android:text="Chuyển tiền qua MBBank"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            app:backgroundTint="@color/white" />
+
+        <TextView
+            android:layout_width="310dp"
+            android:layout_height="30dp"
+            android:text="MoMo E-Wallet"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp">
+        </TextView>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/momo_icon"
+            android:text="Chuyển tiền qua MoMo E-Wallet"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:layout_marginTop="5dp"
+            app:backgroundTint="@color/white"
+            android:background="@drawable/button_payment_method"
+            android:textAlignment="textStart"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:layout_width="310dp"
+            android:layout_height="30dp"
+            android:text="Giao dịch tại quầy"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp">
+        </TextView>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/gdtt"
+            android:text="Giao dịch tại trực tiếp"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:layout_marginTop="5dp"
+            app:backgroundTint="@color/white"
+            android:background="@drawable/button_payment_method"
+            android:textAlignment="textStart"
+            android:layout_marginLeft="20dp"/>
+    </LinearLayout>
+</LinearLayout>
