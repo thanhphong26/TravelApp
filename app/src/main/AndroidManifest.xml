@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -19,11 +19,29 @@
             android:exported="false" />
         <activity
             android:name=".Activity.HomeActivity"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.TravelApp" />
         <activity
             android:name=".Activity.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.TourActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.HotelActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.RestaurantActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.DestinationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.FavoriteActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.MainActivity"
