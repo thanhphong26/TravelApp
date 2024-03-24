@@ -21,9 +21,6 @@
             android:name=".Activity.FlightActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.DetailItineraryActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activity.DetailRestaurantActivity"
             android:exported="false" />
         <activity
@@ -39,7 +36,7 @@
             android:name=".Activity.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.HomeActivity"
+            android:name=".Activity.MainActivity"
             android:exported="false"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.TravelApp" />
@@ -47,7 +44,7 @@
             android:name=".Activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.MainActivity"
+            android:name=".Activity.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
