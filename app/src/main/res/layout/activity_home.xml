@@ -40,7 +40,7 @@
                 android:gravity="center"
                 android:text="Hi, Tien ne"
                 android:textAlignment="textStart"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:textFontWeight="@integer/material_motion_duration_short_1"
                 android:textSize="20sp"
                 android:textStyle="italic"

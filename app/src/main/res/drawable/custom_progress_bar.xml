@@ -5,7 +5,7 @@
         <clip>
             <shape>
                 <corners android:radius="20dp" /> <!-- Adjust the corner radius as needed -->
-                <solid android:color="#FFC107" /> <!-- Change the progress color as needed -->
+                <solid android:color="@color/yellow_cus" /> <!-- Change the progress color as needed -->
             </shape>
         </clip>
     </item>

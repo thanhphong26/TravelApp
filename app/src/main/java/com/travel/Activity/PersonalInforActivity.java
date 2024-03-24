@@ -38,7 +38,7 @@ public class PersonalInforActivity extends AppCompatActivity {
         edtLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(PersonalInforActivity.this, "Edit Date of Birth", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PersonalInforActivity.this, "Chỉnh sửa ngày sinh", Toast.LENGTH_SHORT).show();
             }
         });
         dialog.show();

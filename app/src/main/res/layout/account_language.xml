@@ -72,8 +72,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@null"
-                        android:inputType="none"
-                        android:textColor="#03A9F4"/>
+                        android:inputType="none"/>
 
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -87,7 +86,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
-                android:backgroundTint="#FF9800"
+                android:backgroundTint="@color/yellow_btn"
                 android:fontFamily="@font/montserrat_semibold"
                 android:gravity="center"
                 android:text="Lưu"

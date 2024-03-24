@@ -101,7 +101,7 @@
                             android:layout_marginLeft="75dp"
                             android:fontFamily="@font/montserrat_medium"
                             android:text="Điểm của bạn"
-                            android:textColor="#B1A9A9"
+                            android:textColor="@color/gray1_cus"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -128,7 +128,7 @@
                             android:gravity="center"
                             android:text="2000 điểm"
                             android:textAlignment="gravity"
-                            android:textColor="#009688"
+                            android:textColor="@color/green_loyalty_point"
                             android:textSize="20sp" />
 
                     </LinearLayout>
@@ -175,7 +175,7 @@
                                 android:fontFamily="@font/montserrat_medium"
                                 android:gravity="center"
                                 android:text="Bạc"
-                                android:textColor="#FFFFFF"
+                                android:textColor="@color/white"
                                 android:textSize="12sp" />
                         </LinearLayout>
 
@@ -191,7 +191,7 @@
                         android:minWidth="16dip"
                         android:progress="2000"
                         android:progressDrawable="@drawable/custom_progress_bar"
-                        android:progressTint="#FFC107" />
+                        android:progressTint="@color/yellow_cus" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -205,7 +205,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/montserrat_medium"
                             android:text="2000/2500"
-                            android:textColor="#A6A0A0"
+                            android:textColor="@color/gray1_cus"
                             android:textSize="12sp" />
 
                         <TextView
@@ -217,7 +217,7 @@
                             android:gravity="right"
                             android:text="2500"
                             android:textAlignment="gravity"
-                            android:textColor="#A6A0A0"
+                            android:textColor="@color/gray1_cus"
                             android:textSize="12sp" />
                     </LinearLayout>
 
