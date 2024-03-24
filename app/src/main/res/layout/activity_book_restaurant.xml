@@ -63,11 +63,10 @@
                android:layout_marginTop="10dp"
                android:layout_marginLeft="10dp"
                android:layout_marginRight="10dp">
-               <TableLayout
+               <LinearLayout
                    android:layout_width="match_parent"
+                   android:orientation="vertical"
                    android:layout_height="wrap_content">
-                   <TableRow>
-
                        <TextView
                            android:id="@+id/tv_ngaynhan"
                            android:layout_width="329dp"
@@ -77,11 +76,17 @@
                            android:text="2 tháng 3"
                            android:textAlignment="center"
                            android:textStyle="bold"></TextView>
-
-                   </TableRow>
-                   <TableLayout>
-                       <TableRow>
-
+                   <View
+                       android:layout_width="match_parent"
+                       android:layout_height="2dp"
+                       android:layout_marginLeft="10dp"
+                       android:layout_marginBottom="5dp"
+                       android:layout_marginRight="10dp"
+                       android:background="#DAD6D6"></View>
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal">
                            <TextView
                                android:id="@+id/tv_tenHotel"
                                android:layout_width="199dp"
@@ -91,14 +96,18 @@
                                android:textSize="13sp"
                                android:textStyle="bold"></TextView>
 
-                           <ImageView
-                               android:id="@+id/img_hotel"
-                               android:layout_width="140dp"
-                               android:layout_height="wrap_content"
-                               android:layout_gravity="center"
-                               android:src="@drawable/nhahang1"></ImageView>
-                       </TableRow>
-                   </TableLayout>
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_marginLeft="5dp"
+                           android:layout_marginRight="5dp">
+                           <com.makeramen.roundedimageview.RoundedImageView
+                               android:layout_width="match_parent"
+                               android:layout_height="80dp"
+                               android:src="@drawable/img_restaurant1"
+                               app:riv_corner_radius="10dp"></com.makeramen.roundedimageview.RoundedImageView>
+                       </LinearLayout>
+                   </LinearLayout>
                    <TextView
                        android:id="@+id/tv_moTa"
                        android:layout_width="match_parent"
@@ -106,7 +115,7 @@
                        android:layout_margin="5dp"
                        android:text="Bữa tối tại nhà hàng dành cho người lớn"
                        android:textSize="11sp"></TextView>
-               </TableLayout>
+               </LinearLayout>
            </LinearLayout>
            <LinearLayout
                android:layout_width="match_parent"

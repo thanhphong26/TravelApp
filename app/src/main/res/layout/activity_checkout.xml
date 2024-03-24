@@ -55,12 +55,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="90dp"
                     android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:src="@drawable/pic_checkout"></ImageView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="5dp">
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/img_tour1"
+                            app:riv_corner_radius="10dp"></com.makeramen.roundedimageview.RoundedImageView>
+                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
