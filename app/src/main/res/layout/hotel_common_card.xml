@@ -37,7 +37,7 @@
             android:text="Hotel Nikko SaiGon"
             android:textAlignment="inherit"
             android:textAllCaps="false"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/white"
             android:textSize="11dp" />
 
 
