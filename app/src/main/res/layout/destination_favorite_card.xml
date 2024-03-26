@@ -112,7 +112,7 @@
                             android:layout_height="28dp"
                             android:layout_weight="10"
                             android:text="4.7"
-                            android:textColor="#FFD600"
+                            android:textColor="@color/yellow"
                             android:textSize="14sp" />
 
                         <ImageView

@@ -100,7 +100,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="5dp"
                                 android:text="4.7"
-                                android:textColor="#FFD600"
+                                android:textColor="@color/yellow"
                                 android:textSize="11sp" />
 
 
