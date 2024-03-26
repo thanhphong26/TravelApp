@@ -31,13 +31,12 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/imageView"
+                    <include
+                        android:id="@+id/avatar"
+                        layout="@layout/circular_avt"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:maxHeight="50dp"
-                        android:minHeight="50dp"
-                        app:srcCompat="@drawable/avatar" />
+                        android:maxHeight="50dp" />
 
                     <TextView
                         android:id="@+id/textView"
