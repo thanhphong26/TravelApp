@@ -36,14 +36,12 @@
 
                     <ImageView
                         android:id="@+id/imgBack"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         app:srcCompat="@drawable/left" />
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:text="Tìm Kiếm Chuyến Bay"
                         android:gravity="center"
                         android:textSize="18dp"
