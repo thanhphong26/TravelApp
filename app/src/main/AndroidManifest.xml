@@ -57,6 +57,9 @@
             android:name=".Activity.SignUpActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.PersonalInforActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home"

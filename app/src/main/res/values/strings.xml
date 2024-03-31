@@ -3,4 +3,8 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="title_activity_destination">DestinationActivity</string>
+    <string name="app_name1">Dropdown Menu</string>
+    <string name="select">Select Item</string>
+    <string name="select_area">Chọn khu vực của bạn</string>
+    <string name="select_language">Chọn ngôn ngữ của bạn</string>
 </resources>
