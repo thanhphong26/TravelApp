@@ -1,0 +1,12 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background" android:drawable="@drawable/background_progress_bar" />
+
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <corners android:radius="20dp" /> <!-- Adjust the corner radius as needed -->
+                <solid android:color="@color/yellow_cus" /> <!-- Change the progress color as needed -->
+            </shape>
+        </clip>
+    </item>
+</layer-list>
