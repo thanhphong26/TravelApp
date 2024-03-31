@@ -7,11 +7,13 @@ import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.travel.R;
 
 public class HomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +28,11 @@ public class HomeActivity extends AppCompatActivity {
         LinearLayout ly_hotel = (LinearLayout) findViewById(R.id.hotel_page);
         LinearLayout ly_restaurant = (LinearLayout) findViewById(R.id.restaurant_page);
         LinearLayout ly_flight = (LinearLayout) findViewById(R.id.flight_page);
+
+        //*INFO: Load image from url
+        ImageView avatar = (ImageView) findViewById(R.id.home_avatar);
+        Glide.with(this).load("https://storage.googleapis.com/web-budget1/Image/Items/10100101_2.png").centerCrop().into(avatar);
+        
         ly_tour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

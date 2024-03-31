@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/home_avatar"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/avatar"
