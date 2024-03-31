@@ -1,226 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar_layout"
+    android:layout_height="210dp"
+    android:orientation="vertical">
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
+        android:layout_height="5dp"
+        android:background="#DAD6D6"></View>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp">
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/img_tour1"
+                app:riv_corner_radius="10dp"></com.makeramen.roundedimageview.RoundedImageView>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:contentScrim="@color/white"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+            android:orientation="vertical">
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/blue"
-                app:layout_collapseMode="pin">
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:text="Tour 4 ngày 3 đêm Hà Giang"
+                android:textStyle="bold"
+                android:textSize="15sp">
+            </TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="92dp"
+                android:text="Travelers planning a trip to Europe should consider visiting Italy, known for its rich history, stunning a"
+                android:textSize="13sp"
+                android:textStyle="normal">
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:background="#DAD6D6"></View>
 
-                <ImageView
-                    android:id="@+id/imgBack"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/icon_back" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="56dp"
-                    android:gravity="center"
-                    android:textAlignment="center">
+        <TextView
+            android:layout_width="90dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:text="Bạn đã đánh giá"
+            android:textSize="10sp">
 
-                    <TextView
-                        android:id="@+id/textView16"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="Đánh giá"
-                        android:textColor="@color/white"
-                        android:textSize="20sp" />
-                </LinearLayout>
+        </TextView>
 
-            </androidx.appcompat.widget.Toolbar>
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
+        <RatingBar
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:rating="3.5"
+            android:layout_marginTop="4dp"
+            android:progressTint="#FFB800"
+            android:stepSize="0.1" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:gravity="right"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:text="11/11/2023"
+            android:textSize="10sp">
+        </TextView>
+    </LinearLayout>
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/material_dynamic_neutral90"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="15dp"
-                        android:layout_marginVertical="5dp"
-                        android:orientation="vertical">
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <include
-                                android:id="@+id/tour_img"
-                                layout="@layout/rounded_card"
-                                android:layout_width="80dp"
-                                android:layout_height="80dp"
-                                android:maxHeight="80dp" />
-
-                            <LinearLayout
-                                android:layout_width="70dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                android:paddingHorizontal="10dp">
-
-                                <TextView
-                                    android:id="@+id/tour_name"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_semibold"
-                                    android:text="Tour Hà Giang 4 ngày 3 đêm"
-                                    android:textSize="16sp" />
-
-                                <TextView
-                                    android:id="@+id/tour_description"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_light"
-                                    android:text="Travelers planning a trip to Europe should consider visiting Italy, known for its rich history, stunning aTravelers planning a trip to Europe should consider visiting Italy, known for its rich history, stunning a"
-                                    android:textSize="12sp" />
-                            </LinearLayout>
-                        </LinearLayout>
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:background="@color/white"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="15dp"
-                    android:paddingBottom="30dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:orientation="horizontal">
-
-                        <include
-                            android:id="@+id/avt"
-                            layout="@layout/circular_avt"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:maxHeight="50dp" />
-
-
-                        <TextView
-                            android:id="@+id/textView11"
-                            android:layout_width="222dp"
-                            android:layout_height="25dp"
-                            android:layout_marginLeft="10dp"
-                            android:fontFamily="@font/montserrat_semibold"
-                            android:text="Gipboi" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/textView13"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="20dp"
-                            android:fontFamily="@font/montserrat_light"
-                            android:gravity="center"
-                            android:text="Bạn đánh giá chất lượng như thế nào?" />
-
-                        <RatingBar
-                            android:id="@+id/ratingBar2"
-                            android:layout_width="235dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:numStars="5"
-                            android:progressTint="#FFB800"
-                            android:rating="4.9"
-                            android:scaleX="0.5"
-                            android:scaleY="0.5"
-                            android:stepSize="0.5" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/border_rounded_rectangle"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <EditText
-                                android:id="@+id/editTextText2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="15dp"
-                                android:background="@null"
-                                android:ems="10"
-                                android:fontFamily="@font/montserrat_light"
-                                android:hint="Hãy để lại đánh giá của bạn"
-                                android:inputType="text|textMultiLine"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                        <Button
-                            android:id="@+id/rating_button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:layout_marginTop="20dp"
-                            android:layout_weight="1"
-                            android:backgroundTint="#2196F3"
-                            android:text="Gửi đánh giá"
-                            android:textColorHighlight="#03A9F4"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                </LinearLayout>
-            </LinearLayout>
-        </ScrollView>
-    </androidx.core.widget.NestedScrollView>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        android:text="This formula will generate a random paragraph that could be used as a review or feedback based on a rating."
+        android:textStyle="normal"
+        android:textSize="10sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+    </TextView>
+</LinearLayout>
