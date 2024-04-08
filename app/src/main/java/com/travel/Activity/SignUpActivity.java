@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -51,7 +52,7 @@ public class SignUpActivity extends AppCompatActivity {
                 UserModel userModel=new UserModel(username,email,password, createdAt);
                 Random otp=new Random();
                 int code=otp.nextInt(8999)+1000;
-                new SendEmail(email, code) {
+                AsyncTask<Void, Void, Boolean> execute = new SendEmail(email, code) {
                     @Override
                     protected void onPostExecute(Boolean result) {
                         if (result) {
