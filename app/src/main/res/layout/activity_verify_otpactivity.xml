@@ -6,6 +6,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#63DAEA">
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_back"
+                android:background="@null"
+                android:layout_marginLeft="5dp">
+            </ImageButton>
+        </Toolbar>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
         android:layout_marginBottom="150dp"
         android:layout_marginLeft="20dp"
@@ -48,6 +66,7 @@
             android:textStyle="italic"
             android:text="(Mã xác thực sẽ hết hạn sau 1 phút)"/>
         <TextView
+            android:id="@+id/txtTimeConfirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"

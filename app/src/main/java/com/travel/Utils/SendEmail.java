@@ -81,8 +81,7 @@ public class SendEmail extends AsyncTask<Void, Void, Boolean> {
             message.setFrom(new InternetAddress(senderEmail));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
             message.setSubject("Xác thực email từ ứng dụng TravelApp");
-            message.setText("Mã OTP xác nhận của bạn là: " + code + ". Mã có thời hạn trong vòng 5 phút từ lúc nhận email này. Vui lòng xác nhận ngay để hoàn tất quá trình đăng ký tài khoản. Xin cảm ơn!");
-
+            message.setText("Mã OTP xác nhận của bạn là: " + code + ". Mã có thời hạn trong vòng 1 phút từ lúc nhận email này. Vui lòng xác nhận ngay để hoàn tất quá trình đăng ký tài khoản. Xin cảm ơn!");
             Transport.send(message);
             return true;
         } catch (MessagingException e) {
