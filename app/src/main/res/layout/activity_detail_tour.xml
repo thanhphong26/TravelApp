@@ -23,14 +23,10 @@
             android:fitsSystemWindows="true"
             app:contentScrim="@color/white"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-            <ImageView
-                android:id="@+id/imageView"
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager2"
                 android:layout_width="match_parent"
-                android:layout_height="292dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/lung_cu_tour"
-                app:layout_collapseMode="parallax" />
+                android:layout_height="292dp"/>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -200,54 +196,6 @@
 
                             <ImageView
                                 android:id="@+id/img1"
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:background="@color/white"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/lung_cu_tour" />
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_margin="5dp"
-                            android:elevation="10dp"
-                            app:cardCornerRadius="8dp">
-
-                            <ImageView
-                                android:id="@+id/img2"
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:background="@color/white"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/lung_cu_tour" />
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_margin="5dp"
-                            android:elevation="10dp"
-                            app:cardCornerRadius="8dp">
-
-                            <ImageView
-                                android:id="@+id/img3"
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:background="@color/white"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/lung_cu_tour" />
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_margin="5dp"
-                            android:elevation="10dp"
-                            app:cardCornerRadius="8dp">
-
-                            <ImageView
-                                android:id="@+id/img4"
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
                                 android:background="@color/white"
