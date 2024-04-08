@@ -52,11 +52,11 @@ public class LoginActivity extends AppCompatActivity {
     private boolean checkUser(String email, String password) {
         boolean isValid = false;
         database = databaseHelper.openDatabase();
+        Cursor cursor=null;
         if (database != null) {
-            String query = "SELECT * FROM users WHERE email = ? AND password = ?";
-            Cursor cursor = null;
             try {
-                cursor = database.rawQuery(query, new String[]{email, password});
+                cursor = database.query("users", null, "email = ? AND password = ?", new String[]{email, password}, null, null, null);
+                //cursor = database.rawQuery(query, new String[]{email, password});
                 if (cursor != null && cursor.moveToFirst()) {
                     isValid = true;
                 }
