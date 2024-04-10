@@ -65,13 +65,14 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView12"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/txtNameTour"
+                    android:layout_width="264dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
-                    android:text="Tour Hà Giang"
-                    android:textSize="24dp"
+                    android:inputType="textMultiLine"
+                    android:text="Tour Ngày Tham Quan Bà Nà Hills Từ Đà Nẵng"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -130,7 +131,7 @@
 
                     <ImageView
                         android:id="@+id/imgLocation"
-                        android:layout_width="20dp"
+                        android:layout_width="18dp"
                         android:layout_height="20dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="20dp"
@@ -145,36 +146,25 @@
                     android:layout_marginEnd="15dp"
                     android:background="@color/gray"
                     android:layout_height="1dp" />
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="5dp"
-                    app:cardCornerRadius="10dp"
-                    android:layout_marginLeft="15dp"
-                    app:cardElevation="2dp"
-                    app:contentPadding="10dp"
-                    app:cardBackgroundColor="@android:color/white"
-                    app:cardUseCompatPadding="false"
-                    app:cardPreventCornerOverlap="false"
-                    app:cardMaxElevation="2dp"
-                    android:layout_height="wrap_content" >
-                    <TextView
-                        android:id="@+id/txtDescription"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="The sun was shining brightly as the birds chirped merrily in the trees. A gentle breeze rustled the leaves, creating a soothing melody that filled the air. The flowers bloomed in a riot of colors, painting the landscape with vibrant hues. It was a perfect day to be outside, enjoying the beauty of nature and soaking in the warmth of the sun. Everything seemed to be in harmony, as if the world itself was celebrating the joy of life." />
-                </androidx.cardview.widget.CardView>
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="15dp"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:text="Hình ảnh"/>
+                    android:background="@drawable/tour_card_background"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/txtDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginRight="5dp"
+                        android:inputType="textMultiLine"
+                        android:layout_marginTop="10dp"
+                        android:text="The sun was shining brightly as the birds chirped merrily in the trees. A gentle breeze rustled the leaves, creating a soothing melody that filled the air. The flowers bloomed in a riot of colors, painting the landscape with vibrant hues. It was a perfect day to be outside, enjoying the beauty of nature and soaking in the warmth of the sun. Everything seemed to be in harmony, as if the world itself was celebrating the joy of life." />
+
+                </LinearLayout>
 
                 <HorizontalScrollView
                     android:layout_width="match_parent"
@@ -186,24 +176,6 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
                         android:orientation="horizontal">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_margin="5dp"
-                            android:elevation="10dp"
-                            app:cardCornerRadius="8dp">
-
-                            <ImageView
-                                android:id="@+id/img1"
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:background="@color/white"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/lung_cu_tour" />
-                        </androidx.cardview.widget.CardView>
-
-
                     </LinearLayout>
                 </HorizontalScrollView>
                 <LinearLayout
@@ -320,92 +292,20 @@
                                 android:text="Hoàn hủy miễn phí trong 24h" />
                         </LinearLayout>
                         <Button
-                            android:layout_width="250dp"
+                            android:id="@+id/btnItinerary"
+                            android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:layout_marginTop="15dp"
-                            android:backgroundTint="@color/white"
                             android:layout_marginBottom="10dp"
-                            android:layout_gravity="center"
+                            app:backgroundTint="@null"
                             android:textColor="@color/black"
-                            android:drawableLeft="@drawable/calendar"
+                            android:drawableLeft="@drawable/itinerary"
                             android:background="@drawable/boder_button"
-                            android:text="Xem lịch trình chi tiết"/>
-                            <TextView
-                                android:id="@+id/textView19"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
-                                android:text="Bao gồm"
-                                android:textStyle="bold" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    app:srcCompat="@drawable/check" />
-
-                                <TextView
-                                    android:id="@+id/txtInclude1"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="10dp"
-                                    android:text="1 Vé vào cổng" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    app:srcCompat="@drawable/check" />
-
-                                <TextView
-                                    android:id="@+id/txtInclude2"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="10dp"
-                                    android:text="Xe trung chuyển" />
-                            </LinearLayout>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
-                                android:text="Không bao gồm"
-                                android:textStyle="bold"></TextView>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    app:srcCompat="@drawable/remove" />
-
-                                <TextView
-                                    android:id="@+id/txtNotInclude"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="10dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:text="Chi phí cá nhân khác" />
-                            </LinearLayout>
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:paddingLeft="60dp"
+                            android:paddingRight="60dp"
+                            android:text="Xem chi tiết lịch trình"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -432,7 +332,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView22"
+                            android:id="@+id/txtRatingAverage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
@@ -459,11 +359,11 @@
                             android:scaleY="0.5"
                             android:stepSize="0.5"/>
                         <TextView
-                            android:id="@+id/textView24"
+                            android:id="@+id/txtCountRating"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="-18dp"
-                            android:text="Từ 48 đánh giá" />
+                            android:text="Từ 48 đánh giá >" />
                         <ImageView
                             android:id="@+id/imageView12"
                             android:layout_width="20dp"
@@ -472,21 +372,17 @@
                             app:srcCompat="@drawable/chevron" />
                     </LinearLayout>
                     <LinearLayout
+                        android:id="@+id/layoutReview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginBottom="70dp"
                         android:orientation="vertical">
-<!--                        <ListView-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:id="@+id/listView"-->
-<!--                            android:layout_marginTop="10dp"-->
-<!--                            android:layout_marginLeft="15dp"-->
-<!--                            tools:listitem="@layout/review_item" />-->
-                        <include layout="@layout/review_item"/>
-                        <include layout="@layout/review_item"/>
-
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            android:id="@+id/recyclerViewReview"/>
                     </LinearLayout>
 
 
@@ -520,6 +416,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/txtPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="đ 755,666"

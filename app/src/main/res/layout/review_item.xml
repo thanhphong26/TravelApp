@@ -24,12 +24,13 @@
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/imageView2"
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/edit_avt"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:background="@drawable/circle_background_user"
-                    app:srcCompat="@drawable/icon_profile" />
+                    android:layout_gravity="center"
+                    android:src="@drawable/profile_user"
+                    app:shapeAppearanceOverlay="@style/circular" />
 
                 <TextView
                     android:id="@+id/txtUsername"
@@ -50,13 +51,13 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView17"
+                    android:id="@+id/txtReviewDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="17/12/2024" />
 
                 <TextView
-                    android:id="@+id/textView18"
+                    android:id="@+id/txtRating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="right"
@@ -74,9 +75,10 @@
                 android:layout_marginTop="10dp">
 
                 <TextView
-                    android:id="@+id/textView27"
+                    android:id="@+id/txtReview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
                     android:textSize="14dp"
                     android:text="View rất đẹp, như ở thiên đường mộng mơ, rất nhiều góc nên thơ." />
             </LinearLayout>
@@ -89,7 +91,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView13"
+                    android:id="@+id/btnLike"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:srcCompat="@drawable/like" />

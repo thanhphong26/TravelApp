@@ -2,20 +2,20 @@ package com.travel.Model;
 
 public class ImageTourModel {
     private int imageId;
-    private TourModel tour;
+    private int  tourId;
     private String image;
 
     public ImageTourModel() {
     }
 
-    public ImageTourModel(TourModel tour, String image) {
-        this.tour = tour;
+    public ImageTourModel(int imageId, int tourId, String image) {
+        this.imageId = imageId;
+        this.tourId = tourId;
         this.image = image;
     }
 
-    public ImageTourModel(int imageId, TourModel tour, String image) {
-        this.imageId = imageId;
-        this.tour = tour;
+    public ImageTourModel(int tourId, String image) {
+        this.tourId = tourId;
         this.image = image;
     }
 
@@ -27,12 +27,12 @@ public class ImageTourModel {
         this.imageId = imageId;
     }
 
-    public TourModel getTour() {
-        return tour;
+    public int getTourId() {
+        return tourId;
     }
 
-    public void setTour(TourModel tour) {
-        this.tour = tour;
+    public void setTourId(int tourId) {
+        this.tourId = tourId;
     }
 
     public String getImage() {
