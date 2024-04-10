@@ -1,10 +1,15 @@
 package com.travel.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import java.sql.Time;
 
-public class TourLineModel {
+public class TourLineModel implements Parcelable {
     private int itineraryId;
-    private TourModel tour;
+    private int tourId;
     private String locationName;
     private Time time, endTime;
     private String image;
@@ -13,9 +18,9 @@ public class TourLineModel {
     public TourLineModel() {
     }
 
-    public TourLineModel(int itineraryId, TourModel tour, String locationName, Time time, Time endTime, String image, float latitude, float longitude) {
+    public TourLineModel(int itineraryId, int tourId, String locationName, Time time, Time endTime, String image, float latitude, float longitude) {
         this.itineraryId = itineraryId;
-        this.tour = tour;
+        this.tourId = tourId;
         this.locationName = locationName;
         this.time = time;
         this.endTime = endTime;
@@ -24,8 +29,8 @@ public class TourLineModel {
         this.longitude = longitude;
     }
 
-    public TourLineModel(TourModel tour, String locationName, Time time, Time endTime, String image, float latitude, float longitude) {
-        this.tour = tour;
+    public TourLineModel(int tourId, String locationName, Time time, Time endTime, String image, float latitude, float longitude) {
+        this.tourId = tourId;
         this.locationName = locationName;
         this.time = time;
         this.endTime = endTime;
@@ -42,12 +47,12 @@ public class TourLineModel {
         this.itineraryId = itineraryId;
     }
 
-    public TourModel getTour() {
-        return tour;
+    public int getTourId() {
+        return tourId;
     }
 
-    public void setTour(TourModel tour) {
-        this.tour = tour;
+    public void setTourId(int tourId) {
+        this.tourId = tourId;
     }
 
     public String getLocationName() {
@@ -96,5 +101,42 @@ public class TourLineModel {
 
     public void setLongitude(float longitude) {
         this.longitude = longitude;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+    public static final Creator<TourLineModel> CREATOR = new Creator<TourLineModel>() {
+        @Override
+        public TourLineModel createFromParcel(Parcel in) {
+            return new TourLineModel(in);
+        }
+
+        @Override
+        public TourLineModel[] newArray(int size) {
+            return new TourLineModel[size];
+        }
+    };
+    private TourLineModel(Parcel in) {
+        itineraryId = in.readInt();
+        tourId = in.readInt();
+        locationName = in.readString();
+        time = (Time) in.readSerializable();
+        endTime = (Time) in.readSerializable();
+        image = in.readString();
+        latitude = in.readFloat();
+        longitude = in.readFloat();
+    }
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeInt(itineraryId);
+        dest.writeInt(tourId);
+        dest.writeString(locationName);
+        dest.writeSerializable(time);
+        dest.writeSerializable(endTime);
+        dest.writeString(image);
+        dest.writeFloat(latitude);
+        dest.writeFloat(longitude);
     }
 }

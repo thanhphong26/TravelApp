@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationRequest;
@@ -32,8 +33,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.travel.Model.TourLineModel;
 import com.travel.R;
 import com.travel.databinding.ActivityMapsBinding;
+
+import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
 
@@ -45,22 +49,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LocationCallback locationCallback;
     private Marker originalMarker;
     private Marker currentLocationMarker;
-
+    float latitude,longitude;
+    String locationName;
+    int tourId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        latitude = getIntent().getFloatExtra("latitude", 0);
+        longitude = getIntent().getFloatExtra("longitude", 0);
+        locationName = getIntent().getStringExtra("locationName");
+        tourId = getIntent().getIntExtra("tourId", 0);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
         binding.fabCurrentLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,14 +79,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 showMapTypeSelectionDialog();
             }
         });
+        binding.imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MapsActivity.this, TimeLineActivity.class);
+                intent.putExtra("tourId", tourId);
+                startActivity(intent);
+            }
+        });
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.park);
-        LatLng sydney = new LatLng(23.36396,105.31621);
-        originalMarker = mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney").icon(icon));
-        moveCamera(sydney, 15);
+        LatLng loaction = new LatLng(latitude, longitude);
+        originalMarker = mMap.addMarker(new MarkerOptions().position(loaction).title(locationName).icon(icon));
+        moveCamera(loaction, 15);
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
     }
     private void getLastLocation() {
@@ -97,8 +111,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     if (currentLocationMarker != null) {
                         currentLocationMarker.remove();
                     }
-                    currentLocationMarker = mMap.addMarker(new MarkerOptions().position(latLng).title("Your current location").draggable(false));
-                    moveCamera(latLng, 15);                }
+                    currentLocationMarker = mMap.addMarker(new MarkerOptions().position(latLng).title("Vị trí hiện tại").draggable(false));
+                    moveCamera(latLng, 15);
+                }
             }
         });
     }
@@ -129,7 +144,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void showMapTypeSelectionDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Chọn loại bản đồ");
-
         String[] mapTypes = {"Bản đồ", "Bản đồ vệ tinh", "Bản đồ hybrid", "Bản đồ dạng mặt đất", "Bản đồ dạng mặt đất với bề mặt"};
         builder.setItems(mapTypes, new DialogInterface.OnClickListener() {
             @Override
