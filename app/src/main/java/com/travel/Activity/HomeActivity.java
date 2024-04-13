@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.travel.Database.DestinationDAO;
+import com.travel.Database.TourDAO;
 import com.travel.Model.DestinationModel;
+import com.travel.Model.TourModel;
 import com.travel.Model.UserModel;
 import com.travel.R;
 import com.travel.Utils.SharePreferencesHelper;
@@ -22,8 +24,10 @@ public class HomeActivity extends AppCompatActivity {
     ActivityHomeBinding homeBinding;
     BottomNavigationView bottomNavigationView;
     UserModel currentUser = null;
-    ArrayList<DestinationModel> destinationModels = new ArrayList<DestinationModel>();
+    ArrayList<DestinationModel> destinations = new ArrayList<DestinationModel>();
+    ArrayList<TourModel> commonTours = new ArrayList<TourModel>();
     DestinationDAO destinationDAO = new DestinationDAO();
+    TourDAO tourDAO = new TourDAO();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +41,18 @@ public class HomeActivity extends AppCompatActivity {
         this.initPageOpen();
         this.handleSearchGlobal();
         this.handleClickTour();
+
+        // print out data tourCommon
+        for (TourModel tour : commonTours) {
+            System.out.println("TOUR " + tour.getName());
+            System.out.println("Destination " + tour.getDestination().getImage());
+        }
     }
 
     public void getDefaultValue() {
         currentUser = SharePreferencesHelper.getInstance().get("user", UserModel.class);
-        destinationModels = destinationDAO.getAll();
+        destinations = destinationDAO.getAll();
+        commonTours = tourDAO.getCommon(5);
     }
 
     public void initPageOpen() {
