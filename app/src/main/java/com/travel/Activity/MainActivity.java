@@ -27,9 +27,5 @@ public class MainActivity extends AppCompatActivity {
         });
         animationView.playAnimation();
         animationView.loop(false);
-
-        //*INFO: Open homepage
-        //Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-       // startActivity(intent);
     }
 }

@@ -39,7 +39,7 @@
                         android:maxHeight="50dp" />
 
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/username"
                         android:layout_width="151dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
@@ -97,6 +97,7 @@
                     android:orientation="horizontal">
 
                     <SearchView
+                        android:id="@+id/search_global"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
@@ -265,7 +266,8 @@
                             <!--                    android:scrollbars="vertical"-->
                             <!--                    tools:listitem="@layout/tour_card" />-->
 
-                            <include layout="@layout/tour_card" />
+                            <include layout="@layout/tour_card"
+                                android:id="@+id/tour_card"/>
 
                             <include layout="@layout/tour_card" />
 

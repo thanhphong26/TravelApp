@@ -30,6 +30,7 @@
                     android:paddingVertical="15dp">
 
                     <SearchView
+                        android:id="@+id/search_detail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
