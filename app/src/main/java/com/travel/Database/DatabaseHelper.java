@@ -32,6 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     public SQLiteDatabase openDatabase() throws SQLException {
         File dbFile = mContext.getDatabasePath(DATABASE_NAME);
+        System.out.println("Path: " + dbFile.getPath());
         if (!dbFile.exists()) {
             try {
                 copyDatabase(dbFile);
