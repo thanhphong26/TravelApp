@@ -14,10 +14,12 @@ import com.travel.Model.DestinationModel;
 import com.travel.Model.UserModel;
 import com.travel.R;
 import com.travel.Utils.SharePreferencesHelper;
+import com.travel.databinding.ActivityHomeBinding;
 
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
+    ActivityHomeBinding homeBinding;
     BottomNavigationView bottomNavigationView;
     UserModel currentUser = null;
     ArrayList<DestinationModel> destinationModels = new ArrayList<DestinationModel>();
@@ -26,9 +28,9 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        bottomNavigationView = findViewById(R.id.navigation);
-        bottomNavigationView.setItemIconTintList(null);
+        homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(homeBinding.getRoot());
+        homeBinding.navigation.setItemIconTintList(null);
 
 
         this.getDefaultValue();
@@ -43,20 +45,13 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void initPageOpen() {
-        LinearLayout ly_tour = (LinearLayout) findViewById(R.id.tour_page);
-        LinearLayout ly_hotel = (LinearLayout) findViewById(R.id.hotel_page);
-        LinearLayout ly_restaurant = (LinearLayout) findViewById(R.id.restaurant_page);
-        LinearLayout ly_flight = (LinearLayout) findViewById(R.id.flight_page);
-        TextView tv_username = (TextView) findViewById(R.id.username);
-        ImageView avatar = (ImageView) findViewById(R.id.home_avatar);
-
         //*INFO: Load image from url
-        Glide.with(this).load(currentUser.getAvatar()).centerCrop().into(avatar);
-        tv_username.setText("Chào, " + currentUser.getUsername());
+        Glide.with(this).load(currentUser.getAvatar()).centerCrop().into(homeBinding.avatar.homeAvatar);
+        homeBinding.username.setText("Chào, " + currentUser.getUsername());
 
 
         //*INFO: Set onclick product
-        ly_tour.setOnClickListener(new View.OnClickListener() {
+        homeBinding.tourPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Open another layout here
@@ -65,7 +60,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        ly_hotel.setOnClickListener(new View.OnClickListener() {
+        homeBinding.hotelPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Open another layout here
@@ -74,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        ly_restaurant.setOnClickListener(new View.OnClickListener() {
+        homeBinding.restaurantPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Open another layout here
@@ -83,7 +78,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        ly_flight.setOnClickListener(new View.OnClickListener() {
+        homeBinding.flightPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Open another layout here
@@ -102,8 +97,6 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 // Open another layout here
                 Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
-
-                System.out.println("Search: " + query);
                 intent.putExtra("search", query);
                 startActivity(intent);
                 return false;
