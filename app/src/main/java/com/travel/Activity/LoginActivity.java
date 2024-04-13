@@ -2,14 +2,20 @@ package com.travel.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 
 import com.travel.Database.DatabaseHelper;
+import com.travel.Model.UserModel;
+import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityLoginBinding;
 public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding loginBinding;
@@ -29,10 +35,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = loginBinding.edtEmail.getText().toString();
                 String password = loginBinding.edtPassword.getText().toString();
+                UserModel userModel = getUser(email, password);
                 if(email.isEmpty() || password.isEmpty()){
                     loginBinding.txtError.setText("Vui lòng điền đầy đủ thông tin!");
                 }
-                else if (checkUser(email, password)) {
+                else if (userModel != null) {
+                    SharePreferencesHelper.getInstance().put("user", userModel);
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
                 }else {
@@ -49,7 +57,8 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private boolean checkUser(String email, String password) {
+    @SuppressLint("Range")
+    private UserModel getUser(String email, String password) {
         boolean isValid = false;
         database = databaseHelper.openDatabase();
         Cursor cursor=null;
@@ -58,7 +67,13 @@ public class LoginActivity extends AppCompatActivity {
                 cursor = database.query("users", null, "email = ? AND password = ?", new String[]{email, password}, null, null, null);
                 //cursor = database.rawQuery(query, new String[]{email, password});
                 if (cursor != null && cursor.moveToFirst()) {
-                    isValid = true;
+                    UserModel userModel = new UserModel();
+                    userModel.setUserId(cursor.getInt(cursor.getColumnIndex("user_id")));
+                    userModel.setEmail(cursor.getString(cursor.getColumnIndex("email")));
+                    userModel.setPassword(cursor.getString(cursor.getColumnIndex("password")));
+                    userModel.setUsername(cursor.getString(cursor.getColumnIndex("username")));
+                    userModel.setAvatar(cursor.getString(cursor.getColumnIndex("avatar")));
+                    return userModel;
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -69,6 +84,6 @@ public class LoginActivity extends AppCompatActivity {
                 databaseHelper.closeDatabase(database);
             }
         }
-        return isValid;
+        return null;
     }
 }
