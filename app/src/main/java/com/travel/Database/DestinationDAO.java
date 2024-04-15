@@ -17,7 +17,30 @@ public class DestinationDAO {
 
     public DestinationDAO() {
     }
-
+    public DestinationModel getDestinationById(int id) {
+        database = databaseHelper.openDatabase();
+        DestinationModel destinationModel = new DestinationModel();
+        Cursor cursor=null;
+        if (database != null) {
+            try {
+                cursor = database.query("destinations", null, "destination_id= ?", new String[]{String.valueOf(id)}, null, null, null);
+                if (cursor != null && cursor.moveToFirst()) {
+                    destinationModel.setDestinationId(cursor.getInt(0));
+                    destinationModel.setName(cursor.getString(1));
+                    destinationModel.setImage(cursor.getString(2));
+                    destinationModel.setCreatedAt(Timestamp.valueOf(cursor.getString(3)));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+                databaseHelper.closeDatabase(database);
+            }
+        }
+        return destinationModel;
+    }
     public ArrayList<DestinationModel> getAll() {
         ArrayList<DestinationModel> destinationModels = new ArrayList<DestinationModel>();
         database = databaseHelper.openDatabase();
@@ -46,7 +69,6 @@ public class DestinationDAO {
                 databaseHelper.closeDatabase(database);
             }
         }
-
         return destinationModels;
     }
 

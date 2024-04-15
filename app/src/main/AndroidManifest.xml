@@ -52,7 +52,7 @@
             android:name=".Activity.DetailHotelActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.DetailDestinationActivity"
+            android:name=".Activity.DetailTourActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.TimeLineActivity"
@@ -93,7 +93,7 @@
             android:name=".Activity.FavoriteActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.DetailTourActivity"
+            android:name=".Activity.DetailDestinationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
