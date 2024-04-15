@@ -13,8 +13,10 @@ import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.travel.Model.ImageTourModel;
 import com.travel.R;
+import android.os.Handler;
 
 import java.util.List;
+import java.util.logging.LogRecord;
 
 public class ImageTourDetailAdapter extends RecyclerView.Adapter<ImageTourDetailAdapter.ImageViewHolder> {
     private List<ImageTourModel> imageList;
@@ -34,7 +36,6 @@ public class ImageTourDetailAdapter extends RecyclerView.Adapter<ImageTourDetail
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
         ImageTourModel imageTour = imageList.get(position);
-
         Glide.with(viewPager2)
                 .load(imageTour.getImage())
                 .error(R.drawable.default_image)

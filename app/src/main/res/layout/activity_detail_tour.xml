@@ -19,14 +19,14 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             app:contentScrim="@color/white"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager2"
                 android:layout_width="match_parent"
-                android:layout_height="292dp"/>
+                android:layout_height="250dp"/>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -48,8 +48,8 @@
     <!-- NestedScrollView -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="-24dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-33dp"
         android:background="@drawable/custom_corner"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
@@ -98,7 +98,7 @@
                         android:text="4.9" />
 
                     <TextView
-                        android:id="@+id/textView14"
+                        android:id="@+id/txtCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -109,7 +109,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <!-- <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
@@ -136,32 +136,34 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="20dp"
                         app:srcCompat="@drawable/chevron" />
-                </LinearLayout>
+                </LinearLayout>-->
 
                 <View
                     android:id="@+id/view"
-                    android:layout_marginTop="10dp"
                     android:layout_width="330dp"
+                    android:layout_height="1dp"
                     android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
-                    android:background="@color/gray"
-                    android:layout_height="1dp" />
+                    android:background="@color/gray" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:background="@drawable/tour_card_background"
                     android:layout_marginTop="5dp"
+                    android:background="@drawable/tour_card_background"
                     android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/txtDescription"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginRight="5dp"
-                        android:inputType="textMultiLine"
                         android:layout_marginTop="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:inputType="textMultiLine"
                         android:text="The sun was shining brightly as the birds chirped merrily in the trees. A gentle breeze rustled the leaves, creating a soothing melody that filled the air. The flowers bloomed in a riot of colors, painting the landscape with vibrant hues. It was a perfect day to be outside, enjoying the beauty of nature and soaking in the warmth of the sun. Everything seemed to be in harmony, as if the world itself was celebrating the joy of life." />
 
                 </LinearLayout>
@@ -175,21 +177,22 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
-                        android:orientation="horizontal">
-                    </LinearLayout>
+                        android:orientation="horizontal"></LinearLayout>
                 </HorizontalScrollView>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Thông tin lịch trình"
                         android:textSize="18dp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -214,11 +217,12 @@
                             <TextView
                                 android:id="@+id/txtTime"
                                 android:layout_width="match_parent"
-                                android:layout_marginTop="4dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
+                                android:layout_marginTop="4dp"
                                 android:text="07:30 - 12:30" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -234,11 +238,12 @@
                             <TextView
                                 android:id="@+id/txtDepart"
                                 android:layout_width="match_parent"
-                                android:layout_marginTop="4dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
+                                android:layout_marginTop="4dp"
                                 android:text="Hình thức khởi hành: Điểm đón" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -250,27 +255,31 @@
                                 android:layout_width="26dp"
                                 android:layout_height="26dp"
                                 app:srcCompat="@drawable/mountains" />
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
+
                                 <TextView
                                     android:id="@+id/txtPlace"
                                     android:layout_width="match_parent"
-                                    android:layout_marginTop="4dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="10dp"
+                                    android:layout_marginTop="4dp"
                                     android:text="Đền Cô Đôi Cầu Má" />
+
                                 <TextView
                                     android:id="@+id/txtPlace1"
                                     android:layout_width="match_parent"
-                                    android:layout_marginTop="5dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="10dp"
+                                    android:layout_marginTop="5dp"
                                     android:text="Hà Giang cột số 0" />
                             </LinearLayout>
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -286,26 +295,27 @@
                             <TextView
                                 android:id="@+id/txtPolicy"
                                 android:layout_width="match_parent"
-                                android:layout_marginTop="4dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
+                                android:layout_marginTop="4dp"
                                 android:text="Hoàn hủy miễn phí trong 24h" />
                         </LinearLayout>
+
                         <Button
                             android:id="@+id/btnItinerary"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginBottom="10dp"
-                            app:backgroundTint="@null"
-                            android:textColor="@color/black"
-                            android:drawableLeft="@drawable/itinerary"
-                            android:background="@drawable/boder_button"
                             android:layout_marginLeft="10dp"
+                            android:layout_marginTop="15dp"
                             android:layout_marginRight="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/boder_button"
+                            android:drawableLeft="@drawable/itinerary"
                             android:paddingLeft="60dp"
                             android:paddingRight="60dp"
-                            android:text="Xem chi tiết lịch trình"/>
+                            android:text="Xem chi tiết lịch trình"
+                            android:textColor="@color/black"
+                            app:backgroundTint="@null" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -320,9 +330,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
+                        android:text="Đánh Giá"
                         android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:text="Đánh Giá" />
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -335,10 +345,10 @@
                             android:id="@+id/txtRatingAverage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textSize="22dp"
+                            android:text="4.9"
                             android:textColor="@color/blue"
-                            android:text="4.9" />
+                            android:textSize="22dp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/textView23"
@@ -352,18 +362,20 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="-40dp"
                             android:layout_marginTop="-10dp"
-                            android:progressTint="@color/yellow"
                             android:numStars="5"
+                            android:progressTint="@color/yellow"
                             android:rating="4.9"
                             android:scaleX="0.5"
                             android:scaleY="0.5"
-                            android:stepSize="0.5"/>
+                            android:stepSize="0.5" />
+
                         <TextView
                             android:id="@+id/txtCountRating"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="-18dp"
                             android:text="Từ 48 đánh giá >" />
+
                         <ImageView
                             android:id="@+id/imageView12"
                             android:layout_width="20dp"
@@ -371,6 +383,7 @@
                             android:layout_marginTop="8dp"
                             app:srcCompat="@drawable/chevron" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/layoutReview"
                         android:layout_width="match_parent"
@@ -378,11 +391,12 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginBottom="70dp"
                         android:orientation="vertical">
+
                         <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerViewReview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            android:id="@+id/recyclerViewReview"/>
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
                     </LinearLayout>
 
 
@@ -400,9 +414,10 @@
         android:src="@drawable/heart"
         app:fabSize="normal"
         app:layout_anchor="@id/app_bar_layout"
-        app:layout_anchorGravity="bottom|end"
+        app:layout_anchorGravity="bottom|right|end"
         app:tint="@null"
         app:borderWidth="0dp"
+        android:layout_marginTop="-50dp"
         android:layout_marginRight="20dp"
         android:backgroundTint="@color/white"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
