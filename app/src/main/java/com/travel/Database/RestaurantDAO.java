@@ -80,14 +80,14 @@ public class RestaurantDAO {
             database = databaseHelper.openDatabase();
             if (database != null) {
                 String[] columns = {
-                        "restaurants.*",
+                        "restaurant.*",
                         "destinations.destination_id",
                         "destinations.name AS destination_name",
                         "destinations.image AS destination_image"
                 };
-                String query = "SELECT " + TextUtils.join(",", columns) + " FROM restaurants " +
-                        "INNER JOIN destinations ON restaurants.destination_id = destinations.destination_id " +
-                        "WHERE restaurants.destination_id = " + destinationId;
+                String query = "SELECT " + TextUtils.join(",", columns) + " FROM restaurant " +
+                        "INNER JOIN destinations ON restaurant.destination_id = destinations.destination_id " +
+                        "WHERE restaurant.destination_id = " + destinationId;
 
                 cursor = database.rawQuery(query, null);
 
@@ -95,8 +95,8 @@ public class RestaurantDAO {
                     do {
                         DestinationModel destination = new DestinationModel();
                         destination.setDestinationId(cursor.getInt(cursor.getColumnIndex("destination_id")));
-                        destination.setName(cursor.getString(cursor.getColumnIndex("name")));
-                        destination.setImage(cursor.getString(cursor.getColumnIndex("image")));
+                        destination.setName(cursor.getString(cursor.getColumnIndex("destination_name")));
+                        destination.setImage(cursor.getString(cursor.getColumnIndex("destination_image")));
 
                         RestaurantModel restaurant = new RestaurantModel();
                         restaurant.setRestaurantId(cursor.getInt(cursor.getColumnIndex("restaurant_id")));

@@ -2,6 +2,7 @@ package com.travel.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -16,21 +17,30 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
+import com.travel.Activity.DetailHotelActivity;
+import com.travel.Activity.DetailRestaurantActivity;
+import com.travel.Activity.DetailTourActivity;
+import com.travel.Database.DestinationDAO;
+import com.travel.Database.WishlistDAO;
+import com.travel.Model.DestinationModel;
 import com.travel.Model.HotelModel;
 import com.travel.Model.RestaurantModel;
 import com.travel.Model.TourModel;
+import com.travel.Model.WishlistModel;
 import com.travel.R;
 
+import java.text.BreakIterator;
 import java.util.List;
 
 public class DetailDestinationAdapter<T> extends RecyclerView.Adapter<DetailDestinationAdapter.DetailDestinationViewHolder>{
     private List<T> listItem;
     private Context context;
+    private WishlistDAO wishlistDAO;
     private boolean isHeartRed = false;
-
     public DetailDestinationAdapter(List<T> listItem, Context context) {
         this.listItem = listItem;
         this.context = context;
+        this.wishlistDAO = new WishlistDAO(context);
     }
     @NonNull
     @Override
@@ -38,7 +48,6 @@ public class DetailDestinationAdapter<T> extends RecyclerView.Adapter<DetailDest
         View view= LayoutInflater.from(context).inflate(R.layout.card_detail_item,parent,false);
         return new DetailDestinationViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull DetailDestinationAdapter.DetailDestinationViewHolder holder, int position) {
         T item = listItem.get(position);
@@ -49,6 +58,27 @@ public class DetailDestinationAdapter<T> extends RecyclerView.Adapter<DetailDest
         } else if (item instanceof RestaurantModel){
             bindRestaurantModel(holder, (RestaurantModel) item);
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (item instanceof TourModel){
+                    TourModel tourModel = (TourModel) item;
+                    Intent intent = new Intent(context, DetailTourActivity.class);
+                    intent.putExtra("tourId", tourModel.getTourId());
+                    context.startActivity(intent);
+                } else if (item instanceof HotelModel){
+                    HotelModel hotelModel = (HotelModel) item;
+                    Intent intent = new Intent(context, DetailHotelActivity.class);
+                    intent.putExtra("hotelId", hotelModel.getHotelId());
+                    context.startActivity(intent);
+                } else if (item instanceof RestaurantModel){
+                    RestaurantModel restaurantModel = (RestaurantModel) item;
+                    Intent intent = new Intent(context, DetailRestaurantActivity.class);
+                    intent.putExtra("restaurantId", restaurantModel.getRestaurantId());
+                    context.startActivity(intent);
+                }
+            }
+        });
     }
     @Override
     public int getItemCount() {
@@ -56,7 +86,7 @@ public class DetailDestinationAdapter<T> extends RecyclerView.Adapter<DetailDest
     }
 
     public class DetailDestinationViewHolder extends RecyclerView.ViewHolder{
-        TextView txtItemName, txtRating;
+        TextView txtItemName, txtRating,txtDestinationName;
         ImageView imgTour, imgLove;
         RatingBar ratingBar2;
 
@@ -64,28 +94,32 @@ public class DetailDestinationAdapter<T> extends RecyclerView.Adapter<DetailDest
             super(itemView);
             txtItemName = itemView.findViewById(R.id.txtItemName);
             txtRating = itemView.findViewById(R.id.txtRating);
+            txtDestinationName= itemView.findViewById(R.id.txtDestination);
             imgTour = itemView.findViewById(R.id.imgItem);
             imgLove = itemView.findViewById(R.id.imgLove);
             ratingBar2 = itemView.findViewById(R.id.ratingBar2);
         }
     }
-
     public void bindTourModel(DetailDestinationViewHolder holder, TourModel tourModel){
         holder.txtItemName.setText(tourModel.getName());
+        holder.txtDestinationName.setText(tourModel.getDestination().getName());
         Glide.with(context).load(tourModel.getImage()).error(R.drawable.default_image).into(holder.imgTour);
         holder.txtRating.setText(String.valueOf(tourModel.getRating()));
         holder.ratingBar2.setRating(tourModel.getRating());
+        setHeartColor(holder.imgLove, wishlistDAO.checkFavoriteTour(tourModel.getTourId(), 1));
         holder.imgLove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isHeartRed = !isHeartRed;
-                if (isHeartRed) {
-                    holder.imgLove.setImageResource(R.drawable.ic_heart);
-                    //wishlistDAO.insert(tourModel.getId(), sharedPreferences.getInt("userId", 0));
+                boolean isCurrentlyFavorite = wishlistDAO.checkFavoriteTour(tourModel.getTourId(), 1);
+               // tourModel.setFavorite(!isCurrentlyFavorite);
+                boolean newFavoriteState = !isCurrentlyFavorite;
+                setHeartColor(holder.imgLove, newFavoriteState);
+
+                if (newFavoriteState) {
+                    // wishlistDAO.insert(tourModel.getTourId(), sharedPreferences.getInt("userId", 0));
                     showSnackbar(v, "Đã thêm vào danh sách yêu thích");
                 } else {
-                    holder.imgLove.setImageResource(R.drawable.icon_heart);
-                    //wishlistDAO.remove(tourModel.getId(), sharedPreferences.getInt("userId", 0));
+                    // wishlistDAO.remove(tourModel.getTourId(), sharedPreferences.getInt("userId", 0));
                     showSnackbar(v, "Đã xóa khỏi danh sách yêu thích");
                 }
             }
@@ -94,6 +128,7 @@ public class DetailDestinationAdapter<T> extends RecyclerView.Adapter<DetailDest
     public void bindHotelModel(DetailDestinationViewHolder holder, HotelModel hotelModel){
         //handler hotelModel
         holder.txtItemName.setText(hotelModel.getName());
+        holder.txtDestinationName.setText(hotelModel.getDestination().getName());
         Glide.with(context).load(hotelModel.getImage()).error(R.drawable.default_image).into(holder.imgTour);
         holder.txtRating.setText(String.valueOf(hotelModel.getRating()));
         holder.ratingBar2.setRating(hotelModel.getRating());
@@ -116,6 +151,7 @@ public class DetailDestinationAdapter<T> extends RecyclerView.Adapter<DetailDest
     public void bindRestaurantModel(DetailDestinationViewHolder holder, RestaurantModel restaurantModel){
         //bind restaurant model
         holder.txtItemName.setText(restaurantModel.getName());
+        holder.txtDestinationName.setText(restaurantModel.getDestination().getName());
         Glide.with(context).load(restaurantModel.getImage()).error(R.drawable.default_image).into(holder.imgTour);
         holder.txtRating.setText(String.valueOf(restaurantModel.getRating()));
         holder.ratingBar2.setRating(restaurantModel.getRating());
@@ -135,11 +171,17 @@ public class DetailDestinationAdapter<T> extends RecyclerView.Adapter<DetailDest
             }
         });
     }
+    private void setHeartColor(ImageView imageView, boolean isHeartRed) {
+        if (isHeartRed) {
+            imageView.setImageResource(R.drawable.ic_heart);
+        } else {
+            imageView.setImageResource(R.drawable.icon_heart);
+        }
+    }
     @SuppressLint("ResourceType")
     private void showSnackbar(View view, String message) {
         Snackbar snackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT);
         snackbar.getView().setBackgroundTintList(ColorStateList.valueOf(Color.rgb(204,153,255)));
         snackbar.show();
-
     }
 }
