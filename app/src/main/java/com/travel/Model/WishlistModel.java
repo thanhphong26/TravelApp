@@ -2,22 +2,19 @@ package com.travel.Model;
 
 public class WishlistModel {
     private int wishlistId;
-    private UserModel user;
-    private DestinationModel destination;
-    private HotelModel hotel;
-    private TourModel tour;
-    private RestaurantModel restaurant;
+    private int userId;
+    private int destinationId,tourId ,hotelId, restaurantId;
 
     public WishlistModel() {
     }
 
-    public WishlistModel(int wishlistId, UserModel user, DestinationModel destination, HotelModel hotel, TourModel tour, RestaurantModel restaurant) {
+    public WishlistModel(int wishlistId, int userId, int destinationId, int tourId, int hotelId, int restaurantId) {
         this.wishlistId = wishlistId;
-        this.user = user;
-        this.destination = destination;
-        this.hotel = hotel;
-        this.tour = tour;
-        this.restaurant = restaurant;
+        this.userId = userId;
+        this.destinationId = destinationId;
+        this.tourId = tourId;
+        this.hotelId = hotelId;
+        this.restaurantId = restaurantId;
     }
 
     public int getWishlistId() {
@@ -28,43 +25,43 @@ public class WishlistModel {
         this.wishlistId = wishlistId;
     }
 
-    public UserModel getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser(UserModel user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public DestinationModel getDestination() {
-        return destination;
+    public int getDestinationId() {
+        return destinationId;
     }
 
-    public void setDestination(DestinationModel destination) {
-        this.destination = destination;
+    public void setDestinationId(int destinationId) {
+        this.destinationId = destinationId;
     }
 
-    public HotelModel getHotel() {
-        return hotel;
+    public int getTourId() {
+        return tourId;
     }
 
-    public void setHotel(HotelModel hotel) {
-        this.hotel = hotel;
+    public void setTourId(int tourId) {
+        this.tourId = tourId;
     }
 
-    public TourModel getTour() {
-        return tour;
+    public int getHotelId() {
+        return hotelId;
     }
 
-    public void setTour(TourModel tour) {
-        this.tour = tour;
+    public void setHotelId(int hotelId) {
+        this.hotelId = hotelId;
     }
 
-    public RestaurantModel getRestaurant() {
-        return restaurant;
+    public int getRestaurantId() {
+        return restaurantId;
     }
 
-    public void setRestaurant(RestaurantModel restaurant) {
-        this.restaurant = restaurant;
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 }

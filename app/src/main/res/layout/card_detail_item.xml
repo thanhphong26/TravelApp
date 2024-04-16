@@ -13,7 +13,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
@@ -24,7 +24,7 @@
 
             <ImageView
                 android:id="@+id/imgItem"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:background="@color/white"
                 android:scaleType="fitXY"
@@ -66,15 +66,16 @@
 
     <RatingBar
         android:id="@+id/ratingBar2"
-        android:layout_width="230dp"
+        android:layout_width="240dp"
         android:layout_height="40dp"
         android:layout_alignBottom="@+id/txtItemName"
-        android:layout_marginLeft="-50dp"
+        android:layout_marginLeft="-55dp"
         android:layout_marginBottom="-34dp"
         android:numStars="5"
         android:progressTint="@color/yellow"
         android:rating="4.7"
         android:scaleX="0.3"
+        android:isIndicator="true"
         android:scaleY="0.3"
         android:stepSize="0.4" />
 

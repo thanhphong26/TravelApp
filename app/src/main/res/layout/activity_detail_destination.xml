@@ -105,7 +105,7 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/imageView7"
+                            android:id="@+id/imgTour"
                             android:layout_width="50dp"
                             android:layout_height="45dp"
                             app:srcCompat="@drawable/icon_travel" />
@@ -126,7 +126,7 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/imageView8"
+                            android:id="@+id/imgHotel"
                             android:layout_width="45dp"
                             android:layout_height="45dp"
                             app:srcCompat="@drawable/icon_hotel" />
@@ -147,7 +147,7 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/imageView9"
+                            android:id="@+id/imgRestaurant"
                             android:layout_width="45dp"
                             android:layout_height="45dp"
                             app:srcCompat="@drawable/icon_restaurant" />
@@ -169,7 +169,7 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/imageView10"
+                            android:id="@+id/imgFlight"
                             android:layout_width="45dp"
                             android:layout_height="45dp"
                             app:srcCompat="@drawable/icon_flight" />
@@ -252,22 +252,21 @@
                     </LinearLayout>
 
                 </LinearLayout>
-                <HorizontalScrollView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_marginTop="5dp"
                     android:layout_height="wrap_content">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
                        <androidx.recyclerview.widget.RecyclerView
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
                             android:id="@+id/recyclerViewTour"/>
                     </LinearLayout>
-                </HorizontalScrollView>
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -311,22 +310,21 @@
                     </LinearLayout>
 
                 </LinearLayout>
-                <HorizontalScrollView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_marginTop="5dp"
                     android:layout_height="wrap_content">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/recyclerViewRestaurant"/>
                     </LinearLayout>
-                </HorizontalScrollView>
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -367,22 +365,22 @@
                    </LinearLayout>
 
                 </LinearLayout>
-                <HorizontalScrollView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_height="wrap_content">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/recyclerViewHotel"/>
                     </LinearLayout>
-                </HorizontalScrollView>
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </androidx.core.widget.NestedScrollView>

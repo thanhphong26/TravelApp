@@ -58,8 +58,8 @@ public class DetailTourActivity extends AppCompatActivity {
         detailTourBinding=ActivityDetailTourBinding.inflate(getLayoutInflater());
         setContentView(detailTourBinding.getRoot());
         detailTourBinding.viewPager2.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
-        int tourId = 1;
-        //tourId=getIntent().getIntExtra("tourId",1);
+       // int tourId = 1;
+        int tourId=getIntent().getIntExtra("tourId",1);
         tourModel=tourDAO.getTourById(tourId);
         detailTourBinding.txtNameTour.setText(tourModel.getName());
         detailTourBinding.txtRating.setText(String.valueOf(tourModel.getRating()));
