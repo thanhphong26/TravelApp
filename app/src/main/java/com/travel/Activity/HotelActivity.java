@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.travel.Adapter.DetailDestinationAdapter;
 import com.travel.Adapter.HotelCommonAdapter;
+import com.travel.Adapter.HotelFavoriteAdapter;
 import com.travel.Database.HotelDAO;
 import com.travel.Model.HotelModel;
 import com.travel.Model.RestaurantModel;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 public class HotelActivity extends AppCompatActivity {
     HotelDAO hotelDAO = new HotelDAO();
     ArrayList<HotelModel> commonHotels = new ArrayList<HotelModel>();
+    ArrayList<HotelModel> hotels = new ArrayList<HotelModel>();
     ActivityHotelBinding hotelBinding;
 
     @Override
@@ -35,11 +37,21 @@ public class HotelActivity extends AppCompatActivity {
 
         this.setupLayoutRecyclerView();
         this.initCommonHotel();
+        this.handleListHotel();
+    }
+
+    private void handleListHotel() {
+        hotels = hotelDAO.getAll("", 10, 0);
+        HotelFavoriteAdapter<HotelModel> hotelAdapter = new HotelFavoriteAdapter<>(hotels, this);
+        hotelBinding.hotelFavouriteRecyclerViewContainer.setAdapter(hotelAdapter);
     }
 
     public  void setupLayoutRecyclerView() {
         LinearLayoutManager layoutManagerHotelCommon = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         hotelBinding.hotelCommonRecyclerViewContainer.setLayoutManager(layoutManagerHotelCommon);
+        LinearLayoutManager layoutManagerHotel = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        hotelBinding.hotelFavouriteRecyclerViewContainer.setLayoutManager(layoutManagerHotel);
+
     }
 
     private void initCommonHotel() {

@@ -86,14 +86,14 @@
         <activity
             android:name=".Activity.DestinationActivity"
             android:exported="false" />
-        <activity
-            android:name=".Activity.SearchActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".Activity.SearchActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".Activity.FavoriteActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.HotelActivity"
+            android:name=".Activity.SearchActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

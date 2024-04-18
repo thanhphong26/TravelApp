@@ -102,12 +102,11 @@ public class TourActivity extends AppCompatActivity {
             for (TourModel tour : tours) {
                 TourFavoriteCardBinding tourFavoriteCardBinding = TourFavoriteCardBinding.inflate(getLayoutInflater());
 
-                Glide.with(this).load(tour.getImage()).centerCrop().into(tourFavoriteCardBinding.roundedCityImage);
+                Glide.with(this).load(tour.getImage()).centerCrop().into(tourFavoriteCardBinding.tourRoundedCityImage);
                 tourFavoriteCardBinding.tvTourName.setText(tour.getName());
                 tourFavoriteCardBinding.tourFavoriteRating.setText(String.valueOf(tour.getRating()));
-                tourFavoriteCardBinding.ratingBar.setRating(tour.getRating());
-                tourFavoriteCardBinding.tvDescription.setText(tour.getDescription());
-                tourFavoriteCardBinding.tvPrice.setText(NumberHelper.getFormattedPrice(tour.getPrice()) + " đ");
+                tourFavoriteCardBinding.tourFavoriteRatingBar.setRating(tour.getRating());
+                tourFavoriteCardBinding.tourFavoritePrice.setText(NumberHelper.getFormattedPrice(tour.getPrice()) + " đ");
 
                 tourFavoriteCardBinding.getRoot().setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -57,6 +57,7 @@ public class HotelDAO {
                         hotel.setRating(cursor.getFloat(cursor.getColumnIndex("rating")));
                         hotel.setLongitude(cursor.getFloat(cursor.getColumnIndex("longitude")));
                         hotel.setLatitude(cursor.getFloat(cursor.getColumnIndex("latitude")));
+                        hotel.setAddress(cursor.getString(cursor.getColumnIndex("address")));
                         hotel.setDestination(destination);
 
                         hotels.add(hotel);
@@ -108,6 +109,7 @@ public class HotelDAO {
                         hotel.setRating(cursor.getFloat(cursor.getColumnIndex("rating")));
                         hotel.setLongitude(cursor.getFloat(cursor.getColumnIndex("longitude")));
                         hotel.setLatitude(cursor.getFloat(cursor.getColumnIndex("latitude")));
+                        hotel.setAddress(cursor.getString(cursor.getColumnIndex("address")));
                         hotel.setDestination(destination);
                         hotels.add(hotel);
                     } while (cursor.moveToNext());
@@ -157,6 +159,9 @@ public class HotelDAO {
                         hotel.setImage(cursor.getString(cursor.getColumnIndex("image")));
                         hotel.setPrice(cursor.getFloat(cursor.getColumnIndex("price")));
                         hotel.setRating(cursor.getFloat(cursor.getColumnIndex("rating")));
+                        hotel.setLongitude(cursor.getFloat(cursor.getColumnIndex("longitude")));
+                        hotel.setLatitude(cursor.getFloat(cursor.getColumnIndex("latitude")));
+                        hotel.setAddress(cursor.getString(cursor.getColumnIndex("address")));
                         hotel.setDestination(destination);
 
                         commonHotels.add(hotel);
