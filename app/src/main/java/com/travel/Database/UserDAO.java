@@ -53,16 +53,4 @@ public class UserDAO {
         }
         return user;
     }
-    public void updateImageProfile(UserModel user){
-        database = databaseHelper.openDatabase();
-        if (database != null) {
-            try {
-                database.execSQL("UPDATE users SET avatar = ? WHERE user_id = ?", new String[]{user.getAvatar(), String.valueOf(user.getUserId())});
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                databaseHelper.closeDatabase(database);
-            }
-        }
-    }
 }

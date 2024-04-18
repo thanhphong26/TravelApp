@@ -1,10 +1,10 @@
 package com.travel.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.travel.Adapter.DetailDestinationAdapter;
@@ -45,10 +45,11 @@ public class DetailDestinationActivity extends AppCompatActivity {
         detailDestinationBinding.imgTour.setOnClickListener(v -> navigateToTour(destinationId));
         detailDestinationBinding.imgRestaurant.setOnClickListener(v -> navigateToRestaurant(destinationId));
         detailDestinationBinding.imgHotel.setOnClickListener(v -> navigateToHotel(destinationId));
-        //detailDestinationBinding.imgFlight.setOnClickListener(v -> navigateToFlight(destinationId));
+        detailDestinationBinding.imgFlight.setOnClickListener(v -> navigateToFlight(destinationId));
     }
     public void setDestination(DestinationModel destination){
         detailDestinationBinding.txtDestinationName.setText(destination.getName());
+        detailDestinationBinding.txtDescription.setText(destination.getDescription());
         Glide.with(this).load(destination.getImage()).into(detailDestinationBinding.imageDestination);
     }
     private void setupTourRecyclerView(int destinationId) {
@@ -95,9 +96,9 @@ public class DetailDestinationActivity extends AppCompatActivity {
         intent.putExtra("destination_id",destinationId);
         startActivity(intent);
     }
-    /*public void navigateToFlight(int destinationId){
+    public void navigateToFlight(int destinationId){
         Intent intent=new Intent(this, FlightActivity.class);
         intent.putExtra("destination_id",destinationId);
         startActivity(intent);
-    }*/
+    }
 }

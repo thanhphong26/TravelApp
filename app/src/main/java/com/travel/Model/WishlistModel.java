@@ -4,8 +4,20 @@ public class WishlistModel {
     private int wishlistId;
     private int userId;
     private int destinationId,tourId ,hotelId, restaurantId;
-
     public WishlistModel() {
+    }
+
+    public WishlistModel(int userId, int destinationId) {
+        this.userId = userId;
+        this.destinationId = destinationId;
+    }
+
+    public WishlistModel(int userId, int destinationId, int tourId, int hotelId, int restaurantId) {
+        this.userId = userId;
+        this.destinationId = destinationId;
+        this.tourId = tourId;
+        this.hotelId = hotelId;
+        this.restaurantId = restaurantId;
     }
 
     public WishlistModel(int wishlistId, int userId, int destinationId, int tourId, int hotelId, int restaurantId) {
