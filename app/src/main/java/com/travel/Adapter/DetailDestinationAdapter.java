@@ -111,15 +111,13 @@ public class DetailDestinationAdapter<T> extends RecyclerView.Adapter<DetailDest
             @Override
             public void onClick(View v) {
                 boolean isCurrentlyFavorite = wishlistDAO.checkFavoriteTour(tourModel.getTourId(), 1);
-               // tourModel.setFavorite(!isCurrentlyFavorite);
                 boolean newFavoriteState = !isCurrentlyFavorite;
                 setHeartColor(holder.imgLove, newFavoriteState);
-
                 if (newFavoriteState) {
-                    // wishlistDAO.insert(tourModel.getTourId(), sharedPreferences.getInt("userId", 0));
+                    wishlistDAO.insertTourWhishlist(1, tourModel.getTourId());
                     showSnackbar(v, "Đã thêm vào danh sách yêu thích");
                 } else {
-                    // wishlistDAO.remove(tourModel.getTourId(), sharedPreferences.getInt("userId", 0));
+                    wishlistDAO.removeWhishlistTourId(1,tourModel.getTourId());
                     showSnackbar(v, "Đã xóa khỏi danh sách yêu thích");
                 }
             }
@@ -132,17 +130,18 @@ public class DetailDestinationAdapter<T> extends RecyclerView.Adapter<DetailDest
         Glide.with(context).load(hotelModel.getImage()).error(R.drawable.default_image).into(holder.imgTour);
         holder.txtRating.setText(String.valueOf(hotelModel.getRating()));
         holder.ratingBar2.setRating(hotelModel.getRating());
+        setHeartColor(holder.imgLove, wishlistDAO.checkFavoriteTour(hotelModel.getHotelId(), 1));
         holder.imgLove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isHeartRed = !isHeartRed;
-                if (isHeartRed) {
-                    holder.imgLove.setImageResource(R.drawable.ic_heart);
-                    //wishlistDAO.insert(tourModel.getId(), sharedPreferences.getInt("userId", 0));
+                boolean isCurrentlyFavorite = wishlistDAO.checkFavoriteTour(hotelModel.getHotelId(), 1);
+                boolean newFavoriteState = !isCurrentlyFavorite;
+                setHeartColor(holder.imgLove, newFavoriteState);
+                if (newFavoriteState) {
+                    wishlistDAO.insertTourWhishlist(1, hotelModel.getHotelId());
                     showSnackbar(v, "Đã thêm vào danh sách yêu thích");
                 } else {
-                    holder.imgLove.setImageResource(R.drawable.icon_heart);
-                    //wishlistDAO.remove(tourModel.getId(), sharedPreferences.getInt("userId", 0));
+                    wishlistDAO.removeWhishlistTourId(1,hotelModel.getHotelId());
                     showSnackbar(v, "Đã xóa khỏi danh sách yêu thích");
                 }
             }
@@ -155,17 +154,18 @@ public class DetailDestinationAdapter<T> extends RecyclerView.Adapter<DetailDest
         Glide.with(context).load(restaurantModel.getImage()).error(R.drawable.default_image).into(holder.imgTour);
         holder.txtRating.setText(String.valueOf(restaurantModel.getRating()));
         holder.ratingBar2.setRating(restaurantModel.getRating());
+        setHeartColor(holder.imgLove, wishlistDAO.checkFavoriteTour(restaurantModel.getRestaurantId(), 1));
         holder.imgLove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isHeartRed = !isHeartRed;
-                if (isHeartRed) {
-                    holder.imgLove.setImageResource(R.drawable.ic_heart);
-                    //wishlistDAO.insert(tourModel.getId(), sharedPreferences.getInt("userId", 0));
+                boolean isCurrentlyFavorite = wishlistDAO.checkFavoriteTour(restaurantModel.getRestaurantId(), 1);
+                boolean newFavoriteState = !isCurrentlyFavorite;
+                setHeartColor(holder.imgLove, newFavoriteState);
+                if (newFavoriteState) {
+                    wishlistDAO.insertTourWhishlist(1, restaurantModel.getRestaurantId());
                     showSnackbar(v, "Đã thêm vào danh sách yêu thích");
                 } else {
-                    holder.imgLove.setImageResource(R.drawable.icon_heart);
-                    //wishlistDAO.remove(tourModel.getId(), sharedPreferences.getInt("userId", 0));
+                    wishlistDAO.removeWhishlistTourId(1,restaurantModel.getRestaurantId());
                     showSnackbar(v, "Đã xóa khỏi danh sách yêu thích");
                 }
             }

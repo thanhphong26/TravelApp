@@ -61,20 +61,20 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txtHotelName"
-                    android:layout_width="match_parent"
+                    android:layout_width="264dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
                     android:text="Khách Sạn 1000 Sao"
+                    android:inputType="textMultiLine"
                     android:textSize="24dp"
                     android:textStyle="bold" />
 
@@ -88,7 +88,6 @@
                         android:id="@+id/imageView5"
                         android:layout_width="26dp"
                         android:layout_height="26dp"
-                        android:layout_marginLeft="15dp"
                         android:layout_marginTop="5dp"
                         app:srcCompat="@drawable/icon_star" />
 
@@ -96,7 +95,6 @@
                         android:id="@+id/txtRating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
                         android:layout_marginTop="10dp"
                         android:text="4.9" />
 
@@ -114,7 +112,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
@@ -152,118 +149,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="15dp"
                     android:textSize="18dp"
                     android:textStyle="bold"
                     android:text="Thông Tin">
                 </TextView>
-                <androidx.cardview.widget.CardView
+                <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
-                    app:cardCornerRadius="10dp"
-                    android:layout_marginLeft="15dp"
-                    app:cardElevation="2dp"
-                    app:contentPadding="10dp"
-                    app:cardBackgroundColor="@android:color/white"
-                    app:cardUseCompatPadding="false"
-                    app:cardPreventCornerOverlap="false"
-                    app:cardMaxElevation="2dp"
-                    android:layout_height="wrap_content" >
+                    android:background="@drawable/input_search_background"
+                    android:orientation="vertical">
                     <TextView
-                        android:id="@+id/txtDescription"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="The sun was shining brightly as the birds chirped merrily in the trees. A gentle breeze rustled the leaves, creating a soothing melody that filled the air. The flowers bloomed in a riot of colors, painting the landscape with vibrant hues. It was a perfect day to be outside, enjoying the beauty of nature and soaking in the warmth of the sun. Everything seemed to be in harmony, as if the world itself was celebrating the joy of life." />
-                </androidx.cardview.widget.CardView>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="15dp"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:text="Hình ảnh"/>
+                        android:layout_margin="5dp"
+                        android:text="Đà Nẵng là một thành phố trực thuộc trung ương của Việt Nam, là trung tâm kinh tế, văn hóa, giáo dục, khoa học và công nghệ lớn nhất miền Trung, cũng như là một trong những cửa ngõ quan trọng của khu vực Đông Nam Bộ. Đà Nẵng nằm ở vị trí cực Đông của vùng Đông Dương, cách thủ đô Hà Nội 764 km về phía Nam và cách thành phố Hồ Chí Minh 964 km về phía Bắc. Đà Nẵng giáp biển Đông, giữa ba vùng kinh tế trọng điểm Bắc Trung Bộ, Tây Nguyên và Đông Nam Bộ, nằm trên tuyến giao thông quốc lộ 1A và tuyến đường sắt Bắc Nam, là cửa ngõ quan trọng của khu vực Đông Dương và là trung tâm giao thông vận tải quan trọng của cả nước."
+                        android:textSize="14dp"/>
+                </LinearLayout>
 
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="horizontal">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_margin="5dp"
-                            android:elevation="10dp"
-                            app:cardCornerRadius="8dp">
-
-                            <ImageView
-                                android:id="@+id/img1"
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:background="@color/white"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/hotel" />
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_margin="5dp"
-                            android:elevation="10dp"
-                            app:cardCornerRadius="8dp">
-
-                            <ImageView
-                                android:id="@+id/img2"
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:background="@color/white"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/hotel" />
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_margin="5dp"
-                            android:elevation="10dp"
-                            app:cardCornerRadius="8dp">
-
-                            <ImageView
-                                android:id="@+id/img3"
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:background="@color/white"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/hotel" />
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_margin="5dp"
-                            android:elevation="10dp"
-                            app:cardCornerRadius="8dp">
-
-                            <ImageView
-                                android:id="@+id/img4"
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:background="@color/white"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/hotel" />
-                        </androidx.cardview.widget.CardView>
-
-
-                    </LinearLayout>
-                </HorizontalScrollView>
 
 
 
@@ -276,7 +179,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
                         android:textSize="18dp"
                         android:textStyle="bold"
                         android:text="Đánh Giá" />
@@ -284,18 +186,17 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
                         android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView22"
+                            android:id="@+id/txtRatingAverage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textSize="22dp"
+                            android:text="4.9"
                             android:textColor="@color/blue"
-                            android:text="4.9" />
+                            android:textSize="22dp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/textView23"
@@ -309,18 +210,20 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="-40dp"
                             android:layout_marginTop="-10dp"
-                            android:progressTint="@color/yellow"
                             android:numStars="5"
+                            android:progressTint="@color/yellow"
                             android:rating="4.9"
                             android:scaleX="0.5"
                             android:scaleY="0.5"
-                            android:stepSize="0.5"/>
+                            android:stepSize="0.5" />
+
                         <TextView
-                            android:id="@+id/textView24"
+                            android:id="@+id/txtCountRating"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="-18dp"
-                            android:text="Từ 48 đánh giá" />
+                            android:text="Từ 48 đánh giá >" />
+
                         <ImageView
                             android:id="@+id/imageView12"
                             android:layout_width="20dp"
@@ -332,15 +235,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="80dp"
-                        android:layout_marginLeft="15dp"
                         android:orientation="vertical">
-                        <!--                        <ListView-->
-                        <!--                            android:layout_width="match_parent"-->
-                        <!--                            android:layout_height="wrap_content"-->
-                        <!--                            android:id="@+id/listView"-->
-                        <!--                            android:layout_marginTop="10dp"-->
-                        <!--                            android:layout_marginLeft="15dp"-->
-                        <!--                            tools:listitem="@layout/review_item" />-->
                         <include layout="@layout/review_item"/>
                         <include layout="@layout/review_item"/>
 
@@ -370,7 +265,6 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:orientation="horizontal">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

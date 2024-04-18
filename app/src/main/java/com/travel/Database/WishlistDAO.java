@@ -21,17 +21,77 @@ public class WishlistDAO {
     TourDAO tourDAO=new TourDAO();
     public WishlistDAO(Context context) {
     }
-    public void insertWishlist(WishlistModel wishlistModel) {
+    public void insertDestinationWhishlist(int userId, int destinationId){
         SQLiteDatabase database = null;
         try {
             database = databaseHelper.getWritableDatabase();
             ContentValues values = new ContentValues();
-            values.put("userId", wishlistModel.getUserId());
-            values.put("destinationId", wishlistModel.getDestinationId());
-            values.put("tourId", wishlistModel.getTourId());
-            values.put("hotelId", wishlistModel.getHotelId());
-            values.put("restaurantId", wishlistModel.getRestaurantId());
-            long rowId = database.insert("wishlist", null, values);
+            values.put("user_id", userId);
+            values.put("destination_id", destinationId);
+            long rowId = database.insert("whishlist", null, values);
+            if (rowId != -1) {
+                Log.d("Insert", "Thêm vào danh sách yêu thích thành công");
+            } else {
+                Log.e("Insert", "Lỗi thêm vào danh sách yêu thích");
+            }
+        } catch (SQLException e) {
+            Log.e("Insert", "Error inserting row: " + e.getMessage());
+        } finally {
+            if (database != null) {
+                database.close();
+            }
+        }
+    }
+    public void insertHotelWhishlist(int userId, int hotelId){
+        SQLiteDatabase database = null;
+        try {
+            database = databaseHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("user_id", userId);
+            values.put("hotel_id", hotelId);
+            long rowId = database.insert("whishlist", null, values);
+            if (rowId != -1) {
+                Log.d("Insert", "Thêm vào danh sách yêu thích thành công");
+            } else {
+                Log.e("Insert", "Lỗi thêm vào danh sách yêu thích");
+            }
+        } catch (SQLException e) {
+            Log.e("Insert", "Error inserting row: " + e.getMessage());
+        } finally {
+            if (database != null) {
+                database.close();
+            }
+        }
+    }
+    public void insertTourWhishlist(int userId, int tourId){
+        SQLiteDatabase database = null;
+        try {
+            database = databaseHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("user_id", userId);
+            values.put("tour_id", tourId);
+            long rowId = database.insert("whishlist", null, values);
+            if (rowId != -1) {
+                Log.d("Insert", "Thêm vào danh sách yêu thích thành công");
+            } else {
+                Log.e("Insert", "Lỗi thêm vào danh sách yêu thích");
+            }
+        } catch (SQLException e) {
+            Log.e("Insert", "Error inserting row: " + e.getMessage());
+        } finally {
+            if (database != null) {
+                database.close();
+            }
+        }
+    }
+    public void insertRestaurantWhishlist(int userId, int restaurantId){
+        SQLiteDatabase database = null;
+        try {
+            database = databaseHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("user_id", userId);
+            values.put("restaurant_id", restaurantId);
+            long rowId = database.insert("whishlist", null, values);
             if (rowId != -1) {
                 Log.d("Insert", "Thêm vào danh sách yêu thích thành công");
             } else {
@@ -52,7 +112,7 @@ public class WishlistDAO {
         Cursor cursor = null;
         if (database != null) {
             try {
-                cursor = database.query("wishlist", null, "user_id = ?", new String[]{String.valueOf(userId)}, null, null, null);
+                cursor = database.query("whishlist", null, "user_id = ?", new String[]{String.valueOf(userId)}, null, null, null);
                 if (cursor.moveToFirst()) {
                     do {
                         WishlistModel wishlistModel = new WishlistModel();
@@ -76,18 +136,44 @@ public class WishlistDAO {
         }
         return wishlistModelList;
     }
-
-    public void removeWishList(int userId, int itemId) {
+    public void removeWishListDestinationId(int userId,int destinationId) {
         database = databaseHelper.getWritableDatabase();
         try {
-            switch (itemId) {
-                case 1 ->  database.delete("wishlist", "user_id = ? AND destination_id = ?", new String[]{String.valueOf(userId), String.valueOf(itemId)});
-                case 2 -> database.delete("wishlist", "user_id = ? AND tour_id = ?", new String[]{String.valueOf(userId), String.valueOf(itemId)});
-                case 3 -> database.delete("wishlist", "user_id = ? AND hotel_id = ?", new String[]{String.valueOf(userId), String.valueOf(itemId)});
-                case 4 -> database.delete("wishlist", "user_id = ? AND restaurant_id = ?", new String[]{String.valueOf(userId), String.valueOf(itemId)});
-            }
+            database.delete("whishlist", "user_id=? and destination_id = ?", new String[]{String.valueOf(userId), String.valueOf(destinationId)});
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            databaseHelper.closeDatabase(database);
+        }
+    }
+    public void removeWhishlistHotelId(int userId,int hotelId) {
+        database = databaseHelper.getWritableDatabase();
+        try {
+            database.delete("whishlist", "user_id=? and hotel_id = ?",  new String[]{String.valueOf(userId), String.valueOf(hotelId)});
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            databaseHelper.closeDatabase(database);
+        }
+    }
+    public void removeWhishlistRestaurantId(int userId,int restaurantId) {
+        database = databaseHelper.getWritableDatabase();
+        try {
+            database.delete("whishlist", "user_id=? and restaurant_id = ?", new String[]{String.valueOf(userId), String.valueOf(restaurantId)});
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            databaseHelper.closeDatabase(database);
+        }
+    }
+    public void removeWhishlistTourId(int userId,int tourId) {
+        database = databaseHelper.getWritableDatabase();
+        try {
+            database.delete("whishlist", "user_id=? and tour_id = ?",  new String[]{String.valueOf(userId), String.valueOf(tourId)});
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            databaseHelper.closeDatabase(database);
         }
     }
     public boolean checkFavoriteTour(int tourId, int userId){
@@ -95,6 +181,45 @@ public class WishlistDAO {
         Cursor cursor = null;
         try {
             cursor = database.query("whishlist", null, "user_id = ? AND tour_id = ?", new String[]{String.valueOf(userId), String.valueOf(tourId)}, null, null, null);
+            if (cursor.moveToFirst()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean checkFavoriteHotel(int hotelId, int userId) {
+        database = databaseHelper.getReadableDatabase();
+        Cursor cursor = null;
+        try {
+            cursor = database.query("whishlist", null, "user_id = ? AND hotel_id = ?", new String[]{String.valueOf(userId), String.valueOf(hotelId)}, null, null, null);
+            if (cursor.moveToFirst()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean checkFavoriteDestination(int destinationId, int userId) {
+        database = databaseHelper.getReadableDatabase();
+        Cursor cursor = null;
+        try {
+            cursor = database.query("whishlist", null, "user_id = ? AND destination_id = ?", new String[]{String.valueOf(userId), String.valueOf(destinationId)}, null, null, null);
+            if (cursor.moveToFirst()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean checkFavoriteRestaurant(int restaurantId, int userId) {
+        database = databaseHelper.getReadableDatabase();
+        Cursor cursor = null;
+        try {
+            cursor = database.query("whishlist", null, "user_id = ? AND restaurant_id = ?", new String[]{String.valueOf(userId), String.valueOf(restaurantId)}, null, null, null);
             if (cursor.moveToFirst()) {
                 return true;
             }

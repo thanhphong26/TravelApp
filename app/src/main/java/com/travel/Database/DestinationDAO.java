@@ -29,6 +29,7 @@ public class DestinationDAO {
                     destinationModel.setName(cursor.getString(1));
                     destinationModel.setImage(cursor.getString(2));
                     destinationModel.setCreatedAt(Timestamp.valueOf(cursor.getString(3)));
+                    destinationModel.setDescription(cursor.getString(4));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -56,6 +57,7 @@ public class DestinationDAO {
                         destinationModel.setName(cursor.getString(1));
                         destinationModel.setImage(cursor.getString(2));
                         destinationModel.setCreatedAt(Timestamp.valueOf(cursor.getString(3)));
+                        destinationModel.setDescription(cursor.getString(4));
                         destinationModels.add(destinationModel);
                     } while (cursor.moveToNext());
                 }

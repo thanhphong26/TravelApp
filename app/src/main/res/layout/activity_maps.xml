@@ -6,32 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".Activity.MapsActivity">
 
-    <Toolbar
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        android:id="@+id/toolbar">
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp" />
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
         <ImageView
             android:id="@+id/imgBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_back"/>
+            android:layout_gravity="start"
+            android:src="@drawable/icon_back" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bản đồ"
             android:textStyle="bold"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:textColor="@android:color/white"
             android:layout_gravity="center"
-            android:gravity="center"/>
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp" />
-    </Toolbar>
+            android:gravity="center" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <fragment
         android:id="@+id/map"
@@ -55,7 +55,7 @@
         android:layout_marginBottom="33dp"
         android:src="@drawable/current_location" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+   <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabChooseMapType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,5 +67,5 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="525dp"
         android:src="@drawable/stack" />
-
+-->
 </RelativeLayout>
