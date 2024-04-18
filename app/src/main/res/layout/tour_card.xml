@@ -10,11 +10,27 @@
     android:paddingVertical="10dp">
 
 
-    <ImageView
-        android:id="@+id/imgCity"
+    <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
-        android:layout_height="110dp"
-        app:srcCompat="@drawable/img_ha_giang" />
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:elevation="10dp"
+        android:foregroundGravity="bottom"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp"
+        app:cardCornerRadius="8dp">
+
+        <ImageView
+            android:id="@+id/imgCity"
+            android:layout_width="153dp"
+            android:layout_height="110dp"
+            android:layout_gravity="bottom"
+            android:background="@color/white"
+            android:foregroundGravity="bottom"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_ha_giang" />
+
+    </androidx.cardview.widget.CardView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -74,7 +90,7 @@
             android:textStyle="italic" />
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/tvPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

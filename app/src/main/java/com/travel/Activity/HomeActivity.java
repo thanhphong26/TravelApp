@@ -15,8 +15,11 @@ import com.travel.Model.DestinationModel;
 import com.travel.Model.TourModel;
 import com.travel.Model.UserModel;
 import com.travel.R;
+import com.travel.Utils.NumberHelper;
 import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityHomeBinding;
+import com.travel.databinding.TourCardBinding;
+import com.travel.databinding.TourFavoriteCardBinding;
 
 import java.util.ArrayList;
 
@@ -34,19 +37,13 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(homeBinding.getRoot());
-        homeBinding.navigation.setItemIconTintList(null);
+//        homeBinding.navigation.setItemIconTintList(null);
 
 
         this.getDefaultValue();
         this.initPageOpen();
         this.handleSearchGlobal();
-        this.handleClickTour();
-
-        // print out data tourCommon
-        for (TourModel tour : commonTours) {
-            System.out.println("TOUR " + tour.getName());
-            System.out.println("Destination " + tour.getDestination().getImage());
-        }
+        this.handleListCommonTour();
     }
 
     public void getDefaultValue() {
@@ -93,17 +90,15 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Open another layout here
-                Intent intent = new Intent(HomeActivity.this, DestinationActivity.class);
+                Intent intent = new Intent(HomeActivity.this, FlightActivity.class);
                 startActivity(intent);
             }
         });
     }
 
     public void handleSearchGlobal() {
-        SearchView search = (SearchView) findViewById(R.id.search_global);
-
         // handle get search string
-        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        homeBinding.searchGlobal.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // Open another layout here
@@ -121,15 +116,32 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    public void handleClickTour() {
-        // handle click LinearLayout tour then open DetailTourActivity
-        LinearLayout ly_tour = (LinearLayout) findViewById(R.id.tour_card);
-        ly_tour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, DetailTourActivity.class);
-                startActivity(intent);
+
+    public void handleListCommonTour() {
+        if (commonTours.size() <= 0) {
+            homeBinding.lyCommonTour.setVisibility(View.GONE);
+        } else {
+            for (TourModel tour : commonTours) {
+                TourCardBinding tourCardBinding = TourCardBinding.inflate(getLayoutInflater());
+
+                System.out.println(tour.getImage());
+
+                Glide.with(this).load(tour.getImage()).centerCrop().into(tourCardBinding.imgCity);
+                tourCardBinding.txtCity.setText(tour.getDestination().getName());
+                tourCardBinding.txtRating.setText(String.valueOf(tour.getRating()));
+                tourCardBinding.tvPrice.setText(NumberHelper.getFormattedPrice(tour.getPrice()) + " đ");
+
+                tourCardBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(HomeActivity.this, DetailTourActivity.class);
+                        intent.putExtra("tourId", tour.getTourId());
+                        startActivity(intent);
+                    }
+                });
+
+                homeBinding.lyCommonTour.addView(tourCardBinding.getRoot());
             }
-        });
+        }
     }
 }

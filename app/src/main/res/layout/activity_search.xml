@@ -52,47 +52,53 @@
                     android:paddingHorizontal="20dp">
 
                     <LinearLayout
+                        android:id="@+id/ly_search_tour"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/textView11"
+                            android:id="@+id/title_tour"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/montserrat_medium"
                             android:text="Du lịch"
                             android:textSize="20sp" />
-
-                            <include layout="@layout/destination_favorite_card" />
-
-                            <include layout="@layout/destination_favorite_card" />
-
                     </LinearLayout>
 
 
                     <LinearLayout
+                        android:id="@+id/ly_search_hotel"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="20dp"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/textView12"
+                            android:id="@+id/title_hotel"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/montserrat_medium"
                             android:text="Khách sạn"
                             android:textSize="20sp" />
-
-
-                        <include layout="@layout/hotel_favorite_card" />
-
-                        <include layout="@layout/hotel_favorite_card" />
-
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/ly_search_restaurant"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/title_restaurant"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="Nhà hàng"
+                            android:textSize="20sp" />
+                    </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>
@@ -100,18 +106,6 @@
         </ScrollView>
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_gravity="bottom|center"
-        android:background="@drawable/custom_corner"
-        android:fitsSystemWindows="true"
-        android:textAlignment="center"
-        app:elevation="10dp"
-        app:itemTextColor="@color/black"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
+    <include layout="@layout/bottom_navigation" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

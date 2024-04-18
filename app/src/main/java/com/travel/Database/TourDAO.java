@@ -88,7 +88,7 @@ public class TourDAO {
                         "destinations.destination_id", "destinations.name AS destination_name", "destinations.image AS destination_image"
                 };
                 String query = "SELECT " + TextUtils.join(",", columns) + " FROM tours " +
-                        "INNER JOIN destinations ON hotels.destination_id = destinations.destination_id " +
+                        "INNER JOIN destinations ON tours.destination_id = destinations.destination_id " +
                         "WHERE tours.name LIKE '%" + string + "%' " +
                         "ORDER BY rating DESC LIMIT " + pageSize + " OFFSET " + (pageNumber - 1) * pageSize;
 
