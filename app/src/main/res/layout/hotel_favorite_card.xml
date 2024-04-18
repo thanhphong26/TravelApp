@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/border"
     android:orientation="vertical"
+    android:layout_marginBottom="15dp"
     android:paddingTop="10dp">
 
     <LinearLayout
@@ -40,7 +41,7 @@
                         android:layout_gravity="bottom"
                         android:background="@color/white"
                         android:foregroundGravity="bottom"
-                        android:scaleType="centerCrop"
+                        android:scaleType="fitXY"
                         android:src="@drawable/bg_test_hotel_common_card" />
 
                 </androidx.cardview.widget.CardView>
@@ -76,7 +77,9 @@
                                 android:fontFamily="@font/montserrat_medium"
                                 android:text="Hotel Nikko SaiGon"
                                 android:textColor="@color/black"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                android:ellipsize="end"
+                                android:maxLines="2"/>
 
                             <ImageView
                                 android:id="@+id/imageView12"
@@ -125,21 +128,6 @@
 
                     </LinearLayout>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_description"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Mô tả"
-                        android:textColor="@color/black"
-                        android:textSize="13sp" />
                 </LinearLayout>
 
             </LinearLayout>
