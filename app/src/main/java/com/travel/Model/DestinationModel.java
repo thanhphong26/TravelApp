@@ -5,15 +5,17 @@ import java.sql.Timestamp;
 public class DestinationModel {
     private int destinationId;
     private String name;
+    private String description;
     private String image;
     private Timestamp createdAt;
 
     public DestinationModel() {
     }
 
-    public DestinationModel(int destinationId, String name, String image, Timestamp createdAt) {
+    public DestinationModel(int destinationId, String name,String description, String image, Timestamp createdAt) {
         this.destinationId = destinationId;
         this.name = name;
+        this.description = description;
         this.image = image;
         this.createdAt = createdAt;
     }
@@ -22,6 +24,14 @@ public class DestinationModel {
         this.name = name;
         this.image = image;
         this.createdAt = createdAt;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getDestinationId() {

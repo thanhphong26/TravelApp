@@ -13,6 +13,8 @@ import com.travel.Model.TourModel;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class TourDAO {
     DatabaseHelper databaseHelper = databaseHelper = new DatabaseHelper(App.self());;
@@ -124,5 +126,106 @@ public class TourDAO {
         }
 
         return tours;
+    }
+    @SuppressLint("Range")
+    public List<TourModel> getTourByDestinationId(int destinationId){
+        database=databaseHelper.openDatabase();
+        List<TourModel> listTour=new ArrayList<>();
+        Cursor cursor = null;
+        if (database != null) {
+            try {
+                String[] columns = {
+                        "tours.*",
+                        "destinations.destination_id", "destinations.name AS destination_name", "destinations.image AS destination_image"
+                };
+                String query = "SELECT " + TextUtils.join(",", columns) + " FROM tours " +
+                        "INNER JOIN destinations ON tours.destination_id = destinations.destination_id " +
+                        "WHERE tours.destination_id = " + destinationId +
+                        " ORDER BY rating DESC";
+                cursor = database.rawQuery(query, null);
+                if (cursor.moveToFirst()) {
+                    do {
+                        DestinationModel destination = new DestinationModel();
+                        destination.setDestinationId(cursor.getInt(cursor.getColumnIndex("destination_id")));
+                        destination.setName(cursor.getString(cursor.getColumnIndex("destination_name")));
+                        destination.setImage(cursor.getString(cursor.getColumnIndex("destination_image")));
+
+                        TourModel tour = new TourModel();
+                        tour.setTourId(cursor.getInt(cursor.getColumnIndex("tour_id")));
+                        tour.setName(cursor.getString(cursor.getColumnIndex("name")));
+                        tour.setDescription(cursor.getString(cursor.getColumnIndex("description")));
+                        tour.setImage(cursor.getString(cursor.getColumnIndex("image")));
+                        tour.setPrice(cursor.getFloat(cursor.getColumnIndex("price")));
+                        tour.setRating(cursor.getFloat(cursor.getColumnIndex("rating")));
+                        tour.setDestination(destination);
+                        listTour.add(tour);
+                    } while (cursor.moveToNext());
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+                databaseHelper.closeDatabase(database);
+            }
+        }
+        return listTour;
+    }
+    public List<TourModel> getAllTours(int destinationId) {
+        database = databaseHelper.openDatabase();
+        List<TourModel> tourModels = new ArrayList<>();
+        Cursor cursor = null;
+        if (database != null) {
+            try {
+                cursor = database.query("tours", null, "destination_id= ?", new String[]{String.valueOf(destinationId)}, null, null, null);
+                if (cursor!=null && cursor.moveToFirst()) {
+                    do {
+                        TourModel tourModel = new TourModel();
+                        tourModel.setTourId(cursor.getInt(0));
+                        tourModel.setName(cursor.getString(2));
+                        tourModel.setDescription(cursor.getString(3));
+                        tourModel.setImage(cursor.getString(4));
+                        tourModel.setRating(cursor.getFloat(5));
+                        tourModel.setPrice(cursor.getFloat(6));
+                        tourModels.add(tourModel);
+                    } while (cursor.moveToNext());
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+                databaseHelper.closeDatabase(database);
+            }
+        }
+        return tourModels;
+    }
+    public TourModel getTourById(int id) {
+        database = databaseHelper.openDatabase();
+        TourModel tourModel = new TourModel();
+        Cursor cursor=null;
+        if (database != null) {
+            try {
+                cursor = database.query("tours", null, "tour_id= ?", new String[]{String.valueOf(id)}, null, null, null);
+                if (cursor != null && cursor.moveToFirst()) {
+                    tourModel.setTourId(cursor.getInt(0));
+                    tourModel.setName(cursor.getString(2));
+                    tourModel.setDescription(cursor.getString(3));
+                    tourModel.setImage(cursor.getString(4));
+                    tourModel.setRating(cursor.getFloat(5));
+                    tourModel.setPrice(cursor.getFloat(6));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+                databaseHelper.closeDatabase(database);
+            }
+        }
+        return tourModel;
     }
 }

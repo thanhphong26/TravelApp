@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationRequest;
@@ -32,8 +33,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.travel.Model.TourLineModel;
 import com.travel.R;
 import com.travel.databinding.ActivityMapsBinding;
+
+import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
 
@@ -45,32 +49,41 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LocationCallback locationCallback;
     private Marker originalMarker;
     private Marker currentLocationMarker;
-
+    float latitude,longitude;
+    String locationName;
+    int tourId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
+        latitude = getIntent().getFloatExtra("latitude", 0);
+        longitude = getIntent().getFloatExtra("longitude", 0);
+        locationName = getIntent().getStringExtra("locationName");
+        tourId = getIntent().getIntExtra("tourId", 0);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
         binding.fabCurrentLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getLastLocation();
             }
         });
-        binding.fabChooseMapType.setOnClickListener(new View.OnClickListener() {
+       /* binding.fabChooseMapType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showMapTypeSelectionDialog();
+            }
+        });*/
+        binding.imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MapsActivity.this, TimeLineActivity.class);
+                intent.putExtra("tourId", tourId);
+                startActivity(intent);
             }
         });
     }
@@ -78,27 +91,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.park);
-        LatLng sydney = new LatLng(23.36396,105.31621);
-        originalMarker = mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney").icon(icon));
-        moveCamera(sydney, 15);
-        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        LatLng loaction = new LatLng(latitude, longitude);
+        originalMarker = mMap.addMarker(new MarkerOptions().position(loaction).title(locationName).icon(icon));
+        moveCamera(loaction, 5);
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
     }
     private void getLastLocation() {
-        if (ActivityCompat.checkSelfPermission(MapsActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(MapsActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MapsActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_REQUEST_ACCESS_LOCATION);
+        if (ActivityCompat.checkSelfPermission(MapsActivity.this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(MapsActivity.this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(MapsActivity.this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_LOCATION);
             return;
         }
+
         fusedLocationProviderClient.getLastLocation().addOnSuccessListener(MapsActivity.this, new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
                 if (location != null) {
                     LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                    if (currentLocationMarker != null) {
-                        currentLocationMarker.remove();
-                    }
-                    currentLocationMarker = mMap.addMarker(new MarkerOptions().position(latLng).title("Your current location").draggable(false));
-                    moveCamera(latLng, 15);                }
+                    mMap.clear(); // Clear existing markers
+                    mMap.addMarker(new MarkerOptions()
+                            .position(latLng)
+                            .title("Vị trí hiện tại"));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                }
             }
         });
     }
@@ -126,10 +146,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
     }
-    private void showMapTypeSelectionDialog() {
+    /*private void showMapTypeSelectionDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Chọn loại bản đồ");
-
         String[] mapTypes = {"Bản đồ", "Bản đồ vệ tinh", "Bản đồ hybrid", "Bản đồ dạng mặt đất", "Bản đồ dạng mặt đất với bề mặt"};
         builder.setItems(mapTypes, new DialogInterface.OnClickListener() {
             @Override
@@ -143,5 +162,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
         builder.show();
-    }
+    }*/
 }
