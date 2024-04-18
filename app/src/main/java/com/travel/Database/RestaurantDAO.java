@@ -33,9 +33,9 @@ public class RestaurantDAO {
                         "restaurant.*",
                         "destinations.destination_id", "destinations.name AS destination_name", "destinations.image AS destination_image"
                 };
-                String query = "SELECT " + TextUtils.join(",", columns) + " FROM restaurants " +
-                        "INNER JOIN destinations ON restaurants.destination_id = destinations.destination_id " +
-                        "WHERE restaurants.name LIKE '%" + string + "%' " +
+                String query = "SELECT " + TextUtils.join(",", columns) + " FROM restaurant " +
+                        "INNER JOIN destinations ON restaurant.destination_id = destinations.destination_id " +
+                        "WHERE restaurant.name LIKE '%" + string + "%' " +
                         "ORDER BY rating DESC LIMIT " + pageSize + " OFFSET " + (pageNumber - 1) * pageSize;
 
                 cursor = database.rawQuery(query, null);
@@ -45,7 +45,6 @@ public class RestaurantDAO {
                         destination.setDestinationId(cursor.getInt(cursor.getColumnIndex("destination_id")));
                         destination.setName(cursor.getString(cursor.getColumnIndex("destination_name")));
                         destination.setImage(cursor.getString(cursor.getColumnIndex("destination_image")));
-
                         RestaurantModel restaurant = new RestaurantModel();
                         restaurant.setRestaurantId(cursor.getInt(cursor.getColumnIndex("restaurant_id")));
                         restaurant.setName(cursor.getString(cursor.getColumnIndex("name")));
@@ -56,7 +55,6 @@ public class RestaurantDAO {
                         restaurant.setLongitude(cursor.getFloat(cursor.getColumnIndex("longitude")));
                         restaurant.setLatitude(cursor.getFloat(cursor.getColumnIndex("latitude")));
                         restaurant.setDestination(destination);
-
                         restaurants.add(restaurant);
                     } while (cursor.moveToNext());
                 }
