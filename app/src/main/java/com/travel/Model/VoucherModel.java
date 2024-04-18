@@ -4,12 +4,14 @@ public class VoucherModel {
     private int voucherId;
     private String voucherCode;
     private String voucherDescription;
+    private float voucherDiscount;
     public VoucherModel() {
     }
-    public VoucherModel(int voucherId, String voucherCode, String voucherDescription) {
+    public VoucherModel(int voucherId, String voucherCode, String voucherDescription, float voucherDiscount) {
         this.voucherId = voucherId;
         this.voucherCode = voucherCode;
         this.voucherDescription = voucherDescription;
+        this.voucherDiscount = voucherDiscount;
     }
 
     public int getVoucherId() {
@@ -34,5 +36,13 @@ public class VoucherModel {
 
     public void setVoucherDescription(String voucherDescription) {
         this.voucherDescription = voucherDescription;
+    }
+
+    public float getVoucherDiscount() {
+        return voucherDiscount;
+    }
+
+    public void setVoucherDiscount(float voucherDiscount) {
+        this.voucherDiscount = voucherDiscount;
     }
 }

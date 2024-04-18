@@ -34,6 +34,7 @@
                     <LinearLayout
                         android:layout_width="270dp"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -73,14 +74,6 @@
                             android:text="Giảm giá 10% trên tổng hóa đơn" />
 
                     </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/delete_img1"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/delete" />
 
                 </LinearLayout>
             </LinearLayout>
