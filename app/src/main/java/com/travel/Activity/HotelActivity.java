@@ -6,17 +6,47 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.travel.Adapter.DetailDestinationAdapter;
+import com.travel.Adapter.HotelCommonAdapter;
+import com.travel.Database.HotelDAO;
+import com.travel.Model.HotelModel;
+import com.travel.Model.RestaurantModel;
 import com.travel.R;
+import com.travel.databinding.ActivityHotelBinding;
+
+import java.util.ArrayList;
 
 public class HotelActivity extends AppCompatActivity {
+    HotelDAO hotelDAO = new HotelDAO();
+    ArrayList<HotelModel> commonHotels = new ArrayList<HotelModel>();
+    ActivityHotelBinding hotelBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hotel);
+        hotelBinding = ActivityHotelBinding.inflate(getLayoutInflater());
+        setContentView(hotelBinding.getRoot());
 
         this.initHeaderEvent();
+
+
+
+        this.setupLayoutRecyclerView();
+        this.initCommonHotel();
+    }
+
+    public  void setupLayoutRecyclerView() {
+        LinearLayoutManager layoutManagerHotelCommon = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        hotelBinding.hotelCommonRecyclerViewContainer.setLayoutManager(layoutManagerHotelCommon);
+    }
+
+    private void initCommonHotel() {
+        commonHotels = hotelDAO.getCommon(5);
+        System.out.println("Hotel: " + commonHotels.size());
+        HotelCommonAdapter<HotelModel> hotelCommonAdapter = new HotelCommonAdapter<>(commonHotels, this);
+        hotelBinding.hotelCommonRecyclerViewContainer.setAdapter(hotelCommonAdapter);
     }
 
     public void initHeaderEvent() {
