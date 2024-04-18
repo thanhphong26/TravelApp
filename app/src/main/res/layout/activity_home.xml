@@ -7,13 +7,14 @@
     tools:context=".Activity.HomeActivity">
 
     <androidx.core.widget.NestedScrollView
+        android:layout_marginBottom="60dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -257,23 +258,9 @@
                         android:layout_marginTop="5dp">
 
                         <LinearLayout
+                            android:id="@+id/ly_common_tour"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
-
-                            <!--                <ListView-->
-                            <!--                    android:layout_width="match_parent"-->
-                            <!--                    android:layout_height="match_parent"-->
-                            <!--                    android:scrollbars="vertical"-->
-                            <!--                    tools:listitem="@layout/tour_card" />-->
-
-                            <include layout="@layout/tour_card"
-                                android:id="@+id/tour_card"/>
-
-                            <include layout="@layout/tour_card" />
-
-                            <include layout="@layout/tour_card" />
-
-                            <include layout="@layout/tour_card" />
 
                         </LinearLayout>
                     </HorizontalScrollView>
@@ -285,18 +272,7 @@
         </ScrollView>
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_gravity="bottom|center"
-        android:background="@drawable/custom_corner"
-        android:fitsSystemWindows="true"
-        android:textAlignment="center"
-        app:elevation="10dp"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
+    <include layout="@layout/bottom_navigation"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

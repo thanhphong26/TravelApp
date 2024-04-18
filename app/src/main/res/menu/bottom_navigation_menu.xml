@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/home"
+        android:id="@+id/navigation_home"
         android:enabled="true"
         android:icon="@drawable/icon_home"
         android:iconTint="#31a6d4"
         android:title="" />
     <item
-        android:id="@+id/map"
+        android:id="@+id/navigation_map"
         android:enabled="true"
         android:icon="@drawable/icon_compass"
         android:title="" />
 
     <item
-        android:id="@+id/favorite"
+        android:id="@+id/navigation_favorite"
         android:enabled="true"
         android:icon="@drawable/icon_favorite"
         android:title="" />
 
     <item
-        android:id="@+id/translate"
+        android:id="@+id/navigation_translate"
         android:enabled="true"
         android:icon="@drawable/icon_translate"
         android:title="" />
