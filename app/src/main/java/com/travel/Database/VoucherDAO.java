@@ -17,46 +17,29 @@ public class VoucherDAO {
     public VoucherDAO() {
     }
     @SuppressLint("Range")
-    public List<VoucherModel> getAllVouchers(int voucherId) {
-        database = databaseHelper.openDatabase();
-        VoucherModel voucherModel = new VoucherModel();
-        List<VoucherModel> listVoucher = new ArrayList<VoucherModel>();
-        if (database != null) {
-            Cursor cursor = null;
-            try {
-
-                // get voucher from voucher table with voucherId
-                cursor = database.query("voucher", null, "voucher_id = ?", new String[]{String.valueOf(voucherId)}, null, null, null);
-                if (cursor != null && cursor.moveToFirst()) {
-                    String voucherCode = cursor.getString(cursor.getColumnIndex("code"));
-                    String voucherDescription = cursor.getString(cursor.getColumnIndex("description"));
-                    voucherModel = new VoucherModel(voucherId, voucherCode, voucherDescription);
-                    listVoucher.add(voucherModel);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                if (cursor != null) {
-                    cursor.close();
-                }
-                databaseHelper.closeDatabase(database);
-            }
-        }
-        return listVoucher;
-    }
-    @SuppressLint("Range")
-    // delete voucher from voucher table with voucherId
-    public void deleteVoucher(int voucherId) {
+    // get all vouchers from voucher table
+    public List<VoucherModel> getAllVouchers() {
+        List<VoucherModel> voucherModels = new ArrayList<>();
         database = databaseHelper.openDatabase();
         if (database != null) {
             try {
-                database.delete("voucher", "voucher_id = ?", new String[]{String.valueOf(voucherId)});
+                Cursor cursor = database.rawQuery("SELECT * FROM voucher", null);
+                if (cursor.moveToFirst() ){
+                    do {
+                        VoucherModel voucherModel = new VoucherModel();
+                        voucherModel.setVoucherId(cursor.getInt(cursor.getColumnIndex("voucher_id")));
+                        voucherModel.setVoucherCode(cursor.getString(cursor.getColumnIndex("code")));
+                        voucherModel.setVoucherDescription(cursor.getString(cursor.getColumnIndex("description")));
+                        voucherModel.setVoucherDiscount(cursor.getFloat(cursor.getColumnIndex("voucher_value")));
+                        voucherModels.add(voucherModel);
+                    } while (cursor.moveToNext());
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
                 databaseHelper.closeDatabase(database);
             }
         }
+        return voucherModels;
     }
-
 }

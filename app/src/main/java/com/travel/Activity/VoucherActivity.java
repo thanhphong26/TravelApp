@@ -4,8 +4,12 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.travel.Adapter.HistoryPointsAdapter;
+import com.travel.Adapter.VoucherAdapter;
 import com.travel.Database.VoucherDAO;
+import com.travel.Model.LoyaltyPointModel;
 import com.travel.Model.VoucherModel;
 import com.travel.databinding.ActivityMyDiscountBinding;
 import com.travel.databinding.VoucherBinding;
@@ -24,29 +28,18 @@ public class VoucherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMyDiscountBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        //int voucherId = getIntent().getIntExtra("voucherId", 0);
-        int voucherId=1;
-        voucherModels = voucherDAO.getAllVouchers(voucherId);
-        for (VoucherModel voucher : voucherModels) {
-            System.out.println("voucher" + voucher.getVoucherCode() + voucher.getVoucherDescription());
-        }
-        if (voucher != null) {
-
-            binding.voucherContainer.setVisibility(View.VISIBLE);
-            this.displayVoucher();
-        }
+        this.setupLayoutRecyclerView();
+        this.displayVoucher();
     }
 
     public void displayVoucher() {
-        if (voucherModels.size() <= 0) {
-            binding.voucherContainer.setVisibility(View.GONE);
-        } else {
-            binding.voucherContainer.setVisibility(View.VISIBLE);
-            for (VoucherModel voucher : voucherModels) {
-                VoucherBinding voucherBinding = VoucherBinding.inflate(getLayoutInflater());
-                voucherBinding.voucherCodeTxt.setText(voucher.getVoucherCode());
-                voucherBinding.voucherDescriptionTxt.setText(voucher.getVoucherDescription());
-            }
-        }
+        List<VoucherModel> voucherModels = voucherDAO.getAllVouchers();
+        System.out.println("Voucher: " + voucherModels.size());
+        VoucherAdapter<VoucherModel> voucherAdapter = new VoucherAdapter<>(voucherModels, this);
+        binding.recyclerViewVoucher.setAdapter(voucherAdapter);
+    }
+    private void setupLayoutRecyclerView() {
+        LinearLayoutManager layoutManagerVoucher = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        binding.recyclerViewVoucher.setLayoutManager(layoutManagerVoucher);
     }
 }
