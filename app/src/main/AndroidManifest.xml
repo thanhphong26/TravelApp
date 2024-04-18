@@ -43,6 +43,9 @@
             android:name=".Activity.DetailFlightActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.CheckoutActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.FlightActivity"
             android:exported="false" />
         <activity
@@ -94,6 +97,9 @@
             android:exported="false" />
         <activity
             android:name=".Activity.FavoriteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.BookFlightActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.MyRatingActivity"

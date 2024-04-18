@@ -3,7 +3,8 @@ package com.travel.Model;
 public class AirportModel {
     private String airportCode;
     private DestinationModel destination;
-    private String name, description;
+    private String name;
+    private String description;
 
     public AirportModel() {
     }

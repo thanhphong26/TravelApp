@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageButton
-            android:id="@+id/btn_back"
+            android:id="@+id/btnBack"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:backgroundTint="#BBE7E9"
@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="150dp"
                     android:layout_marginTop="2dp"
-                    android:text="Khởi hành vào..."
+
                     android:textColor="#EAA827"
                     android:textSize="10sp"></TextView>
 
@@ -72,13 +72,14 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <TextView
+                            android:id="@+id/tvTen"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-
                             android:text="Tour 4 ngày 3 đêm Hà Giang"
                             android:textSize="15sp"
                             android:textStyle="bold"></TextView>
                         <TextView
+                            android:id="@+id/tvMoTa"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Travelers planning a trip to Europe should consider visiting Italy, known for its rich history, stunning a"
@@ -116,6 +117,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="1"
+                                android:id="@+id/tvQuantityAdult"
                                 android:textSize="10sp">
                             </TextView>
                         </TableRow>
@@ -136,6 +138,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="1"
+                                android:id="@+id/tvQuantityChild"
                                 android:textSize="10sp">
                             </TextView>
                         </TableRow>
@@ -147,6 +150,7 @@
                         android:layout_marginRight="10dp"
                         android:text="2.500.000 VND"
                         android:textSize="13sp"
+                        android:id="@+id/tvThanhTien"
                         android:textStyle="bold">
                     </TextView>
                 </LinearLayout>
@@ -186,7 +190,7 @@
                     android:text="Họ và tên"></TextView>
 
                 <TextView
-                    android:id="@+id/edt_hoTen"
+                    android:id="@+id/edtHoTen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -209,6 +213,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:id="@+id/edtSoDienThoai"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="7dp"
                     android:text="0123456789"
@@ -224,7 +229,7 @@
                     android:text="Email liên hệ"></TextView>
 
                 <TextView
-                    android:id="@+id/edt_email"
+                    android:id="@+id/edtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -270,6 +275,7 @@
                     android:text="Điền yêu cầu thêm vào đây"
                     android:gravity="center_horizontal"
                     android:textColor="#B1A9A9"
+                    android:id="@+id/tvYeuCau"
                     android:textSize="10sp">
                 </EditText>
             </LinearLayout>
@@ -320,12 +326,12 @@
         android:layout_marginTop="10dp">
         <LinearLayout
             android:layout_width="180dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_thanhTien"
+                android:id="@+id/tvTongTien"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
@@ -333,13 +339,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"></TextView>
 
-            <TextView
-                android:id="@+id/tv_giaGiam"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:text="Giảm 340.000 VND"
-                android:textColor="#0FAEC3"></TextView>
+
         </LinearLayout>
         <Button
             android:id="@+id/btn_thanhToan"
