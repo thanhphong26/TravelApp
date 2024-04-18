@@ -93,6 +93,7 @@
             android:name=".Activity.FavoriteActivity"
             android:exported="false" />
         <activity
+        <activity
             android:name=".Activity.MainActivity"
             android:exported="true">
             <intent-filter>
