@@ -1,10 +1,11 @@
 package com.travel.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import androidx.annotation.Nullable;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.travel.Database.BookFlightDAO;
+import com.bumptech.glide.Glide;
 import com.travel.Database.BookRestaurantDAO;
 import com.travel.Model.UserModel;
 import com.travel.databinding.ActivityBookRestaurantBinding;
@@ -16,7 +17,7 @@ public class BookRestaurantActivity extends AppCompatActivity {
     ActivityBookRestaurantBinding bookRestaurantBinding;
     BookRestaurantDAO bookRestaurantDAO;
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bookRestaurantBinding = ActivityBookRestaurantBinding.inflate(getLayoutInflater());
         setContentView(bookRestaurantBinding.getRoot());
@@ -26,14 +27,21 @@ public class BookRestaurantActivity extends AppCompatActivity {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String tomorrowAsString = dateFormat.format(tomorrow);
         bookRestaurantBinding.tvNgayDat.setText(tomorrowAsString);
+        int restaurantId = 1;
+        int userId= 1;
+        loadUser(userId);
+        loadInfor(restaurantId);
+        String img=bookRestaurantDAO.getInfor(restaurantId).getImage();
+        Glide.with(this).load(img).into(bookRestaurantBinding.imgRestaurant);
         bookRestaurantBinding.btnDecreaseAdults.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int adults = Integer.parseInt(bookRestaurantBinding.tvQuantityAdults.getText().toString());
-                if (adults > 1) {
+                if (adults > 0) {
                     adults--;
                     bookRestaurantBinding.tvQuantityAdults.setText(String.valueOf(adults));
                 }
+
             }
         });
         bookRestaurantBinding.btnPlusAdults.setOnClickListener(new View.OnClickListener() {
@@ -42,6 +50,7 @@ public class BookRestaurantActivity extends AppCompatActivity {
                 int adults = Integer.parseInt(bookRestaurantBinding.tvQuantityAdults.getText().toString());
                 adults++;
                 bookRestaurantBinding.tvQuantityAdults.setText(String.valueOf(adults));
+
             }
         });
         bookRestaurantBinding.btnDecreaseChilds.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +61,7 @@ public class BookRestaurantActivity extends AppCompatActivity {
                     childs--;
                     bookRestaurantBinding.tvQuantityChilds.setText(String.valueOf(childs));
                 }
+
             }
         });
         bookRestaurantBinding.btnPlusChilds.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +70,27 @@ public class BookRestaurantActivity extends AppCompatActivity {
                 int childs = Integer.parseInt(bookRestaurantBinding.tvQuantityChilds.getText().toString());
                 childs++;
                 bookRestaurantBinding.tvQuantityChilds.setText(String.valueOf(childs));
+
+            }
+        });
+        bookRestaurantBinding.btnThanhToan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(BookRestaurantActivity.this, CheckoutActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putInt("restaurantId",restaurantId);
+                bundle.putInt("userId",userId);
+                bundle.putInt("quantityAdults",Integer.parseInt(bookRestaurantBinding.tvQuantityAdults.getText().toString()));
+                bundle.putInt("quantityChilds",Integer.parseInt(bookRestaurantBinding.tvQuantityChilds.getText().toString()));
+                bundle.putFloat("total",Float.parseFloat(bookRestaurantBinding.tvThanhTien.getText().toString()));
+                bundle.putString("hoTen",bookRestaurantBinding.edtHoTen.getText().toString());
+                bundle.putString("email",bookRestaurantBinding.edtEmail.getText().toString());
+                bundle.putString("soDienThoai",bookRestaurantBinding.edtSoDienThoai.getText().toString());
+                bundle.putString("ten",bookRestaurantBinding.tvTenRestaurant.getText().toString());
+                bundle.putString("moTa",bookRestaurantBinding.tvMoTa.getText().toString());
+                bundle.putString("img",img);
+                intent.putExtra("package",bundle);
+                startActivity(intent);
             }
         });
     }
@@ -76,5 +107,7 @@ public class BookRestaurantActivity extends AppCompatActivity {
         bookRestaurantDAO = new BookRestaurantDAO();
         bookRestaurantBinding.tvTenRestaurant.setText(bookRestaurantDAO.getInfor(restaurantId).getName());
         bookRestaurantBinding.tvMoTa.setText(bookRestaurantDAO.getInfor(restaurantId).getDescription());
+
     }
+
 }

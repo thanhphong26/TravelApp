@@ -91,7 +91,7 @@
                        android:id="@+id/tvMoTa"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
-                       android:layout_margin="5dp"
+                       android:layout_margin="10dp"
                        android:text="Bữa tối tại nhà hàng dành cho người lớn"
                        android:textSize="11sp"></TextView>
                </LinearLayout>
@@ -145,7 +145,7 @@
                            android:id="@+id/btnDecreaseAdults"
                            android:layout_width="20dp"
                            android:layout_height="20dp"
-                           android:layout_marginLeft="150dp"
+                           android:layout_marginLeft="180dp"
                            android:layout_marginTop="3dp"
                            android:src="@drawable/button_decrease"></ImageButton>
 
@@ -180,7 +180,7 @@
                            android:id="@+id/btnDecreaseChilds"
                            android:layout_width="20dp"
                            android:layout_height="20dp"
-                           android:layout_marginLeft="150dp"
+                           android:layout_marginLeft="180dp"
                            android:layout_marginTop="3dp"
                            android:src="@drawable/button_decrease"></ImageButton>
 
@@ -268,7 +268,6 @@
                    android:layout_height="50dp"
                    android:layout_marginLeft="10dp"
                    android:layout_marginRight="10dp"
-
                    android:inputType="textEmailAddress"
                    android:textColor="@color/black"
                    android:textStyle="italic" />

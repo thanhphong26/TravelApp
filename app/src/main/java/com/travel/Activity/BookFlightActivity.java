@@ -31,7 +31,6 @@ import java.util.Calendar;
 
 public class BookFlightActivity extends AppCompatActivity {
     ActivityBookFlightBinding bookFlightBinding;
-    private int mYear, mMonth, mDay;
     DatabaseHelper databaseHelper;
     SQLiteDatabase database;
     BookFlightDAO bookFlightDAO;
@@ -101,7 +100,7 @@ public class BookFlightActivity extends AppCompatActivity {
                 bundle.putString("hoTen",bookFlightBinding.edtHoTen.getText().toString());
                 bundle.putString("email",bookFlightBinding.edtEmail.getText().toString());
                 bundle.putString("soDienThoai",bookFlightBinding.edtSoDienThoai.getText().toString());
-                bundle.putString("tenFlight",bookFlightBinding.tvTenFlight.getText().toString());
+                bundle.putString("ten",bookFlightBinding.tvTenFlight.getText().toString());
                 bundle.putString("moTa",bookFlightBinding.tvMoTa.getText().toString());
                 intent.putExtra("package",bundle);
                 startActivity(intent);
@@ -145,5 +144,4 @@ public class BookFlightActivity extends AppCompatActivity {
         float tongtien=sl_nguoiLon*gia+sl_treEm*gia/2;
         bookFlightBinding.tvThanhTien.setText(String.valueOf(tongtien));
     }
-
 }
