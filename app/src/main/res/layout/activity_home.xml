@@ -7,9 +7,9 @@
     tools:context=".Activity.HomeActivity">
 
     <androidx.core.widget.NestedScrollView
-        android:layout_marginBottom="60dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <ScrollView
@@ -251,20 +251,17 @@
                             android:textSize="12sp" />
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/ly_common_tour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="5dp">
-
-                        <LinearLayout
-                            android:id="@+id/ly_common_tour"
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_view_common_tour"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content" />
 
-                        </LinearLayout>
-                    </HorizontalScrollView>
-
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
@@ -272,7 +269,7 @@
         </ScrollView>
     </androidx.core.widget.NestedScrollView>
 
-    <include layout="@layout/bottom_navigation"/>
+    <include layout="@layout/bottom_navigation" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

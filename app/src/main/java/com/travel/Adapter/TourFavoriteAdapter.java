@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.travel.Activity.DetailHotelActivity;
+import com.travel.Activity.DetailTourActivity;
 import com.travel.Model.HotelModel;
 import com.travel.Model.TourModel;
 import com.travel.R;
@@ -58,7 +59,7 @@ public class TourFavoriteAdapter<T> extends RecyclerView.Adapter<TourFavoriteAda
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, DetailHotelActivity.class);
+                Intent intent = new Intent(context, DetailTourActivity.class);
                 intent.putExtra("tourId", item.getTourId());
                 context.startActivity(intent);
             }

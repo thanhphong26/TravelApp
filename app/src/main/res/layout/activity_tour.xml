@@ -118,18 +118,18 @@
                             android:text="Phổ biến"
                             android:textSize="20sp" />
 
-                        <HorizontalScrollView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:id="@+id/ly_common_tour"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp">
 
-                            <LinearLayout
-                                android:id="@+id/ly_common_tour"
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rcv_common_tour"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="20dp">
+                                android:layout_height="wrap_content"/>
 
-                            </LinearLayout>
-                        </HorizontalScrollView>
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -140,6 +140,11 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="20dp"
                         android:orientation="vertical">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rcv_tour"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
 
                     </LinearLayout>
 

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.bumptech.glide.Glide;
 import com.travel.Adapter.HotelCommonAdapter;
 import com.travel.Adapter.HotelFavoriteAdapter;
+import com.travel.Adapter.RestaurantFavoriteAdapter;
 import com.travel.Adapter.TourFavoriteAdapter;
 import com.travel.Database.HotelDAO;
 import com.travel.Database.RestaurantDAO;
@@ -32,6 +33,7 @@ import com.travel.databinding.TourFavoriteCardBinding;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class SearchActivity extends AppCompatActivity {
     ActivitySearchBinding searchBinding;
@@ -48,8 +50,7 @@ public class SearchActivity extends AppCompatActivity {
         searchBinding = ActivitySearchBinding.inflate(getLayoutInflater());
         setContentView(searchBinding.getRoot());
         Intent intent = getIntent();
-        String query = intent.getStringExtra("search");
-
+        String query = Optional.ofNullable(intent.getStringExtra("search")).orElse("");
         this.setupLayoutRecyclerView();
         this.initPage();
         this.handleSearchGlobal(query);
@@ -79,42 +80,33 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void handleListTour() {
-        System.out.println("Tour: " + matchedTours.size());
+        if (matchedTours.size() == 0) {
+            searchBinding.titleTour.setVisibility(View.GONE);
+        } else {
+            searchBinding.titleTour.setVisibility(View.VISIBLE);
+        }
         TourFavoriteAdapter<TourModel> adapter = new TourFavoriteAdapter<>(matchedTours, this);
         searchBinding.tourRecycleView.setAdapter(adapter);
     }
 
     public void handleListHotel() {
+        if (matchedHotels.size() == 0) {
+            searchBinding.titleHotel.setVisibility(View.GONE);
+        } else {
+            searchBinding.titleHotel.setVisibility(View.VISIBLE);
+        }
         HotelFavoriteAdapter<HotelModel> adapter = new HotelFavoriteAdapter<>(matchedHotels, this);
         searchBinding.hotelRecycleView.setAdapter(adapter);
     }
 
     public void handleListRestaurant() {
-        if (matchedRestaurants.size() <= 0) {
-            searchBinding.lySearchRestaurant.setVisibility(View.GONE);
+        if (matchedRestaurants.size() == 0) {
+            searchBinding.titleRestaurant.setVisibility(View.GONE);
         } else {
-            searchBinding.lySearchRestaurant.setVisibility(View.VISIBLE);
-            for (RestaurantModel restaurant : matchedRestaurants) {
-                RestaurantFavoriteCardBinding restaurantFavoriteCardBinding = RestaurantFavoriteCardBinding.inflate(getLayoutInflater());
-                Glide.with(this).load(restaurant.getImage()).centerCrop().into(restaurantFavoriteCardBinding.restaurantRoundedCityImage);
-                restaurantFavoriteCardBinding.tvRestaurantName.setText(restaurant.getName());
-                restaurantFavoriteCardBinding.restaurantFavoriteRating.setText(String.valueOf(restaurant.getRating()));
-                restaurantFavoriteCardBinding.restaurantFavoriteRatingBar.setRating(restaurant.getRating());
-                restaurantFavoriteCardBinding.restaurantFavoriteAddress.setText(restaurant.getDestination().getName());
-                restaurantFavoriteCardBinding.restaurantFavoritePrice.setText(NumberHelper.getFormattedPrice(restaurant.getPrice()) + " đ");
-
-                restaurantFavoriteCardBinding.getRoot().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(SearchActivity.this, DetailRestaurantActivity.class);
-                        intent.putExtra("restaurantId", restaurant.getRestaurantId());
-                        startActivity(intent);
-                    }
-                });
-
-                searchBinding.lySearchRestaurant.addView(restaurantFavoriteCardBinding.getRoot());
-            }
+            searchBinding.titleRestaurant.setVisibility(View.VISIBLE);
         }
+        RestaurantFavoriteAdapter<RestaurantModel> adapter = new RestaurantFavoriteAdapter<>(matchedRestaurants, this);
+        searchBinding.restaurantRecycleView.setAdapter(adapter);
     }
 
     public void initPage() {
@@ -127,6 +119,7 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                handleSearchGlobal(newText);
                 return false;
             }
         });

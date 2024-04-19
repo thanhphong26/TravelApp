@@ -2,15 +2,20 @@ package com.travel.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.travel.Adapter.DestinationCommonRatingAdapter;
 import com.travel.Database.DestinationDAO;
 import com.travel.Database.TourDAO;
+import com.travel.Model.DestinationDetailModel;
 import com.travel.Model.DestinationModel;
 import com.travel.Model.TourModel;
 import com.travel.Model.UserModel;
@@ -28,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     UserModel currentUser = null;
     ArrayList<DestinationModel> destinations = new ArrayList<DestinationModel>();
-    ArrayList<TourModel> commonTours = new ArrayList<TourModel>();
+    ArrayList<DestinationDetailModel> destinationDetails = new ArrayList<DestinationDetailModel>();
     DestinationDAO destinationDAO = new DestinationDAO();
     TourDAO tourDAO = new TourDAO();
 
@@ -39,22 +44,27 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(homeBinding.getRoot());
 //        homeBinding.navigation.setItemIconTintList(null);
 
-
+        this.setupLayoutRecyclerView();
         this.getDefaultValue();
         this.initPageOpen();
         this.handleSearchGlobal();
         this.handleListCommonTour();
     }
 
+    private void setupLayoutRecyclerView() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        homeBinding.recyclerViewCommonTour.setLayoutManager(layoutManager);
+    }
+
     public void getDefaultValue() {
         currentUser = SharePreferencesHelper.getInstance().get("user", UserModel.class);
         destinations = destinationDAO.getAll();
-        commonTours = tourDAO.getCommon(5);
+        destinationDetails = destinationDAO.getDetailCommon(5);
     }
 
     public void initPageOpen() {
         //*INFO: Load image from url
-        Glide.with(this).load(currentUser.getAvatar()).centerCrop().into(homeBinding.avatar.homeAvatar);
+        Glide.with(this).load(currentUser.getAvatar()).error(R.drawable.avatar).centerCrop().into(homeBinding.avatar.homeAvatar);
         homeBinding.username.setText("Chào, " + currentUser.getUsername());
 
 
@@ -72,6 +82,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Open another layout here
+                System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaa");
                 Intent intent = new Intent(HomeActivity.this, HotelActivity.class);
                 startActivity(intent);
             }
@@ -118,30 +129,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public void handleListCommonTour() {
-        if (commonTours.size() <= 0) {
-            homeBinding.lyCommonTour.setVisibility(View.GONE);
-        } else {
-            for (TourModel tour : commonTours) {
-                TourCardBinding tourCardBinding = TourCardBinding.inflate(getLayoutInflater());
-
-                System.out.println(tour.getImage());
-
-                Glide.with(this).load(tour.getImage()).centerCrop().into(tourCardBinding.imgCity);
-                tourCardBinding.txtCity.setText(tour.getDestination().getName());
-                tourCardBinding.txtRating.setText(String.valueOf(tour.getRating()));
-                tourCardBinding.tvPrice.setText(NumberHelper.getFormattedPrice(tour.getPrice()) + " đ");
-
-                tourCardBinding.getRoot().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(HomeActivity.this, DetailTourActivity.class);
-                        intent.putExtra("tourId", tour.getTourId());
-                        startActivity(intent);
-                    }
-                });
-
-                homeBinding.lyCommonTour.addView(tourCardBinding.getRoot());
-            }
-        }
+        DestinationCommonRatingAdapter<DestinationDetailModel> adapter = new DestinationCommonRatingAdapter<>(destinationDetails, this);
+        homeBinding.recyclerViewCommonTour.setAdapter(adapter);
     }
 }
