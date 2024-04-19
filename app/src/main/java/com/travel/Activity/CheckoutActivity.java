@@ -9,8 +9,12 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.travel.App;
 import com.travel.Database.BookFlightDAO;
+import com.travel.Database.BookHotelDAO;
+import com.travel.Database.BookRestaurantDAO;
+import com.travel.Database.BookTourDAO;
 import com.travel.Database.DatabaseHelper;
 import com.travel.Model.BookFlightModel;
 import com.travel.Model.FlightModel;
@@ -24,6 +28,9 @@ import java.util.List;
 public class CheckoutActivity extends AppCompatActivity {
     ActivityCheckoutBinding checkoutBinding;
     BookFlightDAO bookFlightDAO;
+    BookHotelDAO bookHotelDAO;
+    BookRestaurantDAO bookRestaurantDAO;
+    BookTourDAO bookTourDAO;
     DatabaseHelper databaseHelper = databaseHelper = new DatabaseHelper(App.self());;
     SQLiteDatabase database;
 
@@ -42,8 +49,11 @@ public class CheckoutActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("package");
         int flightId = bundle.getInt("flightId");
+        int typeId = flightId;
         int userId = bundle.getInt("userId");
-        checkoutBinding.tvTen.setText(bundle.getString("tenFlight"));
+        String img= bundle.getString("img");
+        Glide.with(this).load(img).into(checkoutBinding.img);
+        checkoutBinding.tvTen.setText(bundle.getString("ten"));
         checkoutBinding.tvMoTa.setText(bundle.getString("moTa"));
         checkoutBinding.tvQuantityAdult.setText(String.valueOf(bundle.getInt("quantityAdults")));
         checkoutBinding.tvQuantityChild.setText(String.valueOf(bundle.getInt("quantityChilds")));
@@ -52,30 +62,21 @@ public class CheckoutActivity extends AppCompatActivity {
         checkoutBinding.edtEmail.setText(bundle.getString("email"));
         checkoutBinding.edtSoDienThoai.setText(bundle.getString("soDienThoai"));
         checkoutBinding.tvTongTien.setText(String.valueOf(bundle.getFloat("total")));
+
         checkoutBinding.btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<BookFlightModel> list = new ArrayList<>();
-                BookFlightModel bookFlightModel = new BookFlightModel();
-
-                bookFlightModel.setFlightId(flightId);
-                bookFlightModel.setTypeId(flightId);
-                bookFlightModel.setNumberOfAdults(bundle.getInt("quantityAdults"));
-                bookFlightModel.setNumberOfChilds(bundle.getInt("quantityChilds"));
-                bookFlightModel.setTotalPrice(bundle.getFloat("total"));
-                list.add(bookFlightModel);
-
-//                database = databaseHelper.openDatabase();
-//                ContentValues values = new ContentValues();
-//                values.put("user_id", userId);
-//                values.put("flight_id", flightId);
-//                values.put("type_id", flightId);
-//                values.put("number_of_adults", bundle.getInt("quantityAdults"));
-//                values.put("number_of_childs", bundle.getInt("quantityChilds"));
-//                values.put("total_price", bundle.getFloat("total"));
-//                database.insert("flight_bookings", null, values);
+                bookFlightDAO = new BookFlightDAO();
+                bookHotelDAO = new BookHotelDAO();
+                bookRestaurantDAO = new BookRestaurantDAO();
+                bookTourDAO = new BookTourDAO();
+                bookFlightDAO.addBookFlight(userId, flightId, typeId , bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getFloat("total"));
+                bookHotelDAO.addBookHotel(userId, bundle.getInt("hotelId"), bundle.getInt("quantityRoom"), bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getFloat("total"));
+                bookRestaurantDAO.addBookRestaurant(userId, bundle.getInt("restaurantId"), bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getFloat("total"));
+                bookTourDAO.addBookTour(userId, bundle.getInt("tourId"),bundle.getString("ngayDat"), bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getFloat("total"),bundle.getString("createdAt"));
             }
         });
+
 
     }
 }

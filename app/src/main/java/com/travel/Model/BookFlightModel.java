@@ -2,8 +2,8 @@ package com.travel.Model;
 
 public class BookFlightModel {
     private int bookingId;
-    private int userId;
-    private int flightId;
+    private UserModel user;
+    private FlightModel flight;
     private int typeId;
     private int numberOfAdults;
     private int numberOfChilds;
@@ -12,10 +12,10 @@ public class BookFlightModel {
     public BookFlightModel() {
     }
 
-    public BookFlightModel(int bookingId, int userId, int flightId, int typeId, int numberOfAdults, int numberOfChilds, float totalPrice) {
+    public BookFlightModel(int bookingId, UserModel user, FlightModel flight, int typeId, int numberOfAdults, int numberOfChilds, float totalPrice) {
         this.bookingId = bookingId;
-        this.userId = userId;
-        this.flightId = flightId;
+        this.user = user;
+        this.flight = flight;
         this.typeId = typeId;
         this.numberOfAdults = numberOfAdults;
         this.numberOfChilds = numberOfChilds;
@@ -30,20 +30,20 @@ public class BookFlightModel {
         this.bookingId = bookingId;
     }
 
-    public int getUserId() {
-        return userId;
+    public UserModel getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(UserModel user) {
+        this.user = user;
     }
 
-    public int getFlightId() {
-        return flightId;
+    public FlightModel getFlight() {
+        return flight;
     }
 
-    public void setFlightId(int flightId) {
-        this.flightId = flightId;
+    public void setFlight(FlightModel flight) {
+        this.flight = flight;
     }
 
     public int getTypeId() {

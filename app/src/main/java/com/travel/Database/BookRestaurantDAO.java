@@ -1,5 +1,6 @@
 package com.travel.Database;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,7 +12,6 @@ import com.travel.Model.UserModel;
 
 public class BookRestaurantDAO {
     DatabaseHelper databaseHelper = databaseHelper = new DatabaseHelper(App.self());
-    ;
     SQLiteDatabase database;
     BookRestaurantModel bookRestaurantModel;
     public UserModel getUser(int userId){
@@ -67,5 +67,16 @@ public class BookRestaurantDAO {
 
         }
         return restaurantModel;
+    }
+    public void addBookRestaurant(int userId, int restaurantId, int quantityAdults, int quantityChilds, float totalPrice){
+        database = databaseHelper.openDatabase();
+        ContentValues values = new ContentValues();
+        values.put("restaurant_id", restaurantId);
+        values.put("user_id", userId);
+        values.put("number_of_adults", quantityAdults);
+        values.put("number_of_childs", quantityChilds);;
+        values.put("total_price", totalPrice);
+        database.insert("restaurant_bookings", null, values);
+        databaseHelper.closeDatabase(database);
     }
 }
