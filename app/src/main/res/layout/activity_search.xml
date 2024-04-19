@@ -54,8 +54,8 @@
                     <LinearLayout
                         android:id="@+id/ly_search_tour"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="20dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -78,7 +78,7 @@
                         android:id="@+id/ly_search_hotel"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -100,7 +100,7 @@
                         android:id="@+id/ly_search_restaurant"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
                         android:orientation="vertical">
 
                         <TextView

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,19 +32,10 @@ public class HotelActivity extends AppCompatActivity {
         hotelBinding = ActivityHotelBinding.inflate(getLayoutInflater());
         setContentView(hotelBinding.getRoot());
 
-        this.initHeaderEvent();
-
-
-
         this.setupLayoutRecyclerView();
-        this.initCommonHotel();
-        this.handleListHotel();
-    }
-
-    private void handleListHotel() {
-        hotels = hotelDAO.getAll("", 10, 0);
-        HotelFavoriteAdapter<HotelModel> hotelAdapter = new HotelFavoriteAdapter<>(hotels, this);
-        hotelBinding.hotelFavouriteRecyclerViewContainer.setAdapter(hotelAdapter);
+        this.initHeaderEvent();
+        this.initPage();
+        this.handleSearchGlobal();
     }
 
     public  void setupLayoutRecyclerView() {
@@ -54,20 +46,50 @@ public class HotelActivity extends AppCompatActivity {
 
     }
 
-    private void initCommonHotel() {
+    public void initPage() {
+        hotels = hotelDAO.getAll("", 10, 0);
         commonHotels = hotelDAO.getCommon(5);
-        System.out.println("Hotel: " + commonHotels.size());
+
+        this.handleListHotel();
+        this.handleListCommonHHotel();
+    }
+
+    private void handleListHotel() {
+        HotelFavoriteAdapter<HotelModel> hotelAdapter = new HotelFavoriteAdapter<>(hotels, this);
+        hotelBinding.hotelFavouriteRecyclerViewContainer.setAdapter(hotelAdapter);
+    }
+
+
+    private void handleListCommonHHotel() {
         HotelCommonAdapter<HotelModel> hotelCommonAdapter = new HotelCommonAdapter<>(commonHotels, this);
         hotelBinding.hotelCommonRecyclerViewContainer.setAdapter(hotelCommonAdapter);
     }
 
     public void initHeaderEvent() {
-        ImageView img_back = (ImageView) findViewById(R.id.imgBack);
-        img_back.setOnClickListener(new View.OnClickListener() {
+        ImageView imgBack = (ImageView) findViewById(R.id.imgBack);
+        imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HotelActivity.this, HomeActivity.class);
                 startActivity(intent);
+            }
+        });
+    }
+
+    public void handleSearchGlobal() {
+        hotelBinding.searchHotel.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                hotels = hotelDAO.getAll(query, 10, 0);
+                handleListHotel();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                hotels = hotelDAO.getAll(newText, 10, 0);
+                handleListHotel();
+                return false;
             }
         });
     }

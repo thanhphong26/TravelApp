@@ -41,7 +41,7 @@
                         android:layout_gravity="bottom"
                         android:background="@color/white"
                         android:foregroundGravity="bottom"
-                        android:scaleType="centerCrop"
+                        android:scaleType="fitXY"
                         android:src="@drawable/bg_test_card_favorite" />
 
                 </androidx.cardview.widget.CardView>

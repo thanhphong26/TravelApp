@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.travel.Activity.DetailHotelActivity;
+import com.travel.Activity.DetailRestaurantActivity;
 import com.travel.Model.RestaurantModel;
 import com.travel.R;
 import com.travel.Utils.NumberHelper;
@@ -47,7 +48,7 @@ public class RestaurantFavoriteAdapter<T> extends RecyclerView.Adapter<Restauran
 
     private void bindRestaurantModel(RestaurantFavoriteViewHolder holder, RestaurantModel item) {
         holder.name.setText(item.getName());
-        Glide.with(context).load(item.getImage()).error(R.drawable.bg_test_card_favorite).into(holder.image);
+        Glide.with(context).load(item.getImage()).error(R.drawable.bg_test_restaurant_favorite).into(holder.image);
         holder.rating.setText(String.valueOf(item.getRating()));
         holder.price.setText(NumberHelper.getFormattedPrice(item.getPrice()) + " đ");
         holder.address.setText(item.getDestination().getName());
@@ -56,7 +57,7 @@ public class RestaurantFavoriteAdapter<T> extends RecyclerView.Adapter<Restauran
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, DetailHotelActivity.class);
+                Intent intent = new Intent(context, DetailRestaurantActivity.class);
                 intent.putExtra("restaurantId", item.getRestaurantId());
                 context.startActivity(intent);
             }
