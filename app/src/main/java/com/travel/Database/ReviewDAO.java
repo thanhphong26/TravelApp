@@ -72,4 +72,88 @@ public class ReviewDAO {
         String date = sdf.format(new Date());
         database.execSQL(sql, new Object[]{userId, reviewType, id, comment, rating, date});
     }
+    public List<ReviewModel> getReviewsForHotel(int hotelId) {
+        SQLiteDatabase database = databaseHelper.getReadableDatabase();
+        ArrayList<ReviewModel> reviewList = new ArrayList<>();
+        Cursor cursor = null;
+        try {
+            cursor = database.query("reviews",
+                    new String[]{"review_id", "user_id", "review_type", "item_id", "review", "rating", "reviewDate"},
+                    "review_type='hotel' and item_id = ?",
+                    new String[]{String.valueOf(hotelId)},
+                    null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    @SuppressLint("Range") int reviewId = cursor.getInt(cursor.getColumnIndex("review_id"));
+                    @SuppressLint("Range") int userId = cursor.getInt(cursor.getColumnIndex("user_id"));
+                    @SuppressLint("Range") String reviewType = cursor.getString(cursor.getColumnIndex("review_type"));
+                    @SuppressLint("Range") int itemId = cursor.getInt(cursor.getColumnIndex("item_id"));
+                    @SuppressLint("Range") String review = cursor.getString(cursor.getColumnIndex("review"));
+                    @SuppressLint("Range") int rating = cursor.getInt(cursor.getColumnIndex("rating"));
+                    @SuppressLint("Range") String dateTimeString = cursor.getString(cursor.getColumnIndex("reviewDate"));
+                    SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    Date date = null;
+                    try {
+                        date = inputFormat.parse(dateTimeString);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if (date != null) {
+                        Timestamp reviewDate = new Timestamp(date.getTime());
+                        ReviewModel reviewModel = new ReviewModel(reviewId, userId, ReviewType.HOTEL, itemId, review, rating, reviewDate);
+                        reviewList.add(reviewModel);
+                    }
+                } while (cursor.moveToNext());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return reviewList;
+    }
+    public List<ReviewModel> getReviewsForRestaurant(int restaurantId) {
+        SQLiteDatabase database = databaseHelper.getReadableDatabase();
+        ArrayList<ReviewModel> reviewList = new ArrayList<>();
+        Cursor cursor = null;
+        try {
+            cursor = database.query("reviews",
+                    new String[]{"review_id", "user_id", "review_type", "item_id", "review", "rating", "reviewDate"},
+                    "review_type='restaurant' and item_id = ?",
+                    new String[]{String.valueOf(restaurantId)},
+                    null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    @SuppressLint("Range") int reviewId = cursor.getInt(cursor.getColumnIndex("review_id"));
+                    @SuppressLint("Range") int userId = cursor.getInt(cursor.getColumnIndex("user_id"));
+                    @SuppressLint("Range") String reviewType = cursor.getString(cursor.getColumnIndex("review_type"));
+                    @SuppressLint("Range") int itemId = cursor.getInt(cursor.getColumnIndex("item_id"));
+                    @SuppressLint("Range") String review = cursor.getString(cursor.getColumnIndex("review"));
+                    @SuppressLint("Range") int rating = cursor.getInt(cursor.getColumnIndex("rating"));
+                    @SuppressLint("Range") String dateTimeString = cursor.getString(cursor.getColumnIndex("reviewDate"));
+                    SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    Date date = null;
+                    try {
+                        date = inputFormat.parse(dateTimeString);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if (date != null) {
+                        Timestamp reviewDate = new Timestamp(date.getTime());
+                        ReviewModel reviewModel = new ReviewModel(reviewId, userId, ReviewType.RESTAURANT, itemId, review, rating, reviewDate);
+                        reviewList.add(reviewModel);
+                    }
+                } while (cursor.moveToNext());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return reviewList;
+    }
 }
