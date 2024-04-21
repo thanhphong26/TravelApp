@@ -80,20 +80,20 @@
         <activity
             android:name=".Activity.HotelActivity"
             android:exported="false" />
-        <activity
-            android:name=".Activity.RestaurantActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".Activity.RestaurantActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".Activity.DestinationActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".Activity.SearchActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".Activity.SearchActivity"
+            android:exported="false" />
         <activity
             android:name=".Activity.FavoriteActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.DetailDestinationActivity"
+            android:name=".Activity.RestaurantActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
