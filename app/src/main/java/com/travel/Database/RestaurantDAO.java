@@ -125,4 +125,54 @@ public class RestaurantDAO {
         return restaurants;
     }
 
+    @SuppressLint("Range")
+    public ArrayList<RestaurantModel> getCommon(int limit) {
+        ArrayList<RestaurantModel> commonRestaurants = new ArrayList<RestaurantModel>();
+        database = databaseHelper.openDatabase();
+        Cursor cursor=null;
+        if (database != null) {
+            try {
+                //*TODO: Refactor this query to use rawQuery
+                String[] columns = {
+                        "restaurant.*",
+                        "destinations.destination_id", "destinations.name AS destination_name", "destinations.image AS destination_image"
+                };
+                String query = "SELECT " + TextUtils.join(",", columns) + " FROM restaurant " +
+                        "INNER JOIN destinations ON restaurant.destination_id = destinations.destination_id " +
+                        "ORDER BY rating DESC LIMIT " + limit;
+
+                cursor = database.rawQuery(query, null);
+                if (cursor.moveToFirst()) {
+                    do {
+                        DestinationModel destination = new DestinationModel();
+                        destination.setDestinationId(cursor.getInt(cursor.getColumnIndex("destination_id")));
+                        destination.setName(cursor.getString(cursor.getColumnIndex("destination_name")));
+                        destination.setImage(cursor.getString(cursor.getColumnIndex("destination_image")));
+
+                        RestaurantModel tour = new RestaurantModel();
+                        tour.setRestaurantId(cursor.getInt(cursor.getColumnIndex("restaurant_id")));
+                        tour.setName(cursor.getString(cursor.getColumnIndex("name")));
+                        tour.setDescription(cursor.getString(cursor.getColumnIndex("description")));
+                        tour.setImage(cursor.getString(cursor.getColumnIndex("image")));
+                        tour.setPrice(cursor.getFloat(cursor.getColumnIndex("price")));
+                        tour.setRating(cursor.getFloat(cursor.getColumnIndex("rating")));
+                        tour.setDestination(destination);
+
+                        commonRestaurants.add(tour);
+                    } while (cursor.moveToNext());
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+                databaseHelper.closeDatabase(database);
+            }
+        }
+
+        return commonRestaurants;
+    }
+
 }

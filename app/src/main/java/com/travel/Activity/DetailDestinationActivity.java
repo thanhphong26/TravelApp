@@ -38,7 +38,7 @@ public class DetailDestinationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         detailDestinationBinding = ActivityDetailDestinationBinding.inflate(getLayoutInflater());
         setContentView(detailDestinationBinding.getRoot());
-        destinationId=getIntent().getIntExtra("destination_id",0);
+        destinationId=getIntent().getIntExtra("destination_id",21);
 
         DestinationModel destination = destinationDAO.getDestinationById(destinationId);
         setDestination(destination);

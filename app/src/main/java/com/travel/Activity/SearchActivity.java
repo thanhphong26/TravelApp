@@ -51,6 +51,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(searchBinding.getRoot());
         Intent intent = getIntent();
         String query = Optional.ofNullable(intent.getStringExtra("search")).orElse("");
+
         this.setupLayoutRecyclerView();
         this.initPage();
         this.handleSearchGlobal(query);
@@ -66,12 +67,14 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void handleSearchGlobal(String query) {
+        //*TODO: Refactor later
+        int MAX_SIZE = 9999;
         searchBinding.searchDetail.setIconified(false);
         searchBinding.searchDetail.setQuery(query, false);
 
-        matchedHotels = hotelDAO.getAll(query, 5, 1);
-        matchedRestaurants = restaurantDAO.getAll(query, 5, 1);
-        matchedTours = tourDAO.getAll(query, 5, 1);
+        matchedHotels = hotelDAO.getAll(query, MAX_SIZE, 1);
+        matchedRestaurants = restaurantDAO.getAll(query, MAX_SIZE, 1);
+        matchedTours = tourDAO.getAll(query, MAX_SIZE, 1);
 
         //*INFO: load searched data to UI
         this.handleListTour();
@@ -119,7 +122,6 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                handleSearchGlobal(newText);
                 return false;
             }
         });

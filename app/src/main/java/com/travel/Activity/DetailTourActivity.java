@@ -144,5 +144,4 @@ public class DetailTourActivity extends AppCompatActivity {
         handler.postDelayed(runnable, intervalInMillis);
         detailTourBinding.viewPager2.setTag(runnable);
     }
-
 }

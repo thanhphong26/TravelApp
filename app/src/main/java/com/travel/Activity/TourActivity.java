@@ -79,6 +79,8 @@ public class TourActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                tours = tourDAO.getAll(newText, 10, 0);
+                handleListTour();
                 return false;
             }
         });
