@@ -41,6 +41,7 @@ public class BookTourActivity extends AppCompatActivity {
         loadInfor(tourId);
         loadUser(userId);
         String img=bookTourDAO.getInformationTour(tourId).getImage();
+        bookTourBinding.btnThanhToan.setEnabled(false);
         bookTourBinding.btnDecreaseAdults.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,7 +138,7 @@ public class BookTourActivity extends AppCompatActivity {
         }
     }
     public boolean checkPrice(float price){
-        if(price>0){
+        if(price>0.0){
             return true;
         }
         return false;

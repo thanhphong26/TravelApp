@@ -111,7 +111,7 @@ public class BookRestaurantActivity extends AppCompatActivity {
 
     }
     public boolean checkPrice(float price){
-        if(price>0){
+        if(price>0.0){
             return true;
         }
         return false;

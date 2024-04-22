@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.travel.Database.DatabaseHelper;
 import com.travel.Database.HistoryRatingDAO;
 import com.travel.Model.HistoryRatingModel;
 import com.travel.R;
@@ -17,6 +18,9 @@ public class RatingHistoryActivity extends AppCompatActivity {
     ActivityRatingHistoryBinding ratingHistoryBinding;
 
     ArrayList<HistoryRatingModel> list;
+    ArrayList<HistoryRatingModel> listHotel;
+    ArrayList<HistoryRatingModel> listResTaurant;
+    ArrayList<HistoryRatingModel> listTour;
     HistoryRatingAdapter adapter;
     HistoryRatingDAO historyRatingDAO;
     @Override
@@ -26,7 +30,13 @@ public class RatingHistoryActivity extends AppCompatActivity {
         setContentView(ratingHistoryBinding.getRoot());
         int userId = 1;
         historyRatingDAO = new HistoryRatingDAO();
-        list = historyRatingDAO.getReviewTour(userId);
+        listHotel = historyRatingDAO.getReviewHotel(userId);
+        listResTaurant = historyRatingDAO.getReviewRestaurant(userId);
+        listTour = historyRatingDAO.getReviewTour(userId);
+        list = new ArrayList<>();
+        list.addAll(listHotel);
+        list.addAll(listResTaurant);
+        list.addAll(listTour);
         adapter = new HistoryRatingAdapter(this, R.layout.item_rating, list);
         ratingHistoryBinding.lvRatingHistory.setAdapter(adapter);
     }
