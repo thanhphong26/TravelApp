@@ -33,6 +33,7 @@ public class BookRestaurantActivity extends AppCompatActivity {
         loadInfor(restaurantId);
         String img=bookRestaurantDAO.getInfor(restaurantId).getImage();
         Glide.with(this).load(img).into(bookRestaurantBinding.imgRestaurant);
+
         bookRestaurantBinding.btnDecreaseAdults.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,7 +83,7 @@ public class BookRestaurantActivity extends AppCompatActivity {
                 bundle.putInt("userId",userId);
                 bundle.putInt("quantityAdults",Integer.parseInt(bookRestaurantBinding.tvQuantityAdults.getText().toString()));
                 bundle.putInt("quantityChilds",Integer.parseInt(bookRestaurantBinding.tvQuantityChilds.getText().toString()));
-                bundle.putFloat("total",Float.parseFloat(bookRestaurantBinding.tvThanhTien.getText().toString()));
+                bundle.putLong("total",Long.parseLong(bookRestaurantBinding.tvThanhTien.getText().toString()));
                 bundle.putString("hoTen",bookRestaurantBinding.edtHoTen.getText().toString());
                 bundle.putString("email",bookRestaurantBinding.edtEmail.getText().toString());
                 bundle.putString("soDienThoai",bookRestaurantBinding.edtSoDienThoai.getText().toString());
@@ -108,6 +109,12 @@ public class BookRestaurantActivity extends AppCompatActivity {
         bookRestaurantBinding.tvTenRestaurant.setText(bookRestaurantDAO.getInfor(restaurantId).getName());
         bookRestaurantBinding.tvMoTa.setText(bookRestaurantDAO.getInfor(restaurantId).getDescription());
 
+    }
+    public boolean checkPrice(float price){
+        if(price>0){
+            return true;
+        }
+        return false;
     }
 
 }

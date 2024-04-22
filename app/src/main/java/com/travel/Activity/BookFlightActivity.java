@@ -25,9 +25,14 @@ import com.travel.Model.TypeOfFlightModel;
 import com.travel.Model.UserModel;
 import com.travel.databinding.ActivityBookFlightBinding;
 
+import java.math.RoundingMode;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class BookFlightActivity extends AppCompatActivity {
     ActivityBookFlightBinding bookFlightBinding;
@@ -45,6 +50,7 @@ public class BookFlightActivity extends AppCompatActivity {
         loadInfor(flightId);
         loadUser(userId);
         bookFlightDAO=new BookFlightDAO();
+
         bookFlightBinding.btnDecreaseAdults.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,7 +102,7 @@ public class BookFlightActivity extends AppCompatActivity {
                 bundle.putInt("userId",userId);
                 bundle.putInt("quantityAdults",Integer.parseInt(bookFlightBinding.tvQuantityAdults.getText().toString()));
                 bundle.putInt("quantityChilds",Integer.parseInt(bookFlightBinding.tvQuantityChilds.getText().toString()));
-                bundle.putFloat("total",Float.parseFloat(bookFlightBinding.tvThanhTien.getText().toString()));
+                bundle.putLong("total",Long.parseLong(bookFlightBinding.tvThanhTien.getText().toString()));
                 bundle.putString("hoTen",bookFlightBinding.edtHoTen.getText().toString());
                 bundle.putString("email",bookFlightBinding.edtEmail.getText().toString());
                 bundle.putString("soDienThoai",bookFlightBinding.edtSoDienThoai.getText().toString());
@@ -138,10 +144,23 @@ public class BookFlightActivity extends AppCompatActivity {
     }
     public void thanhtien(int flightId)
     {
-        int sl_treEm=Integer.parseInt(bookFlightBinding.tvQuantityChilds.getText().toString());
-        int sl_nguoiLon=Integer.parseInt(bookFlightBinding.tvQuantityAdults.getText().toString());
-        float gia=bookFlightDAO.getInfor(flightId).getPrice();
-        float tongtien=sl_nguoiLon*gia+sl_treEm*gia/2;
+        int sl_treEm = Integer.parseInt(bookFlightBinding.tvQuantityChilds.getText().toString());
+        int sl_nguoiLon = Integer.parseInt(bookFlightBinding.tvQuantityAdults.getText().toString());
+        float gia = bookFlightDAO.getInfor(flightId).getPrice();
+        long tongtien = (long)(sl_nguoiLon * gia + sl_treEm * gia );
         bookFlightBinding.tvThanhTien.setText(String.valueOf(tongtien));
+        if(checkPrice(Float.parseFloat(bookFlightBinding.tvThanhTien.getText().toString())))
+        {
+            bookFlightBinding.btnThanhToan.setEnabled(true);
+        }
+        else{
+            bookFlightBinding.btnThanhToan.setEnabled(false);
+        }
+    }
+    public boolean checkPrice(float price){
+        if(price>0.0){
+            return true;
+        }
+        return false;
     }
 }
