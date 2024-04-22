@@ -24,6 +24,7 @@ import com.travel.Model.DestinationModel;
 import com.travel.Model.TourModel;
 import com.travel.Model.UserModel;
 import com.travel.R;
+import com.travel.Utils.Constants;
 import com.travel.Utils.NumberHelper;
 import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityHomeBinding;
@@ -37,7 +38,7 @@ public class HomeActivity extends AppCompatActivity {
     ActivityHomeBinding homeBinding;
     BottomNavigationView bottomNavigationView;
     UserModel currentUser = null;
-    ArrayList<DestinationModel> destinations = new ArrayList<DestinationModel>();
+    ArrayList<DestinationDetailModel> destinations = new ArrayList<DestinationDetailModel>();
     ArrayList<DestinationDetailModel> destinationDetails = new ArrayList<DestinationDetailModel>();
     DestinationDAO destinationDAO = new DestinationDAO();
     TourDAO tourDAO = new TourDAO();
@@ -49,12 +50,6 @@ public class HomeActivity extends AppCompatActivity {
         homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(homeBinding.getRoot());
 //        homeBinding.navigation.setItemIconTintList(null);
-
-//        View view = LayoutInflater.from(HomeActivity.this.getContext()).inflate(R.layout.rounded_card, HomeActivity.this, false);
-//        Glide.with(homeBinding.viewPager2)
-//                .load("https://storage.googleapis.com/app-bucket1/Image/BinhPhuoc/TayCatTien.jpg")
-//                .error(R.drawable.default_image)
-//                .into(homeBinding.);
 
         this.setupLayoutRecyclerView();
         this.getDefaultValue();
@@ -70,7 +65,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void getDefaultValue() {
         currentUser = SharePreferencesHelper.getInstance().get("user", UserModel.class);
-        destinations = destinationDAO.getAll();
+        destinations = destinationDAO.getAll("", Constants.MAX_RECORD, 0);
         destinationDetails = destinationDAO.getDetailCommon(5);
     }
 
@@ -116,6 +111,14 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        homeBinding.viewAllDestination.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, DestinationActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void handleSearchGlobal() {
@@ -123,7 +126,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
-                intent.putExtra("search", query);
+                intent.putExtra("search", query.trim());
                 startActivity(intent);
                 return false;
             }

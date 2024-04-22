@@ -43,7 +43,6 @@ public class HotelActivity extends AppCompatActivity {
         hotelBinding.hotelCommonRecyclerViewContainer.setLayoutManager(layoutManagerHotelCommon);
         LinearLayoutManager layoutManagerHotel = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         hotelBinding.hotelFavouriteRecyclerViewContainer.setLayoutManager(layoutManagerHotel);
-
     }
 
     public void initPage() {
@@ -51,7 +50,7 @@ public class HotelActivity extends AppCompatActivity {
         commonHotels = hotelDAO.getCommon(5);
 
         this.handleListHotel();
-        this.handleListCommonHHotel();
+        this.handleListCommonHotel();
     }
 
     private void handleListHotel() {
@@ -60,7 +59,7 @@ public class HotelActivity extends AppCompatActivity {
     }
 
 
-    private void handleListCommonHHotel() {
+    private void handleListCommonHotel() {
         HotelCommonAdapter<HotelModel> hotelCommonAdapter = new HotelCommonAdapter<>(commonHotels, this);
         hotelBinding.hotelCommonRecyclerViewContainer.setAdapter(hotelCommonAdapter);
     }
@@ -80,14 +79,14 @@ public class HotelActivity extends AppCompatActivity {
         hotelBinding.searchHotel.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                hotels = hotelDAO.getAll(query, 10, 0);
+                hotels = hotelDAO.getAll(query.trim(), 10, 0);
                 handleListHotel();
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                hotels = hotelDAO.getAll(newText, 10, 0);
+                hotels = hotelDAO.getAll(newText.trim(), 10, 0);
                 handleListHotel();
                 return false;
             }

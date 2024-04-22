@@ -57,9 +57,9 @@
         <activity
             android:name=".Activity.TimeLineActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".Activity.DetailDestinationActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".Activity.DetailDestinationActivity"
+            android:exported="false" />
         <activity
             android:name=".Activity.SignUpActivity"
             android:exported="false" />
@@ -80,9 +80,9 @@
         <activity
             android:name=".Activity.HotelActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".Activity.RestaurantActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".Activity.RestaurantActivity"
+            android:exported="false" />
         <activity
             android:name=".Activity.DestinationActivity"
             android:exported="false" />
@@ -93,7 +93,7 @@
             android:name=".Activity.FavoriteActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.RestaurantActivity"
+            android:name=".Activity.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
