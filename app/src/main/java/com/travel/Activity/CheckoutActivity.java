@@ -24,6 +24,7 @@ import com.travel.databinding.ActivityCheckoutBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class CheckoutActivity extends AppCompatActivity {
     ActivityCheckoutBinding checkoutBinding;
@@ -57,12 +58,11 @@ public class CheckoutActivity extends AppCompatActivity {
         checkoutBinding.tvMoTa.setText(bundle.getString("moTa"));
         checkoutBinding.tvQuantityAdult.setText(String.valueOf(bundle.getInt("quantityAdults")));
         checkoutBinding.tvQuantityChild.setText(String.valueOf(bundle.getInt("quantityChilds")));
-        checkoutBinding.tvThanhTien.setText(String.valueOf(bundle.getFloat("total")));
+        checkoutBinding.tvThanhTien.setText(String.valueOf(bundle.getLong("total")));
         checkoutBinding.edtHoTen.setText(bundle.getString("hoTen"));
         checkoutBinding.edtEmail.setText(bundle.getString("email"));
         checkoutBinding.edtSoDienThoai.setText(bundle.getString("soDienThoai"));
-        checkoutBinding.tvTongTien.setText(String.valueOf(bundle.getFloat("total")));
-
+        checkoutBinding.tvTongTien.setText(String.valueOf(bundle.getLong("total")));
         checkoutBinding.btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,13 +70,14 @@ public class CheckoutActivity extends AppCompatActivity {
                 bookHotelDAO = new BookHotelDAO();
                 bookRestaurantDAO = new BookRestaurantDAO();
                 bookTourDAO = new BookTourDAO();
-                bookFlightDAO.addBookFlight(userId, flightId, typeId , bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getFloat("total"));
-                bookHotelDAO.addBookHotel(userId, bundle.getInt("hotelId"), bundle.getInt("quantityRoom"), bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getFloat("total"));
-                bookRestaurantDAO.addBookRestaurant(userId, bundle.getInt("restaurantId"), bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getFloat("total"));
-                bookTourDAO.addBookTour(userId, bundle.getInt("tourId"),bundle.getString("ngayDat"), bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getFloat("total"),bundle.getString("createdAt"));
+                bookFlightDAO.addBookFlight(userId, flightId, typeId , bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getLong("total"));
+                bookHotelDAO.addBookHotel(userId, bundle.getInt("hotelId"), bundle.getInt("quantityRoom"), bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getLong("total"));
+                bookRestaurantDAO.addBookRestaurant(userId, bundle.getInt("restaurantId"), bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getLong("total"));
+                bookTourDAO.addBookTour(userId, bundle.getInt("tourId"),bundle.getString("ngayDat"), bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getLong("total"),bundle.getString("createdAt"));
             }
         });
 
 
     }
+
 }

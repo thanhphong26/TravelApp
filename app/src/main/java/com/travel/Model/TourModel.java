@@ -2,7 +2,7 @@ package com.travel.Model;
 
 public class TourModel {
     private int tourId;
-//    private DestinationModel destination;
+    private DestinationModel destination;
     private int destinationId;
     private String name,description, image;
     private float rating;
@@ -10,7 +10,7 @@ public class TourModel {
     public TourModel() {
     }
     public TourModel(int tourId, int destinationId, String name, String description, String image, float rating, float price) {
-        this.tourId = tourId;
+       this.tourId = tourId;
         this.destinationId = destinationId;
         this.name = name;
         this.description = description;
@@ -24,24 +24,24 @@ public class TourModel {
     public void setDestinationId(int destinationId) {
         this.destinationId = destinationId;
     }
-//       public TourModel(int tourId, DestinationModel destination, String name, String description, String image, float rating, float price) {
-//        this.tourId = tourId;
-//        this.destination = destination;
-//        this.name = name;
-//        this.description = description;
-//        this.image = image;
-//        this.rating = rating;
-//        this.price = price;
-//    }
-//
-//    public TourModel(DestinationModel destination, String name, String description, String image, float rating, float price) {
-//        this.destination = destination;
-//        this.name = name;
-//        this.description = description;
-//        this.image = image;
-//        this.rating = rating;
-//        this.price = price;
-//    }
+       public TourModel(int tourId, DestinationModel destination, String name, String description, String image, float rating, float price) {
+        this.tourId = tourId;
+        this.destination = destination;
+        this.name = name;
+        this.description = description;
+        this.image = image;
+        this.rating = rating;
+       this.price = price;
+    }
+
+    public TourModel(DestinationModel destination, String name, String description, String image, float rating, float price) {
+        this.destination = destination;
+        this.name = name;
+        this.description = description;
+        this.image = image;
+        this.rating = rating;
+        this.price = price;
+   }
 
 
     public int getTourId() {
@@ -52,13 +52,13 @@ public class TourModel {
         this.tourId = tourId;
     }
 
-//    public DestinationModel getDestination() {
-//        return destination;
-//    }
-//
-//    public void setDestination(DestinationModel destination) {
-//        this.destination = destination;
-//    }
+    public DestinationModel getDestination() {
+        return destination;
+    }
+
+    public void setDestination(DestinationModel destination) {
+        this.destination = destination;
+    }
 
     public String getName() {
         return name;

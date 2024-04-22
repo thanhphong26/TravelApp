@@ -92,7 +92,7 @@ public class BookTourActivity extends AppCompatActivity {
                 bundle.putString("moTa",bookTourBinding.tvMoTa.getText().toString());
                 bundle.putInt("quantityAdults",Integer.parseInt(bookTourBinding.tvQuantityAdults.getText().toString()));
                 bundle.putInt("quantityChilds",Integer.parseInt(bookTourBinding.tvQuantityChilds.getText().toString()));
-                bundle.putFloat("total",Float.parseFloat(bookTourBinding.tvThanhTien.getText().toString()));
+                bundle.putLong("total",Long.parseLong(bookTourBinding.tvThanhTien.getText().toString()));
                 bundle.putString("hoTen",bookTourBinding.edtHoTen.getText().toString());
                 bundle.putString("email",bookTourBinding.edtEmail.getText().toString());
                 bundle.putString("soDienThoai",bookTourBinding.edtSoDienThoai.getText().toString());
@@ -126,8 +126,21 @@ public class BookTourActivity extends AppCompatActivity {
         int quantityChilds = Integer.parseInt(bookTourBinding.tvQuantityChilds.getText().toString());
         float price_adults = bookTourDAO.getInforPrice(tourId).getAdultPrice();
         float price_childs = bookTourDAO.getInforPrice(tourId).getChildPrice();
-        float total = (quantityAdults*price_adults) + (quantityChilds*price_childs);
+        long total = (long)(quantityAdults * price_adults + quantityChilds * price_childs);
         bookTourBinding.tvThanhTien.setText(String.valueOf(total));
+        if(checkPrice(Float.parseFloat(bookTourBinding.tvThanhTien.getText().toString())))
+        {
+            bookTourBinding.btnThanhToan.setEnabled(true);
+        }
+        else{
+            bookTourBinding.btnThanhToan.setEnabled(false);
+        }
+    }
+    public boolean checkPrice(float price){
+        if(price>0){
+            return true;
+        }
+        return false;
     }
 
 

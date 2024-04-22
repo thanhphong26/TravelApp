@@ -22,6 +22,7 @@
             <com.makeramen.roundedimageview.RoundedImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:id="@+id/imgRating"
                 android:src="@drawable/img_tour1"
                 app:riv_corner_radius="10dp"></com.makeramen.roundedimageview.RoundedImageView>
         </LinearLayout>
@@ -31,6 +32,7 @@
             android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
+                android:id="@+id/tvName"
                 android:layout_height="30dp"
                 android:layout_marginTop="10dp"
                 android:text="Tour 4 ngày 3 đêm Hà Giang"
@@ -40,6 +42,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="92dp"
+                android:id="@+id/tvRatingMoTa"
                 android:text="Travelers planning a trip to Europe should consider visiting Italy, known for its rich history, stunning a"
                 android:textSize="13sp"
                 android:textStyle="normal">
@@ -72,6 +75,7 @@
         <RatingBar
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
+            android:id="@+id/itemratingBar"
             android:layout_height="wrap_content"
             android:isIndicator="true"
             android:numStars="5"
@@ -83,6 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="15dp"
             android:gravity="right"
+            android:id="@+id/tvNgayDanhGia"
             android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
             android:text="11/11/2023"
@@ -94,6 +99,7 @@
         android:layout_height="match_parent"
         android:text="This formula will generate a random paragraph that could be used as a review or feedback based on a rating."
         android:textStyle="normal"
+        android:id="@+id/tvRatingNoiDung"
         android:textSize="10sp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
