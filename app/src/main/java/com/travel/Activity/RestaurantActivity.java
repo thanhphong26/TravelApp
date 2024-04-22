@@ -69,14 +69,14 @@ public class RestaurantActivity extends AppCompatActivity {
         restaurantBinding.searchRestaurant.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                restaurants = restaurantDAO.getAll(query, 10, 0);
+                restaurants = restaurantDAO.getAll(query.trim(), 10, 0);
                 handleListRestaurant();
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                restaurants = restaurantDAO.getAll(newText, 10, 0);
+                restaurants = restaurantDAO.getAll(newText.trim(), 10, 0);
                 handleListRestaurant();
                 return false;
             }

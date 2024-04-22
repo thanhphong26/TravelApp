@@ -35,6 +35,7 @@
                     android:paddingBottom="15dp">
 
                     <SearchView
+                        android:id="@+id/searchView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
@@ -117,27 +118,19 @@
                             android:text="Phổ biến"
                             android:textSize="20sp" />
 
-                        <HorizontalScrollView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                        
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="20dp">
-
-                                <include layout="@layout/city_card" />
-
-                                <include layout="@layout/city_card" />
-
-                                <include layout="@layout/city_card" />
-
-                                <include layout="@layout/city_card" />
-
-                                <include layout="@layout/city_card" />
                                 
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rvCity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+
                             </LinearLayout>
-                        </HorizontalScrollView>
 
                     </LinearLayout>
 
@@ -149,15 +142,11 @@
                         android:orientation="vertical">
 
 
-                        <include layout="@layout/destination_favorite_card" />
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvFavorite"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
 
-                        <include layout="@layout/destination_favorite_card" />
-
-                        <include layout="@layout/destination_favorite_card" />
-
-                        <include layout="@layout/destination_favorite_card" />
-
-                        <include layout="@layout/destination_favorite_card" />
                     </LinearLayout>
 
 
