@@ -44,11 +44,11 @@ public class BookFlightActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         bookFlightBinding = ActivityBookFlightBinding.inflate(getLayoutInflater());
         setContentView(bookFlightBinding.getRoot());
-        databaseHelper = new DatabaseHelper(this);
         int flightId=7;
         int userId=1;
         loadInfor(flightId);
         loadUser(userId);
+        bookFlightBinding.btnThanhToan.setEnabled(false);
         bookFlightDAO=new BookFlightDAO();
 
         bookFlightBinding.btnDecreaseAdults.setOnClickListener(new View.OnClickListener() {
@@ -146,7 +146,7 @@ public class BookFlightActivity extends AppCompatActivity {
     {
         int sl_treEm = Integer.parseInt(bookFlightBinding.tvQuantityChilds.getText().toString());
         int sl_nguoiLon = Integer.parseInt(bookFlightBinding.tvQuantityAdults.getText().toString());
-        float gia = bookFlightDAO.getInfor(flightId).getPrice();
+        long gia = (long) bookFlightDAO.getInfor(flightId).getPrice();
         long tongtien = (long)(sl_nguoiLon * gia + sl_treEm * gia );
         bookFlightBinding.tvThanhTien.setText(String.valueOf(tongtien));
         if(checkPrice(Float.parseFloat(bookFlightBinding.tvThanhTien.getText().toString())))

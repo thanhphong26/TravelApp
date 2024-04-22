@@ -159,7 +159,7 @@ public class BookHotelActivity extends AppCompatActivity {
         }
     }
     public boolean checkPrice(float price){
-        if(price>0){
+        if(price>0.0){
             return true;
         }
         return false;

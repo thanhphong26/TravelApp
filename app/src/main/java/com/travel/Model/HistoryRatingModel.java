@@ -6,16 +6,26 @@ public class HistoryRatingModel {
     private String image;
     private float rating;
     private String review;
+    private String date;
 
     public HistoryRatingModel() {
     }
 
-    public HistoryRatingModel(String name, String description, String image, float rating, String review) {
+    public HistoryRatingModel(String name, String description, String image, float rating, String review, String date) {
         this.name = name;
         this.description = description;
         this.image = image;
         this.rating = rating;
         this.review = review;
+        this.date = date;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getName() {
