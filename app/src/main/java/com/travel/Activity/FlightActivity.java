@@ -5,16 +5,24 @@ import androidx.core.widget.NestedScrollView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 
 import com.travel.Database.DestinationDAO;
 import com.travel.Model.DestinationDetailModel;
 import com.travel.R;
 import com.travel.Utils.Constants;
+import com.travel.Utils.TextWatcherHelper;
 import com.travel.databinding.ActivityFlightBinding;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,13 +39,21 @@ public class FlightActivity extends AppCompatActivity {
         setContentView(flightBinding.getRoot());
 
 
+        this.setDefaultData();
         this.initPage();
+    }
+
+    private void setDefaultData() {
+        destinationDetails = destinationDAO.getAll("", Constants.MAX_RECORD, 0);
     }
 
     private void initPage() {
         this.initHeaderEvent();
+        this.initDatePicker();
+        this.initAutoComplete();
+    }
 
-        destinationDetails = destinationDAO.getAll("", Constants.MAX_RECORD, 0);
+    private void initAutoComplete() {
         List<String> countries = destinationDetails.stream()
                 .map(DestinationDetailModel::getName)
                 .collect(Collectors.toList());
@@ -45,6 +61,17 @@ public class FlightActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries);
         flightBinding.edtCurrentPlace.setAdapter(adapter);
+        flightBinding.edtDestination.setAdapter(adapter);
+    }
+
+    private void initDatePicker() {
+        TextWatcherHelper departTimeWatcher = new TextWatcherHelper();
+        departTimeWatcher.setEditText(flightBinding.edtDepartTime);
+        flightBinding.edtDepartTime.addTextChangedListener(departTimeWatcher);
+
+        TextWatcherHelper arrivalTimeWatcher = new TextWatcherHelper();
+        arrivalTimeWatcher.setEditText(flightBinding.edtArrivalTime);
+        flightBinding.edtArrivalTime.addTextChangedListener(arrivalTimeWatcher);
     }
 
     private void initHeaderEvent() {
@@ -70,4 +97,7 @@ public class FlightActivity extends AppCompatActivity {
             }
         });
     }
+
 }
+
+
