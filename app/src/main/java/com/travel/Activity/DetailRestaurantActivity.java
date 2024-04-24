@@ -22,7 +22,9 @@ import com.travel.Database.WishlistDAO;
 import com.travel.Model.HotelModel;
 import com.travel.Model.RestaurantModel;
 import com.travel.Model.ReviewModel;
+import com.travel.Model.UserModel;
 import com.travel.R;
+import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityDetailRestaurantBinding;
 import com.travel.databinding.ActivityRestaurantBinding;
 
@@ -38,16 +40,16 @@ public class DetailRestaurantActivity extends AppCompatActivity {
     ReviewDAO reviewDAO=new ReviewDAO();
     private boolean isFavorite;
     List<ReviewModel> reviewList;
-    int destinationId,userId;
+    int destinationId;
+    UserModel userModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         restaurantBinding = ActivityDetailRestaurantBinding.inflate(getLayoutInflater());
         setContentView(restaurantBinding.getRoot());
         destinationId=getIntent().getIntExtra("destinationId",0);
-        int restaurantId = getIntent().getIntExtra("restaurant_id", 0);
-        userId = 1;
-
+        int restaurantId = getIntent().getIntExtra("restaurantId", 0);
+        userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
         AppBarLayout appBarLayout = findViewById(com.travel.R.id.app_bar_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         ImageView backIcon = findViewById(R.id.imgBack);
@@ -70,9 +72,9 @@ public class DetailRestaurantActivity extends AppCompatActivity {
         setUpRecyclerView(restaurantModel);
         restaurantBinding.lyMap.setOnClickListener(v -> navigateToLocation(restaurantModel));
         restaurantBinding.button.setOnClickListener(v -> navigateToBooking(restaurantModel));
-        isFavorite = wishlistDAO.checkFavoriteRestaurant(restaurantModel.getRestaurantId(), 1);
+        isFavorite = wishlistDAO.checkFavoriteRestaurant(restaurantModel.getRestaurantId(), userModel.getUserId());
         setHeartColor(restaurantBinding.fab, isFavorite);
-        restaurantBinding.fab.setOnClickListener(v -> addToWhislist(restaurantModel));
+        restaurantBinding.fab.setOnClickListener(v -> addToWhislist(restaurantModel,userModel));
         restaurantBinding.imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,13 +84,13 @@ public class DetailRestaurantActivity extends AppCompatActivity {
             }
         });
     }
-    private void addToWhislist(RestaurantModel restaurantModel) {
+    private void addToWhislist(RestaurantModel restaurantModel, UserModel userModel) {
         isFavorite = !isFavorite;
         if (isFavorite) {
-            wishlistDAO.insertRestaurantWhishlist(1, restaurantModel.getRestaurantId());
+            wishlistDAO.insertRestaurantWhishlist(userModel.getUserId(), restaurantModel.getRestaurantId());
             showSnackbar("Đã thêm vào danh sách yêu thích");
         } else {
-            wishlistDAO.removeWhishlistRestaurantId(1, restaurantModel.getRestaurantId());
+            wishlistDAO.removeWhishlistRestaurantId(userModel.getUserId(), restaurantModel.getRestaurantId());
             showSnackbar("Đã xóa khỏi danh sách yêu thích");
         }
         setHeartColor(restaurantBinding.fab, isFavorite);

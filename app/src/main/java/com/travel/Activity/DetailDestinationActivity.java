@@ -3,6 +3,7 @@ package com.travel.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.net.vcn.VcnUnderlyingNetworkTemplate;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +26,9 @@ import com.travel.Model.DestinationModel;
 import com.travel.Model.HotelModel;
 import com.travel.Model.RestaurantModel;
 import com.travel.Model.TourModel;
+import com.travel.Model.UserModel;
 import com.travel.R;
+import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityDetailDestinationBinding;
 
 import java.util.List;
@@ -41,13 +44,14 @@ public class DetailDestinationActivity extends AppCompatActivity {
      DetailDestinationAdapter<HotelModel> hotelAdapter;
      WishlistDAO wishlistDAO;
     private boolean isFavorite;
-
+    UserModel userModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         detailDestinationBinding = ActivityDetailDestinationBinding.inflate(getLayoutInflater());
         setContentView(detailDestinationBinding.getRoot());
-        int destinationId=getIntent().getIntExtra("destination_id",15);
+        int destinationId=getIntent().getIntExtra("destinationId",15);
+        userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
         wishlistDAO=new WishlistDAO(this);
         AppBarLayout appBarLayout = findViewById(com.travel.R.id.app_bar_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -62,25 +66,31 @@ public class DetailDestinationActivity extends AppCompatActivity {
             }
         });
         DestinationModel destination = destinationDAO.getDestinationById(destinationId);
-        isFavorite = wishlistDAO.checkFavoriteDestination(destination.getDestinationId(), 1);
-        //Log.d("Hello: ", "onCreate: " +isFavorite);
+        isFavorite = wishlistDAO.checkFavoriteDestination(destination.getDestinationId(), userModel.getUserId());
         setHeartColor(detailDestinationBinding.fab, isFavorite);
-        detailDestinationBinding.fab.setOnClickListener(v -> addToWhislist(destinationId));
+        detailDestinationBinding.fab.setOnClickListener(v -> addToWhislist(destinationId, userModel));
         setDestination(destination);
         setupLayoutRecyclerView();
         setupTourRecyclerView(destinationId);
         setupRestaurantRecyclerView(destinationId);
         setupHotelRecyclerView(destinationId);
-        this.initPage();
+
+        detailDestinationBinding.imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailDestinationActivity.this, DestinationActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
-    private void addToWhislist(int destinationId) {
+    private void addToWhislist(int destinationId, UserModel userModel) {
         isFavorite = !isFavorite;
         if (isFavorite) {
-            wishlistDAO.insertDestinationWhishlist(1, destinationId);
+            wishlistDAO.insertDestinationWhishlist(userModel.getUserId(), destinationId);
             showSnackbar("Đã thêm vào danh sách yêu thích");
         } else {
-            wishlistDAO.removeWishListDestinationId(1, destinationId);
+            wishlistDAO.removeWishListDestinationId(userModel.getUserId(), destinationId);
             showSnackbar("Đã xóa khỏi danh sách yêu thích");
         }
         setHeartColor(detailDestinationBinding.fab, isFavorite);
