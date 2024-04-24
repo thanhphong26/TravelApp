@@ -23,7 +23,7 @@ public class DestinationDAO {
 
     public DestinationDAO() {
     }
-
+    @SuppressLint("Range")
     public DestinationModel getDestinationById(int id) {
         database = databaseHelper.openDatabase();
         DestinationModel destinationModel = new DestinationModel();
@@ -32,11 +32,28 @@ public class DestinationDAO {
             try {
                 cursor = database.query("destinations", null, "destination_id= ?", new String[]{String.valueOf(id)}, null, null, null);
                 if (cursor != null && cursor.moveToFirst()) {
-                    destinationModel.setDestinationId(cursor.getInt(0));
-                    destinationModel.setName(cursor.getString(1));
-                    destinationModel.setImage(cursor.getString(2));
-                    destinationModel.setCreatedAt(Timestamp.valueOf(cursor.getString(3)));
-                    destinationModel.setDescription(cursor.getString(4));
+                    // Retrieve column indices
+                    int destinationIdIndex = cursor.getColumnIndex("destination_id");
+                    int nameIndex = cursor.getColumnIndex("name");
+                    int imageIndex = cursor.getColumnIndex("image");
+                    int createdAtIndex = cursor.getColumnIndex("created_at");
+                    int descriptionIndex = cursor.getColumnIndex("description");
+
+                    // Set DestinationModel properties from Cursor
+                    destinationModel.setDestinationId(cursor.getInt(destinationIdIndex));
+                    destinationModel.setName(cursor.getString(nameIndex));
+                    destinationModel.setImage(cursor.getString(imageIndex));
+
+                    // Convert createdAt String to Timestamp
+                    String createdAtString = cursor.getString(createdAtIndex);
+                    if (createdAtString != null) {
+                        destinationModel.setCreatedAt(Timestamp.valueOf(createdAtString));
+                    }
+
+                    // Set description (if available)
+                    if (descriptionIndex != -1) {  // Check if description column exists
+                        destinationModel.setDescription(cursor.getString(descriptionIndex));
+                    }
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

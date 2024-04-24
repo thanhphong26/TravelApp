@@ -93,8 +93,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.park);
         LatLng loaction = new LatLng(latitude, longitude);
         originalMarker = mMap.addMarker(new MarkerOptions().position(loaction).title(locationName).icon(icon));
-        moveCamera(loaction, 10);
-        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        moveCamera(loaction, 14);
+        //mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
     }
     private void getLastLocation() {
         if (ActivityCompat.checkSelfPermission(MapsActivity.this,

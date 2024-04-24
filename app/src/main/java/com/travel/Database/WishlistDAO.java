@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WishlistDAO {
-    DatabaseHelper databaseHelper = databaseHelper = new DatabaseHelper(App.self());
+    DatabaseHelper databaseHelper  = new DatabaseHelper(App.self());
     SQLiteDatabase database;
     UserDAO userDAO = new UserDAO();
     TourDAO tourDAO=new TourDAO();
@@ -231,7 +231,7 @@ public class WishlistDAO {
         database = databaseHelper.getReadableDatabase();
         Cursor cursor = null;
         try {
-            cursor = database.query("whishlist", null, "user_id = ? AND destination_id = ?", new String[]{String.valueOf(userId), String.valueOf(destinationId)}, null, null, null);
+            cursor = database.query("whishlist", null, "user_id = ? AND destination_id = ? ", new String[]{String.valueOf(userId), String.valueOf(destinationId)}, null, null, null);
             if (cursor.moveToFirst()) {
                 return true;
             }
