@@ -33,7 +33,9 @@ import com.travel.Model.ReviewModel;
 import com.travel.Model.ReviewType;
 import com.travel.Model.TourLineModel;
 import com.travel.Model.TourModel;
+import com.travel.Model.UserModel;
 import com.travel.R;
+import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityDetailDestinationBinding;
 import com.travel.databinding.ActivityDetailTourBinding;
 
@@ -61,6 +63,7 @@ public class DetailTourActivity extends AppCompatActivity {
     WishlistDAO wishlistDAO;
     private boolean isFavorite;
     int destinationId;
+    UserModel userModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +73,7 @@ public class DetailTourActivity extends AppCompatActivity {
        // int tourId = 1;
         destinationId=getIntent().getIntExtra("destinationId",0);
         int tourId=getIntent().getIntExtra("tourId",1);
+        userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
         wishlistDAO=new WishlistDAO(this);
         AppBarLayout appBarLayout = findViewById(com.travel.R.id.app_bar_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -85,10 +89,9 @@ public class DetailTourActivity extends AppCompatActivity {
         });
 
         tourModel=tourDAO.getTourById(tourId);
-        isFavorite = wishlistDAO.checkFavoriteTour(tourModel.getTourId(), 1);
-        //Log.d("Hello: ", "onCreate: " +isFavorite);
+        isFavorite = wishlistDAO.checkFavoriteTour(tourModel.getTourId(), userModel.getUserId());
         setHeartColor(detailTourBinding.fabLove, isFavorite);
-        detailTourBinding.fabLove.setOnClickListener(v -> addToWhislist(tourId));
+        detailTourBinding.fabLove.setOnClickListener(v -> addToWhislist(tourModel,userModel));
         detailTourBinding.txtNameTour.setText(tourModel.getName());
         detailTourBinding.txtRating.setText(String.valueOf(tourModel.getRating()));
         detailTourBinding.txtDescription.setText(tourModel.getDescription());
@@ -129,13 +132,13 @@ public class DetailTourActivity extends AppCompatActivity {
             }
         });
     }
-    private void addToWhislist(int tourId) {
+    private void addToWhislist(TourModel tourModel, UserModel userModel) {
         isFavorite = !isFavorite;
         if (isFavorite) {
-            wishlistDAO.insertTourWhishlist(1, tourId);
+            wishlistDAO.insertTourWhishlist(userModel.getUserId(), tourModel.getTourId());
             showSnackbar("Đã thêm vào danh sách yêu thích");
         } else {
-            wishlistDAO.removeWhishlistTourId(1, tourId);
+            wishlistDAO.removeWhishlistTourId(userModel.getUserId(), tourModel.getTourId());
             showSnackbar("Đã xóa khỏi danh sách yêu thích");
         }
         setHeartColor(detailTourBinding.fabLove, isFavorite);

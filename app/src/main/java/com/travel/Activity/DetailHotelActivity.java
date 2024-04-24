@@ -21,7 +21,9 @@ import com.travel.Database.ReviewDAO;
 import com.travel.Database.WishlistDAO;
 import com.travel.Model.HotelModel;
 import com.travel.Model.ReviewModel;
+import com.travel.Model.UserModel;
 import com.travel.R;
+import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityDetailHotelBinding;
 
 import java.text.DecimalFormat;
@@ -38,13 +40,14 @@ public class DetailHotelActivity extends AppCompatActivity {
     WishlistDAO wishlistDAO;
     private boolean isFavorite;
     int destinationId;
+    UserModel userModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         detailHotelBinding = ActivityDetailHotelBinding.inflate(getLayoutInflater());
         setContentView(detailHotelBinding.getRoot());
-        int hotelId = getIntent().getIntExtra("hotel_id", 0);
+        int hotelId = getIntent().getIntExtra("hotelId", 0);
         destinationId=getIntent().getIntExtra("destinationId",0);
         AppBarLayout appBarLayout = findViewById(com.travel.R.id.app_bar_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -60,6 +63,7 @@ public class DetailHotelActivity extends AppCompatActivity {
         });
         wishlistDAO=new WishlistDAO(this);
         hotelModel = hotelDAO.getHotelById(hotelId);
+        userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
         reviewList = reviewDAO.getReviewsForHotel(hotelId);
         setHotelModel(hotelModel);
         setRating((int) ratingAverage(reviewList));
@@ -67,9 +71,9 @@ public class DetailHotelActivity extends AppCompatActivity {
         setUpRecyclerView(hotelModel);
         detailHotelBinding.lyMap.setOnClickListener(v -> navigateToLocation(hotelModel));
         detailHotelBinding.button.setOnClickListener(v -> navigateToBooking(hotelModel));
-        isFavorite = wishlistDAO.checkFavoriteHotel(hotelModel.getHotelId(), 1);
+        isFavorite = wishlistDAO.checkFavoriteHotel(hotelModel.getHotelId(), userModel.getUserId());
         setHeartColor(detailHotelBinding.fab, isFavorite);
-        detailHotelBinding.fab.setOnClickListener(v -> addToWhislist(hotelModel));
+        detailHotelBinding.fab.setOnClickListener(v -> addToWhislist(hotelModel, userModel));
 
         detailHotelBinding.imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,13 +84,13 @@ public class DetailHotelActivity extends AppCompatActivity {
             }
         });
     }
-    private void addToWhislist(HotelModel hotelModel) {
+    private void addToWhislist(HotelModel hotelModel, UserModel userModel) {
         isFavorite = !isFavorite;
         if (isFavorite) {
-            wishlistDAO.insertHotelWhishlist(1, hotelModel.getHotelId());
+            wishlistDAO.insertHotelWhishlist(userModel.getUserId(), hotelModel.getHotelId());
             showSnackbar("Đã thêm vào danh sách yêu thích");
         } else {
-            wishlistDAO.removeWhishlistHotelId(1, hotelModel.getHotelId());
+            wishlistDAO.removeWhishlistHotelId(userModel.getUserId(), hotelModel.getHotelId());
             showSnackbar("Đã xóa khỏi danh sách yêu thích");
         }
         setHeartColor(detailHotelBinding.fab, isFavorite);
@@ -136,7 +140,6 @@ public class DetailHotelActivity extends AppCompatActivity {
         LinearLayoutManager layoutManagerHotel = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         detailHotelBinding.recyclerViewHotelNearby.setLayoutManager(layoutManagerHotel);
         List<HotelModel> hotels = hotelDAO.getNearDestinationExcludingCurrent(hotelModel.getDestination().getDestinationId(), hotelModel.getHotelId());
-        System.out.print("Hotel: " + hotels.size());
         DetailDestinationAdapter<HotelModel> hotelAdapter = new DetailDestinationAdapter<>(hotels, this);
         detailHotelBinding.recyclerViewHotelNearby.setAdapter(hotelAdapter);
     }
@@ -156,7 +159,6 @@ public class DetailHotelActivity extends AppCompatActivity {
     }
     private void showSnackbar(String message) {
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT);
-
         View snackbarView = snackbar.getView();
         snackbarView.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(204, 153, 255)));
         snackbar.show();

@@ -22,6 +22,8 @@ public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding loginBinding;
     DatabaseHelper databaseHelper;
     SQLiteDatabase database;
+    SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(loginBinding.getRoot());
 
         databaseHelper = new DatabaseHelper(this);
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 
         loginBinding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,9 +44,13 @@ public class LoginActivity extends AppCompatActivity {
                     loginBinding.txtError.setText("Vui lòng điền đầy đủ thông tin!");
                 }
                 else if (userModel != null) {
-                    SharePreferencesHelper.getInstance().put(Constants.USER_SHARE_PREFERENCES, userModel);
+                    SharePreferencesHelper.getInstance().put("user", userModel);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("isLoggedIn", true);
+                    editor.apply();
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
+                    finish();
                 }else {
                     loginBinding.txtError.setText("Email hoặc mật khẩu không đúng! Vui lòng kiểm tra lại!");
                 }

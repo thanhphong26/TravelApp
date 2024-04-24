@@ -49,7 +49,7 @@
             android:name=".Activity.DetailRestaurantActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.MainActivity"
+            android:name=".Activity.DetailDestinationActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.DetailTourActivity"
@@ -58,7 +58,7 @@
             android:name=".Activity.TimeLineActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.DetailDestinationActivity"
+            android:name=".Activity.DetailHotelActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.SignUpActivity"
@@ -67,7 +67,7 @@
             android:name=".Activity.PersonalInforActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.DetailHotelActivity"
+            android:name=".Activity.HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.TravelApp" />

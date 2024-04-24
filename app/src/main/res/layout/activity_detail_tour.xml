@@ -7,53 +7,51 @@
     android:layout_height="match_parent"
     android:background="#F4FDFB"
     tools:context=".Activity.DetailTourActivity">
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar_layout"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        app:layout_constraintTop_toTopOf="parent">
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager2"
+        android:layout_height="wrap_content">
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
-            android:layout_height="250dp"/>
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:layout_constraintTop_toTopOf="parent">
 
-<!--        <com.google.android.material.appbar.CollapsingToolbarLayout-->
-<!--            android:id="@+id/collapsing_toolbar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:fitsSystemWindows="true"-->
-<!--            app:contentScrim="@color/white"-->
-<!--            app:layout_scrollFlags="scroll|exitUntilCollapsed">-->
-
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin">
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                app:contentScrim="@color/white"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager2"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"/>
 
-                <ImageView
-                    android:id="@+id/imgBack"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    app:srcCompat="@drawable/icon_back" />
-            </androidx.appcompat.widget.Toolbar>
-<!--        </com.google.android.material.appbar.CollapsingToolbarLayout>-->
-    </com.google.android.material.appbar.AppBarLayout>
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin">
 
-    <!-- NestedScrollView -->
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-25dp"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+                    <ImageView
+                        android:id="@+id/imgBack"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        app:srcCompat="@drawable/icon_back" />
+                </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- NestedScrollView -->
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-25dp"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -400,22 +398,22 @@
                 </LinearLayout>
 
             </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabLove"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:baselineAlignBottom="false"
-        android:src="@drawable/heart"
-        app:fabSize="normal"
-        app:layout_anchor="@id/app_bar_layout"
-        app:layout_anchorGravity="bottom|right|end"
-        app:tint="@null"
-        app:borderWidth="0dp"
-        android:layout_marginTop="-50dp"
-        android:layout_marginRight="20dp"
-        android:backgroundTint="@color/white"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabLove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:baselineAlignBottom="false"
+            android:src="@drawable/heart"
+            app:fabSize="normal"
+            app:layout_anchor="@id/app_bar_layout"
+            app:layout_anchorGravity="bottom|right|end"
+            app:tint="@null"
+            app:borderWidth="0dp"
+            android:layout_marginTop="-50dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/white"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <LinearLayout

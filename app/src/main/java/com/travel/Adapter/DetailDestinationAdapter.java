@@ -71,13 +71,13 @@ public class DetailDestinationAdapter<T> extends RecyclerView.Adapter<DetailDest
                     HotelModel hotelModel = (HotelModel) item;
                     Intent intent = new Intent(context, DetailHotelActivity.class);
                     intent.putExtra("destinationId",hotelModel.getDestination().getDestinationId());
-                    intent.putExtra("hotel_id", hotelModel.getHotelId());
+                    intent.putExtra("hotelId", hotelModel.getHotelId());
                     context.startActivity(intent);
                 } else if (item instanceof RestaurantModel){
                     RestaurantModel restaurantModel = (RestaurantModel) item;
                     Intent intent = new Intent(context, DetailRestaurantActivity.class);
                     intent.putExtra("destinationId",restaurantModel.getDestination().getDestinationId());
-                    intent.putExtra("restaurant_id", restaurantModel.getRestaurantId());
+                    intent.putExtra("restaurantId", restaurantModel.getRestaurantId());
                     context.startActivity(intent);
                 }
             }
