@@ -45,19 +45,15 @@ public class MainActivity extends AppCompatActivity {
 //            @Override
 //            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 //                if (item.getItemId() == R.id.navigation_home) {
-//                    System.out.println("aaa");
 //                    // Handle navigation for Home activity
 //                    return true;
 //                } else if (item.getItemId() == R.id.navigation_map) {
-//                    System.out.println("bbb");
 //                    // Handle navigation for Map activity
 //                    return true;
 //                } else if (item.getItemId() == R.id.navigation_favorite) {
-//                    System.out.println("ccc");
 //                    // Handle navigation for Favorite activity
 //                    return true;
 //                } else if (item.getItemId() == R.id.navigation_translate) {
-//                    System.out.println("ddd");
 //                    // Handle navigation for Translate activity
 //                    return true;
 //                } else {

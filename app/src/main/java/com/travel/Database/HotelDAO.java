@@ -38,8 +38,6 @@ public class HotelDAO {
                         "WHERE hotels.name LIKE '%" + string + "%' " +
                         "ORDER BY rating DESC LIMIT " + pageSize + " OFFSET " + (pageNumber - 1) * pageSize;
 
-                System.out.println("query " + query);
-
                 cursor = database.rawQuery(query, null);
                 if (cursor.moveToFirst()) {
                     do {
@@ -141,8 +139,6 @@ public class HotelDAO {
                 String query = "SELECT " + TextUtils.join(",", columns) + " FROM hotels " +
                         "INNER JOIN destinations ON hotels.destination_id = destinations.destination_id " +
                         "ORDER BY rating DESC LIMIT " + limit;
-
-                System.out.println("query " + query);
 
                 cursor = database.rawQuery(query, null);
                 if (cursor.moveToFirst()) {

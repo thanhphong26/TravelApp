@@ -48,7 +48,6 @@ public class TourFavoriteAdapter<T> extends RecyclerView.Adapter<TourFavoriteAda
     }
 
     private void bindTourModel(TourFavoriteViewHolder holder, TourModel item) {
-        System.out.println("Tour Nameeeeeeeeeeeeeee: " + item.getName());
         holder.name.setText(item.getName());
         Glide.with(context).load(item.getImage()).error(R.drawable.bg_test_card_favorite).into(holder.image);
         holder.rating.setText(String.valueOf(item.getRating()));

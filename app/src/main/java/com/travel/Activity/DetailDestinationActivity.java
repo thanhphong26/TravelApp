@@ -57,21 +57,18 @@ public class DetailDestinationActivity extends AppCompatActivity {
     private void setupTourRecyclerView(int destinationId) {
 
         List<TourModel> tourModels = tourDAO.getTourByDestinationId(destinationId);
-        System.out.println("Restaurant: " + tourModels.size());
         DetailDestinationAdapter<TourModel> tourAdapter = new DetailDestinationAdapter<>(tourModels, this);
         detailDestinationBinding.recyclerViewTour.setAdapter(tourAdapter);
     }
     private void setupRestaurantRecyclerView(int destinationId) {
 
         List<RestaurantModel> restaurants = restaurantDAO.getAllRestaurant(destinationId);
-        System.out.println("Restaurant: " + restaurants.size());
         DetailDestinationAdapter<RestaurantModel> restaurantAdapter = new DetailDestinationAdapter<>(restaurants, this);
         detailDestinationBinding.recyclerViewRestaurant.setAdapter(restaurantAdapter);
     }
     private void setupHotelRecyclerView(int destinationId) {
 
         List<HotelModel> hotels = hotelDAO.getByDestinationId(destinationId);
-        System.out.println("Hotel: " + hotels.size());
         DetailDestinationAdapter<HotelModel> hotelAdapter = new DetailDestinationAdapter<>(hotels, this);
         detailDestinationBinding.recyclerViewHotel.setAdapter(hotelAdapter);
     }
