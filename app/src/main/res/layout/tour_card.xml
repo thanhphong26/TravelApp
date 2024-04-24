@@ -45,6 +45,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/montserrat_medium"
             android:text="Hà Giang"
+            android:textColor="@color/black"
             android:textSize="15sp" />
 
         <LinearLayout
@@ -69,6 +70,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="5.0"
+                android:textColor="@color/black"
                 android:textAlignment="textStart" />
         </LinearLayout>
     </LinearLayout>
@@ -78,23 +80,15 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Vietnam Photo Tour"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            android:textStyle="italic" />
-
         <TextView
             android:id="@+id/tvPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="200$"
+            android:text="Từ 200,000 đ"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:textStyle="italic"
             android:textColor="@color/black" />
     </LinearLayout>
 </LinearLayout>

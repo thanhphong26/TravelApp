@@ -7,9 +7,14 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
+import com.travel.Adapter.DestinationCommonRatingAdapter;
+import com.travel.Adapter.TourCommonAdapter;
+import com.travel.Adapter.TourFavoriteAdapter;
 import com.travel.Database.TourDAO;
+import com.travel.Model.DestinationDetailModel;
 import com.travel.Model.TourModel;
 import com.travel.R;
 import com.travel.Utils.NumberHelper;
@@ -31,14 +36,22 @@ public class TourActivity extends AppCompatActivity {
         tourBinding = ActivityTourBinding.inflate(getLayoutInflater());
         setContentView(tourBinding.getRoot());
 
+        this.setupLayoutRecyclerView();
         this.initHeaderEvent();
         this.initPage();
         this.handleSearchGlobal();
     }
 
+    private void setupLayoutRecyclerView() {
+        LinearLayoutManager layoutManagerCommon = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        tourBinding.rcvCommonTour.setLayoutManager(layoutManagerCommon);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        tourBinding.rcvTour.setLayoutManager(layoutManager);
+    }
+
     public void initHeaderEvent() {
-        ImageView img_back = (ImageView) findViewById(R.id.imgBack);
-        img_back.setOnClickListener(new View.OnClickListener() {
+        ImageView imgBack = (ImageView) findViewById(R.id.imgBack);
+        imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TourActivity.this, HomeActivity.class);
@@ -66,60 +79,20 @@ public class TourActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                tours = tourDAO.getAll(newText, 10, 0);
+                handleListTour();
                 return false;
             }
         });
     }
 
     public void handleListCommonTour() {
-        tourBinding.lyCommonTour.removeAllViews();
-        if (commonTours.size() <= 0) {
-            tourBinding.lyCommonTour.setVisibility(View.GONE);
-        } else {
-            for (TourModel tour : commonTours) {
-                TourCommonCardBinding tourCardBinding = TourCommonCardBinding.inflate(getLayoutInflater());
-                tourCardBinding.cityName.setText(tour.getDestination().getName());
-                Glide.with(this).load(tour.getImage()).into(tourCardBinding.roundedCityImage);
-                tourCardBinding.getRoot().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(TourActivity.this, DetailTourActivity.class);
-                        intent.putExtra("tourId", tour.getTourId());
-                        startActivity(intent);
-                    }
-                });
-                tourBinding.lyCommonTour.addView(tourCardBinding.getRoot());
-            }
-        }
+        TourCommonAdapter<TourModel> adapter = new TourCommonAdapter<>(commonTours, this);
+        tourBinding.rcvCommonTour.setAdapter(adapter);
     }
 
     public void handleListTour() {
-        tourBinding.lyTour.removeAllViews();
-        if (tours.size() <= 0) {
-            tourBinding.lyTour.setVisibility(View.GONE);
-        } else {
-            tourBinding.lyTour.setVisibility(View.VISIBLE);
-            for (TourModel tour : tours) {
-                TourFavoriteCardBinding tourFavoriteCardBinding = TourFavoriteCardBinding.inflate(getLayoutInflater());
-
-                Glide.with(this).load(tour.getImage()).centerCrop().into(tourFavoriteCardBinding.roundedCityImage);
-                tourFavoriteCardBinding.tvTourName.setText(tour.getName());
-                tourFavoriteCardBinding.tourFavoriteRating.setText(String.valueOf(tour.getRating()));
-                tourFavoriteCardBinding.ratingBar.setRating(tour.getRating());
-                tourFavoriteCardBinding.tvDescription.setText(tour.getDescription());
-                tourFavoriteCardBinding.tvPrice.setText(NumberHelper.getFormattedPrice(tour.getPrice()) + " đ");
-
-                tourFavoriteCardBinding.getRoot().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(TourActivity.this, DetailTourActivity.class);
-                        intent.putExtra("tourId", tour.getTourId());
-                        startActivity(intent);
-                    }
-                });
-
-                tourBinding.lyTour.addView(tourFavoriteCardBinding.getRoot());
-            }
-        }
+        TourFavoriteAdapter<TourModel> adapter = new TourFavoriteAdapter<>(tours, this);
+        tourBinding.rcvTour.setAdapter(adapter);
     }
 }

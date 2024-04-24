@@ -17,17 +17,17 @@
         app:cardCornerRadius="8dp">
 
         <ImageView
-            android:id="@+id/roundedHotelImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/hotel_common_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@color/white"
             android:foregroundGravity="bottom"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:src="@drawable/bg_test_hotel_common_card" />
 
         <TextView
-            android:id="@+id/hotelName"
+            android:id="@+id/hotel_common_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/montserrat_medium"

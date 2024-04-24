@@ -54,8 +54,8 @@
                     <LinearLayout
                         android:id="@+id/ly_search_tour"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="20dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -65,6 +65,12 @@
                             android:fontFamily="@font/montserrat_medium"
                             android:text="Du lịch"
                             android:textSize="20sp" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/tourRecycleView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
                     </LinearLayout>
 
 
@@ -72,7 +78,7 @@
                         android:id="@+id/ly_search_hotel"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -82,13 +88,19 @@
                             android:fontFamily="@font/montserrat_medium"
                             android:text="Khách sạn"
                             android:textSize="20sp" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/hotelRecycleView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/ly_search_restaurant"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -98,6 +110,11 @@
                             android:fontFamily="@font/montserrat_medium"
                             android:text="Nhà hàng"
                             android:textSize="20sp" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/restaurantRecycleView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
                     </LinearLayout>
 
                 </LinearLayout>
