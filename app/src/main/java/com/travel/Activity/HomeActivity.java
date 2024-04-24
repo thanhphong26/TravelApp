@@ -167,7 +167,6 @@ public class HomeActivity extends AppCompatActivity {
         List<String> imageUrls = new ArrayList<>();
         for (DestinationModel destination : destinations) {
             imageUrls.add(destination.getImage());
-            System.out.println(destination.getImage());
         }
         imageSliderAdapter = new ImageSliderAdapter(imageUrls, homeBinding.viewPager2);
         homeBinding.viewPager2.setAdapter(imageSliderAdapter);

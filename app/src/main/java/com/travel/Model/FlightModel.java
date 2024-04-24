@@ -8,15 +8,17 @@ public class FlightModel {
     String arrivalAirportCode;
     Timestamp departureTime;
     Timestamp arrivalTime;
-    int flightDuration;
+    int flightDuration, availableSeats;
     Timestamp departureDate;
     Timestamp arrivalDate;
     String status;
+    float price;
+    String description;
 
     public FlightModel() {
     }
 
-    public FlightModel(int flightId, String departureAirportCode, String arrivalAirportCode, Timestamp departureTime, Timestamp arrivalTime, int flightDuration, Timestamp departureDate, Timestamp arrivalDate, String status) {
+    public FlightModel(int flightId, String departureAirportCode, String arrivalAirportCode, Timestamp departureTime, Timestamp arrivalTime, int flightDuration, Timestamp departureDate, Timestamp arrivalDate, String status, float price, String description, int availableSeats) {
         this.flightId = flightId;
         this.departureAirportCode = departureAirportCode;
         this.arrivalAirportCode = arrivalAirportCode;
@@ -26,6 +28,9 @@ public class FlightModel {
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
         this.status = status;
+        this.price = price;
+        this.description = description;
+        this.availableSeats = availableSeats;
     }
 
     public int getFlightId() {
@@ -98,5 +103,29 @@ public class FlightModel {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getAvailableSeats() {
+        return availableSeats;
+    }
+
+    public void setAvailableSeats(int availableSeats) {
+        this.availableSeats = availableSeats;
     }
 }

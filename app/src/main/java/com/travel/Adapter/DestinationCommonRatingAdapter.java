@@ -47,7 +47,6 @@ public class DestinationCommonRatingAdapter<T> extends RecyclerView.Adapter<Dest
 
     private void bindDestinationModel(DestinationCommonRatingViewHolder holder, DestinationDetailModel item) {
         holder.name.setText(item.getName());
-        System.out.println("item.getImage()" + item.getImage());
         Glide.with(context).load(item.getImage()).error(R.drawable.img_ha_giang).into(holder.image);
         holder.rating.setText(String.valueOf(item.getRating()));
         holder.price.setText("Từ " + NumberHelper.getFormattedPrice(item.getMinPrice()) + "đ");
