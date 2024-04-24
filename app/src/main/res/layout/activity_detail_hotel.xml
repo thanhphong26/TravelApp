@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F4FDFB"
     android:orientation="vertical"
     tools:context=".Activity.DetailTourActivity">
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -19,7 +20,7 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             app:contentScrim="@color/white"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
@@ -44,7 +45,7 @@
                     android:layout_height="32dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    app:srcCompat="@drawable/left" />
+                    app:srcCompat="@drawable/icon_back" />
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -52,24 +53,26 @@
     <!-- NestedScrollView -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="-24dp"
-        android:background="@drawable/custom_corner"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <!-- ScrollView -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:layout_marginLeft="15dp"
+                android:background="@drawable/rounded_corner"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txtHotelName"
                     android:layout_width="264dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
                     android:text="Khách Sạn 1000 Sao"
                     android:inputType="textMultiLine"
                     android:textSize="24dp"
@@ -77,15 +80,15 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/imageView5"
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="8dp"
                         app:srcCompat="@drawable/icon_star" />
 
                     <TextView
@@ -104,41 +107,57 @@
                         android:layout_marginTop="10dp"
                         android:text="(500 đánh giá)"
                         android:textSize="10sp" />
-
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/rounded_corner_2"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/imageView11"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginTop="8dp"
-                        app:srcCompat="@drawable/icon_location" />
-
-                    <TextView
-                        android:id="@+id/txtDestination"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textMultiLine"
-                        android:layout_weight="1"
-                        android:layout_marginTop="10dp"
-                        android:text="Đà Nẵng, Việt Nam" />
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/imgLocation"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="5dp"
-                        app:srcCompat="@drawable/chevron" />
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/imgmap" />
+                        <TextView
+                            android:id="@+id/txtAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="Số 1 Võ Văn Ngân, Linh Chiểu, Thủ Đức"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/lyMap"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_marginRight="25dp"
+                            android:src="@drawable/imgmap2"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/orange"
+                            android:layout_marginRight="20dp"
+                            android:text="Bản đồ"/>
+                    </LinearLayout>
                 </LinearLayout>
-
                 <View
                     android:id="@+id/view"
                     android:layout_marginTop="10dp"
@@ -151,15 +170,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
                     android:textSize="18dp"
                     android:textStyle="bold"
                     android:text="Thông Tin">
                 </TextView>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/input_search_background"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:orientation="vertical">
                     <TextView
                         android:id="@+id/txtDescription"
@@ -169,16 +188,11 @@
                         android:text="Đà Nẵng là một thành phố trực thuộc trung ương của Việt Nam, là trung tâm kinh tế, văn hóa, giáo dục, khoa học và công nghệ lớn nhất miền Trung, cũng như là một trong những cửa ngõ quan trọng của khu vực Đông Nam Bộ. Đà Nẵng nằm ở vị trí cực Đông của vùng Đông Dương, cách thủ đô Hà Nội 764 km về phía Nam và cách thành phố Hồ Chí Minh 964 km về phía Bắc. Đà Nẵng giáp biển Đông, giữa ba vùng kinh tế trọng điểm Bắc Trung Bộ, Tây Nguyên và Đông Nam Bộ, nằm trên tuyến giao thông quốc lộ 1A và tuyến đường sắt Bắc Nam, là cửa ngõ quan trọng của khu vực Đông Dương và là trung tâm giao thông vận tải quan trọng của cả nước."
                         android:textSize="14dp"/>
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:orientation="vertical">
-
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
                         android:textSize="18dp"
                         android:textStyle="bold"
                         android:text="Đánh Giá" />
@@ -187,6 +201,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
+                        android:layout_marginLeft="10dp"
                         android:orientation="horizontal">
 
                         <TextView
@@ -233,6 +248,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:orientation="vertical">
                         <androidx.recyclerview.widget.RecyclerView
                             android:layout_width="match_parent"
@@ -241,23 +257,23 @@
                     </LinearLayout>
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:text="Khách sạn gần đó "
                         android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
                         android:textSize="18dp"
                         android:textStyle="bold"/>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="250dp"
                         android:orientation="vertical"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp">
                         <androidx.recyclerview.widget.RecyclerView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/recyclerViewHotelNearby"/>
                     </LinearLayout>
-                </LinearLayout>
-
             </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

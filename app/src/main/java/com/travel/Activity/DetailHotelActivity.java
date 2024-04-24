@@ -1,6 +1,7 @@
 package com.travel.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.Snackbar;
 import com.travel.Adapter.DetailDestinationAdapter;
 import com.travel.Adapter.ReviewAdapter;
@@ -35,14 +37,27 @@ public class DetailHotelActivity extends AppCompatActivity {
     ReviewAdapter reviewAdapter;
     WishlistDAO wishlistDAO;
     private boolean isFavorite;
+    int destinationId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         detailHotelBinding = ActivityDetailHotelBinding.inflate(getLayoutInflater());
         setContentView(detailHotelBinding.getRoot());
-        //int hotelId = getIntent().getIntExtra("hotel_id", 0);
-        int hotelId = 1;
+        int hotelId = getIntent().getIntExtra("hotel_id", 0);
+        destinationId=getIntent().getIntExtra("destinationId",0);
+        AppBarLayout appBarLayout = findViewById(com.travel.R.id.app_bar_layout);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ImageView backIcon = findViewById(R.id.imgBack);
+        appBarLayout.addOnOffsetChangedListener((appBarLayout1, verticalOffset) -> {
+            if (Math.abs(verticalOffset) - appBarLayout1.getTotalScrollRange() == 0) {
+                toolbar.setBackgroundColor(Color.parseColor("#ffffff"));
+                backIcon.setColorFilter(Color.parseColor("#000000"));
+            } else {
+                toolbar.setBackgroundColor(Color.parseColor("#00000000"));
+                backIcon.setColorFilter(Color.parseColor("#ffffff"));
+            }
+        });
         wishlistDAO=new WishlistDAO(this);
         hotelModel = hotelDAO.getHotelById(hotelId);
         reviewList = reviewDAO.getReviewsForHotel(hotelId);
@@ -50,11 +65,20 @@ public class DetailHotelActivity extends AppCompatActivity {
         setRating((int) ratingAverage(reviewList));
         setupHotelRecyclerView(hotelModel);
         setUpRecyclerView(hotelModel);
-        detailHotelBinding.imgLocation.setOnClickListener(v -> navigateToLocation(hotelModel));
+        detailHotelBinding.lyMap.setOnClickListener(v -> navigateToLocation(hotelModel));
         detailHotelBinding.button.setOnClickListener(v -> navigateToBooking(hotelModel));
         isFavorite = wishlistDAO.checkFavoriteHotel(hotelModel.getHotelId(), 1);
         setHeartColor(detailHotelBinding.fab, isFavorite);
         detailHotelBinding.fab.setOnClickListener(v -> addToWhislist(hotelModel));
+
+        detailHotelBinding.imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(DetailHotelActivity.this,DetailDestinationActivity.class);
+                intent.putExtra("destinationId",destinationId);
+                startActivity(intent);
+            }
+        });
     }
     private void addToWhislist(HotelModel hotelModel) {
         isFavorite = !isFavorite;
@@ -83,7 +107,7 @@ public class DetailHotelActivity extends AppCompatActivity {
     public void setHotelModel(HotelModel hotelModel){
         detailHotelBinding.txtHotelName.setText(hotelModel.getName());
         detailHotelBinding.txtDescription.setText(hotelModel.getDescription());
-        detailHotelBinding.txtDestination.setText(hotelModel.getAddress());
+       detailHotelBinding.txtAddress.setText(hotelModel.getAddress());
         detailHotelBinding.txtRating.setText(String.valueOf(hotelModel.getRating()));
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
         String formattedMinValue = decimalFormat.format(hotelModel.getPrice());
@@ -92,7 +116,7 @@ public class DetailHotelActivity extends AppCompatActivity {
     public void setRating(int ratingAverage){
         detailHotelBinding.txtRatingAverage.setText(String.valueOf(ratingAverage));
         detailHotelBinding.ratingBar2.setRating(ratingAverage);
-        detailHotelBinding.txtRating.setText(String.valueOf(ratingAverage(reviewList)));
+        //detailHotelBinding.txtRating.setText(String.valueOf(ratingAverage(reviewList)));
         detailHotelBinding.txtCount.setText("("+reviewList.size()+" đánh giá)");
         String review=reviewList.isEmpty()?"Chưa có đánh giá": "Từ " + reviewList.size() + " đánh giá";
         detailHotelBinding.txtCountRating.setText(review);
@@ -100,6 +124,9 @@ public class DetailHotelActivity extends AppCompatActivity {
     }
     public float ratingAverage(List<ReviewModel> reviewList){
         float totalRating=0;
+        if (reviewList.isEmpty()) {
+            return 0;
+        }
         for (ReviewModel reviewModel:reviewList){
             totalRating+=reviewModel.getRating();
         }

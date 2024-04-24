@@ -46,7 +46,7 @@
             android:name=".Activity.FlightActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.DetailHotelActivity"
+            android:name=".Activity.DetailRestaurantActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.MainActivity"
@@ -67,7 +67,7 @@
             android:name=".Activity.PersonalInforActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.DetailDestinationActivity"
+            android:name=".Activity.DetailHotelActivity"
             android:exported="false"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.TravelApp" />

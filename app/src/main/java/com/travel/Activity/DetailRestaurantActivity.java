@@ -1,6 +1,7 @@
 package com.travel.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.Snackbar;
 import com.travel.Adapter.DetailDestinationAdapter;
 import com.travel.Adapter.ReviewAdapter;
@@ -36,14 +38,28 @@ public class DetailRestaurantActivity extends AppCompatActivity {
     ReviewDAO reviewDAO=new ReviewDAO();
     private boolean isFavorite;
     List<ReviewModel> reviewList;
-
+    int destinationId,userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         restaurantBinding = ActivityDetailRestaurantBinding.inflate(getLayoutInflater());
         setContentView(restaurantBinding.getRoot());
-        int restaurantId = 1;
-        int userId = 1;
+        destinationId=getIntent().getIntExtra("destinationId",0);
+        int restaurantId = getIntent().getIntExtra("restaurant_id", 0);
+        userId = 1;
+
+        AppBarLayout appBarLayout = findViewById(com.travel.R.id.app_bar_layout);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ImageView backIcon = findViewById(R.id.imgBack);
+        appBarLayout.addOnOffsetChangedListener((appBarLayout1, verticalOffset) -> {
+            if (Math.abs(verticalOffset) - appBarLayout1.getTotalScrollRange() == 0) {
+                toolbar.setBackgroundColor(Color.parseColor("#ffffff"));
+                backIcon.setColorFilter(Color.parseColor("#000000"));
+            } else {
+                toolbar.setBackgroundColor(Color.parseColor("#00000000"));
+                backIcon.setColorFilter(Color.parseColor("#ffffff"));
+            }
+        });
         restaurantDAO=new RestaurantDAO();
         wishlistDAO=new WishlistDAO(this);
         restaurantModel = restaurantDAO.getRestaurantById(restaurantId);
@@ -52,11 +68,19 @@ public class DetailRestaurantActivity extends AppCompatActivity {
         setRating((int) ratingAverage(reviewList));
         setupRestaurantRecyclerView(restaurantModel);
         setUpRecyclerView(restaurantModel);
-        restaurantBinding.imgLocation.setOnClickListener(v -> navigateToLocation(restaurantModel));
+        restaurantBinding.lyMap.setOnClickListener(v -> navigateToLocation(restaurantModel));
         restaurantBinding.button.setOnClickListener(v -> navigateToBooking(restaurantModel));
         isFavorite = wishlistDAO.checkFavoriteRestaurant(restaurantModel.getRestaurantId(), 1);
         setHeartColor(restaurantBinding.fab, isFavorite);
         restaurantBinding.fab.setOnClickListener(v -> addToWhislist(restaurantModel));
+        restaurantBinding.imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(DetailRestaurantActivity.this,DetailDestinationActivity.class);
+                intent.putExtra("destinationId",destinationId);
+                startActivity(intent);
+            }
+        });
     }
     private void addToWhislist(RestaurantModel restaurantModel) {
         isFavorite = !isFavorite;
@@ -69,7 +93,6 @@ public class DetailRestaurantActivity extends AppCompatActivity {
         }
         setHeartColor(restaurantBinding.fab, isFavorite);
     }
-
     private void navigateToBooking(RestaurantModel restaurantModel) {
         Intent intent = new Intent(this, BookHotelActivity.class);
         intent.putExtra("restaurant_id", restaurantModel.getRestaurantId());
@@ -85,7 +108,7 @@ public class DetailRestaurantActivity extends AppCompatActivity {
     public void setRestaurant(RestaurantModel restaurantModel){
         restaurantBinding.txtRestaurantName.setText(restaurantModel.getName());
         restaurantBinding.txtDescription.setText(restaurantModel.getDescription());
-        restaurantBinding.txtDestination.setText(restaurantModel.getAddress());
+        restaurantBinding.txtAddress.setText(restaurantModel.getAddress());
         restaurantBinding.txtRating.setText(String.valueOf(restaurantModel.getRating()));
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
         String formattedMinValue = decimalFormat.format(restaurantModel.getPrice());
@@ -94,7 +117,7 @@ public class DetailRestaurantActivity extends AppCompatActivity {
     public void setRating(int ratingAverage){
         restaurantBinding.txtRatingAverage.setText(String.valueOf(ratingAverage));
         restaurantBinding.ratingBar2.setRating(ratingAverage);
-        restaurantBinding.txtRating.setText(String.valueOf(ratingAverage(reviewList)));
+        //restaurantBinding.txtRating.setText(String.valueOf(ratingAverage(reviewList)));
         restaurantBinding.txtCount.setText("("+reviewList.size()+" đánh giá)");
         String review=reviewList.isEmpty()?"Chưa có đánh giá": "Từ " + reviewList.size() + " đánh giá";
         restaurantBinding.txtCountRating.setText(review);
@@ -102,6 +125,9 @@ public class DetailRestaurantActivity extends AppCompatActivity {
     }
     public float ratingAverage(List<ReviewModel> reviewList){
         float totalRating=0;
+        if(reviewList.size()==0){
+            return 0;
+        }
         for (ReviewModel reviewModel:reviewList){
             totalRating+=reviewModel.getRating();
         }

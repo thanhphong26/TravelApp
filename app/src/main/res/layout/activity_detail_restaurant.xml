@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F4FDFB"
     android:orientation="vertical"
     tools:context=".Activity.DetailTourActivity">
 
@@ -46,7 +47,7 @@
                         android:layout_height="32dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        app:srcCompat="@drawable/left" />
+                        app:srcCompat="@drawable/icon_back" />
                 </androidx.appcompat.widget.Toolbar>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
@@ -56,21 +57,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="-24dp"
-            android:background="@drawable/custom_corner"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/rounded_corner"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txtRestaurantName"
                     android:layout_width="264dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
                     android:inputType="textMultiLine"
                     android:text="Nhà Hàng"
                     android:textSize="24dp"
@@ -79,14 +82,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/imageView5"
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="8dp"
                         app:srcCompat="@drawable/icon_star" />
 
                     <TextView
@@ -111,33 +114,52 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/rounded_corner_2"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/imageView11"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginTop="8dp"
-                        app:srcCompat="@drawable/icon_location" />
-
-                    <TextView
-                        android:id="@+id/txtDestination"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:inputType="textMultiLine"
-                        android:text="Đà Nẵng, Việt Nam" />
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/imgLocation"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="5dp"
-                        app:srcCompat="@drawable/chevron" />
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/imgmap" />
+                        <TextView
+                            android:id="@+id/txtAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="Số 1 Võ Văn Ngân, Linh Chiểu, Thủ Đức"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/lyMap"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_marginRight="25dp"
+                            android:src="@drawable/imgmap2"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/orange"
+                            android:layout_marginRight="20dp"
+                            android:text="Bản đồ"/>
+                    </LinearLayout>
                 </LinearLayout>
 
                 <View
@@ -145,12 +167,15 @@
                     android:layout_width="330dp"
                     android:layout_height="1dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:background="@color/gray" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
                     android:text="Thông Tin"
                     android:textSize="18dp"
                     android:textStyle="bold"></TextView>
@@ -158,8 +183,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/input_search_background"
+                    android:layout_marginLeft="10dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -174,7 +198,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -249,7 +274,7 @@
                         android:textStyle="bold"/>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="250dp"
                         android:orientation="vertical"
                         android:layout_marginTop="10dp">
                         <androidx.recyclerview.widget.RecyclerView
