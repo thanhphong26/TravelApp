@@ -50,7 +50,7 @@ public class DetailDestinationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         detailDestinationBinding = ActivityDetailDestinationBinding.inflate(getLayoutInflater());
         setContentView(detailDestinationBinding.getRoot());
-        int destinationId=getIntent().getIntExtra("destinationId",15);
+        int destinationId=getIntent().getIntExtra("destinationId",0);
         userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
         wishlistDAO=new WishlistDAO(this);
         AppBarLayout appBarLayout = findViewById(com.travel.R.id.app_bar_layout);

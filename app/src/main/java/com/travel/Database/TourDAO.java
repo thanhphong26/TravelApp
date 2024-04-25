@@ -1,6 +1,7 @@
 package com.travel.Database;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,7 +20,9 @@ import java.util.List;
 public class TourDAO {
     DatabaseHelper databaseHelper = databaseHelper = new DatabaseHelper(App.self());;
     SQLiteDatabase database;
+    public TourDAO(Context context){
 
+    }
     public TourDAO() {
     }
 
@@ -242,5 +245,47 @@ public class TourDAO {
             }
         }
         return tourModel;
+    }
+    @SuppressLint("Range")
+    public TourModel getDestinationId(int tourId){
+        database=databaseHelper.openDatabase();
+        TourModel tour=new TourModel();
+        Cursor cursor = null;
+        if (database != null) {
+            try {
+                String[] columns = {
+                        "tours.*",
+                        "destinations.destination_id", "destinations.name AS destination_name", "destinations.image AS destination_image"
+                };
+                String query = "SELECT " + TextUtils.join(",", columns) + " FROM tours " +
+                        "INNER JOIN destinations ON tours.destination_id = destinations.destination_id " +
+                        "WHERE tours.tour_id = " + tourId;
+                        cursor = database.rawQuery(query, null);
+                if (cursor.moveToFirst()) {
+                    do {
+                        DestinationModel destination = new DestinationModel();
+                        destination.setDestinationId(cursor.getInt(cursor.getColumnIndex("destination_id")));
+                        destination.setName(cursor.getString(cursor.getColumnIndex("destination_name")));
+                        destination.setImage(cursor.getString(cursor.getColumnIndex("destination_image")));
+
+                        tour.setTourId(cursor.getInt(cursor.getColumnIndex("tour_id")));
+                        tour.setName(cursor.getString(cursor.getColumnIndex("name")));
+                        tour.setDescription(cursor.getString(cursor.getColumnIndex("description")));
+                        tour.setImage(cursor.getString(cursor.getColumnIndex("image")));
+                        tour.setPrice(cursor.getFloat(cursor.getColumnIndex("price")));
+                        tour.setRating(cursor.getFloat(cursor.getColumnIndex("rating")));
+                        tour.setDestination(destination);
+                    } while (cursor.moveToNext());
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+                databaseHelper.closeDatabase(database);
+            }
+        }
+        return tour;
     }
 }

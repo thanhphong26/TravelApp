@@ -58,6 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        int destinationId=getIntent().getIntExtra("destinationId",0);
         latitude = getIntent().getFloatExtra("latitude", 0);
         longitude = getIntent().getFloatExtra("longitude", 0);
         locationName = getIntent().getStringExtra("locationName");
@@ -82,6 +83,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(MapsActivity.this, TimeLineActivity.class);
+                intent.putExtra("destinationId", destinationId);
                 intent.putExtra("tourId", tourId);
                 startActivity(intent);
             }
