@@ -84,6 +84,14 @@ public class HistoryCardAdapter<T> extends RecyclerView.Adapter<HistoryCardAdapt
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String date = dateFormat.format(tourBookingModel.getCreatedAt());
         holder.createdAt.setText("Đã đặt ngày " + date);
+
+        if (tourBookingModel.getReview() != null) {
+            holder.ratingButton.setVisibility(View.GONE);
+            holder.ratingButton.setEnabled(false);
+        } else {
+            holder.ratingButton.setVisibility(View.VISIBLE);
+            holder.ratingButton.setEnabled(true);
+        }
     }
 
     private void bindRestaurantBookingModel(HistoryCardViewHolder holder, RestaurantBookingReviewModel restaurantBookingModel) {
