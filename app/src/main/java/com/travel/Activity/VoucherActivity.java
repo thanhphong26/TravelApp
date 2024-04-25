@@ -34,7 +34,6 @@ public class VoucherActivity extends AppCompatActivity {
 
     public void displayVoucher() {
         List<VoucherModel> voucherModels = voucherDAO.getAllVouchers();
-        System.out.println("Voucher: " + voucherModels.size());
         VoucherAdapter<VoucherModel> voucherAdapter = new VoucherAdapter<>(voucherModels, this);
         binding.recyclerViewVoucher.setAdapter(voucherAdapter);
     }

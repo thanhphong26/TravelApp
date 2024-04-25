@@ -2,7 +2,9 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Activity.MyRatingActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
@@ -149,7 +151,7 @@
 
 
                         <TextView
-                            android:id="@+id/textView11"
+                            android:id="@+id/userName"
                             android:layout_width="222dp"
                             android:layout_height="25dp"
                             android:layout_marginLeft="10dp"
@@ -192,7 +194,7 @@
                             android:orientation="vertical">
 
                             <EditText
-                                android:id="@+id/editTextText2"
+                                android:id="@+id/review"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="15dp"

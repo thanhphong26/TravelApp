@@ -64,4 +64,12 @@ public class ReviewDAO {
         }
         return reviewList;
     }
+
+    public void addReview(int id, String reviewType, int userId, float rating, String comment) {
+        SQLiteDatabase database = databaseHelper.getWritableDatabase();
+        String sql = "INSERT INTO reviews (user_id, review_type, item_id, review, rating, reviewDate) VALUES (?, ?, ?, ?, ?, ?)";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String date = sdf.format(new Date());
+        database.execSQL(sql, new Object[]{userId, reviewType, id, comment, rating, date});
+    }
 }
