@@ -93,8 +93,7 @@
             android:name=".Activity.FavoriteActivity"
             android:exported="false" />
         <activity
-        <activity
-            android:name=".Activity.MainActivity"
+            android:name=".Activity.HistoryActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

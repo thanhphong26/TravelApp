@@ -17,7 +17,6 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import com.bumptech.glide.Glide;
-import com.travel.Activity.RatingActivity;
 import com.travel.Model.HotelBookingReviewModel;
 import com.travel.Model.RestaurantBookingReviewModel;
 import com.travel.Model.TourBookingModel;
@@ -85,13 +84,6 @@ public class HistoryCardAdapter<T> extends RecyclerView.Adapter<HistoryCardAdapt
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String date = dateFormat.format(tourBookingModel.getCreatedAt());
         holder.createdAt.setText("Đã đặt ngày " + date);
-        holder.ratingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // handle rating
-                Intent intent = new Intent(context, RatingActivity.class);
-            }
-        });
     }
 
     private void bindRestaurantBookingModel(HistoryCardViewHolder holder, RestaurantBookingReviewModel restaurantBookingModel) {
@@ -104,13 +96,6 @@ public class HistoryCardAdapter<T> extends RecyclerView.Adapter<HistoryCardAdapt
             description = description.substring(0, 150) + "...";
         }
         holder.tourDescription.setText(description);
-        holder.ratingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // handle rating
-                Intent intent = new Intent(context, RatingActivity.class);
-            }
-        });
     }
 
     private void bindHotelBookingModel(HistoryCardViewHolder holder, HotelBookingReviewModel hotelBookingModel) {
@@ -123,12 +108,6 @@ public class HistoryCardAdapter<T> extends RecyclerView.Adapter<HistoryCardAdapt
             description = description.substring(0, 150) + "...";
         }
         holder.tourDescription.setText(description);
-        holder.ratingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // handle rating
-                Intent intent = new Intent(context, RatingActivity.class);
-            }
-        });
     }
+
 }
