@@ -62,7 +62,6 @@ public class DetailTourActivity extends AppCompatActivity {
     TourDAO tourDAO=new TourDAO();
     WishlistDAO wishlistDAO;
     private boolean isFavorite;
-    int destinationId;
     UserModel userModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +70,7 @@ public class DetailTourActivity extends AppCompatActivity {
         setContentView(detailTourBinding.getRoot());
         detailTourBinding.viewPager2.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
        // int tourId = 1;
-        destinationId=getIntent().getIntExtra("destinationId",0);
+        int destinationId=getIntent().getIntExtra("destinationId",0);
         int tourId=getIntent().getIntExtra("tourId",1);
         userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
         wishlistDAO=new WishlistDAO(this);
@@ -117,6 +116,7 @@ public class DetailTourActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DetailTourActivity.this, TimeLineActivity.class);
+                intent.putExtra("destinationId", destinationId);
                 intent.putExtra("tourId", tourId);
                 startActivity(intent);
 

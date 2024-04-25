@@ -1,6 +1,7 @@
 package com.travel.Database;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,7 +21,8 @@ public class DestinationDAO {
     DatabaseHelper databaseHelper = databaseHelper = new DatabaseHelper(App.self());
     ;
     SQLiteDatabase database;
-
+    public DestinationDAO(Context context) {
+    }
     public DestinationDAO() {
     }
     @SuppressLint("Range")
