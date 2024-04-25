@@ -17,8 +17,14 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import com.bumptech.glide.Glide;
+import com.travel.Activity.DetailHotelActivity;
+import com.travel.Activity.DetailRestaurantActivity;
+import com.travel.Activity.DetailTourActivity;
+import com.travel.Activity.MyRatingActivity;
+import com.travel.Activity.RatingHistoryActivity;
 import com.travel.Model.HotelBookingReviewModel;
 import com.travel.Model.RestaurantBookingReviewModel;
+import com.travel.Model.ReviewType;
 import com.travel.Model.TourBookingModel;
 import com.travel.Model.TourBookingReviewModel;
 import com.travel.R;
@@ -57,12 +63,13 @@ public class HistoryCardAdapter<T> extends RecyclerView.Adapter<HistoryCardAdapt
     }
 
     public class HistoryCardViewHolder extends RecyclerView.ViewHolder {
-        TextView tourName, tourDescription, createdAt;
+        TextView tourName, tourDescription, createdAt, status;
         View tourImage;
         Button ratingButton;
 
         public HistoryCardViewHolder(@NonNull View itemView) {
             super(itemView);
+            status = itemView.findViewById(R.id.status);
             tourName = itemView.findViewById(R.id.tour_name);
             tourImage = itemView.findViewById(R.id.tour_img);
             tourDescription = itemView.findViewById(R.id.tour_description);
@@ -85,13 +92,28 @@ public class HistoryCardAdapter<T> extends RecyclerView.Adapter<HistoryCardAdapt
         String date = dateFormat.format(tourBookingModel.getCreatedAt());
         holder.createdAt.setText("Đã đặt ngày " + date);
 
-        if (tourBookingModel.getReview() != null) {
+        if (tourBookingModel.getReview().getReviewId() != 0) {
             holder.ratingButton.setVisibility(View.GONE);
+            holder.status.setVisibility(View.VISIBLE);
             holder.ratingButton.setEnabled(false);
         } else {
             holder.ratingButton.setVisibility(View.VISIBLE);
+            holder.status.setVisibility(View.GONE);
             holder.ratingButton.setEnabled(true);
+
+            holder.ratingButton.setOnClickListener(v -> {
+                Intent intent = new Intent(context, MyRatingActivity.class);
+                intent.putExtra("bookingId", tourBookingModel.getBookingId());
+                intent.putExtra("type", ReviewType.TOUR.toString());
+                context.startActivity(intent);
+            });
         }
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DetailTourActivity.class);
+            intent.putExtra("tourId", tourBookingModel.getTour().getTourId());
+            context.startActivity(intent);
+        });
     }
 
     private void bindRestaurantBookingModel(HistoryCardViewHolder holder, RestaurantBookingReviewModel restaurantBookingModel) {
@@ -104,6 +126,29 @@ public class HistoryCardAdapter<T> extends RecyclerView.Adapter<HistoryCardAdapt
             description = description.substring(0, 150) + "...";
         }
         holder.tourDescription.setText(description);
+
+        if (restaurantBookingModel.getReview().getReviewId() != 0) {
+            holder.ratingButton.setVisibility(View.GONE);
+            holder.status.setVisibility(View.VISIBLE);
+            holder.ratingButton.setEnabled(false);
+        } else {
+            holder.ratingButton.setVisibility(View.VISIBLE);
+            holder.status.setVisibility(View.GONE);
+            holder.ratingButton.setEnabled(true);
+
+            holder.ratingButton.setOnClickListener(v -> {
+                Intent intent = new Intent(context, MyRatingActivity.class);
+                intent.putExtra("bookingId", restaurantBookingModel.getBookingId());
+                intent.putExtra("type", ReviewType.RESTAURANT.toString());
+                context.startActivity(intent);
+            });
+        }
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DetailRestaurantActivity.class);
+            intent.putExtra("restaurantId", restaurantBookingModel.getRestaurant().getRestaurantId());
+            context.startActivity(intent);
+        });
     }
 
     private void bindHotelBookingModel(HistoryCardViewHolder holder, HotelBookingReviewModel hotelBookingModel) {
@@ -116,6 +161,28 @@ public class HistoryCardAdapter<T> extends RecyclerView.Adapter<HistoryCardAdapt
             description = description.substring(0, 150) + "...";
         }
         holder.tourDescription.setText(description);
-    }
 
+        if (hotelBookingModel.getReview().getReviewId() != 0) {
+            holder.ratingButton.setVisibility(View.GONE);
+            holder.status.setVisibility(View.VISIBLE);
+            holder.ratingButton.setEnabled(false);
+        } else {
+            holder.ratingButton.setVisibility(View.VISIBLE);
+            holder.status.setVisibility(View.GONE);
+            holder.ratingButton.setEnabled(true);
+
+            holder.ratingButton.setOnClickListener(v -> {
+                Intent intent = new Intent(context, MyRatingActivity.class);
+                intent.putExtra("bookingId", hotelBookingModel.getBookingId());
+                intent.putExtra("type", ReviewType.HOTEL.toString());
+                context.startActivity(intent);
+            });
+        }
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DetailHotelActivity.class);
+            intent.putExtra("hotelId", hotelBookingModel.getHotel().getHotelId());
+            context.startActivity(intent);
+        });
+    }
 }

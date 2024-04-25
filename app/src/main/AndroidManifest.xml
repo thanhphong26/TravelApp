@@ -93,6 +93,9 @@
             android:name=".Activity.FavoriteActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.MyRatingActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.HistoryActivity"
             android:exported="true">
             <intent-filter>

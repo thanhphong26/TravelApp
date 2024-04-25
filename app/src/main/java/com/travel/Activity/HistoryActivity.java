@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.travel.Adapter.HistoryCardAdapter;
 import com.travel.Database.HotelBookingDAO;
 import com.travel.Database.RestaurantBookingDAO;
-import com.travel.Database.RestaurantDAO;
 import com.travel.Database.TourBookingDAO;
 import com.travel.Model.HotelBookingModel;
 import com.travel.Model.HotelBookingReviewModel;
@@ -43,7 +42,6 @@ public class HistoryActivity extends AppCompatActivity {
     // create displayTourBooking method
     public void displayTourBooking() {
         List<TourBookingReviewModel> tourBookingModels = tourBookingDAO.getAllTourBookingsWithReview(2);
-        System.out.println(tourBookingModels.size());
         HistoryCardAdapter<TourBookingReviewModel> historyCardAdapter = new HistoryCardAdapter<>(tourBookingModels, this);
         binding.recyclerViewHistoryTour.setAdapter(historyCardAdapter);
     }
@@ -55,7 +53,6 @@ public class HistoryActivity extends AppCompatActivity {
     }
     public void displayHotelBooking(){
         List<HotelBookingReviewModel> hotelBookingModels = hotelDAO.getAllHotelBookingsWithReview(2);
-        System.out.println(hotelBookingModels.size());
         HistoryCardAdapter<HotelBookingReviewModel> historyCardAdapter1 = new HistoryCardAdapter<>(hotelBookingModels, this);
         binding.recyclerViewHistoryHotel.setAdapter(historyCardAdapter1);
 

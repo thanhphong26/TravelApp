@@ -55,7 +55,6 @@ public class LoyaltyPointDAO{
                 // cursor get all data from loyalty_points table with user_id
                 cursor = database.query("loyalty_points", null, "user_id = ?", new String[]{String.valueOf(userId)}, null, null, null);
                 if (cursor != null && cursor.moveToFirst()) {
-                    System.out.println("cursor"+ cursor.getCount());
                     LoyaltyPointModel loyaltyPointModel=new LoyaltyPointModel();
                     int pointId = cursor.getInt(cursor.getColumnIndex("point_id"));
                     int pointsValue = cursor.getInt(cursor.getColumnIndex("points"));
