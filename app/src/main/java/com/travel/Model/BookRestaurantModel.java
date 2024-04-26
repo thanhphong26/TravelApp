@@ -8,6 +8,7 @@ public class BookRestaurantModel {
     private int numberOfChilds;
     private float totalPrice;
 
+
     public BookRestaurantModel(int bookingId, UserModel userId, RestaurantModel restaurantId, int numberOfAdults, int numberOfChilds, float totalPrice) {
         this.bookingId = bookingId;
         this.userId = userId;
@@ -16,6 +17,7 @@ public class BookRestaurantModel {
         this.numberOfChilds = numberOfChilds;
         this.totalPrice = totalPrice;
     }
+
 
     public BookRestaurantModel() {
     }

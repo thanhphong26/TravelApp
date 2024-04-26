@@ -36,6 +36,7 @@ public class CheckoutActivity extends AppCompatActivity {
     SQLiteDatabase database;
 
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +67,7 @@ public class CheckoutActivity extends AppCompatActivity {
         checkoutBinding.btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 bookFlightDAO = new BookFlightDAO();
                 bookHotelDAO = new BookHotelDAO();
                 bookRestaurantDAO = new BookRestaurantDAO();
@@ -74,10 +76,25 @@ public class CheckoutActivity extends AppCompatActivity {
                 bookHotelDAO.addBookHotel(userId, bundle.getInt("hotelId"), bundle.getInt("quantityRoom"), bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getLong("total"));
                 bookRestaurantDAO.addBookRestaurant(userId, bundle.getInt("restaurantId"), bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getLong("total"));
                 bookTourDAO.addBookTour(userId, bundle.getInt("tourId"),bundle.getString("ngayDat"), bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getLong("total"),bundle.getString("createdAt"));
+                toComplete(img);
             }
         });
 
 
+
+    }
+    public void toComplete(String img){
+        Intent intent1 =new Intent(CheckoutActivity.this, BookCompleteActivity.class);
+        Bundle bundle=new Bundle();
+        bundle.putString("ten",checkoutBinding.tvTen.getText().toString());
+        bundle.putString("moTa",checkoutBinding.tvMoTa.getText().toString());
+        bundle.putString("hoTen",checkoutBinding.edtHoTen.getText().toString());
+        bundle.putString("email",checkoutBinding.edtEmail.getText().toString());
+        bundle.putString("soDienThoai",checkoutBinding.edtSoDienThoai.getText().toString());
+        bundle.putString("img",img);
+        bundle.putString("thanhtien",checkoutBinding.tvThanhTien.getText().toString());
+        intent1.putExtra("value",bundle);
+        startActivity(intent1);
     }
 
 }

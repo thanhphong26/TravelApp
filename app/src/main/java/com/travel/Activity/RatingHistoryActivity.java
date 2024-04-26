@@ -5,12 +5,11 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.travel.Database.DatabaseHelper;
+import com.travel.Adapter.HistoryRatingAdapter;
 import com.travel.Database.HistoryRatingDAO;
 import com.travel.Model.HistoryRatingModel;
 import com.travel.R;
 import com.travel.databinding.ActivityRatingHistoryBinding;
-import com.travel.databinding.ItemRatingBinding;
 
 import java.util.ArrayList;
 
