@@ -2,17 +2,23 @@ package com.travel.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.travel.Database.BookTourDAO;
 import com.travel.Model.UserModel;
+import com.travel.R;
+import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityBookTourBinding;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,13 +26,16 @@ import java.util.Date;
 public class BookTourActivity extends AppCompatActivity {
     ActivityBookTourBinding bookTourBinding;
     BookTourDAO bookTourDAO;
+    UserModel userModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bookTourBinding = ActivityBookTourBinding.inflate(getLayoutInflater());
         setContentView(bookTourBinding.getRoot());
+        this.handleBottomNavigation();
         bookTourDAO = new BookTourDAO();
+        userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
         Calendar calendar = Calendar.getInstance();
         Date today = calendar.getTime();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -36,10 +45,9 @@ public class BookTourActivity extends AppCompatActivity {
         String tomorrowAsString = dateFormat.format(tomorrow);
         bookTourBinding.tvNgayDi.setText(tomorrowAsString);
         bookTourBinding.tvNgayVe.setText(tomorrowAsString);
-        int tourId = 3;
-        int userId = 1;
+        int tourId = getIntent().getIntExtra("tourId", 0);
         loadInfor(tourId);
-        loadUser(userId);
+        loadUser(userModel.getUserId());
         String img=bookTourDAO.getInformationTour(tourId).getImage();
         bookTourBinding.btnThanhToan.setEnabled(false);
         bookTourBinding.btnDecreaseAdults.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +96,7 @@ public class BookTourActivity extends AppCompatActivity {
                 Intent intent=new Intent(BookTourActivity.this, CheckoutActivity.class);
                 Bundle bundle=new Bundle();
                 bundle.putInt("tourId",tourId);
-                bundle.putInt("userId",userId);
+                bundle.putInt("userId",userModel.getUserId());
                 bundle.putString("ten",bookTourBinding.tvTenTour.getText().toString());
                 bundle.putString("moTa",bookTourBinding.tvMoTa.getText().toString());
                 bundle.putInt("quantityAdults",Integer.parseInt(bookTourBinding.tvQuantityAdults.getText().toString()));
@@ -143,6 +151,33 @@ public class BookTourActivity extends AppCompatActivity {
         }
         return false;
     }
-
+    private void handleBottomNavigation() {
+        bookTourBinding.navigation.setItemIconTintList(null);
+        bookTourBinding.navigation.setSelectedItemId(R.id.navigation_home);
+        bookTourBinding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent = null;
+                int id = item.getItemId();
+                if (id == R.id.navigation_home) {
+                    return true;
+                } else if (id == R.id.navigation_favorite) {
+                    intent = new Intent(BookTourActivity.this, FavoriteActivity.class);
+                } else if (id == R.id.navigation_map) {
+                    intent = new Intent(BookTourActivity.this, DestinationActivity.class);
+                }else if (id == R.id.navigation_translate) {
+//                    intent = new Intent(HomeActivity.this, A.class);
+                }
+                else if (id == R.id.navigation_profile) {
+                    intent = new Intent(BookTourActivity.this, AccountActivity.class);
+                }
+                if (intent != null) {
+                    startActivity(intent);
+                    finish();
+                }
+                return true;
+            }
+        });
+    }
 
 }

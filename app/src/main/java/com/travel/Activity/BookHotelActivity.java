@@ -4,14 +4,19 @@ import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.travel.Database.BookHotelDAO;
+import com.travel.Model.UserModel;
 import com.travel.R;
+import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityBookHotelBinding;
 
 import java.sql.Time;
@@ -26,13 +31,16 @@ public class BookHotelActivity extends AppCompatActivity {
     ActivityBookHotelBinding bookHotelBinding;
 
     BookHotelDAO bookHotelDAO;
+    UserModel userModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bookHotelBinding = ActivityBookHotelBinding.inflate(getLayoutInflater());
         setContentView(bookHotelBinding.getRoot());
+        userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
         Calendar calendar = Calendar.getInstance();
+        this.handleBottomNavigation();
         Date today = calendar.getTime();
         calendar.add(Calendar.DAY_OF_YEAR, 1);
         Date tomorrow = calendar.getTime();
@@ -41,8 +49,8 @@ public class BookHotelActivity extends AppCompatActivity {
         String tomorrowAsString = dateFormat.format(tomorrow);
         bookHotelBinding.tvNgaynhan.setText(todayAsString);
         bookHotelBinding.tvNgaytra.setText(tomorrowAsString);
-        int hotelId = 4;
-        int userId = 1;
+        int hotelId =getIntent().getIntExtra("hotelId",0);
+        int userId = userModel.getUserId();
         loadInfor(hotelId);
         loadUser(userId);
         String img=bookHotelDAO.getInFor(hotelId).getImage();
@@ -164,5 +172,32 @@ public class BookHotelActivity extends AppCompatActivity {
         }
         return false;
     }
-
+    private void handleBottomNavigation() {
+        bookHotelBinding.navigation.setItemIconTintList(null);
+        bookHotelBinding.navigation.setSelectedItemId(R.id.navigation_home);
+        bookHotelBinding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent = null;
+                int id = item.getItemId();
+                if (id == R.id.navigation_home) {
+                    return true;
+                } else if (id == R.id.navigation_favorite) {
+                    intent = new Intent(BookHotelActivity.this, FavoriteActivity.class);
+                } else if (id == R.id.navigation_map) {
+                    intent = new Intent(BookHotelActivity.this, DestinationActivity.class);
+                }else if (id == R.id.navigation_translate) {
+//                    intent = new Intent(HomeActivity.this, A.class);
+                }
+                else if (id == R.id.navigation_profile) {
+                    intent = new Intent(BookHotelActivity.this, AccountActivity.class);
+                }
+                if (intent != null) {
+                    startActivity(intent);
+                    finish();
+                }
+                return true;
+            }
+        });
+    }
 }

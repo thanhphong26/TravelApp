@@ -121,7 +121,7 @@ public class DetailHotelActivity extends AppCompatActivity {
 
     private void navigateToBooking(HotelModel hotelModel) {
         Intent intent = new Intent(this, BookHotelActivity.class);
-        intent.putExtra("hotel_id", hotelModel.getHotelId());
+        intent.putExtra("hotelId", hotelModel.getHotelId());
         startActivity(intent);
     }
     private void navigateToLocation(HotelModel hotelModel) {

@@ -98,12 +98,16 @@ public class BookFlightDAO {
                         flightModel.setArrivalTime(Timestamp.valueOf(cursor.getString(4)));
                         flightModel.setFlightDuration(cursor.getInt(5));
                         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                        try{
+                        try {
                             Date departureDate = sdf.parse(cursor.getString(6));
                             Date arrivalDate = sdf.parse(cursor.getString(7));
-                            flightModel.setDepartureDate(departureDate);
-                            flightModel.setArrivalDate(arrivalDate);
-                        }catch (Exception e){
+
+                            Timestamp departureTimestamp = new Timestamp(departureDate.getTime());
+                            Timestamp arrivalTimestamp = new Timestamp(arrivalDate.getTime());
+
+                            flightModel.setDepartureDate(departureTimestamp);
+                            flightModel.setArrivalDate(arrivalTimestamp);
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                         flightModel.setStatus(cursor.getString(8));

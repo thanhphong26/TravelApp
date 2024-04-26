@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.travel.Database.BookRestaurantDAO;
 import com.travel.Model.UserModel;
+import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityBookRestaurantBinding;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -16,19 +17,21 @@ import java.util.Date;
 public class BookRestaurantActivity extends AppCompatActivity {
     ActivityBookRestaurantBinding bookRestaurantBinding;
     BookRestaurantDAO bookRestaurantDAO;
+    UserModel userModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bookRestaurantBinding = ActivityBookRestaurantBinding.inflate(getLayoutInflater());
         setContentView(bookRestaurantBinding.getRoot());
+        userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, 1);
         Date tomorrow = calendar.getTime();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String tomorrowAsString = dateFormat.format(tomorrow);
         bookRestaurantBinding.tvNgayDat.setText(tomorrowAsString);
-        int restaurantId = 1;
-        int userId= 1;
+        int restaurantId = getIntent().getIntExtra("restaurantId",0);
+        int userId= userModel.getUserId();
         loadUser(userId);
         loadInfor(restaurantId);
         String img=bookRestaurantDAO.getInfor(restaurantId).getImage();

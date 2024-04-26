@@ -34,9 +34,6 @@ public class CheckoutActivity extends AppCompatActivity {
     BookTourDAO bookTourDAO;
     DatabaseHelper databaseHelper = databaseHelper = new DatabaseHelper(App.self());;
     SQLiteDatabase database;
-
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

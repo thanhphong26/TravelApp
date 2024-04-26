@@ -101,6 +101,12 @@
             android:name=".Activity.BookTourActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.BookHotelActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.BookRestaurantActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.BookFlightActivity"
             android:exported="false" />
         <activity
