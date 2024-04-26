@@ -3,6 +3,7 @@ package com.travel.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -29,8 +30,7 @@ public class DetailFlightActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         detailFlightBinding=ActivityDetailFlightBinding.inflate(getLayoutInflater());
         setContentView(detailFlightBinding.getRoot());
-       // int flightId = getIntent().getIntExtra("flightId", 0);
-        int flightId=1;
+        int flightId = getIntent().getIntExtra("flightId", 0);
         flightDAO=new FlightDAO();
         airportDAO=new AirportDAO();
         flightModel=flightDAO.getFlightById(flightId);
@@ -52,7 +52,15 @@ public class DetailFlightActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setDetailFlight(flightModel);
+
+        detailFlightBinding.btnBookFlight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailFlightActivity.this, BookFlightActivity.class);
+                intent.putExtra("flightId", flightModel.getFlightId());
+                startActivity(intent);
+            }
+        });
     }
     public void setDetailFlight(FlightModel flightModel){
         detailFlightBinding.txtDeparture.setText(airportDAO.getAirportByCode(flightModel.getDepartureAirportCode()).getName());

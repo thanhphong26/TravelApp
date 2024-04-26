@@ -132,6 +132,14 @@ public class DetailTourActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        detailTourBinding.button.setOnClickListener(new  View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailTourActivity.this, BookTourActivity.class);
+                intent.putExtra("tourId", tourId);
+                startActivity(intent);
+            }
+        });
     }
     private void addToWhislist(TourModel tourModel, UserModel userModel) {
         isFavorite = !isFavorite;

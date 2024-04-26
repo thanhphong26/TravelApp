@@ -23,6 +23,7 @@ import com.travel.Model.DestinationModel;
 import com.travel.Model.FlightModel;
 import com.travel.Model.TypeOfFlightModel;
 import com.travel.Model.UserModel;
+import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityBookFlightBinding;
 
 import java.math.RoundingMode;
@@ -39,13 +40,15 @@ public class BookFlightActivity extends AppCompatActivity {
     DatabaseHelper databaseHelper;
     SQLiteDatabase database;
     BookFlightDAO bookFlightDAO;
+    UserModel userModel;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bookFlightBinding = ActivityBookFlightBinding.inflate(getLayoutInflater());
         setContentView(bookFlightBinding.getRoot());
-        int flightId=7;
-        int userId=1;
+        userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
+        int flightId=getIntent().getIntExtra("flightId",0);
+        int userId=userModel.getUserId();
         loadInfor(flightId);
         loadUser(userId);
         bookFlightBinding.btnThanhToan.setEnabled(false);
