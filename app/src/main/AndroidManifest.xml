@@ -75,6 +75,9 @@
             android:name=".Activity.LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.AccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.TourActivity"
             android:exported="false" />
         <activity
