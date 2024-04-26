@@ -1,4 +1,4 @@
-package com.travel.Activity;
+package com.travel.Adapter;
 
 import android.app.Activity;
 import android.content.Context;

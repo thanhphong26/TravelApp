@@ -49,13 +49,13 @@
                         android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp">
+
                         <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/img"
                             android:layout_width="match_parent"
                             android:layout_height="80dp"
-                            android:id="@+id/img"
                             android:src="@drawable/img_tour1"
-                            app:riv_corner_radius="10dp">
-                        </com.makeramen.roundedimageview.RoundedImageView>
+                            app:riv_corner_radius="10dp"></com.makeramen.roundedimageview.RoundedImageView>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
