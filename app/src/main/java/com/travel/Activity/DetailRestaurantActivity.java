@@ -78,9 +78,10 @@ public class DetailRestaurantActivity extends AppCompatActivity {
         restaurantBinding.imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(DetailRestaurantActivity.this,DetailDestinationActivity.class);
+               /* Intent intent=new Intent(DetailRestaurantActivity.this,DetailDestinationActivity.class);
                 intent.putExtra("destinationId",destinationId);
-                startActivity(intent);
+                startActivity(intent);*/
+                onBackPressed();
             }
         });
     }

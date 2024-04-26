@@ -28,6 +28,7 @@ import com.travel.Model.RestaurantModel;
 import com.travel.Model.TourModel;
 import com.travel.Model.WishlistModel;
 import com.travel.R;
+import com.travel.Utils.Constants;
 
 import java.text.BreakIterator;
 import java.util.List;
@@ -37,6 +38,7 @@ public class DetailDestinationAdapter<T> extends RecyclerView.Adapter<DetailDest
     private Context context;
     private WishlistDAO wishlistDAO;
     private boolean isHeartRed = false;
+    int REQUEST_CODE_DETAIL_DESTINATION= Constants.REQUEST_CODE_DETAIL_DESTINATION;
     public DetailDestinationAdapter(List<T> listItem, Context context) {
         this.listItem = listItem;
         this.context = context;
@@ -70,6 +72,7 @@ public class DetailDestinationAdapter<T> extends RecyclerView.Adapter<DetailDest
                 } else if (item instanceof HotelModel){
                     HotelModel hotelModel = (HotelModel) item;
                     Intent intent = new Intent(context, DetailHotelActivity.class);
+                    intent.putExtra("requestCode",REQUEST_CODE_DETAIL_DESTINATION);
                     intent.putExtra("destinationId",hotelModel.getDestination().getDestinationId());
                     intent.putExtra("hotelId", hotelModel.getHotelId());
                     context.startActivity(intent);

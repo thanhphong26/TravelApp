@@ -126,9 +126,10 @@ public class DetailTourActivity extends AppCompatActivity {
         detailTourBinding.imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetailTourActivity.this, DetailDestinationActivity.class);
+               /* Intent intent = new Intent(DetailTourActivity.this, DetailDestinationActivity.class);
                 intent.putExtra("destinationId", destinationId);
-                startActivity(intent);
+                startActivity(intent);*/
+                onBackPressed();
             }
         });
     }

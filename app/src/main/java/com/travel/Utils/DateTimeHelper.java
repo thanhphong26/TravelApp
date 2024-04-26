@@ -52,4 +52,14 @@ public final class DateTimeHelper {
         SimpleDateFormat sdf = new SimpleDateFormat(format);
         return sdf.format(timestamp);
     }
+    public static Date convertStringToTime(String dateString) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            return dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }
