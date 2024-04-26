@@ -2,13 +2,16 @@ package com.travel.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.travel.Adapter.DetailDestinationAdapter;
 import com.travel.Adapter.HotelCommonAdapter;
 import com.travel.Adapter.HotelFavoriteAdapter;
@@ -51,6 +54,7 @@ public class HotelActivity extends AppCompatActivity {
 
         this.handleListHotel();
         this.handleListCommonHotel();
+        this.handleBottomNavigation();
     }
 
     private void handleListHotel() {
@@ -89,6 +93,34 @@ public class HotelActivity extends AppCompatActivity {
                 hotels = hotelDAO.getAll(newText.trim(), 10, 0);
                 handleListHotel();
                 return false;
+            }
+        });
+    }
+
+    private void handleBottomNavigation() {
+        hotelBinding.navigation.setItemIconTintList(null);
+        hotelBinding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent = null;
+                int id = item.getItemId();
+                if (id == R.id.navigation_home) {
+                    intent = new Intent(HotelActivity.this, HomeActivity.class);
+                } else if (id == R.id.navigation_favorite) {
+                    intent = new Intent(HotelActivity.this, FavoriteActivity.class);
+                } else if (id == R.id.navigation_map) {
+                    return true;
+                }else if (id == R.id.navigation_translate) {
+//                    intent = new Intent(HomeActivity.this, A.class);
+                }
+                else if (id == R.id.navigation_profile) {
+                    intent = new Intent(HotelActivity.this, PersonalInforActivity.class);
+                }
+                if (intent != null) {
+                    startActivity(intent);
+                    finish();
+                }
+                return true;
             }
         });
     }

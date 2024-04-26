@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.google.android.material.snackbar.Snackbar;
 
-public final class SackBarHelper {
+public final class SnackBarHelper {
 
     @SuppressLint("ResourceType")
     public static void showSnackbar(View view, String message) {

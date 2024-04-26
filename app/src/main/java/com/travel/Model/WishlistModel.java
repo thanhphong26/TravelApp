@@ -4,6 +4,12 @@ public class WishlistModel {
     private int wishlistId;
     private int userId;
     private int destinationId,tourId ,hotelId, restaurantId;
+
+    HotelModel hotelModel;
+    RestaurantModel restaurantModel;
+    TourModel tourModel;
+    DestinationDetailModel destinationModel;
+
     public WishlistModel() {
     }
 
@@ -75,5 +81,37 @@ public class WishlistModel {
 
     public void setRestaurantId(int restaurantId) {
         this.restaurantId = restaurantId;
+    }
+
+    public HotelModel getHotelModel() {
+        return hotelModel;
+    }
+
+    public void setHotelModel(HotelModel hotelModel) {
+        this.hotelModel = hotelModel;
+    }
+
+    public RestaurantModel getRestaurantModel() {
+        return restaurantModel;
+    }
+
+    public void setRestaurantModel(RestaurantModel restaurantModel) {
+        this.restaurantModel = restaurantModel;
+    }
+
+    public TourModel getTourModel() {
+        return tourModel;
+    }
+
+    public void setTourModel(TourModel tourModel) {
+        this.tourModel = tourModel;
+    }
+
+    public DestinationDetailModel getDestinationModel() {
+        return destinationModel;
+    }
+
+    public void setDestinationModel(DestinationDetailModel destinationModel) {
+        this.destinationModel = destinationModel;
     }
 }

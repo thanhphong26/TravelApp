@@ -82,7 +82,7 @@
                                 android:maxLines="2"/>
 
                             <ImageView
-                                android:id="@+id/imageView12"
+                                android:id="@+id/imgLove"
                                 android:layout_width="18dp"
                                 android:layout_height="20dp"
                                 android:textAlignment="textEnd"

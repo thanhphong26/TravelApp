@@ -97,6 +97,9 @@
             android:exported="false" />
         <activity
             android:name=".Activity.HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
