@@ -25,7 +25,7 @@
         android:title="" />
 
     <item
-        android:id="@+id/profile"
+        android:id="@+id/navigation_profile"
         android:enabled="true"
         android:icon="@drawable/icon_profile"
         android:title="" />

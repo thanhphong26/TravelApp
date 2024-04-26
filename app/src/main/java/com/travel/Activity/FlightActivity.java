@@ -1,5 +1,6 @@
 package com.travel.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,11 +13,13 @@ import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.travel.Adapter.FlightCardAdapter;
 import com.travel.Database.AirportDAO;
 import com.travel.Database.DestinationDAO;
@@ -27,7 +30,7 @@ import com.travel.Model.FlightModel;
 import com.travel.R;
 import com.travel.Utils.Constants;
 import com.travel.Utils.DatePickerHelper;
-import com.travel.Utils.SackBarHelper;
+import com.travel.Utils.SnackBarHelper;
 import com.travel.Utils.TextWatcherHelper;
 import com.travel.databinding.ActivityFlightBinding;
 
@@ -89,26 +92,26 @@ public class FlightActivity extends AppCompatActivity {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
                     if (departTime.isEmpty() || arrivalTime.isEmpty()) {
-                        SackBarHelper.showSnackbar(flightBinding.getRoot(), "Vui lòng nhập đầy đủ thông tin để tìm kiếm chuyến bay");
+                        SnackBarHelper.showSnackbar(flightBinding.getRoot(), "Vui lòng nhập đầy đủ thông tin để tìm kiếm chuyến bay");
                         return;
                     }
                     //*TODO: Update database later
 //                    else if (sdf.parse(departTime).before(Calendar.getInstance().getTime())) {
-//                        SackBarHelper.showSnackbar(flightBinding.getRoot(), "Thời gian khởi hành không thể là quá khứ");
+//                        SnackBarHelper.showSnackbar(flightBinding.getRoot(), "Thời gian khởi hành không thể là quá khứ");
 //                        return;
 //                    }
 //                    else if (sdf.parse(arrivalTime).before(Calendar.getInstance().getTime())) {
-//                        SackBarHelper.showSnackbar(flightBinding.getRoot(), "Thời gian đến không thể là quá khứ");
+//                        SnackBarHelper.showSnackbar(flightBinding.getRoot(), "Thời gian đến không thể là quá khứ");
 //                        return;
 //                    }
                     else if (currentPlace.equals(destination)) {
-                        SackBarHelper.showSnackbar(flightBinding.getRoot(), "Điểm đến không được trùng với điểm khởi hành");
+                        SnackBarHelper.showSnackbar(flightBinding.getRoot(), "Điểm đến không được trùng với điểm khởi hành");
                         return;
                     }
                     flights = flightDAO.search(destination, currentPlace, arrivalTime, departTime);
                     handleListFlight();
                 }catch (Exception e){
-                    SackBarHelper.showSnackbar(flightBinding.getRoot(), "Vui lòng nhập đầy đủ thông tin để tìm kiếm chuyến bay");
+                    SnackBarHelper.showSnackbar(flightBinding.getRoot(), "Vui lòng nhập đầy đủ thông tin để tìm kiếm chuyến bay");
                     Log.e("Error", e.getMessage());
                 }
             }

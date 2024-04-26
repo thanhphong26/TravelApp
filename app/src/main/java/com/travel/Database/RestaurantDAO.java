@@ -22,6 +22,50 @@ public class RestaurantDAO {
     }
 
     @SuppressLint("Range")
+    public RestaurantModel getRestaurantById(int id) {
+        database = databaseHelper.openDatabase();
+        RestaurantModel restaurant = new RestaurantModel();
+        Cursor cursor = null;
+        if (database != null) {
+            try {
+                String[] columns = {
+                        "restaurant.*",
+                        "destinations.destination_id", "destinations.name AS destination_name", "destinations.image AS destination_image"
+                };
+                String query = "SELECT " + TextUtils.join(",", columns) + " FROM restaurant " +
+                        "INNER JOIN destinations ON restaurant.destination_id = destinations.destination_id " +
+                        "WHERE restaurant.restaurant_id = " + id;
+
+                cursor = database.rawQuery(query, null);
+                if (cursor != null && cursor.moveToFirst()) {
+                    DestinationModel destination = new DestinationModel();
+                    destination.setDestinationId(cursor.getInt(cursor.getColumnIndex("destination_id")));
+                    destination.setName(cursor.getString(cursor.getColumnIndex("destination_name")));
+                    destination.setImage(cursor.getString(cursor.getColumnIndex("destination_image")));
+
+                    restaurant.setRestaurantId(cursor.getInt(cursor.getColumnIndex("restaurant_id")));
+                    restaurant.setName(cursor.getString(cursor.getColumnIndex("name")));
+                    restaurant.setDescription(cursor.getString(cursor.getColumnIndex("description")));
+                    restaurant.setImage(cursor.getString(cursor.getColumnIndex("image")));
+                    restaurant.setPrice(cursor.getFloat(cursor.getColumnIndex("price")));
+                    restaurant.setRating(cursor.getFloat(cursor.getColumnIndex("rating")));
+                    restaurant.setLongitude(cursor.getFloat(cursor.getColumnIndex("longitude")));
+                    restaurant.setLatitude(cursor.getFloat(cursor.getColumnIndex("latitude")));
+                    restaurant.setDestination(destination);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+                databaseHelper.closeDatabase(database);
+            }
+        }
+        return restaurant;
+    }
+
+    @SuppressLint("Range")
     public ArrayList<RestaurantModel> getAll(String string, int pageSize, int pageNumber) {
         ArrayList<RestaurantModel> restaurants = new ArrayList<RestaurantModel>();
         database = databaseHelper.openDatabase();

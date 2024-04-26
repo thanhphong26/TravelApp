@@ -10,10 +10,10 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/background_gradient_blue"
         android:fitsSystemWindows="true"
         android:paddingHorizontal="20dp"
         android:paddingVertical="20dp"
-        android:background="@drawable/background_gradient_blue"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -78,7 +78,7 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager2"
             android:layout_width="match_parent"
-            android:layout_height="207dp"
+            android:layout_height="168dp"
             android:layout_marginTop="20dp" />
 
         <LinearLayout
@@ -106,7 +106,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="46dp"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <LinearLayout
@@ -283,7 +283,18 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <include layout="@layout/bottom_navigation" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|center"
+        android:background="@drawable/custom_corner"
+        android:fitsSystemWindows="true"
+        app:elevation="10dp"
+        app:labelVisibilityMode="labeled"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_navigation_menu" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
