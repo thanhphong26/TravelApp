@@ -28,6 +28,7 @@ import com.travel.Model.RestaurantModel;
 import com.travel.Model.TourModel;
 import com.travel.Model.WishlistModel;
 import com.travel.R;
+import com.travel.Utils.Constants;
 
 import java.text.BreakIterator;
 import java.util.List;
@@ -37,6 +38,7 @@ public class DetailDestinationAdapter<T> extends RecyclerView.Adapter<DetailDest
     private Context context;
     private WishlistDAO wishlistDAO;
     private boolean isHeartRed = false;
+    int REQUEST_CODE_DETAIL_DESTINATION= Constants.REQUEST_CODE_DETAIL_DESTINATION;
     public DetailDestinationAdapter(List<T> listItem, Context context) {
         this.listItem = listItem;
         this.context = context;
@@ -64,16 +66,20 @@ public class DetailDestinationAdapter<T> extends RecyclerView.Adapter<DetailDest
                 if (item instanceof TourModel){
                     TourModel tourModel = (TourModel) item;
                     Intent intent = new Intent(context, DetailTourActivity.class);
+                    intent.putExtra("destinationId",tourModel.getDestination().getDestinationId());
                     intent.putExtra("tourId", tourModel.getTourId());
                     context.startActivity(intent);
                 } else if (item instanceof HotelModel){
                     HotelModel hotelModel = (HotelModel) item;
                     Intent intent = new Intent(context, DetailHotelActivity.class);
+                    intent.putExtra("requestCode",REQUEST_CODE_DETAIL_DESTINATION);
+                    intent.putExtra("destinationId",hotelModel.getDestination().getDestinationId());
                     intent.putExtra("hotelId", hotelModel.getHotelId());
                     context.startActivity(intent);
                 } else if (item instanceof RestaurantModel){
                     RestaurantModel restaurantModel = (RestaurantModel) item;
                     Intent intent = new Intent(context, DetailRestaurantActivity.class);
+                    intent.putExtra("destinationId",restaurantModel.getDestination().getDestinationId());
                     intent.putExtra("restaurantId", restaurantModel.getRestaurantId());
                     context.startActivity(intent);
                 }
@@ -130,18 +136,18 @@ public class DetailDestinationAdapter<T> extends RecyclerView.Adapter<DetailDest
         Glide.with(context).load(hotelModel.getImage()).error(R.drawable.default_image).into(holder.imgTour);
         holder.txtRating.setText(String.valueOf(hotelModel.getRating()));
         holder.ratingBar2.setRating(hotelModel.getRating());
-        setHeartColor(holder.imgLove, wishlistDAO.checkFavoriteTour(hotelModel.getHotelId(), 1));
+        setHeartColor(holder.imgLove, wishlistDAO.checkFavoriteHotel(hotelModel.getHotelId(), 1));
         holder.imgLove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isCurrentlyFavorite = wishlistDAO.checkFavoriteTour(hotelModel.getHotelId(), 1);
+                boolean isCurrentlyFavorite = wishlistDAO.checkFavoriteHotel(hotelModel.getHotelId(), 1);
                 boolean newFavoriteState = !isCurrentlyFavorite;
                 setHeartColor(holder.imgLove, newFavoriteState);
                 if (newFavoriteState) {
-                    wishlistDAO.insertTourWhishlist(1, hotelModel.getHotelId());
+                    wishlistDAO.insertHotelWhishlist(1, hotelModel.getHotelId());
                     showSnackbar(v, "Đã thêm vào danh sách yêu thích");
                 } else {
-                    wishlistDAO.removeWhishlistTourId(1,hotelModel.getHotelId());
+                    wishlistDAO.removeWhishlistHotelId(1,hotelModel.getHotelId());
                     showSnackbar(v, "Đã xóa khỏi danh sách yêu thích");
                 }
             }
@@ -154,18 +160,18 @@ public class DetailDestinationAdapter<T> extends RecyclerView.Adapter<DetailDest
         Glide.with(context).load(restaurantModel.getImage()).error(R.drawable.default_image).into(holder.imgTour);
         holder.txtRating.setText(String.valueOf(restaurantModel.getRating()));
         holder.ratingBar2.setRating(restaurantModel.getRating());
-        setHeartColor(holder.imgLove, wishlistDAO.checkFavoriteTour(restaurantModel.getRestaurantId(), 1));
+        setHeartColor(holder.imgLove, wishlistDAO.checkFavoriteRestaurant(restaurantModel.getRestaurantId(), 1));
         holder.imgLove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isCurrentlyFavorite = wishlistDAO.checkFavoriteTour(restaurantModel.getRestaurantId(), 1);
+                boolean isCurrentlyFavorite = wishlistDAO.checkFavoriteRestaurant(restaurantModel.getRestaurantId(), 1);
                 boolean newFavoriteState = !isCurrentlyFavorite;
                 setHeartColor(holder.imgLove, newFavoriteState);
                 if (newFavoriteState) {
-                    wishlistDAO.insertTourWhishlist(1, restaurantModel.getRestaurantId());
+                    wishlistDAO.insertRestaurantWhishlist(1, restaurantModel.getRestaurantId());
                     showSnackbar(v, "Đã thêm vào danh sách yêu thích");
                 } else {
-                    wishlistDAO.removeWhishlistTourId(1,restaurantModel.getRestaurantId());
+                    wishlistDAO.removeWhishlistRestaurantId(1,restaurantModel.getRestaurantId());
                     showSnackbar(v, "Đã xóa khỏi danh sách yêu thích");
                 }
             }

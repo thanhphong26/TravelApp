@@ -63,4 +63,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             database.close();
         }
     }
+    public void checkAndUpgradeDatabase() {
+        SQLiteDatabase db = null;
+        try {
+            String dbPath = mContext.getDatabasePath(DATABASE_NAME).getPath();
+            db = SQLiteDatabase.openDatabase(dbPath, null, SQLiteDatabase.OPEN_READWRITE);
+            int currentVersion = db.getVersion();
+            if (currentVersion != DATABASE_VERSION) {
+                db.close();
+                copyUpdatedDatabase();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (db != null && db.isOpen()) {
+                db.close();
+            }
+        }
+    }
+
+    private void copyUpdatedDatabase() {
+        try {
+            File dbFile = mContext.getDatabasePath(DATABASE_NAME);
+            if (dbFile.exists()) {
+                dbFile.delete();
+            }
+            copyDatabase(dbFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

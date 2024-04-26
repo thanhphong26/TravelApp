@@ -1,19 +1,25 @@
 package com.travel.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.travel.Adapter.ImageTourDetailAdapter;
 import com.travel.Adapter.ReviewAdapter;
 import com.travel.Database.DatabaseHelper;
@@ -21,12 +27,15 @@ import com.travel.Database.ImageTourDAO;
 import com.travel.Database.ReviewDAO;
 import com.travel.Database.TourDAO;
 import com.travel.Database.TourLineDAO;
+import com.travel.Database.WishlistDAO;
 import com.travel.Model.ImageTourModel;
 import com.travel.Model.ReviewModel;
 import com.travel.Model.ReviewType;
 import com.travel.Model.TourLineModel;
 import com.travel.Model.TourModel;
+import com.travel.Model.UserModel;
 import com.travel.R;
+import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityDetailDestinationBinding;
 import com.travel.databinding.ActivityDetailTourBinding;
 
@@ -40,7 +49,6 @@ import java.util.Date;
 import java.util.List;
 
 public class DetailTourActivity extends AppCompatActivity {
-    private boolean isHeartRed = false;
     ActivityDetailTourBinding detailTourBinding;
     TourModel tourModel=new TourModel();
     ImageTourDetailAdapter imageTourDetailAdapter;
@@ -52,6 +60,9 @@ public class DetailTourActivity extends AppCompatActivity {
     ReviewDAO reviewDAO=new ReviewDAO();
     ImageTourDAO imageTourDAO=new ImageTourDAO();
     TourDAO tourDAO=new TourDAO();
+    WishlistDAO wishlistDAO;
+    private boolean isFavorite;
+    UserModel userModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,8 +70,27 @@ public class DetailTourActivity extends AppCompatActivity {
         setContentView(detailTourBinding.getRoot());
         detailTourBinding.viewPager2.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
        // int tourId = 1;
+        int destinationId=getIntent().getIntExtra("destinationId",0);
         int tourId=getIntent().getIntExtra("tourId",1);
+        userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
+        wishlistDAO=new WishlistDAO(this);
+        AppBarLayout appBarLayout = findViewById(com.travel.R.id.app_bar_layout);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        ImageView backIcon = findViewById(R.id.imgBack);
+        appBarLayout.addOnOffsetChangedListener((appBarLayout1, verticalOffset) -> {
+            if (Math.abs(verticalOffset) - appBarLayout1.getTotalScrollRange() == 0) {
+                toolbar.setBackgroundColor(Color.parseColor("#ffffff"));
+                backIcon.setColorFilter(Color.parseColor("#000000"));
+            } else {
+                toolbar.setBackgroundColor(Color.parseColor("#00000000"));
+                backIcon.setColorFilter(Color.parseColor("#ffffff"));
+            }
+        });
+
         tourModel=tourDAO.getTourById(tourId);
+        isFavorite = wishlistDAO.checkFavoriteTour(tourModel.getTourId(), userModel.getUserId());
+        setHeartColor(detailTourBinding.fabLove, isFavorite);
+        detailTourBinding.fabLove.setOnClickListener(v -> addToWhislist(tourModel,userModel));
         detailTourBinding.txtNameTour.setText(tourModel.getName());
         detailTourBinding.txtRating.setText(String.valueOf(tourModel.getRating()));
         detailTourBinding.txtDescription.setText(tourModel.getDescription());
@@ -81,27 +111,38 @@ public class DetailTourActivity extends AppCompatActivity {
         setRating((int) ratingAverage(reviewList));
         tourLineList=tourLineDAO.getTourLineList(tourId);
         setTourLine();
-        detailTourBinding.fabLove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                isHeartRed = !isHeartRed;
-                if (isHeartRed) {
-                    detailTourBinding.fabLove.setImageResource(R.drawable.red_heart);
-                } else {
-                    detailTourBinding.fabLove.setImageResource(R.drawable.heart);
-                }
-            }
-        });
 
         detailTourBinding.btnItinerary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DetailTourActivity.this, TimeLineActivity.class);
+                intent.putExtra("destinationId", destinationId);
                 intent.putExtra("tourId", tourId);
                 startActivity(intent);
 
             }
         });
+
+        detailTourBinding.imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               /* Intent intent = new Intent(DetailTourActivity.this, DetailDestinationActivity.class);
+                intent.putExtra("destinationId", destinationId);
+                startActivity(intent);*/
+                onBackPressed();
+            }
+        });
+    }
+    private void addToWhislist(TourModel tourModel, UserModel userModel) {
+        isFavorite = !isFavorite;
+        if (isFavorite) {
+            wishlistDAO.insertTourWhishlist(userModel.getUserId(), tourModel.getTourId());
+            showSnackbar("Đã thêm vào danh sách yêu thích");
+        } else {
+            wishlistDAO.removeWhishlistTourId(userModel.getUserId(), tourModel.getTourId());
+            showSnackbar("Đã xóa khỏi danh sách yêu thích");
+        }
+        setHeartColor(detailTourBinding.fabLove, isFavorite);
     }
     public void setTourLine(){
         detailTourBinding.txtTime.setText(tourLineList.get(0).getTime().toString()+"-"+tourLineList.get(tourLineList.size()-1).getEndTime().toString());
@@ -143,5 +184,18 @@ public class DetailTourActivity extends AppCompatActivity {
 
         handler.postDelayed(runnable, intervalInMillis);
         detailTourBinding.viewPager2.setTag(runnable);
+    }
+    private void setHeartColor(ImageView imageView, boolean isHeartRed) {
+        if (isHeartRed) {
+            imageView.setImageResource(R.drawable.red_heart);
+        } else {
+            imageView.setImageResource(R.drawable.heart);
+        }
+    }
+    private void showSnackbar(String message) {
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT);
+        View snackbarView = snackbar.getView();
+        snackbarView.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(204, 153, 255)));
+        snackbar.show();
     }
 }

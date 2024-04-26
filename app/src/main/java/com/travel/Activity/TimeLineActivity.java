@@ -11,6 +11,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,15 +34,19 @@ public class TimeLineActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             timelineBinding = ActivityTimelineBinding.inflate(getLayoutInflater());
+            int destinationId=getIntent().getIntExtra("destinationId",0);
+            Log.d("destinationId", String.valueOf(destinationId));
             int tourId = getIntent().getIntExtra("tourId", 0);
             tourLineList=tourLineDAO.getTourLineList(tourId);
             tourLineAdapter = new TourLineAdapter(tourLineList, this);
             timelineBinding.recyclerViewTimeline.setAdapter(tourLineAdapter);
             setContentView(timelineBinding.getRoot());
             timelineBinding.imgBack.setOnClickListener(v -> {
-                Intent intent = new Intent(TimeLineActivity.this, DetailTourActivity.class);
-                intent.putExtra("tourId", tourId);
-                startActivity(intent);
+//                Intent intent = new Intent(TimeLineActivity.this, DetailTourActivity.class);
+//                intent.putExtra("destinationId", destinationId);
+//                intent.putExtra("tourId", tourId);
+//                startActivity(intent);
+                onBackPressed();
             });
         }
 }

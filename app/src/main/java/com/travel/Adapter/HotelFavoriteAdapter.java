@@ -31,6 +31,7 @@ public class HotelFavoriteAdapter<T> extends RecyclerView.Adapter<HotelFavoriteA
     private Context context;
     WishlistDAO wishlistDAO;
     UserModel currentUser = SharePreferencesHelper.getInstance().get(Constants.USER_SHARE_PREFERENCES, UserModel.class);
+    int REQUEST_CODE_HOTEL= Constants.REQUEST_CODE_HOTEL;
 
     public HotelFavoriteAdapter(ArrayList<T> listItem, Context context) {
         this.listItem = listItem;
@@ -66,6 +67,7 @@ public class HotelFavoriteAdapter<T> extends RecyclerView.Adapter<HotelFavoriteA
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailHotelActivity.class);
+                intent.putExtra("requestCode", REQUEST_CODE_HOTEL);
                 intent.putExtra("hotelId", item.getHotelId());
                 context.startActivity(intent);
             }

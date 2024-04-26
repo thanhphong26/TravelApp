@@ -6,7 +6,9 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,15 +28,11 @@ public class MainActivity extends AppCompatActivity {
         animationView.addAnimatorListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                redirectToLoginOrMain();
             }
         });
         animationView.playAnimation();
         animationView.loop(false);
-
-
         BottomNavigationBinding bottomNavigationBinding = BottomNavigationBinding.inflate(getLayoutInflater());
 //        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottomNavigationBinding.getRoot().getLayoutParams();
 //        layoutParams.setBehavior(new BottomNavigationBehavior());
@@ -61,5 +59,16 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //            }
 //        });
+    }
+    private void redirectToLoginOrMain() {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+        if (isLoggedIn) {
+            startActivity(new Intent(MainActivity.this, HomeActivity.class));
+        } else {
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        }
+        finish();
     }
 }

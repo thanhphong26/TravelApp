@@ -5,72 +5,68 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
+    android:background="#F4FDFB"
     tools:context=".Activity.DetailTourActivity">
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar_layout"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        app:layout_constraintTop_toTopOf="parent">
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager2"
+        android:layout_height="wrap_content">
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
-            android:layout_height="250dp"/>
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:layout_constraintTop_toTopOf="parent">
 
-<!--        <com.google.android.material.appbar.CollapsingToolbarLayout-->
-<!--            android:id="@+id/collapsing_toolbar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:fitsSystemWindows="true"-->
-<!--            app:contentScrim="@color/white"-->
-<!--            app:layout_scrollFlags="scroll|exitUntilCollapsed">-->
-
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin">
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                app:contentScrim="@color/white"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager2"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"/>
 
-                <ImageView
-                    android:id="@+id/imgBack"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    app:srcCompat="@drawable/left" />
-            </androidx.appcompat.widget.Toolbar>
-<!--        </com.google.android.material.appbar.CollapsingToolbarLayout>-->
-    </com.google.android.material.appbar.AppBarLayout>
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin">
 
-    <!-- NestedScrollView -->
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-33dp"
-        android:background="@drawable/custom_corner"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+                    <ImageView
+                        android:id="@+id/imgBack"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        app:srcCompat="@drawable/icon_back" />
+                </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- ScrollView -->
-        <ScrollView
+        <!-- NestedScrollView -->
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-25dp"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_corner"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txtNameTour"
                     android:layout_width="264dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
                     android:inputType="textMultiLine"
                     android:text="Tour Ngày Tham Quan Bà Nà Hills Từ Đà Nẵng"
@@ -81,14 +77,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/imageView5"
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="8dp"
                         app:srcCompat="@drawable/icon_star" />
 
                     <TextView
@@ -144,7 +140,7 @@
                     android:id="@+id/view"
                     android:layout_width="330dp"
                     android:layout_height="1dp"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
                     android:background="@color/gray" />
@@ -152,22 +148,18 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/tour_card_background"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/txtDescription"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginRight="5dp"
                         android:layout_marginBottom="5dp"
                         android:inputType="textMultiLine"
                         android:text="The sun was shining brightly as the birds chirped merrily in the trees. A gentle breeze rustled the leaves, creating a soothing melody that filled the air. The flowers bloomed in a riot of colors, painting the landscape with vibrant hues. It was a perfect day to be outside, enjoying the beauty of nature and soaking in the warmth of the sun. Everything seemed to be in harmony, as if the world itself was celebrating the joy of life." />
-
                 </LinearLayout>
 
                 <HorizontalScrollView
@@ -177,7 +169,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginRight="15dp"
                         android:orientation="horizontal"></LinearLayout>
                 </HorizontalScrollView>
@@ -185,10 +177,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical">
-
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -207,7 +198,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="10dp"
                             android:orientation="horizontal">
 
                             <ImageView
@@ -339,7 +330,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
@@ -367,6 +358,7 @@
                             android:numStars="5"
                             android:progressTint="@color/yellow"
                             android:rating="4.9"
+                            android:isIndicator="true"
                             android:scaleX="0.5"
                             android:scaleY="0.5"
                             android:stepSize="0.5" />
@@ -375,7 +367,7 @@
                             android:id="@+id/txtCountRating"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="-18dp"
+                            android:layout_marginLeft="-25dp"
                             android:text="Từ 48 đánh giá >" />
 
                         <ImageView
@@ -390,7 +382,8 @@
                         android:id="@+id/layoutReview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         android:layout_marginBottom="70dp"
                         android:orientation="vertical">
 
@@ -405,23 +398,22 @@
                 </LinearLayout>
 
             </LinearLayout>
-        </ScrollView>
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabLove"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:baselineAlignBottom="false"
-        android:src="@drawable/heart"
-        app:fabSize="normal"
-        app:layout_anchor="@id/app_bar_layout"
-        app:layout_anchorGravity="bottom|right|end"
-        app:tint="@null"
-        app:borderWidth="0dp"
-        android:layout_marginTop="-50dp"
-        android:layout_marginRight="20dp"
-        android:backgroundTint="@color/white"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabLove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:baselineAlignBottom="false"
+            android:src="@drawable/heart"
+            app:fabSize="normal"
+            app:layout_anchor="@id/app_bar_layout"
+            app:layout_anchorGravity="bottom|right|end"
+            app:tint="@null"
+            app:borderWidth="0dp"
+            android:layout_marginTop="-50dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/white"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <LinearLayout

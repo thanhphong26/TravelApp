@@ -69,6 +69,32 @@ public class AirportDAO {
 
         return airports;
     }
+    @SuppressLint("Range")
+    public AirportModel getAirportByCode(String airportCode) {
+        database = databaseHelper.openDatabase();
+        Cursor cursor = null;
+        AirportModel airport = null;
+        if (database != null) {
+            try {
+                cursor = database.query("airports", null, "airport_code = ?", new String[]{airportCode}, null, null, null);
+                if (cursor.moveToFirst()) {
+                    airport = new AirportModel();
+                    airport.setAirportCode(cursor.getString(cursor.getColumnIndex("airport_code")));
+                    airport.setName(cursor.getString(cursor.getColumnIndex("name")));
+                    airport.setDescription(cursor.getString(cursor.getColumnIndex("description")));
+                }
 
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+                databaseHelper.closeDatabase(database);
+            }
+        }
+
+        return airport;
+    }
 
 }

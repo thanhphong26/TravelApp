@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.travel.Activity.DetailHotelActivity;
 import com.travel.Model.HotelModel;
 import com.travel.R;
+import com.travel.Utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.List;
 public class HotelCommonAdapter<T> extends RecyclerView.Adapter<HotelCommonAdapter.HotelCommonViewHolder> {
     private List<T> listItem;
     private Context context;
+    int REQUEST_CODE_HOTEL= Constants.REQUEST_CODE_HOTEL;
 
     public HotelCommonAdapter(ArrayList<T> listItem, Context context) {
         this.listItem = listItem;
@@ -52,6 +54,7 @@ public class HotelCommonAdapter<T> extends RecyclerView.Adapter<HotelCommonAdapt
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailHotelActivity.class);
+                intent.putExtra("requestCode", REQUEST_CODE_HOTEL);
                 intent.putExtra("hotelId", item.getHotelId());
                 context.startActivity(intent);
             }
