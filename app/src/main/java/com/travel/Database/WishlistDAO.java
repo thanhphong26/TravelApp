@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.travel.App;
+import com.travel.Model.HotelModel;
 import com.travel.Model.WishlistModel;
 
 import java.util.ArrayList;
@@ -19,7 +20,13 @@ public class WishlistDAO {
     SQLiteDatabase database;
     UserDAO userDAO = new UserDAO();
     TourDAO tourDAO=new TourDAO();
+    HotelDAO hotelDAO =new HotelDAO();
+    RestaurantDAO restaurantDAO =new RestaurantDAO();
+    DestinationDAO destinationDAO = new DestinationDAO();
     public WishlistDAO(Context context) {
+    }
+
+    public WishlistDAO() {
     }
     public void insertDestinationWhishlist(int userId, int destinationId){
         SQLiteDatabase database = null;
@@ -116,12 +123,30 @@ public class WishlistDAO {
                 if (cursor.moveToFirst()) {
                     do {
                         WishlistModel wishlistModel = new WishlistModel();
-                        wishlistModel.setWishlistId(cursor.getInt(cursor.getColumnIndex("wishlist_id")));
+                        int tourId = cursor.getInt(cursor.getColumnIndex("tour_id"));
+                        int hotelId = cursor.getInt(cursor.getColumnIndex("hotel_id"));
+                        int restaurantId = cursor.getInt(cursor.getColumnIndex("restaurant_id"));
+                        int destinationId = cursor.getInt(cursor.getColumnIndex("destination_id"));
+                        wishlistModel.setWishlistId(cursor.getInt(cursor.getColumnIndex("whishlist_id")));
                         wishlistModel.setUserId(cursor.getInt(cursor.getColumnIndex("user_id")));
-                        wishlistModel.setDestinationId(cursor.getInt(cursor.getColumnIndex("destination_id")));
-                        wishlistModel.setTourId(cursor.getInt(cursor.getColumnIndex("tour_id")));
-                        wishlistModel.setHotelId(cursor.getInt(cursor.getColumnIndex("hotel_id")));
-                        wishlistModel.setRestaurantId(cursor.getInt(cursor.getColumnIndex("restaurant_id")));
+                        wishlistModel.setDestinationId(destinationId);
+                        wishlistModel.setTourId(tourId);
+                        wishlistModel.setHotelId(hotelId);
+                        wishlistModel.setRestaurantId(restaurantId);
+
+                        if (tourId != 0) {
+                            wishlistModel.setTourModel(tourDAO.getTourById(tourId));
+                        }
+                        if (hotelId != 0) {
+                            wishlistModel.setHotelModel(hotelDAO.getHotelById(hotelId));
+                        }
+                        if (restaurantId != 0) {
+                            wishlistModel.setRestaurantModel(restaurantDAO.getRestaurantById(restaurantId));
+                        }
+                        if (destinationId != 0) {
+                            wishlistModel.setDestinationModel(destinationDAO.getDestinationDetailById(destinationId));
+                        }
+
                         wishlistModelList.add(wishlistModel);
                     } while (cursor.moveToNext());
                 }

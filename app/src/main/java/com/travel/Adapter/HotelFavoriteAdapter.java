@@ -14,9 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.travel.Activity.DetailHotelActivity;
+import com.travel.Database.WishlistDAO;
 import com.travel.Model.HotelModel;
+import com.travel.Model.UserModel;
 import com.travel.R;
+import com.travel.Utils.Constants;
 import com.travel.Utils.NumberHelper;
+import com.travel.Utils.SharePreferencesHelper;
+import com.travel.Utils.SnackBarHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +29,13 @@ import java.util.List;
 public class HotelFavoriteAdapter<T> extends RecyclerView.Adapter<HotelFavoriteAdapter.HotelCommonViewHolder> {
     private List<T> listItem;
     private Context context;
+    WishlistDAO wishlistDAO;
+    UserModel currentUser = SharePreferencesHelper.getInstance().get(Constants.USER_SHARE_PREFERENCES, UserModel.class);
 
     public HotelFavoriteAdapter(ArrayList<T> listItem, Context context) {
         this.listItem = listItem;
         this.context = context;
+        this.wishlistDAO = new WishlistDAO(context);
     }
 
     @NonNull
@@ -52,6 +60,7 @@ public class HotelFavoriteAdapter<T> extends RecyclerView.Adapter<HotelFavoriteA
         holder.price.setText(NumberHelper.getFormattedPrice(item.getPrice()) + " đ");
         holder.address.setText(item.getAddress());
         holder.ratingBar.setRating(item.getRating());
+        setHeartColor(holder.imgLove, wishlistDAO.checkFavoriteHotel(item.getHotelId(), currentUser.getUserId()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +68,22 @@ public class HotelFavoriteAdapter<T> extends RecyclerView.Adapter<HotelFavoriteA
                 Intent intent = new Intent(context, DetailHotelActivity.class);
                 intent.putExtra("hotelId", item.getHotelId());
                 context.startActivity(intent);
+            }
+        });
+
+        holder.imgLove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isCurrentlyFavorite = wishlistDAO.checkFavoriteHotel(item.getHotelId(), currentUser.getUserId());
+                boolean newFavoriteState = !isCurrentlyFavorite;
+                setHeartColor(holder.imgLove, newFavoriteState);
+                if (newFavoriteState) {
+                    wishlistDAO.insertHotelWhishlist(currentUser.getUserId(), item.getHotelId());
+                    SnackBarHelper.showSnackbar(v, "Đã thêm vào danh sách yêu thích");
+                } else {
+                    wishlistDAO.removeWhishlistHotelId(currentUser.getUserId(),item.getHotelId());
+                    SnackBarHelper.showSnackbar(v, "Đã xóa khỏi danh sách yêu thích");
+                }
             }
         });
     }
@@ -69,18 +94,27 @@ public class HotelFavoriteAdapter<T> extends RecyclerView.Adapter<HotelFavoriteA
     }
 
     public class HotelCommonViewHolder extends RecyclerView.ViewHolder {
-        ImageView hotelImage;
+        ImageView hotelImage, imgLove;
         TextView hotelName, rating, price, address, description;
         RatingBar ratingBar;
 
         public HotelCommonViewHolder(@NonNull View itemView) {
             super(itemView);
+            imgLove = itemView.findViewById(R.id.imgLove);
             hotelImage = itemView.findViewById(R.id.roundedCityImage);
             hotelName = itemView.findViewById(R.id.tv_hotel_name);
             rating = itemView.findViewById(R.id.tour_favorite_rating);
             price = itemView.findViewById(R.id.tv_price);
             address = itemView.findViewById(R.id.tour_favorite_address);
             ratingBar = itemView.findViewById(R.id.ratingBar);
+        }
+    }
+
+    private void setHeartColor(ImageView imageView, boolean isHeartRed) {
+        if (isHeartRed) {
+            imageView.setImageResource(R.drawable.ic_heart);
+        } else {
+            imageView.setImageResource(R.drawable.icon_heart);
         }
     }
 }

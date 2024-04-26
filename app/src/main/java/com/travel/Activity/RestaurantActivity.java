@@ -2,13 +2,16 @@ package com.travel.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.travel.Adapter.RestaurantCommonAdapter;
 import com.travel.Adapter.RestaurantFavoriteAdapter;
 import com.travel.Adapter.TourCommonAdapter;
@@ -45,6 +48,7 @@ public class RestaurantActivity extends AppCompatActivity {
 
         this.handleListCommonRestaurant();
         this.handleListRestaurant();
+        this.handleBottomNavigation();
     }
 
     public void initHeaderEvent() {
@@ -91,5 +95,34 @@ public class RestaurantActivity extends AppCompatActivity {
     public void handleListRestaurant() {
         RestaurantFavoriteAdapter<RestaurantModel> adapter = new RestaurantFavoriteAdapter<>(restaurants, this);
         restaurantBinding.rvRestaurant.setAdapter(adapter);
+    }
+
+    private void handleBottomNavigation() {
+        restaurantBinding.navigation.setItemIconTintList(null);
+        restaurantBinding.navigation.setSelectedItemId(R.id.navigation_map);
+        restaurantBinding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent = null;
+                int id = item.getItemId();
+                if (id == R.id.navigation_home) {
+                    intent = new Intent(RestaurantActivity.this, HomeActivity.class);
+                } else if (id == R.id.navigation_favorite) {
+                    intent = new Intent(RestaurantActivity.this, FavoriteActivity.class);
+                } else if (id == R.id.navigation_map) {
+                    return true;
+                }else if (id == R.id.navigation_translate) {
+//                    intent = new Intent(HomeActivity.this, A.class);
+                }
+                else if (id == R.id.navigation_profile) {
+                    intent = new Intent(RestaurantActivity.this, PersonalInforActivity.class);
+                }
+                if (intent != null) {
+                    startActivity(intent);
+                    finish();
+                }
+                return true;
+            }
+        });
     }
 }

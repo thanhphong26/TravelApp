@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.SearchActivity">
+    tools:context=".Activity.FavoriteActivity">
 
     <!-- NestedScrollView -->
     <androidx.core.widget.NestedScrollView
@@ -55,16 +55,38 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/textView11"
+                            android:id="@+id/titleCity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="Thành phố"
+                            android:textSize="20sp" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/cityRecycleView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/titleTour"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/montserrat_medium"
                             android:text="Du lịch"
                             android:textSize="20sp" />
 
-                        <include layout="@layout/destination_favorite_card" />
-
-                        <include layout="@layout/destination_favorite_card" />
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/tourRecycleView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 
@@ -76,17 +98,38 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/textView12"
+                            android:id="@+id/titleHotel"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/montserrat_medium"
                             android:text="Khách sạn"
                             android:textSize="20sp" />
 
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/hotelRecycleView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
 
-                        <include layout="@layout/hotel_favorite_card" />
+                    </LinearLayout>
 
-                        <include layout="@layout/hotel_favorite_card" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/titleRestaurant"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="Nhà hàng"
+                            android:textSize="20sp" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/restaurantRecycleView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
 
                     </LinearLayout>
 
@@ -97,6 +140,17 @@
         </ScrollView>
     </androidx.core.widget.NestedScrollView>
 
-   <include layout="@layout/bottom_navigation" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|center"
+        android:background="@drawable/custom_corner"
+        android:fitsSystemWindows="true"
+        app:elevation="10dp"
+        app:labelVisibilityMode="labeled"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_navigation_menu" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

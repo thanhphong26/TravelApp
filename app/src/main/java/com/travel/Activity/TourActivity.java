@@ -2,12 +2,15 @@ package com.travel.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import com.bumptech.glide.Glide;
 import com.travel.Adapter.DestinationCommonRatingAdapter;
@@ -66,6 +69,7 @@ public class TourActivity extends AppCompatActivity {
 
         this.handleListCommonTour();
         this.handleListTour();
+        this.handleBottomNavigation();
     }
 
     public void handleSearchGlobal() {
@@ -94,5 +98,34 @@ public class TourActivity extends AppCompatActivity {
     public void handleListTour() {
         TourFavoriteAdapter<TourModel> adapter = new TourFavoriteAdapter<>(tours, this);
         tourBinding.rcvTour.setAdapter(adapter);
+    }
+
+    private void handleBottomNavigation() {
+        tourBinding.navigation.setItemIconTintList(null);
+        tourBinding.navigation.setSelectedItemId(R.id.navigation_favorite);
+        tourBinding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent = null;
+                int id = item.getItemId();
+                if (id == R.id.navigation_home) {
+                    intent = new Intent(TourActivity.this, HomeActivity.class);
+                } else if (id == R.id.navigation_favorite) {
+                    intent = new Intent(TourActivity.this, FavoriteActivity.class);
+                } else if (id == R.id.navigation_map) {
+                    return true;
+                }else if (id == R.id.navigation_translate) {
+//                    intent = new Intent(HomeActivity.this, A.class);
+                }
+                else if (id == R.id.navigation_profile) {
+                    intent = new Intent(TourActivity.this, PersonalInforActivity.class);
+                }
+                if (intent != null) {
+                    startActivity(intent);
+                    finish();
+                }
+                return true;
+            }
+        });
     }
 }

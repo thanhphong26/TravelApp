@@ -202,20 +202,35 @@ public class TourDAO {
         }
         return tourModels;
     }
+    @SuppressLint("Range")
     public TourModel getTourById(int id) {
         database = databaseHelper.openDatabase();
         TourModel tourModel = new TourModel();
         Cursor cursor=null;
         if (database != null) {
             try {
-                cursor = database.query("tours", null, "tour_id= ?", new String[]{String.valueOf(id)}, null, null, null);
+                String[] columns = {
+                        "tours.*",
+                        "destinations.destination_id", "destinations.name AS destination_name", "destinations.image AS destination_image"
+                };
+                String query = "SELECT " + TextUtils.join(",", columns) + " FROM tours " +
+                        "INNER JOIN destinations ON tours.destination_id = destinations.destination_id " +
+                        "WHERE tours.tour_id = " + id;
+
+                cursor = database.rawQuery(query, null);
                 if (cursor != null && cursor.moveToFirst()) {
-                    tourModel.setTourId(cursor.getInt(0));
-                    tourModel.setName(cursor.getString(2));
-                    tourModel.setDescription(cursor.getString(3));
-                    tourModel.setImage(cursor.getString(4));
-                    tourModel.setRating(cursor.getFloat(5));
-                    tourModel.setPrice(cursor.getFloat(6));
+                    DestinationModel destination = new DestinationModel();
+                    destination.setDestinationId(cursor.getInt(cursor.getColumnIndex("destination_id")));
+                    destination.setName(cursor.getString(cursor.getColumnIndex("destination_name")));
+                    destination.setImage(cursor.getString(cursor.getColumnIndex("destination_image")));
+
+                    tourModel.setTourId(cursor.getInt(cursor.getColumnIndex("tour_id")));
+                    tourModel.setName(cursor.getString(cursor.getColumnIndex("name")));
+                    tourModel.setDescription(cursor.getString(cursor.getColumnIndex("description")));
+                    tourModel.setImage(cursor.getString(cursor.getColumnIndex("image")));
+                    tourModel.setPrice(cursor.getFloat(cursor.getColumnIndex("price")));
+                    tourModel.setRating(cursor.getFloat(cursor.getColumnIndex("rating")));
+                    tourModel.setDestination(destination);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

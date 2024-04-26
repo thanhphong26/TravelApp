@@ -15,6 +15,7 @@ import android.view.View;
 
 import com.travel.Database.DatabaseHelper;
 import com.travel.Model.UserModel;
+import com.travel.Utils.Constants;
 import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityLoginBinding;
 public class LoginActivity extends AppCompatActivity {
@@ -40,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
                     loginBinding.txtError.setText("Vui lòng điền đầy đủ thông tin!");
                 }
                 else if (userModel != null) {
-                    SharePreferencesHelper.getInstance().put("user", userModel);
+                    SharePreferencesHelper.getInstance().put(Constants.USER_SHARE_PREFERENCES, userModel);
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
                 }else {

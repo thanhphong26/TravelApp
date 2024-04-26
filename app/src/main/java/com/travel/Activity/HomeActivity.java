@@ -64,7 +64,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void getDefaultValue() {
-        currentUser = SharePreferencesHelper.getInstance().get("user", UserModel.class);
+        currentUser = SharePreferencesHelper.getInstance().get(Constants.USER_SHARE_PREFERENCES, UserModel.class);
         destinations = destinationDAO.getAll("", Constants.MAX_RECORD, 0);
         destinationDetails = destinationDAO.getDetailCommon(5);
     }
@@ -76,7 +76,7 @@ public class HomeActivity extends AppCompatActivity {
 
         //*INFO: Set slider event
         this.handleDestinationSlider();
-
+        this.handleBottomNavigation();
 
         //*INFO: Set onclick product
         homeBinding.tourPage.setOnClickListener(new View.OnClickListener() {
@@ -171,5 +171,34 @@ public class HomeActivity extends AppCompatActivity {
         imageSliderAdapter = new ImageSliderAdapter(imageUrls, homeBinding.viewPager2);
         homeBinding.viewPager2.setAdapter(imageSliderAdapter);
         startAutoSlide(2500);
+    }
+
+    private void handleBottomNavigation() {
+        homeBinding.navigation.setItemIconTintList(null);
+        homeBinding.navigation.setSelectedItemId(R.id.navigation_home);
+        homeBinding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent = null;
+                int id = item.getItemId();
+                if (id == R.id.navigation_home) {
+                    return true;
+                } else if (id == R.id.navigation_favorite) {
+                    intent = new Intent(HomeActivity.this, FavoriteActivity.class);
+                } else if (id == R.id.navigation_map) {
+                    intent = new Intent(HomeActivity.this, DestinationActivity.class);
+                }else if (id == R.id.navigation_translate) {
+//                    intent = new Intent(HomeActivity.this, A.class);
+                }
+                else if (id == R.id.navigation_profile) {
+                    intent = new Intent(HomeActivity.this, PersonalInforActivity.class);
+                }
+                if (intent != null) {
+                    startActivity(intent);
+                    finish();
+                }
+                return true;
+            }
+        });
     }
 }

@@ -4,15 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.travel.Adapter.HotelCommonAdapter;
 import com.travel.Adapter.HotelFavoriteAdapter;
 import com.travel.Adapter.RestaurantFavoriteAdapter;
@@ -80,6 +83,7 @@ public class SearchActivity extends AppCompatActivity {
         this.handleListTour();
         this.handleListHotel();
         this.handleListRestaurant();
+        this.handleBottomNavigation();
     }
 
     public void handleListTour() {
@@ -123,6 +127,35 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
+            }
+        });
+    }
+
+    private void handleBottomNavigation() {
+        searchBinding.navigation.setItemIconTintList(null);
+        searchBinding.navigation.setSelectedItemId(R.id.navigation_map);
+        searchBinding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent = null;
+                int id = item.getItemId();
+                if (id == R.id.navigation_home) {
+                    intent = new Intent(SearchActivity.this, HomeActivity.class);
+                } else if (id == R.id.navigation_favorite) {
+                    intent = new Intent(SearchActivity.this, FavoriteActivity.class);
+                } else if (id == R.id.navigation_map) {
+                    return true;
+                }else if (id == R.id.navigation_translate) {
+//                    intent = new Intent(HomeActivity.this, A.class);
+                }
+                else if (id == R.id.navigation_profile) {
+                    intent = new Intent(SearchActivity.this, PersonalInforActivity.class);
+                }
+                if (intent != null) {
+                    startActivity(intent);
+                    finish();
+                }
+                return true;
             }
         });
     }
