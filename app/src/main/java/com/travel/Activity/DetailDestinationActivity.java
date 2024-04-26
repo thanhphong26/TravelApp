@@ -28,6 +28,7 @@ import com.travel.Model.RestaurantModel;
 import com.travel.Model.TourModel;
 import com.travel.Model.UserModel;
 import com.travel.R;
+import com.travel.Utils.Constants;
 import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityDetailDestinationBinding;
 
@@ -45,6 +46,7 @@ public class DetailDestinationActivity extends AppCompatActivity {
      WishlistDAO wishlistDAO;
     private boolean isFavorite;
     UserModel userModel;
+    int REQUEST_CODE_DETAIL_DESTINATION= Constants.REQUEST_CODE_DETAIL_DESTINATION;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,8 +80,9 @@ public class DetailDestinationActivity extends AppCompatActivity {
         detailDestinationBinding.imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetailDestinationActivity.this, DestinationActivity.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(DetailDestinationActivity.this, DestinationActivity.class);
+                startActivity(intent);*/
+                onBackPressed();
             }
         });
 
@@ -128,22 +131,26 @@ public class DetailDestinationActivity extends AppCompatActivity {
     }
     public void navigateToHotel(int destinationId){
         Intent intent=new Intent(this, HotelActivity.class);
-        intent.putExtra("destination_id",destinationId);
+        intent.putExtra("requestCode",REQUEST_CODE_DETAIL_DESTINATION);
+        intent.putExtra("destinationId",destinationId);
         startActivity(intent);
     }
     public void navigateToRestaurant(int destinationId){
         Intent intent=new Intent(this, RestaurantActivity.class);
-        intent.putExtra("destination_id",destinationId);
+        intent.putExtra("requestCode",REQUEST_CODE_DETAIL_DESTINATION);
+        intent.putExtra("destinationId",destinationId);
         startActivity(intent);
     }
     public void navigateToTour(int destinationId){
         Intent intent=new Intent(this, TourActivity.class);
-        intent.putExtra("destination_id",destinationId);
+        intent.putExtra("requestCode",REQUEST_CODE_DETAIL_DESTINATION);
+        intent.putExtra("destinationId",destinationId);
         startActivity(intent);
     }
     public void navigateToFlight(int destinationId){
         Intent intent=new Intent(this, FlightActivity.class);
-        intent.putExtra("destination_id",destinationId);
+        intent.putExtra("requestCode",REQUEST_CODE_DETAIL_DESTINATION);
+        intent.putExtra("destinationId",destinationId);
         startActivity(intent);
     }
     private void setHeartColor(ImageView imageView, boolean isHeartRed) {

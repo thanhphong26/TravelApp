@@ -42,10 +42,11 @@ public class TimeLineActivity extends AppCompatActivity {
             timelineBinding.recyclerViewTimeline.setAdapter(tourLineAdapter);
             setContentView(timelineBinding.getRoot());
             timelineBinding.imgBack.setOnClickListener(v -> {
-                Intent intent = new Intent(TimeLineActivity.this, DetailTourActivity.class);
-                intent.putExtra("destinationId", destinationId);
-                intent.putExtra("tourId", tourId);
-                startActivity(intent);
+//                Intent intent = new Intent(TimeLineActivity.this, DetailTourActivity.class);
+//                intent.putExtra("destinationId", destinationId);
+//                intent.putExtra("tourId", tourId);
+//                startActivity(intent);
+                onBackPressed();
             });
         }
 }

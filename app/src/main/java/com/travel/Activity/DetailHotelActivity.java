@@ -23,6 +23,7 @@ import com.travel.Model.HotelModel;
 import com.travel.Model.ReviewModel;
 import com.travel.Model.UserModel;
 import com.travel.R;
+import com.travel.Utils.Constants;
 import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityDetailHotelBinding;
 
@@ -41,12 +42,15 @@ public class DetailHotelActivity extends AppCompatActivity {
     private boolean isFavorite;
     int destinationId;
     UserModel userModel;
-
+    private int REQUEST_CODE_DETAIL_HOTEL=Constants.REQUEST_CODE_DETAIL_HOTEL;
+    int REQUEST_CODE_HOTEL=Constants.REQUEST_CODE_HOTEL;
+    int REQUEST_CODE_DETAIL_DESTINATION=Constants.REQUEST_CODE_DETAIL_DESTINATION;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         detailHotelBinding = ActivityDetailHotelBinding.inflate(getLayoutInflater());
         setContentView(detailHotelBinding.getRoot());
+        int requestCode = getIntent().getIntExtra("requestCode", 0);
         int hotelId = getIntent().getIntExtra("hotelId", 0);
         destinationId=getIntent().getIntExtra("destinationId",0);
         AppBarLayout appBarLayout = findViewById(com.travel.R.id.app_bar_layout);
@@ -75,12 +79,31 @@ public class DetailHotelActivity extends AppCompatActivity {
         setHeartColor(detailHotelBinding.fab, isFavorite);
         detailHotelBinding.fab.setOnClickListener(v -> addToWhislist(hotelModel, userModel));
 
+        if(requestCode==REQUEST_CODE_HOTEL){
+            onClickBackToHoTel();
+        }else if(requestCode==REQUEST_CODE_DETAIL_DESTINATION){
+            onClickBackToDetailDestination();
+        }
+    }
+    public void onClickBackToHoTel(){
+        detailHotelBinding.imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(DetailHotelActivity.this,HotelActivity.class);
+                intent.putExtra("destinationId",destinationId);
+                startActivity(intent);
+                //onBackPressed();
+            }
+        });
+    }
+    public void onClickBackToDetailDestination(){
         detailHotelBinding.imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(DetailHotelActivity.this,DetailDestinationActivity.class);
                 intent.putExtra("destinationId",destinationId);
                 startActivity(intent);
+                //onBackPressed();
             }
         });
     }

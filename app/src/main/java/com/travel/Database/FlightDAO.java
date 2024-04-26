@@ -70,5 +70,38 @@ public class FlightDAO {
 
         return flights;
     }
+    @SuppressLint("Range")
+    public FlightModel getFlightById(int flightId) {
+        FlightModel flight = new FlightModel();
+        database = databaseHelper.openDatabase();
+        Cursor cursor = null;
+        if (database != null) {
+            try {
+                cursor = database.query("flights", null, "flight_id = ?", new String[]{String.valueOf(flightId)}, null, null, null);
+
+                if (cursor.moveToFirst()) {
+                    flight.setFlightId(cursor.getInt(cursor.getColumnIndex("flight_id")));
+                    flight.setDepartureAirportCode(cursor.getString(cursor.getColumnIndex("departure_airport_code")));
+                    flight.setArrivalAirportCode(cursor.getString(cursor.getColumnIndex("arrival_airport_code")));
+                    flight.setDepartureDate(DateTimeHelper.convertStringToTimeStamp(cursor.getString(cursor.getColumnIndex("departure_date"))));
+                    flight.setDepartureTime(DateTimeHelper.convertStringToTimeStamp(cursor.getString(cursor.getColumnIndex("departure_time"))));
+                    flight.setArrivalDate(DateTimeHelper.convertStringToTimeStamp(cursor.getString(cursor.getColumnIndex("arrival_date"))));
+                    flight.setArrivalTime(DateTimeHelper.convertStringToTimeStamp(cursor.getString(cursor.getColumnIndex("arrival_time"))));
+                    flight.setPrice(cursor.getFloat(cursor.getColumnIndex("price")));
+                    flight.setDescription(cursor.getString(cursor.getColumnIndex("description")));
+                    flight.setStatus(cursor.getString(cursor.getColumnIndex("status")));
+                    flight.setAvailableSeats(cursor.getInt(cursor.getColumnIndex("available_seats")));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+                databaseHelper.closeDatabase(database);
+            }
+        }
+        return flight;
+    }
 
 }

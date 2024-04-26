@@ -73,19 +73,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getLastLocation();
             }
         });
-       /* binding.fabChooseMapType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showMapTypeSelectionDialog();
-            }
-        });*/
         binding.imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MapsActivity.this, TimeLineActivity.class);
+               /* Intent intent=new Intent(MapsActivity.this, TimeLineActivity.class);
                 intent.putExtra("destinationId", destinationId);
                 intent.putExtra("tourId", tourId);
-                startActivity(intent);
+                startActivity(intent);*/
+                onBackPressed();
             }
         });
     }
@@ -148,21 +143,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
     }
-    /*private void showMapTypeSelectionDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Chọn loại bản đồ");
-        String[] mapTypes = {"Bản đồ", "Bản đồ vệ tinh", "Bản đồ hybrid", "Bản đồ dạng mặt đất", "Bản đồ dạng mặt đất với bề mặt"};
-        builder.setItems(mapTypes, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case 0-> mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                    case 1 -> mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-                    case 2 -> mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-                    case 3-> mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-                }
-            }
-        });
-        builder.show();
-    }*/
 }
