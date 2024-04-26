@@ -9,6 +9,8 @@ android {
     packagingOptions {
         exclude 'META-INF/NOTICE.md'
         exclude 'META-INF/LICENSE.md'
+        exclude 'META-INF/INDEX.LIST'
+
     }
     defaultConfig {
         applicationId "com.travel"
@@ -76,6 +78,7 @@ dependencies {
     implementation 'com.sun.mail:jakarta.mail:2.0.1'
     implementation 'com.sun.activation:jakarta.activation:2.0.1'
     implementation 'com.google.code.gson:gson:2.8.1'
+    implementation 'com.google.cloud:google-cloud-storage:2.2.2'
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
 }
