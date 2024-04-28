@@ -55,7 +55,7 @@ public class BookHotelActivity extends AppCompatActivity {
         loadUser(userId);
         String img=bookHotelDAO.getInFor(hotelId).getImage();
         Glide.with(this).load(img).into(bookHotelBinding.imgHotel);
-
+        bookHotelBinding.btnThanhToan.setEnabled(false);
         bookHotelBinding.btnDecreaseRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,6 +65,12 @@ public class BookHotelActivity extends AppCompatActivity {
                     bookHotelBinding.tvQuantityRoom.setText(String.valueOf(room));
                 }
                 thanhtien(hotelId);
+            }
+        });
+        bookHotelBinding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
         bookHotelBinding.btnPlusRoom.setOnClickListener(new View.OnClickListener() {
@@ -142,7 +148,6 @@ public class BookHotelActivity extends AppCompatActivity {
         bookHotelDAO = new BookHotelDAO();
         bookHotelBinding.tvTenHotel.setText(bookHotelDAO.getInFor(hotelId).getName());
         bookHotelBinding.tvMoTa.setText(bookHotelDAO.getInFor(hotelId).getDescription());
-        bookHotelBinding.tvThanhTien.setText(String.valueOf(bookHotelDAO.getInFor(hotelId).getPrice()));
     }
     public void loadUser(int userId){
         bookHotelDAO = new BookHotelDAO();
@@ -155,10 +160,10 @@ public class BookHotelActivity extends AppCompatActivity {
         int sl_treEm=Integer.parseInt(bookHotelBinding.tvQuantityChilds.getText().toString());
         int sl_nguoiLon=Integer.parseInt(bookHotelBinding.tvQuantityAdults.getText().toString());
         int sl_phong=Integer.parseInt(bookHotelBinding.tvQuantityRoom.getText().toString());
-        float gia=bookHotelDAO.getInFor(hotelId).getPrice();
+        long gia=(long) bookHotelDAO.getInFor(hotelId).getPrice();
         long tongtien=(long)(sl_phong*gia+sl_nguoiLon*gia+sl_treEm*gia/2);
         bookHotelBinding.tvThanhTien.setText(String.valueOf(tongtien));
-        if(checkPrice(Float.parseFloat(bookHotelBinding.tvThanhTien.getText().toString())))
+        if(checkPrice(Long.parseLong(bookHotelBinding.tvThanhTien.getText().toString())))
         {
             bookHotelBinding.btnThanhToan.setEnabled(true);
         }
@@ -167,7 +172,7 @@ public class BookHotelActivity extends AppCompatActivity {
         }
     }
     public boolean checkPrice(float price){
-        if(price>0.0){
+        if(price>0){
             return true;
         }
         return false;

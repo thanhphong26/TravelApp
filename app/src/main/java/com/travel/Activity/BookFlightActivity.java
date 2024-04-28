@@ -65,6 +65,12 @@ public class BookFlightActivity extends AppCompatActivity {
                 thanhtien(flightId);
             }
         });
+        bookFlightBinding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         bookFlightBinding.btnPlusAdults.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
