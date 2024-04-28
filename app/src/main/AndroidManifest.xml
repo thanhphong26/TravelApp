@@ -123,9 +123,6 @@
             android:name=".Activity.BookFlightActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.MyRatingActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activity.HistoryActivity"
             android:exported="false" />
         <activity
