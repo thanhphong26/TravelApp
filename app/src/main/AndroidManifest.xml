@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
+        tools:ignore="CoarseFineLocation" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -41,6 +40,9 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".Activity.DetailFlightActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.CheckoutActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.FlightActivity"
@@ -96,10 +98,25 @@
             android:name=".Activity.FavoriteActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.BookTourActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.BookHotelActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.BookRestaurantActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.BookFlightActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.MyRatingActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.BookCompleteActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.MainActivity"

@@ -7,8 +7,30 @@ public class RestaurantModel {
     private float price;
     private float latitude, longitude;
     private DestinationModel destination;
+    private int destinationId;
 
     public RestaurantModel() {
+    }
+
+    public RestaurantModel(int restaurantId, String name, String address, String image, String description, float rating, float price, float latitude, float longitude, int destinationId) {
+        this.restaurantId = restaurantId;
+        this.name = name;
+        this.address = address;
+        this.image = image;
+        this.description = description;
+        this.rating = rating;
+        this.price = price;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.destinationId = destinationId;
+    }
+
+    public int getDestinationId() {
+        return destinationId;
+    }
+
+    public void setDestinationId(int destinationId) {
+        this.destinationId = destinationId;
     }
 
     public RestaurantModel(int restaurantId, String name, String address, String image, String description, float rating, float price, float latitude, float longitude, DestinationModel destination) {

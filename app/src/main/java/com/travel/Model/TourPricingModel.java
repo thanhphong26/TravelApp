@@ -2,24 +2,39 @@ package com.travel.Model;
 
 public class TourPricingModel {
     private int pricingId;
-    private TourModel tour;
+//    private TourModel tour;
+    private int tourId;
     private float adultPrice, childPrice;
 
     public TourPricingModel() {
     }
 
-    public TourPricingModel(int pricingId, TourModel tour, float adultPrice, float childPrice) {
+    public TourPricingModel(int pricingId, int tourId, float adultPrice, float childPrice) {
         this.pricingId = pricingId;
-        this.tour = tour;
+        this.tourId = tourId;
         this.adultPrice = adultPrice;
         this.childPrice = childPrice;
     }
 
-    public TourPricingModel(TourModel tour, float adultPrice, float childPrice) {
-        this.tour = tour;
-        this.adultPrice = adultPrice;
-        this.childPrice = childPrice;
+    public int getTourId() {
+        return tourId;
     }
+
+    public void setTourId(int tourId) {
+        this.tourId = tourId;
+    }
+    //    public TourPricingModel(int pricingId, TourModel tour, float adultPrice, float childPrice) {
+//        this.pricingId = pricingId;
+//        this.tour = tour;
+//        this.adultPrice = adultPrice;
+//        this.childPrice = childPrice;
+//    }
+//
+//    public TourPricingModel(TourModel tour, float adultPrice, float childPrice) {
+//        this.tour = tour;
+//        this.adultPrice = adultPrice;
+//        this.childPrice = childPrice;
+//    }
 
     public int getPricingId() {
         return pricingId;
@@ -29,13 +44,13 @@ public class TourPricingModel {
         this.pricingId = pricingId;
     }
 
-    public TourModel getTour() {
-        return tour;
-    }
-
-    public void setTour(TourModel tour) {
-        this.tour = tour;
-    }
+//    public TourModel getTour() {
+//        return tour;
+//    }
+//
+//    public void setTour(TourModel tour) {
+//        this.tour = tour;
+//    }
 
     public float getAdultPrice() {
         return adultPrice;

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageButton
-            android:id="@+id/btn_back"
+            android:id="@+id/btnBack"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:backgroundTint="#BBE7E9"
@@ -29,8 +29,8 @@
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:layout_marginTop="20dp">
+        android:layout_height="595dp"
+        android:layout_marginTop="10dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,46 +41,39 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/input_search_background"
                 android:orientation="vertical">
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="150dp"
-                    android:layout_marginTop="2dp"
-                    android:text="Khởi hành vào..."
-                    android:textColor="#EAA827"
-                    android:textSize="10sp"></TextView>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="90dp"
                     android:orientation="horizontal">
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginRight="5dp">
+                        android:layout_margin="10dp">
+
                         <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/img"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="80dp"
                             android:src="@drawable/img_tour1"
                             app:riv_corner_radius="10dp"></com.makeramen.roundedimageview.RoundedImageView>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_marginTop="7dp">
                         <TextView
-                            android:layout_width="match_parent"
+                            android:id="@+id/tvTen"
+                            android:layout_width="200dp"
                             android:layout_height="wrap_content"
-
                             android:text="Tour 4 ngày 3 đêm Hà Giang"
                             android:textSize="15sp"
                             android:textStyle="bold"></TextView>
                         <TextView
-                            android:layout_width="match_parent"
+                            android:id="@+id/tvMoTa"
+                            android:layout_width="200dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
                             android:text="Travelers planning a trip to Europe should consider visiting Italy, known for its rich history, stunning a"
                             android:textSize="12sp"
                             android:textStyle="normal"></TextView>
@@ -116,6 +109,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="1"
+                                android:id="@+id/tvQuantityAdult"
                                 android:textSize="10sp">
                             </TextView>
                         </TableRow>
@@ -136,19 +130,40 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="1"
+                                android:id="@+id/tvQuantityChild"
                                 android:textSize="10sp">
                             </TextView>
                         </TableRow>
+                        <TableRow>
+
+                        </TableRow>
                     </TableLayout>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="right"
-                        android:layout_marginRight="10dp"
-                        android:text="2.500.000 VND"
-                        android:textSize="13sp"
-                        android:textStyle="bold">
-                    </TextView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="180dp"
+                            android:text="Tổng tiền"
+                            android:textSize="12sp"
+                            android:id="@+id/GiaTu"
+                            android:textStyle="italic">
+                        </TextView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+
+                            android:layout_marginRight="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:text="2.500.000 VND"
+                            android:textSize="13sp"
+                            android:id="@+id/tvThanhTien"
+                            android:textStyle="bold">
+                        </TextView>
+
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -186,7 +201,7 @@
                     android:text="Họ và tên"></TextView>
 
                 <TextView
-                    android:id="@+id/edt_hoTen"
+                    android:id="@+id/edtHoTen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -209,6 +224,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:id="@+id/edtSoDienThoai"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="7dp"
                     android:text="0123456789"
@@ -224,7 +240,7 @@
                     android:text="Email liên hệ"></TextView>
 
                 <TextView
-                    android:id="@+id/edt_email"
+                    android:id="@+id/edtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -267,49 +283,14 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:background="@drawable/background_form_checkout"
-                    android:text="Điền yêu cầu thêm vào đây"
+                    android:hint="Điền yêu cầu thêm vào đây"
                     android:gravity="center_horizontal"
                     android:textColor="#B1A9A9"
+                    android:id="@+id/tvYeuCau"
                     android:textSize="10sp">
                 </EditText>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/input_search_background"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="159dp"
-                            android:layout_height="wrap_content"
-                            android:text="Phương thức thanh toán "
-                            android:textSize="13sp"
-                            android:layout_marginLeft="5dp"
-                            android:textStyle="bold"></TextView>
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginLeft="90dp"
-                            android:backgroundTint="@color/white"
-                            android:gravity="center"
-                            android:text="Chọn"
-                            android:textColor="@color/blue" />
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="#DAD6D6"></View>
-                <include layout="@layout/payment_methods"></include>
-            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
     <LinearLayout
@@ -320,26 +301,18 @@
         android:layout_marginTop="10dp">
         <LinearLayout
             android:layout_width="180dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_thanhTien"
+                android:id="@+id/tvTongTien"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
-                android:text="2.000.000 VND"
+                android:text=""
                 android:textSize="20sp"
                 android:textStyle="bold"></TextView>
-
-            <TextView
-                android:id="@+id/tv_giaGiam"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:text="Giảm 340.000 VND"
-                android:textColor="#0FAEC3"></TextView>
         </LinearLayout>
         <Button
             android:id="@+id/btn_thanhToan"
@@ -354,16 +327,16 @@
             android:textStyle="bold">
         </Button>
     </LinearLayout>
-     <com.google.android.material.bottomnavigation.BottomNavigationView
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="bottom|center"
-        android:background="@drawable/custom_corner"
+        android:background="@color/white"
         android:fitsSystemWindows="true"
+        android:textAlignment="center"
         app:elevation="10dp"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         app:menu="@menu/bottom_navigation_menu" />
 </LinearLayout>

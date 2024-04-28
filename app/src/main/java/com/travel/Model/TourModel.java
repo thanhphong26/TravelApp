@@ -3,21 +3,35 @@ package com.travel.Model;
 public class TourModel {
     private int tourId;
     private DestinationModel destination;
+    private int destinationId;
     private String name,description, image;
     private float rating;
     private float price;
-
     public TourModel() {
     }
-
-    public TourModel(int tourId, DestinationModel destination, String name, String description, String image, float rating, float price) {
+    public TourModel(int tourId, int destinationId, String name, String description, String image, float rating, float price) {
+       this.tourId = tourId;
+        this.destinationId = destinationId;
+        this.name = name;
+        this.description = description;
+        this.image = image;
+        this.rating = rating;
+        this.price = price;
+    }
+    public int getDestinationId() {
+        return destinationId;
+    }
+    public void setDestinationId(int destinationId) {
+        this.destinationId = destinationId;
+    }
+       public TourModel(int tourId, DestinationModel destination, String name, String description, String image, float rating, float price) {
         this.tourId = tourId;
         this.destination = destination;
         this.name = name;
         this.description = description;
         this.image = image;
         this.rating = rating;
-        this.price = price;
+       this.price = price;
     }
 
     public TourModel(DestinationModel destination, String name, String description, String image, float rating, float price) {
@@ -27,7 +41,8 @@ public class TourModel {
         this.image = image;
         this.rating = rating;
         this.price = price;
-    }
+   }
+
 
     public int getTourId() {
         return tourId;
@@ -84,4 +99,5 @@ public class TourModel {
     public void setPrice(float price) {
         this.price = price;
     }
+
 }
