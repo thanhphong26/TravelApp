@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.travel.Database.BookFlightDAO;
 import com.travel.Database.DatabaseHelper;
 import com.travel.Database.VoucherDAO;
@@ -49,6 +50,8 @@ public class BookFlightActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         bookFlightBinding = ActivityBookFlightBinding.inflate(getLayoutInflater());
         setContentView(bookFlightBinding.getRoot());
+        String img="https://storage.googleapis.com/app-bucket1/Image/Flight/flight.jpg";
+        Glide.with(this).load(img).into(bookFlightBinding.imgFlight);
         userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
         int flightId=getIntent().getIntExtra("flightId",0);
         int userId=userModel.getUserId();
@@ -65,7 +68,7 @@ public class BookFlightActivity extends AppCompatActivity {
                     quantityA--;
                     bookFlightBinding.tvQuantityAdults.setText(String.valueOf(quantityA));
                 }
-                thanhtien(flightId);
+                thanhtien(flightId,0);
             }
         });
         bookFlightBinding.btnBack.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +83,7 @@ public class BookFlightActivity extends AppCompatActivity {
                 int quantityA = Integer.parseInt(bookFlightBinding.tvQuantityAdults.getText().toString());
                 quantityA++;
                 bookFlightBinding.tvQuantityAdults.setText(String.valueOf(quantityA));
-                thanhtien(flightId);
+                thanhtien(flightId,0);
             }
 
         });
@@ -92,7 +95,7 @@ public class BookFlightActivity extends AppCompatActivity {
                     quantityC--;
                     bookFlightBinding.tvQuantityChilds.setText(String.valueOf(quantityC));
                 }
-                thanhtien(flightId);
+                thanhtien(flightId,0);
             }
         });
         bookFlightBinding.btnPlusChilds.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +104,7 @@ public class BookFlightActivity extends AppCompatActivity {
                 int quantityC = Integer.parseInt(bookFlightBinding.tvQuantityChilds.getText().toString());
                 quantityC++;
                 bookFlightBinding.tvQuantityChilds.setText(String.valueOf(quantityC));
-                thanhtien(flightId);
+                thanhtien(flightId,0);
             }
         });
 
@@ -121,8 +124,29 @@ public class BookFlightActivity extends AppCompatActivity {
                 bundle.putString("ten",bookFlightBinding.tvTenFlight.getText().toString());
                 bundle.putString("moTa",bookFlightBinding.tvMoTa.getText().toString());
                 bundle.putString("txtgia","Thành tiền");
+                bundle.putString("img",img);
+                bundle.putInt("id",1);
                 intent.putExtra("package",bundle);
                 startActivity(intent);
+            }
+        });
+        bookFlightBinding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        bookFlightBinding.btnApply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                VoucherDAO voucherDAO = new VoucherDAO();
+                List<VoucherModel> voucherModels = voucherDAO.getAllVouchers();
+                for (VoucherModel voucherModel : voucherModels) {
+                    if (bookFlightBinding.edtMaGiamGia.getText().toString().equals(voucherModel.getVoucherCode())) {
+                        float disc = voucherModel.getVoucherDiscount();
+                        thanhtien(flightId,disc);
+                    }
+                }
             }
         });
     }
@@ -155,16 +179,9 @@ public class BookFlightActivity extends AppCompatActivity {
         bookFlightBinding.edtEmail.setText(userModel.getEmail());
         bookFlightBinding.edtSoDienThoai.setText(userModel.getPhoneNumber());
     }
-    public void thanhtien(int flightId)
+    public void thanhtien(int flightId,float disc)
     {
-        VoucherDAO voucherDAO = new VoucherDAO();
-        List <VoucherModel> voucherModel = voucherDAO.getAllVouchers();
-        float disc = 0;
-        for (VoucherModel voucher : voucherModel) {
-            if (voucher.getVoucherCode().equals(bookFlightBinding.edtMaGiamGia.getText().toString())) {
-                disc = voucher.getVoucherDiscount();
-            }
-        }
+
         int sl_treEm = Integer.parseInt(bookFlightBinding.tvQuantityChilds.getText().toString());
         int sl_nguoiLon = Integer.parseInt(bookFlightBinding.tvQuantityAdults.getText().toString());
         long gia = (long) bookFlightDAO.getInfor(flightId).getPrice();

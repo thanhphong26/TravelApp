@@ -128,11 +128,11 @@ public class BookFlightDAO {
 
         return flightModel;
     }
-    public void addBookFlight(int flightId, int userId,int typeId, int quantityAdults, int quantityChilds, float totalPrice){
+    public void addBookFlight(int userId, int flightId,int typeId, int quantityAdults, int quantityChilds, float totalPrice){
         database = databaseHelper.openDatabase();
         ContentValues values = new ContentValues();
-        values.put("flight_id", flightId);
         values.put("user_id", userId);
+        values.put("flight_id", flightId);
         values.put("type_id", typeId);
         values.put("number_of_adults", quantityAdults);
         values.put("number_of_childs", quantityChilds);

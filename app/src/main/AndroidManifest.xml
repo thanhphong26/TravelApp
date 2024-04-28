@@ -129,6 +129,9 @@
             android:name=".Activity.BookCompleteActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.RatingHistoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.MainActivity"
             android:exported="true">
             <intent-filter>

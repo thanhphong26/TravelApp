@@ -94,6 +94,7 @@ public class BookRestaurantActivity extends AppCompatActivity {
                 bundle.putString("moTa",bookRestaurantBinding.tvMoTa.getText().toString());
                 bundle.putString("img",img);
                 bundle.putString("txtgia","Giá từ");
+                bundle.putInt("id",3);
                 bundle.putLong("total",Long.parseLong(bookRestaurantBinding.tvThanhTien.getText().toString()));
                 intent.putExtra("package",bundle);
                 startActivity(intent);

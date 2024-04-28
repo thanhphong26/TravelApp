@@ -97,7 +97,7 @@ public class DetailRestaurantActivity extends AppCompatActivity {
         setHeartColor(restaurantBinding.fab, isFavorite);
     }
     private void navigateToBooking(RestaurantModel restaurantModel) {
-        Intent intent = new Intent(this, BookHotelActivity.class);
+        Intent intent = new Intent(this, BookRestaurantActivity.class);
         intent.putExtra("restaurantId", restaurantModel.getRestaurantId());
         startActivity(intent);
     }
