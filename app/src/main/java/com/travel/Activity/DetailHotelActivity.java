@@ -83,6 +83,13 @@ public class DetailHotelActivity extends AppCompatActivity {
             onClickBackToHoTel();
         }else if(requestCode==REQUEST_CODE_DETAIL_DESTINATION){
             onClickBackToDetailDestination();
+        }else {
+            detailHotelBinding.imgBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
         }
     }
     public void onClickBackToHoTel(){
