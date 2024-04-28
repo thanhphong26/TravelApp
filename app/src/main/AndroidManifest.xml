@@ -72,7 +72,7 @@
             android:name=".Activity.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.PersonalInforActivity"
+            android:name=".Activity.PersonalInfoActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.HomeActivity"
@@ -94,11 +94,17 @@
         <activity
             android:name=".Activity.RestaurantActivity"
             android:exported="false" />
+        <activity android:name=".Activity.LoyaltyPointActivity"
+            android:exported="false" />
         <activity
             android:name=".Activity.DestinationActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.SearchActivity"
+            android:exported="false" />
+        <activity android:name=".Activity.VoucherActivity"
+            android:exported="false" />
+        <activity android:name=".Activity.MyRatingActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.FavoriteActivity"
