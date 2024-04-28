@@ -57,6 +57,7 @@ public class BookRestaurantDAO {
                         restaurantModel.setRating(cursor.getFloat(5));
                         restaurantModel.setLongitude(cursor.getFloat(6));
                         restaurantModel.setLatitude(cursor.getFloat(7));
+                        restaurantModel.setPrice(cursor.getFloat(8));
                     } while (cursor.moveToNext());
                 }
             } catch (Exception e) {

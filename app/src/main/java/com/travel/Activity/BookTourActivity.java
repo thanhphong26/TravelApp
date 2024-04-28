@@ -12,7 +12,9 @@ import com.bumptech.glide.Glide;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.travel.Database.BookTourDAO;
+import com.travel.Database.VoucherDAO;
 import com.travel.Model.UserModel;
+import com.travel.Model.VoucherModel;
 import com.travel.R;
 import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityBookTourBinding;
@@ -22,6 +24,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class BookTourActivity extends AppCompatActivity {
     ActivityBookTourBinding bookTourBinding;
@@ -58,7 +61,7 @@ public class BookTourActivity extends AppCompatActivity {
                     adults--;
                     bookTourBinding.tvQuantityAdults.setText(String.valueOf(adults));
                 }
-                thanhtien(tourId);
+                thanhtien(tourId,0);
             }
         });
         bookTourBinding.btnIncreaseAdults.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +70,7 @@ public class BookTourActivity extends AppCompatActivity {
                 int adults = Integer.parseInt(bookTourBinding.tvQuantityAdults.getText().toString());
                 adults++;
                 bookTourBinding.tvQuantityAdults.setText(String.valueOf(adults));
-                thanhtien(tourId);
+                thanhtien(tourId,0);
             }
         });
         bookTourBinding.btnDecreaseChilds.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +81,7 @@ public class BookTourActivity extends AppCompatActivity {
                     childs--;
                     bookTourBinding.tvQuantityChilds.setText(String.valueOf(childs));
                 }
-                thanhtien(tourId);
+                thanhtien(tourId,0);
             }
         });
         bookTourBinding.btnIncreaseChilds.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +90,7 @@ public class BookTourActivity extends AppCompatActivity {
                 int childs = Integer.parseInt(bookTourBinding.tvQuantityChilds.getText().toString());
                 childs++;
                 bookTourBinding.tvQuantityChilds.setText(String.valueOf(childs));
-                thanhtien(tourId);
+                thanhtien(tourId,0);
             }
         });
         bookTourBinding.btnBack.setOnClickListener(new View.OnClickListener() {
@@ -114,8 +117,25 @@ public class BookTourActivity extends AppCompatActivity {
                 bundle.putString("ngayDat",bookTourBinding.tvNgayDi.getText().toString());
                 bundle.putString("createdAt",todayAsString);
                 bundle.putString("img",img);
+                bundle.putString("txtgia","Thành tiền");
                 intent.putExtra("package",bundle);
                 startActivity(intent);
+            }
+        });
+        bookTourBinding.btnApply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                VoucherDAO voucherDAO = new VoucherDAO();
+                List<VoucherModel> voucherModels = voucherDAO.getAllVouchers();
+                String code = bookTourBinding.edtMaGiamGia.getText().toString();
+                float discount = 0;
+                for (VoucherModel voucherModel : voucherModels) {
+                    if (voucherModel.getVoucherCode().equals(code)) {
+                        discount = voucherModel.getVoucherDiscount();
+                        break;
+                    }
+                }
+                thanhtien(tourId,discount);
             }
         });
     }
@@ -134,14 +154,14 @@ public class BookTourActivity extends AppCompatActivity {
         bookTourBinding.tvMoTa.setText(bookTourDAO.getInformationTour(tourId).getDescription());
         Glide.with(this).load(bookTourDAO.getInformationTour(tourId).getImage()).into(bookTourBinding.imgTour);
     }
-    public void thanhtien(int tourId)
+    public void thanhtien(int tourId,float disc)
     {
         BookTourDAO bookTourDAO = new BookTourDAO();
         int quantityAdults = Integer.parseInt(bookTourBinding.tvQuantityAdults.getText().toString());
         int quantityChilds = Integer.parseInt(bookTourBinding.tvQuantityChilds.getText().toString());
         float price_adults = bookTourDAO.getInforPrice(tourId).getAdultPrice();
         float price_childs = bookTourDAO.getInforPrice(tourId).getChildPrice();
-        long total = (long)(quantityAdults * price_adults + quantityChilds * price_childs);
+        long total = (long)((quantityAdults * price_adults + quantityChilds * price_childs)-((quantityAdults * price_adults + quantityChilds * price_childs)*disc));
         bookTourBinding.tvThanhTien.setText(String.valueOf(total));
         if(checkPrice(Long.parseLong(bookTourBinding.tvThanhTien.getText().toString())))
         {
