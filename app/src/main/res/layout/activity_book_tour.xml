@@ -350,7 +350,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:backgroundTint="@color/blue"
-            android:text="Thanh toán"
+            android:text="Đặt ngay"
             app:backgroundTint="@color/blue"
             android:background="@drawable/button_background_blue"
             android:textStyle="bold">

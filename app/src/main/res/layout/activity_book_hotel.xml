@@ -159,7 +159,7 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_marginTop="2dp"
-                            android:text="1"
+                            android:text="0"
                             android:textAlignment="center"
                             android:textSize="12sp"></TextView>
 
@@ -194,7 +194,7 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_marginTop="2dp"
-                            android:text="1"
+                            android:text="0"
                             android:textAlignment="center"
                             android:textSize="12sp"></TextView>
 
@@ -380,7 +380,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:backgroundTint="@color/blue"
-            android:text="Thanh toán"
+            android:text="Đặt ngay"
             app:backgroundTint="@color/blue"
             android:background="@drawable/button_background_blue"
             android:textStyle="bold">

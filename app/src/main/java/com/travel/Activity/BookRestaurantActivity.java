@@ -97,6 +97,12 @@ public class BookRestaurantActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        bookRestaurantBinding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
     public void loadUser(int userId)
     {

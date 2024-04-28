@@ -90,6 +90,12 @@ public class BookTourActivity extends AppCompatActivity {
                 thanhtien(tourId);
             }
         });
+        bookTourBinding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         bookTourBinding.btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,7 +143,7 @@ public class BookTourActivity extends AppCompatActivity {
         float price_childs = bookTourDAO.getInforPrice(tourId).getChildPrice();
         long total = (long)(quantityAdults * price_adults + quantityChilds * price_childs);
         bookTourBinding.tvThanhTien.setText(String.valueOf(total));
-        if(checkPrice(Float.parseFloat(bookTourBinding.tvThanhTien.getText().toString())))
+        if(checkPrice(Long.parseLong(bookTourBinding.tvThanhTien.getText().toString())))
         {
             bookTourBinding.btnThanhToan.setEnabled(true);
         }
