@@ -188,11 +188,11 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
                 } else if (id == R.id.navigation_favorite) {
                     intent = new Intent(MapsActivity2.this, FavoriteActivity.class);
                 } else if (id == R.id.navigation_map) {
-                    return true;
+                    intent = new Intent(MapsActivity2.this, DestinationActivity.class);
                 } else if (id == R.id.navigation_translate) {
-                    //intent = new Intent(HomeActivity.this, A.class);
+                    return true;
                 } else if (id == R.id.navigation_profile) {
-                    intent = new Intent(MapsActivity2.this, PersonalInforActivity.class);
+                    intent = new Intent(MapsActivity2.this, AccountActivity.class);
                 }
                 if (intent != null) {
                     startActivity(intent);

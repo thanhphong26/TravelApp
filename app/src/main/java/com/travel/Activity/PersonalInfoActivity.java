@@ -11,9 +11,11 @@ import android.os.UserHandle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -21,15 +23,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.travel.App;
 import com.travel.Database.UserDAO;
 import com.travel.Model.UserModel;
 import com.travel.R;
 import com.travel.Utils.GooogleCloudStorageHelper;
+import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityPersonalInfoBinding;
 
 import java.io.ByteArrayOutputStream;
@@ -48,6 +53,8 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
     UserDAO userDAO = new UserDAO();
     UserModel user = user = userDAO.getUser(1);
     Calendar myCalendar = Calendar.getInstance();
+    UserModel userModel;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +62,8 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
         binding = ActivityPersonalInfoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         cloudStorageHelper = new GooogleCloudStorageHelper();
+        userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
+        this.handleBottomNavigation();
 
         binding.editAvt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,6 +112,12 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
                 updateAddress();
             }
         });
+        binding.imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     public void hideEditText() {
@@ -143,7 +158,7 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
     }
 
     private void saveImageUrlToDatabase(String imageUrl) {
-        user.setUserId(1);
+        user.setUserId(userModel.getUserId());
         user.setAvatar(imageUrl);
         Glide.with(this).load(user.getAvatar()).error(R.drawable.profile_user).into(binding.editAvt);
         userDAO.updateImageProfile(user);
@@ -159,9 +174,13 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
 
     public void setUser(UserModel user) {
         binding.name.setText(user.getUsername());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String dobString = dateFormat.format(user.getDob());
-        binding.dob.setText(dobString);
+        if (user.getDob() != null) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String dobString = dateFormat.format(user.getDob());
+            binding.dob.setText(dobString);
+        } else {
+            binding.dob.setText("");
+        }
         binding.pw.setText(user.getPassword());
         binding.email.setText(user.getEmail());
         binding.phoneNum.setText(user.getPhoneNumber());
@@ -188,7 +207,7 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
                 dialog.dismiss();
             }
         });
-
+        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -204,8 +223,13 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
         EditText edtDob = dialog.findViewById(R.id.edtDob);
         Button btnLuu = dialog.findViewById(R.id.btnLuu);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String dobString = dateFormat.format(user.getDob());
-        edtDob.setText(dobString);
+
+        if (user.getDob() != null) {
+            String dobString = dateFormat.format(user.getDob());
+            edtDob.setText(dobString);
+        } else {
+            edtDob.setText(dateFormat.format(Calendar.getInstance().getTime()));
+        }
         ImageView imgCalendar=dialog.findViewById(R.id.calendar);
         DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -244,7 +268,6 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
                 dialog.dismiss();
             }
         });
-
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -259,7 +282,6 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
         EditText edtPassword = dialog.findViewById(R.id.edtPassword);
         EditText edtPasswordAgain = dialog.findViewById(R.id.edtPasswordAgain);
         Button btnLuu = dialog.findViewById(R.id.btnLuu);
-        // Lắng nghe sự kiện khi giá trị của edtPassword và edtPasswordAgain thay đổi
         TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -294,6 +316,7 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
                 dialog.dismiss();
             }
         });
+        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -339,7 +362,7 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
                 dialog.dismiss();
             }
         });
-
+        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -383,13 +406,13 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
             @Override
             public void onClick(View v) {
                 String newPhoneNumber = edtPhoneNumber.getText().toString();
-                user.setPhoneNumber(    newPhoneNumber);
+                user.setPhoneNumber(newPhoneNumber);
                 userDAO.updatePhoneNumber(user);
                 setUser(user);
                 dialog.dismiss();
             }
         });
-
+        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -438,12 +461,40 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
                 dialog.dismiss();
             }
         });
-
+        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
+    }
+    private void handleBottomNavigation() {
+        binding.navigation.setItemIconTintList(null);
+        binding.navigation.setSelectedItemId(R.id.navigation_profile);
+        binding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent = null;
+                int id = item.getItemId();
+                if (id == R.id.navigation_home) {
+                    intent = new Intent(PersonalInfoActivity.this, HomeActivity.class);
+                } else if (id == R.id.navigation_favorite) {
+                    intent = new Intent(PersonalInfoActivity.this, FavoriteActivity.class);
+                } else if (id == R.id.navigation_map) {
+                    intent = new Intent(PersonalInfoActivity.this, DestinationActivity.class);
+                }else if (id == R.id.navigation_translate) {
+                    intent = new Intent(PersonalInfoActivity.this, MapsActivity2.class);
+                }
+                else if (id == R.id.navigation_profile) {
+                    return true;
+                }
+                if (intent != null) {
+                    startActivity(intent);
+                    finish();
+                }
+                return true;
+            }
+        });
     }
 }
 

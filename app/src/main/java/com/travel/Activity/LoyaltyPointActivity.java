@@ -14,6 +14,7 @@ import com.travel.Model.HotelModel;
 import com.travel.Model.LoyaltyPointModel;
 import com.travel.Model.UserModel;
 import com.travel.R;
+import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityLoyaltyPointBinding;
 import com.travel.databinding.ActivityPersonalInfoBinding;
 import com.travel.databinding.HistoryPointsBinding;
@@ -28,14 +29,14 @@ public class LoyaltyPointActivity extends AppCompatActivity {
     LoyaltyPointModel loyaltyPoint = new LoyaltyPointModel();
     int totalPoint;
     List<LoyaltyPointModel> loyaltyPointModels;
-
+    UserModel userModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLoyaltyPointBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        //int userId=getIntent().getIntExtra("userId", 0);
-        int userId = 2;
+        userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
+        int userId = userModel.getUserId();
         this.displayTotalPoint(userId);
         this.setupLayoutRecyclerView();
         this.displayHistoryPoints(userId);
