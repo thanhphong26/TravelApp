@@ -93,6 +93,8 @@ public class BookRestaurantActivity extends AppCompatActivity {
                 bundle.putString("ten",bookRestaurantBinding.tvTenRestaurant.getText().toString());
                 bundle.putString("moTa",bookRestaurantBinding.tvMoTa.getText().toString());
                 bundle.putString("img",img);
+                bundle.putString("txtgia","Giá từ");
+                bundle.putLong("total",Long.parseLong(bookRestaurantBinding.tvThanhTien.getText().toString()));
                 intent.putExtra("package",bundle);
                 startActivity(intent);
             }
@@ -117,7 +119,8 @@ public class BookRestaurantActivity extends AppCompatActivity {
         bookRestaurantDAO = new BookRestaurantDAO();
         bookRestaurantBinding.tvTenRestaurant.setText(bookRestaurantDAO.getInfor(restaurantId).getName());
         bookRestaurantBinding.tvMoTa.setText(bookRestaurantDAO.getInfor(restaurantId).getDescription());
-
+        long price = (long) bookRestaurantDAO.getInfor(restaurantId).getPrice();
+        bookRestaurantBinding.tvThanhTien.setText(String.valueOf(price));
     }
     public boolean checkPrice(float price){
         if(price>0.0){

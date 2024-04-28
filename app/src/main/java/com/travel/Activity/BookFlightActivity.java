@@ -18,11 +18,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.travel.Database.BookFlightDAO;
 import com.travel.Database.DatabaseHelper;
+import com.travel.Database.VoucherDAO;
 import com.travel.Model.BookFlightModel;
 import com.travel.Model.DestinationModel;
 import com.travel.Model.FlightModel;
 import com.travel.Model.TypeOfFlightModel;
 import com.travel.Model.UserModel;
+import com.travel.Model.VoucherModel;
 import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityBookFlightBinding;
 
@@ -33,6 +35,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class BookFlightActivity extends AppCompatActivity {
@@ -117,6 +120,7 @@ public class BookFlightActivity extends AppCompatActivity {
                 bundle.putString("soDienThoai",bookFlightBinding.edtSoDienThoai.getText().toString());
                 bundle.putString("ten",bookFlightBinding.tvTenFlight.getText().toString());
                 bundle.putString("moTa",bookFlightBinding.tvMoTa.getText().toString());
+                bundle.putString("txtgia","Thành tiền");
                 intent.putExtra("package",bundle);
                 startActivity(intent);
             }
@@ -153,10 +157,18 @@ public class BookFlightActivity extends AppCompatActivity {
     }
     public void thanhtien(int flightId)
     {
+        VoucherDAO voucherDAO = new VoucherDAO();
+        List <VoucherModel> voucherModel = voucherDAO.getAllVouchers();
+        float disc = 0;
+        for (VoucherModel voucher : voucherModel) {
+            if (voucher.getVoucherCode().equals(bookFlightBinding.edtMaGiamGia.getText().toString())) {
+                disc = voucher.getVoucherDiscount();
+            }
+        }
         int sl_treEm = Integer.parseInt(bookFlightBinding.tvQuantityChilds.getText().toString());
         int sl_nguoiLon = Integer.parseInt(bookFlightBinding.tvQuantityAdults.getText().toString());
         long gia = (long) bookFlightDAO.getInfor(flightId).getPrice();
-        long tongtien = (long)(sl_nguoiLon * gia + sl_treEm * gia );
+        long tongtien = (long)((sl_nguoiLon * gia + sl_treEm * gia)-((sl_nguoiLon * gia + sl_treEm * gia)*disc));
         bookFlightBinding.tvThanhTien.setText(String.valueOf(tongtien));
         if(checkPrice(Float.parseFloat(bookFlightBinding.tvThanhTien.getText().toString())))
         {

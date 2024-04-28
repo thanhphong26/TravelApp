@@ -61,6 +61,7 @@ public class CheckoutActivity extends AppCompatActivity {
         checkoutBinding.edtEmail.setText(bundle.getString("email"));
         checkoutBinding.edtSoDienThoai.setText(bundle.getString("soDienThoai"));
         checkoutBinding.tvTongTien.setText(String.valueOf(bundle.getLong("total")));
+        checkoutBinding.GiaTu.setText(bundle.getString("txtgia"));
         checkoutBinding.btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

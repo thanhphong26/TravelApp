@@ -134,17 +134,36 @@
                                 android:textSize="10sp">
                             </TextView>
                         </TableRow>
+                        <TableRow>
+
+                        </TableRow>
                     </TableLayout>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="right"
-                        android:layout_marginRight="10dp"
-                        android:text="2.500.000 VND"
-                        android:textSize="13sp"
-                        android:id="@+id/tvThanhTien"
-                        android:textStyle="bold">
-                    </TextView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="180dp"
+                            android:text="Tổng tiền"
+                            android:textSize="12sp"
+                            android:id="@+id/GiaTu"
+                            android:textStyle="italic">
+                        </TextView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+
+                            android:layout_marginRight="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:text="2.500.000 VND"
+                            android:textSize="13sp"
+                            android:id="@+id/tvThanhTien"
+                            android:textStyle="bold">
+                        </TextView>
+
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -264,50 +283,14 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:background="@drawable/background_form_checkout"
-                    android:text="Điền yêu cầu thêm vào đây"
+                    android:hint="Điền yêu cầu thêm vào đây"
                     android:gravity="center_horizontal"
                     android:textColor="#B1A9A9"
                     android:id="@+id/tvYeuCau"
                     android:textSize="10sp">
                 </EditText>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/input_search_background"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="159dp"
-                            android:layout_height="wrap_content"
-                            android:text="Phương thức thanh toán "
-                            android:textSize="13sp"
-                            android:layout_marginLeft="5dp"
-                            android:textStyle="bold"></TextView>
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginLeft="90dp"
-                            android:backgroundTint="@color/white"
-                            android:gravity="center"
-                            android:text="Chọn"
-                            android:textColor="@color/blue" />
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="#DAD6D6"></View>
-                <include layout="@layout/payment_methods"></include>
-            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
     <LinearLayout
@@ -327,7 +310,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
-                android:text="2.000.000 VND"
+                android:text=""
                 android:textSize="20sp"
                 android:textStyle="bold"></TextView>
         </LinearLayout>

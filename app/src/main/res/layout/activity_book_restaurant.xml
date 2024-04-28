@@ -324,7 +324,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:textSize="13sp"
-                android:text="Thành tiền"
+                android:text="Giá từ"
                 android:textStyle="bold"></TextView>
             <TextView
                 android:id="@+id/tvThanhTien"
