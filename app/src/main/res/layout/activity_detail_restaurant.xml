@@ -33,7 +33,7 @@
                     android:layout_height="292dp"
                     android:scaleType="centerCrop"
                     app:layout_collapseMode="parallax"
-                    app:srcCompat="@drawable/restaurant" />
+                    app:srcCompat="@drawable/restaurant1" />
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
