@@ -21,7 +21,7 @@
     <item
         android:id="@+id/navigation_translate"
         android:enabled="true"
-        android:icon="@drawable/icon_translate"
+        android:icon="@drawable/icon_destination"
         android:title="" />
 
     <item

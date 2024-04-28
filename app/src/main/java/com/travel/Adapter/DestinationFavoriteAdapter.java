@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.travel.Activity.DetailDestinationActivity;
 import com.travel.Database.WishlistDAO;
 import com.travel.Model.DestinationDetailModel;
@@ -27,13 +28,13 @@ import com.travel.Utils.SnackBarHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DestinationFavoriteAdapter<T> extends RecyclerView.Adapter<DestinationFavoriteAdapter.DestinationFavoriteViewHolder> {
-    private List<T> listItem;
+public class DestinationFavoriteAdapter extends RecyclerView.Adapter<DestinationFavoriteAdapter.DestinationFavoriteViewHolder> {
+    private List<DestinationDetailModel> listItem;
     private Context context;
     WishlistDAO wishlistDAO;
     UserModel currentUser = SharePreferencesHelper.getInstance().get(Constants.USER_SHARE_PREFERENCES, UserModel.class);
 
-    public DestinationFavoriteAdapter(ArrayList<T> listItem, Context context) {
+    public DestinationFavoriteAdapter(ArrayList listItem, Context context) {
         this.listItem = listItem;
         this.context = context;
         this.wishlistDAO = new WishlistDAO(context);
@@ -48,15 +49,13 @@ public class DestinationFavoriteAdapter<T> extends RecyclerView.Adapter<Destinat
 
     @Override
     public void onBindViewHolder(@NonNull DestinationFavoriteAdapter.DestinationFavoriteViewHolder holder, int position) {
-        T item = listItem.get(position);
-        if (item instanceof DestinationDetailModel){
-            bindDestinationModel(holder, (DestinationDetailModel) item);
-        }
+        DestinationDetailModel item = listItem.get(position);
+        bindDestinationModel(holder, item);
     }
 
     private void bindDestinationModel(DestinationFavoriteViewHolder holder, DestinationDetailModel item) {
         holder.name.setText(item.getName());
-        Glide.with(context).load(item.getImage()).error(R.drawable.bg_test_hn).into(holder.image);
+        Picasso.get().load(item.getImage()).error(R.drawable.default_image).into(holder.image);
         holder.rating.setText(String.valueOf(item.getRating()));
         holder.description.setText(item.getDescription());
         setHeartColor(holder.imgLove, wishlistDAO.checkFavoriteDestination(item.getDestinationId(), currentUser.getUserId()));

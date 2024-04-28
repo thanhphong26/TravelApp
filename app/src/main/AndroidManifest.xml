@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
-        tools:ignore="CoarseFineLocation" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
     <application
+        android:usesCleartextTraffic="true"
         android:name=".App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,9 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TravelApp"
         tools:targetApi="31">
-        <activity
-            android:name=".Activity.VerifyOTPActivity"
-            android:exported="false" />
+
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -34,6 +34,13 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBr56Z1bhDkcOVxUyIC-5J7YARzOzjSrHk" />
 
+        <activity
+            android:name=".Activity.MapsActivity2"
+            android:exported="false"
+            android:label="@string/title_activity_maps2" />
+        <activity
+            android:name=".Activity.VerifyOTPActivity"
+            android:exported="false" />
         <activity
             android:name=".Activity.MapsActivity"
             android:exported="false"
@@ -66,7 +73,7 @@
             android:name=".Activity.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.PersonalInforActivity"
+            android:name=".Activity.PersonalInfoActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.HomeActivity"
@@ -88,11 +95,17 @@
         <activity
             android:name=".Activity.RestaurantActivity"
             android:exported="false" />
+        <activity android:name=".Activity.LoyaltyPointActivity"
+            android:exported="false" />
         <activity
             android:name=".Activity.DestinationActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.SearchActivity"
+            android:exported="false" />
+        <activity android:name=".Activity.VoucherActivity"
+            android:exported="false" />
+        <activity android:name=".Activity.MyRatingActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.FavoriteActivity"
@@ -108,9 +121,6 @@
             android:exported="false" />
         <activity
             android:name=".Activity.BookFlightActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.MyRatingActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.HistoryActivity"

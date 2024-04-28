@@ -20,11 +20,11 @@ import com.travel.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DestinationCommonAdapter<T> extends RecyclerView.Adapter<DestinationCommonAdapter.DestinationCommonViewHolder> {
-    private List<T> listItem;
+public class DestinationCommonAdapter extends RecyclerView.Adapter<DestinationCommonAdapter.DestinationCommonViewHolder> {
+    private List<DestinationDetailModel> listItem;
     private Context context;
 
-    public DestinationCommonAdapter(ArrayList<T> listItem, Context context) {
+    public DestinationCommonAdapter(ArrayList listItem, Context context) {
         this.listItem = listItem;
         this.context = context;
     }
@@ -38,15 +38,13 @@ public class DestinationCommonAdapter<T> extends RecyclerView.Adapter<Destinatio
 
     @Override
     public void onBindViewHolder(@NonNull DestinationCommonAdapter.DestinationCommonViewHolder holder, int position) {
-        T item = listItem.get(position);
-        if (item instanceof DestinationDetailModel){
-            bindDestinationModel(holder, (DestinationDetailModel) item);
-        }
+        DestinationDetailModel item = listItem.get(position);
+        bindDestinationModel(holder, item);
     }
 
     private void bindDestinationModel(DestinationCommonViewHolder holder, DestinationDetailModel item) {
         holder.name.setText(item.getName());
-        Glide.with(context).load(item.getImage()).error(R.drawable.bg_test_hg).into(holder.image);
+        Glide.with(context).load(item.getImage()).error(R.drawable.default_image).into(holder.image);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

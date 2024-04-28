@@ -15,6 +15,8 @@ import com.travel.Model.RestaurantBookingModel;
 import com.travel.Model.RestaurantBookingReviewModel;
 import com.travel.Model.TourBookingModel;
 import com.travel.Model.TourBookingReviewModel;
+import com.travel.Model.UserModel;
+import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityMyHistoryBinding;
 
 import java.util.List;
@@ -27,13 +29,15 @@ public class HistoryActivity extends AppCompatActivity {
     HotelBookingDAO hotelDAO = new HotelBookingDAO();
     List<HotelBookingModel> hotelBookingModels;
     List<RestaurantBookingModel> restaurantBookingModels;
-    List<TourBookingModel> tourBookingModels;
+
+    UserModel userModel;
     // write onCreate method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMyHistoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
         this.setupLayoutRecyclerView();
         this.displayTourBooking();
         this.displayRestaurantBooking();
@@ -41,18 +45,18 @@ public class HistoryActivity extends AppCompatActivity {
     }
     // create displayTourBooking method
     public void displayTourBooking() {
-        List<TourBookingReviewModel> tourBookingModels = tourBookingDAO.getAllTourBookingsWithReview(2);
+        List<TourBookingReviewModel> tourBookingModels = tourBookingDAO.getAllTourBookingsWithReview(userModel.getUserId());
         HistoryCardAdapter<TourBookingReviewModel> historyCardAdapter = new HistoryCardAdapter<>(tourBookingModels, this);
         binding.recyclerViewHistoryTour.setAdapter(historyCardAdapter);
     }
     // create displayRestaurantBooking method
     public void displayRestaurantBooking() {
-        List<RestaurantBookingReviewModel> restaurantBookingModels = restaurantDAO.getAllRestaurantBookingsWithReview(2);
+        List<RestaurantBookingReviewModel> restaurantBookingModels = restaurantDAO.getAllRestaurantBookingsWithReview(userModel.getUserId());
         HistoryCardAdapter<RestaurantBookingReviewModel> historyCardAdapter = new HistoryCardAdapter<>(restaurantBookingModels, this);
         binding.recyclerViewHistoryRestaurant.setAdapter(historyCardAdapter);
     }
     public void displayHotelBooking(){
-        List<HotelBookingReviewModel> hotelBookingModels = hotelDAO.getAllHotelBookingsWithReview(2);
+        List<HotelBookingReviewModel> hotelBookingModels = hotelDAO.getAllHotelBookingsWithReview(userModel.getUserId());
         HistoryCardAdapter<HotelBookingReviewModel> historyCardAdapter1 = new HistoryCardAdapter<>(hotelBookingModels, this);
         binding.recyclerViewHistoryHotel.setAdapter(historyCardAdapter1);
 

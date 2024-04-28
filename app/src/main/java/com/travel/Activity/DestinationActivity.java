@@ -72,13 +72,13 @@ public class DestinationActivity extends AppCompatActivity {
     }
 
     private void handleListDestination() {
-        DestinationFavoriteAdapter<DestinationDetailModel> adapter = new DestinationFavoriteAdapter<DestinationDetailModel>(destinationDetails, this);
+        DestinationFavoriteAdapter adapter = new DestinationFavoriteAdapter(destinationDetails, this);
         destinationBinding.rvFavorite.setAdapter(adapter);
     }
 
 
     private void handleListCommonDestination() {
-        DestinationCommonAdapter<DestinationDetailModel> adapter = new DestinationCommonAdapter<DestinationDetailModel>(commonDestinations, this);
+        DestinationCommonAdapter adapter = new DestinationCommonAdapter(commonDestinations, this);
         destinationBinding.rvCity.setAdapter(adapter);
     }
 
@@ -115,10 +115,10 @@ public class DestinationActivity extends AppCompatActivity {
                 } else if (id == R.id.navigation_map) {
                     return true;
                 }else if (id == R.id.navigation_translate) {
-//                    intent = new Intent(HomeActivity.this, A.class);
+                    intent = new Intent(DestinationActivity.this, MapsActivity2.class);
                 }
                 else if (id == R.id.navigation_profile) {
-                    intent = new Intent(DestinationActivity.this, PersonalInforActivity.class);
+                    intent = new Intent(DestinationActivity.this, AccountActivity.class);
                 }
                 if (intent != null) {
                     startActivity(intent);
