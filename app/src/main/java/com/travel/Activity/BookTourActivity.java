@@ -117,6 +117,7 @@ public class BookTourActivity extends AppCompatActivity {
                 bundle.putString("ngayDat",bookTourBinding.tvNgayDi.getText().toString());
                 bundle.putString("createdAt",todayAsString);
                 bundle.putString("img",img);
+                bundle.putInt("id",4);
                 bundle.putString("txtgia","Thành tiền");
                 intent.putExtra("package",bundle);
                 startActivity(intent);
