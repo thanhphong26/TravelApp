@@ -41,31 +41,30 @@
                     android:id="@+id/txtUserName"
                     android:layout_width="222dp"
                     android:layout_height="25dp"
-                    android:fontFamily="@font/montserrat_semibold"
+                    android:textSize="18sp"
                     android:text="Gipboi" />
 
                 <LinearLayout
-                    android:layout_width="95dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/textView12"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/montserrat_light"
                         android:gravity="center|left"
-                        android:text="Thông tin của tôi "
-                        android:textSize="10sp" />
+                        android:text="Thông tin của tôi"
+                        android:textSize="14sp"
+                        android:layout_marginEnd="8dp" />
 
                     <ImageView
                         android:id="@+id/imageView11"
                         android:layout_width="17dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/right_arrow" />
+                        android:layout_height="17dp"
+                        android:layout_gravity="left"
+                        android:src="@drawable/right_arrow" />
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -107,7 +106,6 @@
                         android:id="@+id/profile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_light"
                         android:text="Thông tin tài khoản"
                         android:textSize="16sp" />
 
@@ -115,7 +113,6 @@
                         android:id="@+id/more_profile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_extralight_italic"
                         android:text="Xem hồ sơ của tôi"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -165,7 +162,6 @@
                         android:id="@+id/discount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_light"
                         android:text="Mã giảm giá của tôi"
                         android:textSize="16sp" />
 
@@ -173,7 +169,6 @@
                         android:id="@+id/more_discount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_extralight_italic"
                         android:text="Xem mã giảm giá"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -223,7 +218,6 @@
                         android:id="@+id/loyalty_point"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_light"
                         android:text="Tích điểm"
                         android:textSize="16sp" />
 
@@ -231,7 +225,6 @@
                         android:id="@+id/more_loyalty_point"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_extralight_italic"
                         android:text="Xem điểm của tôi"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -282,7 +275,6 @@
                         android:id="@+id/history_oder"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_light"
                         android:text="Lịch sử đặt"
                         android:textSize="16sp" />
 
@@ -290,7 +282,6 @@
                         android:id="@+id/more_history_oder"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_extralight_italic"
                         android:text="Xem lịch sử đã đặt"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -342,7 +333,6 @@
                         android:id="@+id/rating"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_light"
                         android:text="Đánh giá"
                         android:textSize="16sp" />
 
@@ -350,7 +340,6 @@
                         android:id="@+id/more_rating"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_extralight_italic"
                         android:text="Xem lịch sử đánh giá"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -411,7 +400,6 @@
                         android:id="@+id/policy"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_light"
                         android:text="Điều khoản và Chính sách"
                         android:textSize="16sp" />
 
@@ -464,7 +452,6 @@
                         android:id="@+id/signout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_light"
                         android:text="Đăng xuất"
                         android:textSize="16sp" />
                 </LinearLayout>

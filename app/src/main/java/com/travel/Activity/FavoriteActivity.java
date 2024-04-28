@@ -128,7 +128,7 @@ public class FavoriteActivity extends AppCompatActivity {
         } else {
             favoriteBinding.titleCity.setVisibility(View.VISIBLE);
         }
-        DestinationFavoriteAdapter<DestinationDetailModel> adapter = new DestinationFavoriteAdapter<DestinationDetailModel>(matchedDestinations, this);
+        DestinationFavoriteAdapter adapter = new DestinationFavoriteAdapter(matchedDestinations, this);
         favoriteBinding.cityRecycleView.setAdapter(adapter);
     }
 
@@ -147,10 +147,10 @@ public class FavoriteActivity extends AppCompatActivity {
                 } else if (id == R.id.navigation_map) {
                     intent = new Intent(FavoriteActivity.this, DestinationActivity.class);
                 }else if (id == R.id.navigation_translate) {
-//                    intent = new Intent(HomeActivity.this, A.class);
+                    intent = new Intent(FavoriteActivity.this, MapsActivity2.class);
                 }
                 else if (id == R.id.navigation_profile) {
-                    intent = new Intent(FavoriteActivity.this, PersonalInforActivity.class);
+                    intent = new Intent(FavoriteActivity.this, AccountActivity.class);
                 }
                 if (intent != null) {
                     startActivity(intent);

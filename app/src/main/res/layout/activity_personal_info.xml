@@ -45,8 +45,7 @@
                         android:id="@+id/textView16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:text="Địa điểm"
+                        android:text="Thông tin cá nhân"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -85,10 +84,9 @@
                         <TextView
                             android:id="@+id/avt_txt"
                             android:layout_width="300dp"
+                            android:textStyle="bold"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_light"
-                            android:text="Ảnh đại diện"
-                            android:textSize="12sp" />
+                            android:text="Ảnh đại diện" />
 
                         <ImageView
                             android:id="@+id/edit_avt_img"
@@ -110,7 +108,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/avt"
+                        android:src="@drawable/avatar"
                         app:shapeAppearanceOverlay="@style/circular" />
 
                     <LinearLayout
@@ -139,9 +137,8 @@
                             android:id="@+id/name_txt"
                             android:layout_width="300dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_light"
-                            android:text="Tên của bạn"
-                            android:textSize="12sp" />
+                            android:textStyle="bold"
+                            android:text="Tên của bạn"/>
 
                         <ImageView
                             android:id="@+id/edit_name_img"
@@ -179,9 +176,8 @@
                             android:id="@+id/dob_txt"
                             android:layout_width="300dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_light"
-                            android:text="Ngày sinh"
-                            android:textSize="12sp" />
+                            android:textStyle="bold"
+                            android:text="Ngày sinh" />
 
                         <ImageView
                             android:id="@+id/edit_dob_img"
@@ -219,9 +215,8 @@
                             android:id="@+id/pw_txt"
                             android:layout_width="300dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_light"
-                            android:text="Mật khẩu"
-                            android:textSize="12sp" />
+                            android:textStyle="bold"
+                            android:text="Mật khẩu"/>
 
                         <ImageView
                             android:id="@+id/edit_pw_img"
@@ -259,9 +254,8 @@
                             android:id="@+id/email_txt"
                             android:layout_width="300dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_light"
-                            android:text="Email của bạn"
-                            android:textSize="12sp" />
+                            android:textStyle="bold"
+                            android:text="Email của bạn"/>
 
                         <ImageView
                             android:id="@+id/edit_email_img"
@@ -299,9 +293,8 @@
                             android:id="@+id/sdt_txt"
                             android:layout_width="300dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_light"
-                            android:text="Số điện thoại liên lạc"
-                            android:textSize="12sp" />
+                            android:textStyle="bold"
+                            android:text="Số điện thoại liên lạc"/>
 
                         <ImageView
                             android:id="@+id/edit_phone_img"
@@ -339,9 +332,8 @@
                             android:id="@+id/area_txt"
                             android:layout_width="300dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_light"
-                            android:text="Địa chỉ"
-                            android:textSize="12sp" />
+                            android:textStyle="bold"
+                            android:text="Địa chỉ"/>
 
                         <ImageView
                             android:id="@+id/edit_area_img"
