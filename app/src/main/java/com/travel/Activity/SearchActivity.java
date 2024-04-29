@@ -27,6 +27,7 @@ import com.travel.Model.HotelModel;
 import com.travel.Model.RestaurantModel;
 import com.travel.Model.TourModel;
 import com.travel.R;
+import com.travel.Utils.Constants;
 import com.travel.Utils.NumberHelper;
 import com.travel.databinding.ActivitySearchBinding;
 import com.travel.databinding.HotelFavoriteCardBinding;
@@ -70,14 +71,12 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void handleSearchGlobal(String query) {
-        //*TODO: Refactor later
-        int MAX_SIZE = 9999;
         searchBinding.searchDetail.setIconified(false);
         searchBinding.searchDetail.setQuery(query, false);
 
-        matchedHotels = hotelDAO.getAll(query, MAX_SIZE, 1);
-        matchedRestaurants = restaurantDAO.getAll(query, MAX_SIZE, 1);
-        matchedTours = tourDAO.getAll(query, MAX_SIZE, 1);
+        matchedHotels = hotelDAO.getAll(query, Constants.MAX_RECORD, 1);
+        matchedRestaurants = restaurantDAO.getAll(query, Constants.MAX_RECORD, 1);
+        matchedTours = tourDAO.getAll(query, Constants.MAX_RECORD, 1);
 
         //*INFO: load searched data to UI
         this.handleListTour();

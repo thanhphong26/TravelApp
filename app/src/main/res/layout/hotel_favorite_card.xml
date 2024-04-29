@@ -152,8 +152,6 @@
                 android:layout_height="wrap_content"
                 android:text="Địa chỉ bản đồ"
                 android:textColor="@color/red" />
-
-
         </LinearLayout>
 
 

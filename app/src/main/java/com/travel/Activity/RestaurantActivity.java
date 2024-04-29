@@ -16,19 +16,25 @@ import com.travel.Adapter.RestaurantCommonAdapter;
 import com.travel.Adapter.RestaurantFavoriteAdapter;
 import com.travel.Adapter.TourCommonAdapter;
 import com.travel.Adapter.TourFavoriteAdapter;
+import com.travel.Database.DestinationDAO;
 import com.travel.Database.RestaurantDAO;
+import com.travel.Model.DestinationModel;
 import com.travel.Model.RestaurantModel;
 import com.travel.Model.TourModel;
 import com.travel.R;
+import com.travel.Utils.Constants;
 import com.travel.databinding.ActivityRestaurantBinding;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class RestaurantActivity extends AppCompatActivity {
     ActivityRestaurantBinding restaurantBinding;
     ArrayList<RestaurantModel> restaurants = new ArrayList<RestaurantModel>();
     ArrayList<RestaurantModel> commonRestaurants = new ArrayList<RestaurantModel>();
     RestaurantDAO restaurantDAO = new RestaurantDAO();
+    DestinationDAO destinationDAO = new DestinationDAO();
+    int destinationId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +49,15 @@ public class RestaurantActivity extends AppCompatActivity {
     }
 
     public void initPage() {
-        commonRestaurants = restaurantDAO.getCommon(5);
-        restaurants = restaurantDAO.getAll("", 10, 0);
+        destinationId = getIntent().getIntExtra("destinationId", 0);
+        commonRestaurants = restaurantDAO.getCommon(Constants.COMMON_RECORD);
+        restaurants = restaurantDAO.getAll("", Constants.MAX_RECORD, 0);
+
+        if (destinationId != 0) {
+            DestinationModel destination = destinationDAO.getDestinationById(destinationId);
+            String title = restaurantBinding.title.getText().toString();
+            restaurantBinding.title.setText(title + " - " + destination.getName());
+        }
 
         this.handleListCommonRestaurant();
         this.handleListRestaurant();
@@ -56,8 +69,8 @@ public class RestaurantActivity extends AppCompatActivity {
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RestaurantActivity.this, HomeActivity.class);
-                startActivity(intent);
+                onBackPressed();
+                finish();
             }
         });
     }
@@ -73,14 +86,14 @@ public class RestaurantActivity extends AppCompatActivity {
         restaurantBinding.searchRestaurant.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                restaurants = restaurantDAO.getAll(query.trim(), 10, 0);
+                restaurants = restaurantDAO.getAll(query.trim(), Constants.MAX_RECORD, 0);
                 handleListRestaurant();
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                restaurants = restaurantDAO.getAll(newText.trim(), 10, 0);
+                restaurants = restaurantDAO.getAll(newText.trim(), Constants.MAX_RECORD, 0);
                 handleListRestaurant();
                 return false;
             }
@@ -88,11 +101,17 @@ public class RestaurantActivity extends AppCompatActivity {
     }
 
     public void handleListCommonRestaurant() {
+        if (destinationId != 0) {
+            commonRestaurants = commonRestaurants.stream().filter(restaurant -> restaurant.getDestination().getDestinationId() == destinationId).collect(Collectors.toCollection(ArrayList::new));
+        }
         RestaurantCommonAdapter<RestaurantModel> adapter = new RestaurantCommonAdapter<>(commonRestaurants, this);
         restaurantBinding.rvCommonRestaurant.setAdapter(adapter);
     }
 
     public void handleListRestaurant() {
+        if (destinationId != 0) {
+            restaurants = restaurants.stream().filter(restaurant -> restaurant.getDestination().getDestinationId() == destinationId).collect(Collectors.toCollection(ArrayList::new));
+        }
         RestaurantFavoriteAdapter<RestaurantModel> adapter = new RestaurantFavoriteAdapter<>(restaurants, this);
         restaurantBinding.rvRestaurant.setAdapter(adapter);
     }
@@ -111,10 +130,9 @@ public class RestaurantActivity extends AppCompatActivity {
                     intent = new Intent(RestaurantActivity.this, FavoriteActivity.class);
                 } else if (id == R.id.navigation_map) {
                     return true;
-                }else if (id == R.id.navigation_translate) {
+                } else if (id == R.id.navigation_translate) {
 //                    intent = new Intent(HomeActivity.this, A.class);
-                }
-                else if (id == R.id.navigation_profile) {
+                } else if (id == R.id.navigation_profile) {
                     intent = new Intent(RestaurantActivity.this, PersonalInforActivity.class);
                 }
                 if (intent != null) {
