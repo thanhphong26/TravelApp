@@ -153,6 +153,7 @@ public class BookHotelActivity extends AppCompatActivity {
                 bundle.putString("moTa",bookHotelBinding.tvMoTa.getText().toString());
                 bundle.putString("img",img);
                 bundle.putString("txtgia","Thành tiền");
+                bundle.putString("txtgiamgia",bookHotelBinding.tvGiaDuocGiam.getText().toString());
                 bundle.putInt("id",2);
                 intent.putExtra("package",bundle);
                 startActivity(intent);
@@ -167,6 +168,8 @@ public class BookHotelActivity extends AppCompatActivity {
                     if (bookHotelBinding.edtMaGiamGia.getText().toString().equals(voucherModel.getVoucherCode())) {
                         float disc = voucherModel.getVoucherDiscount();
                         thanhtien(hotelId,disc);
+                        long giam= (long) (disc*100);
+                        bookHotelBinding.tvGiaDuocGiam.setText("Giảm"+" "+giam+"%"+" do áp dụng mã giảm giá");
                     }
                 }
             }
