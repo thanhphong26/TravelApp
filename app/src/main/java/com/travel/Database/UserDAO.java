@@ -24,6 +24,10 @@ public class UserDAO {
         if (database != null) {
             try {
                 cursor = database.query("users", null, "user_id= ?", new String[]{String.valueOf(userId)}, null, null, null);
+
+                for (String name : cursor.getColumnNames()) {
+                    System.out.println(name);
+                }
                 if (cursor != null && cursor.moveToFirst()) {
                     user.setUserId(cursor.getInt(0));
                     user.setUsername(cursor.getString(1));
@@ -34,12 +38,18 @@ public class UserDAO {
                     user.setGender(cursor.getString(7));
                     user.setAddress(cursor.getString(8));
                     @SuppressLint("Range") String dobString = cursor.getString(cursor.getColumnIndex("date_of_birth"));
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    try {
-                        Date dob = dateFormat.parse(dobString);
-                        user.setDob(dob);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
+                    if (dobString != null) {
+                        try {
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            Date dob = dateFormat.parse(dobString);
+                            user.setDob(dob);
+                        } catch (ParseException e) {
+                            user.setDob(null);
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+                        user.setDob(null);
                     }
                 }
             } catch (SQLException e) {
