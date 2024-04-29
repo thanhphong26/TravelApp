@@ -40,7 +40,7 @@ public class MyRatingActivity extends AppCompatActivity {
     Object booking = null;
 
     UserModel currentUser = new UserModel();
-    int bookingId;
+    int bookingId, itemId;
     String reviewType;
 
     // write onCreate method
@@ -60,7 +60,7 @@ public class MyRatingActivity extends AppCompatActivity {
         binding.ratingButton.setOnClickListener(v -> {
             float rating = binding.ratingBar2.getRating();
             String comment = binding.review.getText().toString();
-            reviewDAO.addReview(bookingId, reviewType, currentUser.getUserId(), rating, comment);
+            reviewDAO.addReview(itemId, reviewType, currentUser.getUserId(), rating, comment);
             Intent intent = new Intent(MyRatingActivity.this, HistoryActivity.class);
             startActivity(intent);
             finish();
@@ -86,6 +86,7 @@ public class MyRatingActivity extends AppCompatActivity {
     private void setDefaultValue() {
         currentUser = SharePreferencesHelper.getInstance().get(Constants.USER_SHARE_PREFERENCES, UserModel.class);
         bookingId = getIntent().getIntExtra("bookingId", 0);
+        itemId = getIntent().getIntExtra("itemId", 0);
         reviewType = getIntent().getStringExtra("type");
     }
 

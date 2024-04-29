@@ -24,10 +24,6 @@ public class UserDAO {
         if (database != null) {
             try {
                 cursor = database.query("users", null, "user_id= ?", new String[]{String.valueOf(userId)}, null, null, null);
-
-                for (String name : cursor.getColumnNames()) {
-                    System.out.println(name);
-                }
                 if (cursor != null && cursor.moveToFirst()) {
                     user.setUserId(cursor.getInt(0));
                     user.setUsername(cursor.getString(1));

@@ -79,6 +79,10 @@
                     android:id="@+id/recyclerViewHistoryRestaurant"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewHistoryFlight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
