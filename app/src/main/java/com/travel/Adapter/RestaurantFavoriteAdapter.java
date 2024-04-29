@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.travel.Activity.BookRestaurantActivity;
 import com.travel.Activity.BookTourActivity;
 import com.travel.Activity.DetailRestaurantActivity;
+import com.travel.Activity.MapsActivity;
 import com.travel.Database.WishlistDAO;
 import com.travel.Model.RestaurantModel;
 import com.travel.Model.UserModel;
@@ -98,6 +99,17 @@ public class RestaurantFavoriteAdapter<T> extends RecyclerView.Adapter<Restauran
                 context.startActivity(intent);
             }
         });
+
+        holder.map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MapsActivity.class);
+                intent.putExtra("latitude", item.getLatitude());
+                intent.putExtra("longitude", item.getLongitude());
+                intent.putExtra("locationName", item.getName());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -107,7 +119,7 @@ public class RestaurantFavoriteAdapter<T> extends RecyclerView.Adapter<Restauran
 
     public class RestaurantFavoriteViewHolder extends RecyclerView.ViewHolder {
         ImageView image, imgLove;
-        TextView name, rating, price, address, description;
+        TextView name, rating, price, address, description, map;
         RatingBar ratingBar;
         Button btnBook;
 
@@ -121,6 +133,7 @@ public class RestaurantFavoriteAdapter<T> extends RecyclerView.Adapter<Restauran
             address = itemView.findViewById(R.id.restaurant_favorite_address);
             ratingBar = itemView.findViewById(R.id.restaurant_favorite_ratingBar);
             btnBook = itemView.findViewById(R.id.btnBooking);
+            map = itemView.findViewById(R.id.map);
         }
     }
 

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.travel.Activity.BookTourActivity;
 import com.travel.Activity.DetailTourActivity;
+import com.travel.Activity.MapsActivity;
 import com.travel.Database.WishlistDAO;
 import com.travel.Model.TourModel;
 import com.travel.Model.UserModel;
