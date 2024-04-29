@@ -150,9 +150,6 @@ public class DestinationDAO {
                 String query = "SELECT destinations.*, ROUND( COALESCE(MIN(hotels.price), 0) + COALESCE(MIN(tours.price), 0) + COALESCE(MIN(restaurant.price), 0) , 1) AS min_price, ROUND( ( COALESCE(AVG(tours.rating), 0) + COALESCE(AVG(hotels.rating), 0) + COALESCE(AVG(restaurant.rating), 0) ) / ( CASE WHEN COUNT(tours.rating) > 0 THEN 1 ELSE 0 END + CASE WHEN COUNT(hotels.rating) > 0 THEN 1 ELSE 0 END + CASE WHEN COUNT(restaurant.rating) > 0 THEN 1 ELSE 0 END ) , 1) AS rating FROM destinations LEFT JOIN tours ON destinations.destination_id = tours.destination_id LEFT JOIN hotels ON destinations.destination_id = hotels.destination_id LEFT JOIN restaurant ON destinations.destination_id = restaurant.destination_id WHERE destinations.destination_id = ? ;";
 
                 cursor = database.rawQuery(query, new String[]{String.valueOf(destinationId)});
-
-                System.out.println("cursor DESTINATION: " + cursor.getCount());
-
                 if (cursor.moveToFirst()) {
                     destination.setDestinationId(cursor.getInt(cursor.getColumnIndex("destination_id")));
                     destination.setName(cursor.getString(cursor.getColumnIndex("name")));

@@ -14,6 +14,7 @@ import com.travel.Model.UserModel;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -141,5 +142,38 @@ public class BookFlightDAO {
         databaseHelper.closeDatabase(database);
     }
 
+    @SuppressLint("Range")
+    public  List<BookFlightModel>  getAll(int userId) {
+        List<BookFlightModel> flightBookings = new ArrayList<>();
+        database = databaseHelper.openDatabase();
+        Cursor cursor=null;
+        if (database != null) {
+            try {
+                cursor = database.query("flight_bookings", null, "user_id=?", new String[]{String.valueOf(userId)}, null, null, null);
+                if (cursor.moveToFirst()) {
+                    do {
+                        BookFlightModel flightBooking = new BookFlightModel();
+                        flightBooking.setBookingId(cursor.getInt(cursor.getColumnIndex("booking_id")));
+                        flightBooking.setUser(getUser(cursor.getInt(cursor.getColumnIndex("user_id"))));
+                        flightBooking.setFlight(getInfor(cursor.getInt(cursor.getColumnIndex("flight_id"))));
+                        flightBooking.setTypeId(cursor.getInt(cursor.getColumnIndex("type_id")));
+                        flightBooking.setNumberOfAdults(cursor.getInt(cursor.getColumnIndex("number_of_adults")));
+                        flightBooking.setNumberOfChilds(cursor.getInt(cursor.getColumnIndex("number_of_childs")));
+                        flightBooking.setTotalPrice(cursor.getFloat(cursor.getColumnIndex("total_price")));
 
+                        flightBookings.add(flightBooking);
+                    } while (cursor.moveToNext());
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+                databaseHelper.closeDatabase(database);
+            }
+        }
+
+        return flightBookings;
+    }
 }

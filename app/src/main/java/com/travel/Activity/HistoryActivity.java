@@ -7,9 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.travel.Adapter.HistoryCardAdapter;
+import com.travel.Database.BookFlightDAO;
 import com.travel.Database.HotelBookingDAO;
 import com.travel.Database.RestaurantBookingDAO;
 import com.travel.Database.TourBookingDAO;
+import com.travel.Model.BookFlightModel;
 import com.travel.Model.HotelBookingModel;
 import com.travel.Model.HotelBookingReviewModel;
 import com.travel.Model.RestaurantBookingModel;
@@ -28,6 +30,7 @@ public class HistoryActivity extends AppCompatActivity {
     TourBookingDAO tourBookingDAO = new TourBookingDAO();
     RestaurantBookingDAO restaurantDAO = new RestaurantBookingDAO();
     HotelBookingDAO hotelDAO = new HotelBookingDAO();
+    BookFlightDAO flightBookingDAO = new BookFlightDAO();
 
     UserModel userModel;
     // write onCreate method
@@ -42,6 +45,7 @@ public class HistoryActivity extends AppCompatActivity {
         this.displayTourBooking();
         this.displayRestaurantBooking();
         this.displayHotelBooking();
+        this.displayFlightBooking();
     }
 
     private void initPage() {
@@ -66,18 +70,28 @@ public class HistoryActivity extends AppCompatActivity {
         HistoryCardAdapter<TourBookingReviewModel> historyCardAdapter = new HistoryCardAdapter<>(tourBookingModels, this);
         binding.recyclerViewHistoryTour.setAdapter(historyCardAdapter);
     }
+
     // create displayRestaurantBooking method
     public void displayRestaurantBooking() {
         List<RestaurantBookingReviewModel> restaurantBookingModels = restaurantDAO.getAllRestaurantBookingsWithReview(userModel.getUserId());
         HistoryCardAdapter<RestaurantBookingReviewModel> historyCardAdapter = new HistoryCardAdapter<>(restaurantBookingModels, this);
         binding.recyclerViewHistoryRestaurant.setAdapter(historyCardAdapter);
     }
+
+    // create displayHotelBooking method
     public void displayHotelBooking(){
         List<HotelBookingReviewModel> hotelBookingModels = hotelDAO.getAllHotelBookingsWithReview(userModel.getUserId());
         HistoryCardAdapter<HotelBookingReviewModel> historyCardAdapter1 = new HistoryCardAdapter<>(hotelBookingModels, this);
         binding.recyclerViewHistoryHotel.setAdapter(historyCardAdapter1);
-
     }
+
+    // create displayFlightBooking method
+    public void displayFlightBooking(){
+        List<BookFlightModel> flightBookingModels = flightBookingDAO.getAll(userModel.getUserId());
+        HistoryCardAdapter<BookFlightModel> historyCardAdapter = new HistoryCardAdapter<BookFlightModel>(flightBookingModels, this);
+        binding.recyclerViewHistoryFlight.setAdapter(historyCardAdapter);
+    }
+
     //create setupLayoutRecyclerView method
     private void setupLayoutRecyclerView() {
         LinearLayoutManager layoutManagerHistoryTour = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -86,5 +100,7 @@ public class HistoryActivity extends AppCompatActivity {
         binding.recyclerViewHistoryHotel.setLayoutManager(layoutManagerHistoryHotel);
         LinearLayoutManager layoutManagerHistoryRestaurant = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.recyclerViewHistoryRestaurant.setLayoutManager(layoutManagerHistoryRestaurant);
+        LinearLayoutManager layoutManagerHistoryFlight = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        binding.recyclerViewHistoryFlight.setLayoutManager(layoutManagerHistoryFlight);
     }
 }
