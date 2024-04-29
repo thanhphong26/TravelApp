@@ -124,6 +124,7 @@ public class BookFlightActivity extends AppCompatActivity {
                 bundle.putString("ten",bookFlightBinding.tvTenFlight.getText().toString());
                 bundle.putString("moTa",bookFlightBinding.tvMoTa.getText().toString());
                 bundle.putString("txtgia","Thành tiền");
+                bundle.putString("txtgiamgia",bookFlightBinding.tvGiaDuocGiam.getText().toString());
                 bundle.putString("img",img);
                 bundle.putInt("id",1);
                 intent.putExtra("package",bundle);
@@ -145,6 +146,8 @@ public class BookFlightActivity extends AppCompatActivity {
                     if (bookFlightBinding.edtMaGiamGia.getText().toString().equals(voucherModel.getVoucherCode())) {
                         float disc = voucherModel.getVoucherDiscount();
                         thanhtien(flightId,disc);
+                        long giam= (long) (disc*100);
+                        bookFlightBinding.tvGiaDuocGiam.setText("Giảm"+" "+giam+"%"+" do áp dụng mã giảm giá");
                     }
                 }
             }

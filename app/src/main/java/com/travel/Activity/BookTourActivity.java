@@ -119,6 +119,7 @@ public class BookTourActivity extends AppCompatActivity {
                 bundle.putString("img",img);
                 bundle.putInt("id",4);
                 bundle.putString("txtgia","Thành tiền");
+                bundle.putString("txtgiamgia",bookTourBinding.tvGiaDuocGiam.getText().toString());
                 intent.putExtra("package",bundle);
                 startActivity(intent);
             }
@@ -137,6 +138,8 @@ public class BookTourActivity extends AppCompatActivity {
                     }
                 }
                 thanhtien(tourId,discount);
+                long giam= (long) (discount*100);
+                bookTourBinding.tvGiaDuocGiam.setText("Giảm"+" "+giam+"%"+" do áp dụng mã giảm giá");
             }
         });
     }
