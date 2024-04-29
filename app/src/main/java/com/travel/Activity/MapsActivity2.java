@@ -178,6 +178,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
     private void handleBottomNavigation() {
         binding.navigation.setItemIconTintList(null);
+        binding.navigation.setSelectedItemId(R.id.navigation_translate);
         binding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

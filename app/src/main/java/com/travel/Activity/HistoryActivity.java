@@ -1,5 +1,6 @@
 package com.travel.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import com.travel.Model.RestaurantBookingReviewModel;
 import com.travel.Model.TourBookingModel;
 import com.travel.Model.TourBookingReviewModel;
 import com.travel.Model.UserModel;
+import com.travel.Utils.Constants;
 import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityMyHistoryBinding;
 
@@ -24,11 +26,8 @@ import java.util.List;
 public class HistoryActivity extends AppCompatActivity {
     ActivityMyHistoryBinding binding;
     TourBookingDAO tourBookingDAO = new TourBookingDAO();
-    TourBookingModel tourBooking = new TourBookingModel();
     RestaurantBookingDAO restaurantDAO = new RestaurantBookingDAO();
     HotelBookingDAO hotelDAO = new HotelBookingDAO();
-    List<HotelBookingModel> hotelBookingModels;
-    List<RestaurantBookingModel> restaurantBookingModels;
 
     UserModel userModel;
     // write onCreate method
@@ -37,12 +36,30 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMyHistoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
+
+        this.initPage();
         this.setupLayoutRecyclerView();
         this.displayTourBooking();
         this.displayRestaurantBooking();
         this.displayHotelBooking();
     }
+
+    private void initPage() {
+        this.setDefaultData();
+        this.initHeader();
+    }
+
+    private void setDefaultData() {
+        userModel = SharePreferencesHelper.getInstance().get(Constants.USER_SHARE_PREFERENCES, UserModel.class);
+    }
+
+    private void initHeader() {
+        binding.imgBack.setOnClickListener(v -> {
+            startActivity(new Intent(HistoryActivity.this, AccountActivity.class));
+            finish();
+        });
+    }
+
     // create displayTourBooking method
     public void displayTourBooking() {
         List<TourBookingReviewModel> tourBookingModels = tourBookingDAO.getAllTourBookingsWithReview(userModel.getUserId());

@@ -1,5 +1,6 @@
 package com.travel.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -28,6 +29,8 @@ public class VoucherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMyDiscountBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        this.initHeader();
         this.setupLayoutRecyclerView();
         this.displayVoucher();
     }
@@ -40,5 +43,16 @@ public class VoucherActivity extends AppCompatActivity {
     private void setupLayoutRecyclerView() {
         LinearLayoutManager layoutManagerVoucher = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.recyclerViewVoucher.setLayoutManager(layoutManagerVoucher);
+    }
+
+    private void initHeader() {
+        binding.imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VoucherActivity.this, AccountActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 }

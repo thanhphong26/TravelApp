@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
                     loginBinding.txtError.setText("Vui lòng điền đầy đủ thông tin!");
                 }
                 else if (userModel != null) {
-                    SharePreferencesHelper.getInstance().put("user", userModel);
+                    SharePreferencesHelper.getInstance().put(Constants.USER_SHARE_PREFERENCES, userModel);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("isLoggedIn", true);
                     editor.apply();
