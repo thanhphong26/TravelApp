@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.travel.Activity.BookTourActivity;
 import com.travel.Activity.DetailTourActivity;
 import com.travel.Database.WishlistDAO;
 import com.travel.Model.TourModel;
@@ -86,6 +88,15 @@ public class TourFavoriteAdapter<T> extends RecyclerView.Adapter<TourFavoriteAda
                 }
             }
         });
+
+        holder.btnBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, BookTourActivity.class);
+                intent.putExtra("tourId", item.getTourId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -97,6 +108,7 @@ public class TourFavoriteAdapter<T> extends RecyclerView.Adapter<TourFavoriteAda
         ImageView image, imgLove;
         TextView name, rating, price, address, description;
         RatingBar ratingBar;
+        Button btnBook;
 
         public TourFavoriteViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -107,6 +119,7 @@ public class TourFavoriteAdapter<T> extends RecyclerView.Adapter<TourFavoriteAda
             price = itemView.findViewById(R.id.tour_favorite_price);
             address = itemView.findViewById(R.id.tour_favorite_address);
             ratingBar = itemView.findViewById(R.id.tour_favorite_ratingBar);
+            btnBook = itemView.findViewById(R.id.btnBooking);
         }
     }
 

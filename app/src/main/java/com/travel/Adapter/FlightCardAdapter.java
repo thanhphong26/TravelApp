@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.travel.Activity.BookFlightActivity;
+import com.travel.Activity.BookHotelActivity;
 import com.travel.Activity.DetailDestinationActivity;
 import com.travel.Activity.DetailFlightActivity;
 import com.travel.Model.AirportModel;
@@ -63,6 +66,15 @@ public class FlightCardAdapter<T> extends RecyclerView.Adapter<FlightCardAdapter
                 context.startActivity(intent);
             }
         });
+
+        holder.btnBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, BookFlightActivity.class);
+                intent.putExtra("flightId", item.getFlightId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -72,6 +84,7 @@ public class FlightCardAdapter<T> extends RecyclerView.Adapter<FlightCardAdapter
 
     public class FlightCardViewHolder extends RecyclerView.ViewHolder {
         TextView airportDeparture, airportArrival, departTime, arrivalTime;
+        Button btnBook;
 
         public FlightCardViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -79,6 +92,7 @@ public class FlightCardAdapter<T> extends RecyclerView.Adapter<FlightCardAdapter
             airportArrival = itemView.findViewById(R.id.airportArrival);
             departTime = itemView.findViewById(R.id.departTime);
             arrivalTime = itemView.findViewById(R.id.arrivalTime);
+            btnBook = itemView.findViewById(R.id.btnBooking);
         }
     }
 }

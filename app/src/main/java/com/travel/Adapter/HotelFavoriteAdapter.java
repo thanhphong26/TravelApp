@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.travel.Activity.BookHotelActivity;
 import com.travel.Activity.DetailHotelActivity;
 import com.travel.Database.WishlistDAO;
 import com.travel.Model.HotelModel;
@@ -88,6 +90,15 @@ public class HotelFavoriteAdapter<T> extends RecyclerView.Adapter<HotelFavoriteA
                 }
             }
         });
+
+        holder.btnBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, BookHotelActivity.class);
+                intent.putExtra("hotelId", item.getHotelId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -99,6 +110,7 @@ public class HotelFavoriteAdapter<T> extends RecyclerView.Adapter<HotelFavoriteA
         ImageView hotelImage, imgLove;
         TextView hotelName, rating, price, address, description;
         RatingBar ratingBar;
+        Button btnBook;
 
         public HotelCommonViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -109,6 +121,7 @@ public class HotelFavoriteAdapter<T> extends RecyclerView.Adapter<HotelFavoriteA
             price = itemView.findViewById(R.id.tv_price);
             address = itemView.findViewById(R.id.tour_favorite_address);
             ratingBar = itemView.findViewById(R.id.ratingBar);
+            btnBook = itemView.findViewById(R.id.btnBooking);
         }
     }
 

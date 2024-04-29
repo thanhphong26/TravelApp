@@ -82,6 +82,7 @@ public class DetailRestaurantActivity extends AppCompatActivity {
                 intent.putExtra("destinationId",destinationId);
                 startActivity(intent);*/
                 onBackPressed();
+                finish();
             }
         });
     }

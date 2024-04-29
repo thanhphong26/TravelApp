@@ -47,6 +47,7 @@ public class TimeLineActivity extends AppCompatActivity {
 //                intent.putExtra("tourId", tourId);
 //                startActivity(intent);
                 onBackPressed();
+                finish();
             });
         }
 }
