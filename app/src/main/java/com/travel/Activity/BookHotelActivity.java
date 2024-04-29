@@ -153,6 +153,7 @@ public class BookHotelActivity extends AppCompatActivity {
                 bundle.putString("moTa",bookHotelBinding.tvMoTa.getText().toString());
                 bundle.putString("img",img);
                 bundle.putString("txtgia","Thành tiền");
+                bundle.putInt("id",2);
                 intent.putExtra("package",bundle);
                 startActivity(intent);
             }

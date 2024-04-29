@@ -61,10 +61,10 @@ public class AccountActivity extends AppCompatActivity {
             Intent intent = new Intent(AccountActivity.this, HistoryActivity.class);
             startActivity(intent);
         });
-      /*  accountBinding.layoutRating.setOnClickListener(v -> {
-            Intent intent = new Intent(AccountActivity.this, HistoryActivity.class);
+        accountBinding.layoutRating.setOnClickListener(v -> {
+            Intent intent = new Intent(AccountActivity.this, RatingHistoryActivity.class);
             startActivity(intent);
-        });*/
+        });
         accountBinding.layoutLogout.setOnClickListener(v -> {
             logout();
         });

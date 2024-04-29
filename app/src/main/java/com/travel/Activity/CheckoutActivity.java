@@ -70,10 +70,20 @@ public class CheckoutActivity extends AppCompatActivity {
                 bookHotelDAO = new BookHotelDAO();
                 bookRestaurantDAO = new BookRestaurantDAO();
                 bookTourDAO = new BookTourDAO();
-                bookFlightDAO.addBookFlight(userId, flightId, typeId , bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getLong("total"));
-                bookHotelDAO.addBookHotel(userId, bundle.getInt("hotelId"), bundle.getInt("quantityRoom"), bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getLong("total"));
-                bookRestaurantDAO.addBookRestaurant(userId, bundle.getInt("restaurantId"), bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getLong("total"));
-                bookTourDAO.addBookTour(userId, bundle.getInt("tourId"),bundle.getString("ngayDat"), bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getLong("total"),bundle.getString("createdAt"));
+
+                if(bundle.getInt("id")==1){
+                    bookFlightDAO.addBookFlight(userId, flightId, typeId , bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getLong("total"));
+                }
+                if(bundle.getInt("id")==2){
+                    bookHotelDAO.addBookHotel(userId, bundle.getInt("hotelId"), bundle.getInt("quantityRoom"), bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getLong("total"));
+
+                }
+                if(bundle.getInt("id")==3){
+                    bookRestaurantDAO.addBookRestaurant(userId, bundle.getInt("restaurantId"), bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getLong("total"));
+                }
+                if(bundle.getInt("id")==4){
+                    bookTourDAO.addBookTour(userId, bundle.getInt("tourId"),bundle.getString("ngayDat"), bundle.getInt("quantityAdults"), bundle.getInt("quantityChilds"), bundle.getLong("total"),bundle.getString("createdAt"));
+                }
                 toComplete(img);
             }
         });
