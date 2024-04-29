@@ -83,6 +83,7 @@ public class DetailDestinationActivity extends AppCompatActivity {
                 /*Intent intent = new Intent(DetailDestinationActivity.this, DestinationActivity.class);
                 startActivity(intent);*/
                 onBackPressed();
+                finish();
             }
         });
 
