@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.travel.Activity.BookHotelActivity;
 import com.travel.Activity.DetailHotelActivity;
+import com.travel.Activity.MapsActivity;
 import com.travel.Database.WishlistDAO;
 import com.travel.Model.HotelModel;
 import com.travel.Model.UserModel;
@@ -99,6 +100,17 @@ public class HotelFavoriteAdapter<T> extends RecyclerView.Adapter<HotelFavoriteA
                 context.startActivity(intent);
             }
         });
+
+        holder.map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MapsActivity.class);
+                intent.putExtra("latitude", item.getLatitude());
+                intent.putExtra("longitude", item.getLongitude());
+                intent.putExtra("locationName", item.getName());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -108,7 +120,7 @@ public class HotelFavoriteAdapter<T> extends RecyclerView.Adapter<HotelFavoriteA
 
     public class HotelCommonViewHolder extends RecyclerView.ViewHolder {
         ImageView hotelImage, imgLove;
-        TextView hotelName, rating, price, address, description;
+        TextView hotelName, rating, price, address, description, map;
         RatingBar ratingBar;
         Button btnBook;
 
@@ -122,6 +134,7 @@ public class HotelFavoriteAdapter<T> extends RecyclerView.Adapter<HotelFavoriteA
             address = itemView.findViewById(R.id.tour_favorite_address);
             ratingBar = itemView.findViewById(R.id.ratingBar);
             btnBook = itemView.findViewById(R.id.btnBooking);
+            map = itemView.findViewById(R.id.map);
         }
     }
 
