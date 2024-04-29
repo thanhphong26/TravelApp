@@ -28,7 +28,7 @@
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="605dp">
+        android:layout_height="595dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -372,6 +372,15 @@
                 android:text="0"
                 android:textSize="20sp"
                 android:textColor="#0FAEC3"></TextView>
+            <TextView
+                android:id="@+id/tvGiaDuocGiam"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
+                android:text=""
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/blue"></TextView>
         </LinearLayout>
         <Button
             android:id="@+id/btn_thanhToan"
