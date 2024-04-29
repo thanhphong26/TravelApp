@@ -33,6 +33,7 @@ import com.travel.App;
 import com.travel.Database.UserDAO;
 import com.travel.Model.UserModel;
 import com.travel.R;
+import com.travel.Utils.Constants;
 import com.travel.Utils.GooogleCloudStorageHelper;
 import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityPersonalInfoBinding;
@@ -50,21 +51,32 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
     ActivityPersonalInfoBinding binding;
     private static final int REQUEST_IMAGE_PICK = 1;
     GooogleCloudStorageHelper cloudStorageHelper;
-    UserDAO userDAO = new UserDAO();
-    UserModel user = user = userDAO.getUser(1);
-    Calendar myCalendar = Calendar.getInstance();
-    UserModel userModel;
+    UserDAO userModelDAO = new UserDAO();
+    UserModel userModel = new UserModel();
 
+    Calendar myCalendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPersonalInfoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        cloudStorageHelper = new GooogleCloudStorageHelper();
-        userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
+        
+        this.setDefaultData();
         this.handleBottomNavigation();
+        this.initPage();
+    }
+    
+    private void setDefaultData() {
+        cloudStorageHelper = new GooogleCloudStorageHelper();
+        userModel = SharePreferencesHelper.getInstance().get(Constants.USER_SHARE_PREFERENCES, UserModel.class);
+    }
 
+    private void initPage() {
+        this.setUser(userModel);
+        this.hideEditText();
+
+        //*INFO: Set event
         binding.editAvt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,8 +86,6 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
                 startActivityForResult(intent, REQUEST_IMAGE_PICK);
             }
         });
-        setUser(user);
-        hideEditText();
         binding.editNameImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,9 +125,14 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
         binding.imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                startActivity(new Intent(PersonalInfoActivity.this, AccountActivity.class));
             }
         });
+    }
+
+    private void updateUserReference() {
+        userModel = userModelDAO.getUser(userModel.getUserId());
+        SharePreferencesHelper.getInstance().put(Constants.USER_SHARE_PREFERENCES, userModel);
     }
 
     public void hideEditText() {
@@ -158,10 +173,10 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
     }
 
     private void saveImageUrlToDatabase(String imageUrl) {
-        user.setUserId(userModel.getUserId());
-        user.setAvatar(imageUrl);
-        Glide.with(this).load(user.getAvatar()).error(R.drawable.profile_user).into(binding.editAvt);
-        userDAO.updateImageProfile(user);
+        userModel.setUserId(userModel.getUserId());
+        userModel.setAvatar(imageUrl);
+        Glide.with(this).load(userModel.getAvatar()).error(R.drawable.profile_user).into(binding.editAvt);
+        userModelDAO.updateImageProfile(userModel);
     }
 
     @Override
@@ -172,22 +187,22 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
     public void onUploadFailed() {
     }
 
-    public void setUser(UserModel user) {
-        binding.name.setText(user.getUsername());
-        if (user.getDob() != null) {
+    private void setUser(UserModel userModel) {
+        binding.name.setText(userModel.getUsername());
+        if (userModel.getDob() != null) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String dobString = dateFormat.format(user.getDob());
+            String dobString = dateFormat.format(userModel.getDob());
             binding.dob.setText(dobString);
         } else {
             binding.dob.setText("");
         }
-        binding.pw.setText(user.getPassword());
-        binding.email.setText(user.getEmail());
-        binding.phoneNum.setText(user.getPhoneNumber());
-        binding.area.setText(user.getAddress());
+        binding.pw.setText(userModel.getPassword());
+        binding.email.setText(userModel.getEmail());
+        binding.phoneNum.setText(userModel.getPhoneNumber());
+        binding.area.setText(userModel.getAddress());
     }
 
-    public void updateUsername() {
+    private void updateUsername() {
         final Dialog dialog = new Dialog(PersonalInfoActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.edit_name);
@@ -195,15 +210,16 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
         EditText edtUsername = dialog.findViewById(R.id.edtUsername);
         Button btnLuu = dialog.findViewById(R.id.btnLuu);
 
-        edtUsername.setText(user.getUsername());
+        edtUsername.setText(userModel.getUsername());
 
         btnLuu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String newUsername = edtUsername.getText().toString();
-                user.setUsername(newUsername);
-                userDAO.updateUserName(user);
-                setUser(user);
+                userModel.setUsername(newUsername);
+                userModelDAO.updateUserName(userModel);
+                setUser(userModel);
+                updateUserReference();
                 dialog.dismiss();
             }
         });
@@ -215,7 +231,7 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 
-    public void updateDateOfBirth() {
+    private void updateDateOfBirth() {
         final Dialog dialog = new Dialog(PersonalInfoActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.edit_dob);
@@ -224,8 +240,8 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
         Button btnLuu = dialog.findViewById(R.id.btnLuu);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        if (user.getDob() != null) {
-            String dobString = dateFormat.format(user.getDob());
+        if (userModel.getDob() != null) {
+            String dobString = dateFormat.format(userModel.getDob());
             edtDob.setText(dobString);
         } else {
             edtDob.setText(dateFormat.format(Calendar.getInstance().getTime()));
@@ -259,12 +275,13 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 try {
                     Date dob = dateFormat.parse(dobString);
-                    user.setDob(dob);
+                    userModel.setDob(dob);
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }
-                userDAO.updateDob(user);
-                setUser(user);
+                userModelDAO.updateDob(userModel);
+                setUser(userModel);
+                updateUserReference();
                 dialog.dismiss();
             }
         });
@@ -275,7 +292,7 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 
-    public void updatePassword() {
+    private void updatePassword() {
         final Dialog dialog = new Dialog(PersonalInfoActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.edit_password);
@@ -310,9 +327,10 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
             @Override
             public void onClick(View v) {
                 String newPassword = edtPassword.getText().toString();
-                user.setPassword(newPassword);
-                userDAO.updatePassword(user);
-                setUser(user);
+                userModel.setPassword(newPassword);
+                userModelDAO.updatePassword(userModel);
+                setUser(userModel);
+                updateUserReference();
                 dialog.dismiss();
             }
         });
@@ -324,14 +342,14 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 
-    public void updateEmail() {
+    private void updateEmail() {
         final Dialog dialog = new Dialog(PersonalInfoActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.edit_email);
         EditText edtEmail = dialog.findViewById(R.id.edtEmail);
         Button btnLuu = dialog.findViewById(R.id.btnLuu);
         btnLuu.setEnabled(false);
-        edtEmail.setText(user.getEmail());
+        edtEmail.setText(userModel.getEmail());
         TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -356,9 +374,10 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
             @Override
             public void onClick(View v) {
                 String newEmail = edtEmail.getText().toString();
-                user.setEmail(newEmail);
-                userDAO.updateEmail(user);
-                setUser(user);
+                userModel.setEmail(newEmail);
+                userModelDAO.updateEmail(userModel);
+                setUser(userModel);
+                updateUserReference();
                 dialog.dismiss();
             }
         });
@@ -376,14 +395,14 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
     }
 
 
-    public void updatePhoneNumber() {
+    private void updatePhoneNumber() {
         final Dialog dialog = new Dialog(PersonalInfoActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.edit_phone_number);
         EditText edtPhoneNumber = dialog.findViewById(R.id.edtPhoneNumber);
         Button btnLuu = dialog.findViewById(R.id.btnLuu);
         btnLuu.setEnabled(false);
-        edtPhoneNumber.setText(user.getPhoneNumber());
+        edtPhoneNumber.setText(userModel.getPhoneNumber());
         TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -406,9 +425,10 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
             @Override
             public void onClick(View v) {
                 String newPhoneNumber = edtPhoneNumber.getText().toString();
-                user.setPhoneNumber(newPhoneNumber);
-                userDAO.updatePhoneNumber(user);
-                setUser(user);
+                userModel.setPhoneNumber(newPhoneNumber);
+                userModelDAO.updatePhoneNumber(userModel);
+                setUser(userModel);
+                updateUserReference();
                 dialog.dismiss();
             }
         });
@@ -418,19 +438,20 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
+
     }
 
     private boolean isValidPhone(String phone) {
         String phonePattern = "^(\\+\\d{1,3}[- ]?)?\\d{10}$";
         return phone.matches(phonePattern);
     }
-    public void updateAddress() {
+    private void updateAddress() {
         final Dialog dialog = new Dialog(PersonalInfoActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.edit_area);
         EditText edtAddress = dialog.findViewById(R.id.edtAddress);
         Button btnLuu = dialog.findViewById(R.id.btnLuu);
-        edtAddress.setText(user.getAddress());
+        edtAddress.setText(userModel.getAddress());
         TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -455,9 +476,10 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
             @Override
             public void onClick(View v) {
                 String newAddress = edtAddress.getText().toString();
-                user.setAddress(newAddress);
-                userDAO.updateAddress(user);
-                setUser(user);
+                userModel.setAddress(newAddress);
+                userModelDAO.updateAddress(userModel);
+                setUser(userModel);
+                updateUserReference();
                 dialog.dismiss();
             }
         });

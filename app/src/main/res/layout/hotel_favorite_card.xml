@@ -147,12 +147,11 @@
                 android:src="@drawable/icon_location_red" />
 
             <TextView
+                android:id="@+id/map"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Địa chỉ bản đồ"
                 android:textColor="@color/red" />
-
-
         </LinearLayout>
 
 
@@ -189,6 +188,7 @@
             android:textSize="14dp" />
 
         <Button
+            android:id="@+id/btnBooking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/blue"

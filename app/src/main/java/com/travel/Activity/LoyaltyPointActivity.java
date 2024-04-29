@@ -1,5 +1,6 @@
 package com.travel.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import com.travel.Model.HotelModel;
 import com.travel.Model.LoyaltyPointModel;
 import com.travel.Model.UserModel;
 import com.travel.R;
+import com.travel.Utils.Constants;
 import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityLoyaltyPointBinding;
 import com.travel.databinding.ActivityPersonalInfoBinding;
@@ -35,12 +37,30 @@ public class LoyaltyPointActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLoyaltyPointBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
+
+        this.initPage();
         int userId = userModel.getUserId();
+
         this.displayTotalPoint(userId);
         this.setupLayoutRecyclerView();
         this.displayHistoryPoints(userId);
         this.displayRank();
+    }
+
+    private void setDefaultData() {
+        userModel = SharePreferencesHelper.getInstance().get(Constants.USER_SHARE_PREFERENCES, UserModel.class);
+    }
+
+    private void initPage() {
+        this.setDefaultData();
+        this.initHeader();
+    }
+
+    private void initHeader() {
+        binding.imgBack.setOnClickListener(v -> {
+            startActivity(new Intent(LoyaltyPointActivity.this, AccountActivity.class));
+            finish();
+        });
     }
 
     private void displayTotalPoint(int userId) {

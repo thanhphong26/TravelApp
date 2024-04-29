@@ -81,6 +81,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 intent.putExtra("tourId", tourId);
                 startActivity(intent);*/
                 onBackPressed();
+                finish();
             }
         });
     }

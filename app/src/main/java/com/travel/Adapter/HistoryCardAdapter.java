@@ -17,11 +17,13 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import com.bumptech.glide.Glide;
+import com.travel.Activity.DetailFlightActivity;
 import com.travel.Activity.DetailHotelActivity;
 import com.travel.Activity.DetailRestaurantActivity;
 import com.travel.Activity.DetailTourActivity;
 import com.travel.Activity.MyRatingActivity;
 import com.travel.Activity.RatingHistoryActivity;
+import com.travel.Model.BookFlightModel;
 import com.travel.Model.HotelBookingReviewModel;
 import com.travel.Model.RestaurantBookingReviewModel;
 import com.travel.Model.ReviewType;
@@ -54,6 +56,8 @@ public class HistoryCardAdapter<T> extends RecyclerView.Adapter<HistoryCardAdapt
             bindRestaurantBookingModel(holder, (RestaurantBookingReviewModel) item);
         } else if (item instanceof HotelBookingReviewModel) {
             bindHotelBookingModel(holder, (HotelBookingReviewModel) item);
+        } else if (item instanceof BookFlightModel) {
+            bindFlightBookingModel(holder, (BookFlightModel) item);
         }
     }
 
@@ -104,6 +108,7 @@ public class HistoryCardAdapter<T> extends RecyclerView.Adapter<HistoryCardAdapt
             holder.ratingButton.setOnClickListener(v -> {
                 Intent intent = new Intent(context, MyRatingActivity.class);
                 intent.putExtra("bookingId", tourBookingModel.getBookingId());
+                intent.putExtra("itemId", tourBookingModel.getTour().getTourId());
                 intent.putExtra("type", ReviewType.TOUR.toString());
                 context.startActivity(intent);
             });
@@ -139,6 +144,7 @@ public class HistoryCardAdapter<T> extends RecyclerView.Adapter<HistoryCardAdapt
             holder.ratingButton.setOnClickListener(v -> {
                 Intent intent = new Intent(context, MyRatingActivity.class);
                 intent.putExtra("bookingId", restaurantBookingModel.getBookingId());
+                intent.putExtra("itemId", restaurantBookingModel.getRestaurant().getRestaurantId());
                 intent.putExtra("type", ReviewType.RESTAURANT.toString());
                 context.startActivity(intent);
             });
@@ -161,7 +167,6 @@ public class HistoryCardAdapter<T> extends RecyclerView.Adapter<HistoryCardAdapt
             description = description.substring(0, 150) + "...";
         }
         holder.tourDescription.setText(description);
-
         if (hotelBookingModel.getReview().getReviewId() != 0) {
             holder.ratingButton.setVisibility(View.GONE);
             holder.status.setVisibility(View.VISIBLE);
@@ -174,6 +179,7 @@ public class HistoryCardAdapter<T> extends RecyclerView.Adapter<HistoryCardAdapt
             holder.ratingButton.setOnClickListener(v -> {
                 Intent intent = new Intent(context, MyRatingActivity.class);
                 intent.putExtra("bookingId", hotelBookingModel.getBookingId());
+                intent.putExtra("itemId", hotelBookingModel.getHotel().getHotelId());
                 intent.putExtra("type", ReviewType.HOTEL.toString());
                 context.startActivity(intent);
             });
@@ -184,5 +190,28 @@ public class HistoryCardAdapter<T> extends RecyclerView.Adapter<HistoryCardAdapt
             intent.putExtra("hotelId", hotelBookingModel.getHotel().getHotelId());
             context.startActivity(intent);
         });
+    }
+
+    private void bindFlightBookingModel(HistoryCardViewHolder holder, BookFlightModel flightBooking) {
+        View view = holder.itemView;
+        holder.tourName.setText(flightBooking.getFlight().getDepartureAirportCode() + " - " + flightBooking.getFlight().getArrivalAirportCode());
+        Glide.with(context).load(R.drawable.flight).into(((ImageView) view.findViewById(R.id.image)));
+        // shortcut description
+        String description = flightBooking.getFlight().getDescription();
+        if (description.length() > 150) {
+            description = description.substring(0, 150) + "...";
+        }
+        holder.tourDescription.setText(description);
+
+        holder.ratingButton.setVisibility(View.GONE);
+        holder.status.setVisibility(View.GONE);
+        holder.ratingButton.setEnabled(false);
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DetailFlightActivity.class);
+            intent.putExtra("flightId", flightBooking.getFlight().getFlightId());
+            context.startActivity(intent);
+        });
+
     }
 }

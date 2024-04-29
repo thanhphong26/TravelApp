@@ -82,6 +82,7 @@ public class DetailRestaurantActivity extends AppCompatActivity {
                 intent.putExtra("destinationId",destinationId);
                 startActivity(intent);*/
                 onBackPressed();
+                finish();
             }
         });
     }
@@ -140,7 +141,6 @@ public class DetailRestaurantActivity extends AppCompatActivity {
         LinearLayoutManager layoutManagerHotel = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         restaurantBinding.recyclerViewRestaurantNearby.setLayoutManager(layoutManagerHotel);
         List<RestaurantModel> restaurants = restaurantDAO.getNearDestinationExcludingCurrent(restaurantModel.getDestination().getDestinationId(), restaurantModel.getRestaurantId());
-        System.out.print("Restaurants: " + restaurants.size());
         DetailDestinationAdapter<RestaurantModel> restaurantAdapter = new DetailDestinationAdapter<>(restaurants, this);
         restaurantBinding.recyclerViewRestaurantNearby.setAdapter(restaurantAdapter);
     }

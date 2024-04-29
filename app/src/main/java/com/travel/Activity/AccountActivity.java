@@ -25,22 +25,32 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.travel.Model.UserModel;
 import com.travel.R;
+import com.travel.Utils.Constants;
 import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityAccountBinding;
 
 public class AccountActivity extends AppCompatActivity {
     ActivityAccountBinding accountBinding;
-    BottomNavigationView bottomNavigationView;
     UserModel userModel = new UserModel();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         accountBinding = ActivityAccountBinding.inflate(getLayoutInflater());
         setContentView(accountBinding.getRoot());
+
         this.handleBottomNavigation();
-        userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
+        this.setDefaultDate();
+        this.initPage();
+    }
+
+    private void setDefaultDate() {
+        userModel = SharePreferencesHelper.getInstance().get(Constants.USER_SHARE_PREFERENCES, UserModel.class);
+    }
+
+    private void initPage() {
         accountBinding.txtUserName.setText(userModel.getUsername());
         Glide.with(this).load(userModel.getAvatar()).error(R.drawable.avatar).into(accountBinding.imgUser);
+
         accountBinding.layoutInfor.setOnClickListener(v -> {
             Intent intent = new Intent(AccountActivity.this, PersonalInfoActivity.class);
             startActivity(intent);
@@ -69,6 +79,7 @@ public class AccountActivity extends AppCompatActivity {
             logout();
         });
     }
+
     public void logout() {
         final Dialog dialog = new Dialog(AccountActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -96,7 +107,7 @@ public class AccountActivity extends AppCompatActivity {
 
     private void handleBottomNavigation() {
         accountBinding.navigation.setItemIconTintList(null);
-        accountBinding.navigation.setSelectedItemId(R.id.navigation_home);
+        accountBinding.navigation.setSelectedItemId(R.id.navigation_profile);
         accountBinding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

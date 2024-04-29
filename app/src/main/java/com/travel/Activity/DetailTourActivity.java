@@ -130,6 +130,7 @@ public class DetailTourActivity extends AppCompatActivity {
                 intent.putExtra("destinationId", destinationId);
                 startActivity(intent);*/
                 onBackPressed();
+                finish();
             }
         });
         detailTourBinding.button.setOnClickListener(new  View.OnClickListener() {
