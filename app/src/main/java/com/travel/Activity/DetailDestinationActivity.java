@@ -76,6 +76,7 @@ public class DetailDestinationActivity extends AppCompatActivity {
         setupTourRecyclerView(destinationId);
         setupRestaurantRecyclerView(destinationId);
         setupHotelRecyclerView(destinationId);
+        this.initNavigation();
 
         detailDestinationBinding.imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,8 +87,8 @@ public class DetailDestinationActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
+
     private void addToWhislist(int destinationId, UserModel userModel) {
         isFavorite = !isFavorite;
         if (isFavorite) {
@@ -166,5 +167,14 @@ public class DetailDestinationActivity extends AppCompatActivity {
         View snackbarView = snackbar.getView();
         snackbarView.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(204, 153, 255)));
         snackbar.show();
+    }
+
+    private void initNavigation() {
+        int destinationId=getIntent().getIntExtra("destinationId",0);
+
+        detailDestinationBinding.imgHotel.setOnClickListener(v -> navigateToHotel(destinationId));
+        detailDestinationBinding.imgRestaurant.setOnClickListener(v -> navigateToRestaurant(destinationId));
+        detailDestinationBinding.imgTour.setOnClickListener(v -> navigateToTour(destinationId));
+        detailDestinationBinding.imgFlight.setOnClickListener(v -> navigateToFlight(destinationId));
     }
 }

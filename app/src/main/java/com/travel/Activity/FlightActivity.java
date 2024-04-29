@@ -155,8 +155,8 @@ public class FlightActivity extends AppCompatActivity {
         flightBinding.imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FlightActivity.this, HomeActivity.class);
-                startActivity(intent);
+                onBackPressed();
+                finish();
             }
         });
 

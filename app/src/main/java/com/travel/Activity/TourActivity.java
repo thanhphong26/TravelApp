@@ -16,22 +16,28 @@ import com.bumptech.glide.Glide;
 import com.travel.Adapter.DestinationCommonRatingAdapter;
 import com.travel.Adapter.TourCommonAdapter;
 import com.travel.Adapter.TourFavoriteAdapter;
+import com.travel.Database.DestinationDAO;
 import com.travel.Database.TourDAO;
 import com.travel.Model.DestinationDetailModel;
+import com.travel.Model.DestinationModel;
 import com.travel.Model.TourModel;
 import com.travel.R;
+import com.travel.Utils.Constants;
 import com.travel.Utils.NumberHelper;
 import com.travel.databinding.ActivityTourBinding;
 import com.travel.databinding.TourCommonCardBinding;
 import com.travel.databinding.TourFavoriteCardBinding;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class TourActivity extends AppCompatActivity {
     ActivityTourBinding tourBinding;
     ArrayList<TourModel> tours = new ArrayList<TourModel>();
     ArrayList<TourModel> commonTours = new ArrayList<TourModel>();
     TourDAO tourDAO = new TourDAO();
+    DestinationDAO destinationDAO = new DestinationDAO();
+    int destinationId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,15 +63,22 @@ public class TourActivity extends AppCompatActivity {
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TourActivity.this, HomeActivity.class);
-                startActivity(intent);
+               onBackPressed();
+               finish();
             }
         });
     }
 
     public void initPage() {
+        destinationId = getIntent().getIntExtra("destinationId", 0);
         commonTours = tourDAO.getCommon(5);
-        tours = tourDAO.getAll("", 10, 0);
+        tours = tourDAO.getAll("", Constants.MAX_RECORD, 0);
+
+        if (destinationId != 0) {
+            DestinationModel destination = destinationDAO.getDestinationById(destinationId);
+            String title = tourBinding.title.getText().toString();
+            tourBinding.title.setText(title + " - " + destination.getName());
+        }
 
         this.handleListCommonTour();
         this.handleListTour();
@@ -76,14 +89,14 @@ public class TourActivity extends AppCompatActivity {
         tourBinding.searchTour.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                tours = tourDAO.getAll(query, 10, 0);
+                tours = tourDAO.getAll(query, Constants.MAX_RECORD, 0);
                 handleListTour();
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                tours = tourDAO.getAll(newText, 10, 0);
+                tours = tourDAO.getAll(newText, Constants.MAX_RECORD, 0);
                 handleListTour();
                 return false;
             }
@@ -91,11 +104,17 @@ public class TourActivity extends AppCompatActivity {
     }
 
     public void handleListCommonTour() {
+        if (destinationId != 0) {
+            commonTours = commonTours.stream().filter(item -> item.getDestination().getDestinationId() == destinationId).collect(Collectors.toCollection(ArrayList::new));
+        }
         TourCommonAdapter<TourModel> adapter = new TourCommonAdapter<>(commonTours, this);
         tourBinding.rcvCommonTour.setAdapter(adapter);
     }
 
     public void handleListTour() {
+        if (destinationId != 0) {
+            tours = tours.stream().filter(item -> item.getDestination().getDestinationId() == destinationId).collect(Collectors.toCollection(ArrayList::new));
+        }
         TourFavoriteAdapter<TourModel> adapter = new TourFavoriteAdapter<>(tours, this);
         tourBinding.rcvTour.setAdapter(adapter);
     }
