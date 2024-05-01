@@ -233,26 +233,6 @@
                             android:textSize="16dp"
                             android:textStyle="bold" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/txtMoreTour"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Xem thêm"
-                                android:textStyle="italic" />
-
-                            <View
-                                android:layout_width="62dp"
-                                android:layout_height="1dp"
-                                android:layout_marginTop="-4dp"
-                                android:background="@color/black" />
-                        </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -291,27 +271,6 @@
                             android:text="Nhà hàng"
                             android:textSize="16dp"
                             android:textStyle="bold" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/txtMoreRes"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Xem thêm"
-                                android:textStyle="italic" />
-
-                            <View
-                                android:layout_width="62dp"
-                                android:layout_height="1dp"
-                                android:layout_marginTop="-4dp"
-                                android:background="@color/black" />
-                        </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -349,27 +308,6 @@
                             android:text="Khách sạn"
                             android:textSize="16dp"
                             android:textStyle="bold" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/txtMoreHotel"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Xem thêm"
-                                android:textStyle="italic" />
-
-                            <View
-                                android:layout_width="62dp"
-                                android:layout_height="1dp"
-                                android:layout_marginTop="-4dp"
-                                android:background="@color/black" />
-                        </LinearLayout>
                    </LinearLayout>
 
                 </LinearLayout>
