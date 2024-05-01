@@ -121,7 +121,7 @@ public class TourActivity extends AppCompatActivity {
 
     private void handleBottomNavigation() {
         tourBinding.navigation.setItemIconTintList(null);
-        tourBinding.navigation.setSelectedItemId(R.id.navigation_favorite);
+        tourBinding.navigation.setSelectedItemId(R.id.navigation_map);
         tourBinding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -134,7 +134,7 @@ public class TourActivity extends AppCompatActivity {
                 } else if (id == R.id.navigation_map) {
                     return true;
                 }else if (id == R.id.navigation_translate) {
-//                    intent = new Intent(HomeActivity.this, A.class);
+                    intent = new Intent(TourActivity.this, MapsActivity2.class);
                 }
                 else if (id == R.id.navigation_profile) {
                     intent = new Intent(TourActivity.this, PersonalInforActivity.class);

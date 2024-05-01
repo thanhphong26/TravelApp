@@ -196,7 +196,7 @@ public class BookTourActivity extends AppCompatActivity {
                 } else if (id == R.id.navigation_map) {
                     intent = new Intent(BookTourActivity.this, DestinationActivity.class);
                 }else if (id == R.id.navigation_translate) {
-//                    intent = new Intent(HomeActivity.this, A.class);
+                    intent = new Intent(BookTourActivity.this, MapsActivity2.class);
                 }
                 else if (id == R.id.navigation_profile) {
                     intent = new Intent(BookTourActivity.this, AccountActivity.class);
