@@ -46,11 +46,11 @@ public class HistoryActivity extends AppCompatActivity {
         this.displayRestaurantBooking();
         this.displayHotelBooking();
         this.displayFlightBooking();
+        this.initHeader();
     }
 
     private void initPage() {
         this.setDefaultData();
-        this.initHeader();
     }
 
     private void setDefaultData() {
