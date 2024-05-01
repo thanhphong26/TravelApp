@@ -223,9 +223,8 @@ public class BookHotelActivity extends AppCompatActivity {
                 } else if (id == R.id.navigation_map) {
                     intent = new Intent(BookHotelActivity.this, DestinationActivity.class);
                 }else if (id == R.id.navigation_translate) {
-//                    intent = new Intent(HomeActivity.this, A.class);
-                }
-                else if (id == R.id.navigation_profile) {
+                    intent = new Intent(BookHotelActivity.this, MapsActivity2.class);
+                }else if (id == R.id.navigation_profile) {
                     intent = new Intent(BookHotelActivity.this, AccountActivity.class);
                 }
                 if (intent != null) {

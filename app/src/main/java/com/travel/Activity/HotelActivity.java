@@ -118,6 +118,8 @@ public class HotelActivity extends AppCompatActivity {
 
     private void handleBottomNavigation() {
         hotelBinding.navigation.setItemIconTintList(null);
+        hotelBinding.navigation.setSelectedItemId(R.id.navigation_map);
+
         hotelBinding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -130,7 +132,7 @@ public class HotelActivity extends AppCompatActivity {
                 } else if (id == R.id.navigation_map) {
                     return true;
                 }else if (id == R.id.navigation_translate) {
-//                    intent = new Intent(HomeActivity.this, A.class);
+                    intent = new Intent(HotelActivity.this, MapsActivity2.class);
                 }
                 else if (id == R.id.navigation_profile) {
                     intent = new Intent(HotelActivity.this, PersonalInforActivity.class);
