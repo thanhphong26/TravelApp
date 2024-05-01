@@ -14,8 +14,12 @@ import com.travel.Model.TourModel;
 import com.travel.Model.ReviewType;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class TourBookingDAO {
     DatabaseHelper databaseHelper = new DatabaseHelper(App.self());
@@ -44,7 +48,17 @@ public class TourBookingDAO {
                         tourBookingModel.setTotalPrice(cursor.getFloat(cursor.getColumnIndex("total_price")));
                         tourBookingModel.setNumberOfAdults(cursor.getInt(cursor.getColumnIndex("number_of_adults")));
                         tourBookingModel.setNumberOfChildren(cursor.getInt(cursor.getColumnIndex("number_of_childs")));
-                        tourBookingModel.setCreatedAt(Timestamp.valueOf(cursor.getString(cursor.getColumnIndex("created_at"))));
+                        String timestampString = cursor.getString(cursor.getColumnIndex("created_at"));
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                        try {
+                            Date parsedDate = dateFormat.parse(timestampString);
+                            long timeInMillis = parsedDate.getTime();
+                            Timestamp timestamp = new Timestamp(timeInMillis);
+                            tourBookingModel.setCreatedAt(timestamp);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
 
                         TourModel tour = new TourModel();
                         tour.setTourId(cursor.getInt(cursor.getColumnIndex("tour_id")));
