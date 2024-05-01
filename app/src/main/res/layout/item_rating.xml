@@ -39,6 +39,8 @@
                         android:layout_width="match_parent"
                         android:id="@+id/tvName"
                         android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:layout_marginTop="10dp"
                         android:text="Tour 4 ngày 3 đêm Hà Giang"
                         android:textStyle="bold"
@@ -48,6 +50,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="4"
                         android:id="@+id/tvRatingMoTa"
                         android:text="Travelers planning a trip to Europe should consider visiting Italy, known for its rich history, stunning a"
                         android:textSize="13sp"

@@ -42,7 +42,7 @@ public class RatingHistoryActivity extends AppCompatActivity {
         list.addAll(listTour);
         adapter = new HistoryRatingAdapter(this, R.layout.item_rating, list);
         ratingHistoryBinding.lvRatingHistory.setAdapter(adapter);
-        ratingHistoryBinding.btnBack.setOnClickListener(v -> {
+        ratingHistoryBinding.imgBack.setOnClickListener(v -> {
             finish();
         });
     }

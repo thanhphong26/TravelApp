@@ -42,6 +42,9 @@
             android:name=".Activity.VerifyOTPActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.PolicyActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.MapsActivity"
             android:exported="false"
             android:label="@string/title_activity_maps" />
