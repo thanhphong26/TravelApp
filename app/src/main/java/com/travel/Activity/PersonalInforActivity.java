@@ -75,7 +75,7 @@ public class PersonalInforActivity extends AppCompatActivity {
                 } else if (id == R.id.navigation_map) {
                     intent = new Intent(PersonalInforActivity.this, DestinationActivity.class);
                 }else if (id == R.id.navigation_translate) {
-//                    intent = new Intent(HomeActivity.this, A.class);
+                    intent = new Intent(PersonalInforActivity.this, MapsActivity2.class);
                 }
                 else if (id == R.id.navigation_profile) {
                     return true;

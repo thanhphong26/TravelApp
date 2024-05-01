@@ -131,7 +131,7 @@ public class RestaurantActivity extends AppCompatActivity {
                 } else if (id == R.id.navigation_map) {
                     return true;
                 } else if (id == R.id.navigation_translate) {
-//                    intent = new Intent(HomeActivity.this, A.class);
+                    intent = new Intent(RestaurantActivity.this, MapsActivity2.class);
                 } else if (id == R.id.navigation_profile) {
                     intent = new Intent(RestaurantActivity.this, PersonalInforActivity.class);
                 }
