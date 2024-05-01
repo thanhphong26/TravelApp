@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         ReviewModel reviewModel=reviewModelList.get(position);
         UserModel userModel = getUser(reviewModel.getUserId());
         holder.txtReview.setText(reviewModel.getReview());
+        Log.e("Rating",String.valueOf(reviewModel.getRating()));
         holder.txtRating.setText(String.valueOf(reviewModel.getRating())+"/5");
         holder.txtDate.setText(reviewModel.getReviewDate().toString());
         holder.txtUsername.setText(userModel.getUsername());
@@ -63,8 +65,8 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
             super(itemView);
             txtUsername = itemView.findViewById(R.id.txtUsername);
             txtReview = itemView.findViewById(R.id.txtReview);
-            txtDate = itemView.findViewById(R.id.txtReviewDate);
-            txtRating = itemView.findViewById(R.id.txtRating);
+            txtDate = itemView.findViewById(R.id.historyPoint_txt);
+            txtRating = itemView.findViewById(R.id.txtReviewDate);
             imgUser = itemView.findViewById(R.id.edit_avt);
         }
     }
