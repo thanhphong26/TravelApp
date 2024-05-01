@@ -5,30 +5,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/background_gradient_blue">
-    <LinearLayout
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageButton
+        android:layout_height="?attr/actionBarSize"
+        app:layout_collapseMode="pin">
+
+        <ImageView
             android:id="@+id/btn_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="11dp"
-            android:layout_marginTop="12dp"
-            android:src="@drawable/back">
-        </ImageButton>
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:srcCompat="@drawable/icon_back" />
+
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="95dp"
-            android:layout_marginTop="18dp"
-            android:text="Đặt Nhà Hàng"
-            android:textSize="16sp"
-            android:textStyle="normal|bold"
-            android:visibility="visible"></TextView>
-    </LinearLayout>
+            android:layout_marginRight="40dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="Đặt nhà hàng"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+    </androidx.appcompat.widget.Toolbar>
     <ScrollView
        android:layout_width="match_parent"
-       android:layout_height="605dp">
+       android:layout_height="wrap_content">
        <LinearLayout
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
@@ -113,38 +116,36 @@
                    android:textSize="16sp"
                    android:textStyle="normal|bold"
                    android:visibility="visible"></TextView>
-               <TableLayout
+               <LinearLayout
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:layout_marginTop="15dp">
+                   android:orientation="vertical">
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginLeft="10dp"
+                       android:layout_marginTop="3dp"
+                       android:text="Số lượng:"
+                       android:textSize="14sp"
+                       android:textStyle="normal|bold"></TextView>
 
-                   <TableRow>
-
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal">
                        <TextView
-                           android:layout_width="match_parent"
-                           android:layout_height="match_parent"
+                           android:layout_width="80dp"
+                           android:layout_height="wrap_content"
                            android:layout_marginLeft="10dp"
                            android:layout_marginTop="3dp"
-                           android:text="Số lượng:"
-                           android:textSize="14sp"
-                           android:textStyle="normal|bold"></TextView>
-                   </TableRow>
-                   <TableRow>
-
-                       <TextView
-                           android:layout_width="match_parent"
-                           android:layout_height="match_parent"
-                           android:layout_marginLeft="10dp"
-                           android:layout_marginTop="3dp"
-                           android:text="Người lớn: "
+                           android:text="Người lớn:"
                            android:textSize="14sp"
                            android:textStyle="normal|italic"></TextView>
 
                        <ImageButton
                            android:id="@+id/btnDecreaseAdults"
                            android:layout_width="20dp"
-                           android:layout_height="20dp"
-                           android:layout_marginLeft="180dp"
+                           android:layout_height="23dp"
                            android:layout_marginTop="3dp"
                            android:src="@drawable/button_decrease"></ImageButton>
 
@@ -163,15 +164,17 @@
                            android:layout_height="20dp"
                            android:layout_marginTop="3dp"
                            android:src="@drawable/button_plus"></ImageButton>
-                   </TableRow>
-                   <TableRow>
-
+                   </LinearLayout>
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal">
                        <TextView
-                           android:layout_width="match_parent"
-                           android:layout_height="match_parent"
+                           android:layout_width="80dp"
+                           android:layout_height="wrap_content"
                            android:layout_marginLeft="10dp"
                            android:layout_marginTop="3dp"
-                           android:text="Trẻ em: "
+                           android:text="Trẻ em:"
                            android:textSize="14sp"
                            android:textStyle="normal|italic"></TextView>
 
@@ -179,7 +182,6 @@
                            android:id="@+id/btnDecreaseChilds"
                            android:layout_width="20dp"
                            android:layout_height="20dp"
-                           android:layout_marginLeft="180dp"
                            android:layout_marginTop="3dp"
                            android:src="@drawable/button_decrease"></ImageButton>
 
@@ -198,8 +200,11 @@
                            android:layout_height="20dp"
                            android:layout_marginTop="3dp"
                            android:src="@drawable/button_plus"></ImageButton>
-                   </TableRow>
-               </TableLayout>
+
+                   </LinearLayout>
+
+
+               </LinearLayout>
 
                <View
                    android:layout_width="match_parent"
@@ -276,56 +281,81 @@
            </LinearLayout>
        </LinearLayout>
    </ScrollView>
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:layout_marginTop="10dp">
+        android:layout_height="match_parent">
+
+
         <LinearLayout
-            android:layout_width="224dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="vertical">
-            <TextView
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:textSize="13sp"
-                android:text="Giá từ"
-                android:textStyle="bold"></TextView>
-            <TextView
-                android:id="@+id/tvThanhTien"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="25dp"
-                android:text="0"
-                android:textSize="20sp"
-                android:textColor="#0FAEC3"></TextView>
+                android:orientation="horizontal"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="10dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="13sp"
+                        android:text="Giá từ"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/tvThanhTien"
+                        android:layout_width="194dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="25dp"
+                        android:text="0"
+                        android:textColor="#0FAEC3"
+                        android:textSize="20sp"></TextView>
+
+                    <TextView
+                        android:id="@+id/tvGiaDuocGiam"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:text="Cho 1 người"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:layout_marginBottom="5dp"
+                        android:textStyle="italic"></TextView>
+                </LinearLayout>
+                <Button
+                    android:id="@+id/btnThanhToan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="37dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="@color/blue"
+                    android:text="Đặt ngay"
+                    android:layout_weight="1"
+                    app:backgroundTint="@color/blue"
+                    android:background="@drawable/button_background_blue"
+                    android:textStyle="bold">
+                </Button>
+            </LinearLayout>
+
         </LinearLayout>
-        <Button
-            android:id="@+id/btn_thanhToan"
-            android:layout_width="wrap_content"
-            android:layout_height="37dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/blue"
-            android:text="Đặt ngay"
-            app:backgroundTint="@color/blue"
-            android:background="@drawable/button_background_blue"
-            android:textStyle="bold">
-        </Button>
-    </LinearLayout>
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_gravity="bottom|center"
-        android:background="@color/white"
-        android:fitsSystemWindows="true"
-        android:textAlignment="center"
-        app:elevation="10dp"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
