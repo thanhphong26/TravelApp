@@ -43,7 +43,6 @@ public class BookHotelActivity extends AppCompatActivity {
         setContentView(bookHotelBinding.getRoot());
         userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
         Calendar calendar = Calendar.getInstance();
-        this.handleBottomNavigation();
         Date today = calendar.getTime();
         calendar.add(Calendar.DAY_OF_YEAR, 1);
         Date tomorrow = calendar.getTime();
@@ -208,31 +207,5 @@ public class BookHotelActivity extends AppCompatActivity {
         }
         return false;
     }
-    private void handleBottomNavigation() {
-        bookHotelBinding.navigation.setItemIconTintList(null);
-        bookHotelBinding.navigation.setSelectedItemId(R.id.navigation_home);
-        bookHotelBinding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Intent intent = null;
-                int id = item.getItemId();
-                if (id == R.id.navigation_home) {
-                    return true;
-                } else if (id == R.id.navigation_favorite) {
-                    intent = new Intent(BookHotelActivity.this, FavoriteActivity.class);
-                } else if (id == R.id.navigation_map) {
-                    intent = new Intent(BookHotelActivity.this, DestinationActivity.class);
-                }else if (id == R.id.navigation_translate) {
-                    intent = new Intent(BookHotelActivity.this, MapsActivity2.class);
-                }else if (id == R.id.navigation_profile) {
-                    intent = new Intent(BookHotelActivity.this, AccountActivity.class);
-                }
-                if (intent != null) {
-                    startActivity(intent);
-                    finish();
-                }
-                return true;
-            }
-        });
-    }
+
 }

@@ -36,7 +36,7 @@ public class BookTourActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         bookTourBinding = ActivityBookTourBinding.inflate(getLayoutInflater());
         setContentView(bookTourBinding.getRoot());
-        this.handleBottomNavigation();
+//        this.handleBottomNavigation();
         bookTourDAO = new BookTourDAO();
         userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
         Calendar calendar = Calendar.getInstance();
@@ -64,7 +64,7 @@ public class BookTourActivity extends AppCompatActivity {
                 thanhtien(tourId,0);
             }
         });
-        bookTourBinding.btnIncreaseAdults.setOnClickListener(new View.OnClickListener() {
+        bookTourBinding.btnPlusAdults.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int adults = Integer.parseInt(bookTourBinding.tvQuantityAdults.getText().toString());
@@ -84,7 +84,7 @@ public class BookTourActivity extends AppCompatActivity {
                 thanhtien(tourId,0);
             }
         });
-        bookTourBinding.btnIncreaseChilds.setOnClickListener(new View.OnClickListener() {
+        bookTourBinding.btnPlusChilds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int childs = Integer.parseInt(bookTourBinding.tvQuantityChilds.getText().toString());
@@ -181,33 +181,33 @@ public class BookTourActivity extends AppCompatActivity {
         }
         return false;
     }
-    private void handleBottomNavigation() {
-        bookTourBinding.navigation.setItemIconTintList(null);
-        bookTourBinding.navigation.setSelectedItemId(R.id.navigation_home);
-        bookTourBinding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Intent intent = null;
-                int id = item.getItemId();
-                if (id == R.id.navigation_home) {
-                    return true;
-                } else if (id == R.id.navigation_favorite) {
-                    intent = new Intent(BookTourActivity.this, FavoriteActivity.class);
-                } else if (id == R.id.navigation_map) {
-                    intent = new Intent(BookTourActivity.this, DestinationActivity.class);
-                }else if (id == R.id.navigation_translate) {
-                    intent = new Intent(BookTourActivity.this, MapsActivity2.class);
-                }
-                else if (id == R.id.navigation_profile) {
-                    intent = new Intent(BookTourActivity.this, AccountActivity.class);
-                }
-                if (intent != null) {
-                    startActivity(intent);
-                    finish();
-                }
-                return true;
-            }
-        });
-    }
+//    private void handleBottomNavigation() {
+//        bookTourBinding.navigation.setItemIconTintList(null);
+//        bookTourBinding.navigation.setSelectedItemId(R.id.navigation_home);
+//        bookTourBinding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                Intent intent = null;
+//                int id = item.getItemId();
+//                if (id == R.id.navigation_home) {
+//                    return true;
+//                } else if (id == R.id.navigation_favorite) {
+//                    intent = new Intent(BookTourActivity.this, FavoriteActivity.class);
+//                } else if (id == R.id.navigation_map) {
+//                    intent = new Intent(BookTourActivity.this, DestinationActivity.class);
+//                }else if (id == R.id.navigation_translate) {
+//                    intent = new Intent(BookTourActivity.this, MapsActivity2.class);
+//                }
+//                else if (id == R.id.navigation_profile) {
+//                    intent = new Intent(BookTourActivity.this, AccountActivity.class);
+//                }
+//                if (intent != null) {
+//                    startActivity(intent);
+//                    finish();
+//                }
+//                return true;
+//            }
+//        });
+//    }
 
 }

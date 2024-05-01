@@ -5,28 +5,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/backgroud_checkout">
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageButton
+        android:layout_height="?attr/actionBarSize"
+        app:layout_collapseMode="pin">
+
+        <ImageView
             android:id="@+id/btn_back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#BBE7E9"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="7dp"
-            android:src="@drawable/back_checkout">
-        </ImageButton>
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:srcCompat="@drawable/icon_back" />
+
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="108dp"
-            android:layout_marginTop="18dp"
-            android:text="Đánh giá"
-            android:textSize="16sp"
-            android:textStyle="normal|bold"
-            android:visibility="visible"></TextView>
-    </LinearLayout>
+            android:layout_marginRight="40dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="Lịch sử đánh giá"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+    </androidx.appcompat.widget.Toolbar>
     <ListView
         android:id="@+id/lvRatingHistory"
         android:layout_width="match_parent"
