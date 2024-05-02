@@ -146,14 +146,23 @@ public class BookFlightActivity extends AppCompatActivity {
             public void onClick(View view) {
                 VoucherDAO voucherDAO = new VoucherDAO();
                 List<VoucherModel> voucherModels = voucherDAO.getAllVouchers();
+                String code = bookFlightBinding.edtMaGiamGia.getText().toString();
+                float discount = 0;
                 for (VoucherModel voucherModel : voucherModels) {
-                    if (bookFlightBinding.edtMaGiamGia.getText().toString().equals(voucherModel.getVoucherCode())) {
-                        float disc = voucherModel.getVoucherDiscount();
-                        thanhtien(flightId,disc);
-                        long giam= (long) (disc*100);
+                    if (voucherModel.getVoucherCode().equals(code)) {
+                        discount = voucherModel.getVoucherDiscount();
+                        long giam= (long) (discount*100);
                         bookFlightBinding.tvGiaDuocGiam.setText("Giảm"+" "+giam+"%"+" do áp dụng mã giảm giá");
+                        break;
                     }
                 }
+                if(discount==0){
+                    Toast.makeText(BookFlightActivity.this, "Mã giảm giá không hợp lệ", Toast.LENGTH_SHORT).show();
+                    bookFlightBinding.tvGiaDuocGiam.setText("");
+                }
+                thanhtien(flightId,discount);
+
+
             }
         });
     }
