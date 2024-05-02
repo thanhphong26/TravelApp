@@ -37,7 +37,7 @@ public class DetailHotelActivity extends AppCompatActivity {
     HotelModel hotelModel=new HotelModel();
     ReviewDAO reviewDAO=new ReviewDAO();
     List<ReviewModel> reviewList=new ArrayList<ReviewModel>();
-    ReviewAdapter reviewAdapter;
+
     WishlistDAO wishlistDAO;
     private boolean isFavorite;
     int destinationId;
@@ -178,7 +178,7 @@ public class DetailHotelActivity extends AppCompatActivity {
         LinearLayoutManager layoutManagerHotel = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         detailHotelBinding.recyclerViewHotelNearby.setLayoutManager(layoutManagerHotel);
         reviewList=reviewDAO.getReviewsForHotel(hotelModel.getHotelId());
-        reviewAdapter=new ReviewAdapter(this,reviewList);
+        ReviewAdapter reviewAdapter = new ReviewAdapter(this,reviewList);
         detailHotelBinding.recyclerViewDanhGia.setAdapter(reviewAdapter);
     }
     private void setHeartColor(ImageView imageView, boolean isHeartRed) {

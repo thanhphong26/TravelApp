@@ -37,7 +37,7 @@ public class TourBookingDAO {
         if (database != null) {
             try {
                 // get tour bookings by user id
-                String query = "SELECT tour_bookings.*, reviews.*,tours.* FROM tour_bookings JOIN tours ON tour_bookings.tour_id = tours.tour_id LEFT JOIN reviews ON tours.tour_id = reviews.item_id AND reviews.review_type = ? WHERE tour_bookings.user_Id = ?;";
+                String query = "SELECT tour_bookings.*, reviews.*,tours.* FROM tour_bookings JOIN tours ON tour_bookings.tour_id = tours.tour_id LEFT JOIN reviews ON tour_bookings.booking_id = reviews.item_id AND reviews.review_type = ? WHERE tour_bookings.user_Id = ?;";
                 cursor = database.rawQuery(query, new String[]{ReviewType.TOUR.toString(), String.valueOf(userId)});
                 if (cursor.moveToFirst()) {
                     do {

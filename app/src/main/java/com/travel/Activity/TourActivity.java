@@ -137,7 +137,7 @@ public class TourActivity extends AppCompatActivity {
                     intent = new Intent(TourActivity.this, MapsActivity2.class);
                 }
                 else if (id == R.id.navigation_profile) {
-                    intent = new Intent(TourActivity.this, PersonalInforActivity.class);
+                    intent = new Intent(TourActivity.this, AccountActivity.class);
                 }
                 if (intent != null) {
                     startActivity(intent);

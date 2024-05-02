@@ -60,7 +60,7 @@ public class MyRatingActivity extends AppCompatActivity {
         binding.ratingButton.setOnClickListener(v -> {
             float rating = binding.ratingBar2.getRating();
             String comment = binding.review.getText().toString();
-            reviewDAO.addReview(itemId, reviewType, currentUser.getUserId(), rating, comment);
+            reviewDAO.addReview(bookingId, reviewType, currentUser.getUserId(), rating, comment);
             Intent intent = new Intent(MyRatingActivity.this, HistoryActivity.class);
             startActivity(intent);
             finish();

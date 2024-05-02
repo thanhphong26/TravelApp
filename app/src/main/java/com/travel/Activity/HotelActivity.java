@@ -135,7 +135,7 @@ public class HotelActivity extends AppCompatActivity {
                     intent = new Intent(HotelActivity.this, MapsActivity2.class);
                 }
                 else if (id == R.id.navigation_profile) {
-                    intent = new Intent(HotelActivity.this, PersonalInforActivity.class);
+                    intent = new Intent(HotelActivity.this, AccountActivity.class);
                 }
                 if (intent != null) {
                     startActivity(intent);
