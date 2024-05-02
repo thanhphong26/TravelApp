@@ -202,6 +202,7 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
         binding.email.setText(userModel.getEmail());
         binding.phoneNum.setText(userModel.getPhoneNumber());
         binding.area.setText(userModel.getAddress());
+        Glide.with(this).load(userModel.getAvatar()).error(R.drawable.profile_user).into(binding.editAvt);
     }
 
 
