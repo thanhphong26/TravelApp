@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,7 +37,7 @@ public class BookTourActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         bookTourBinding = ActivityBookTourBinding.inflate(getLayoutInflater());
         setContentView(bookTourBinding.getRoot());
-        this.handleBottomNavigation();
+//        this.handleBottomNavigation();
         bookTourDAO = new BookTourDAO();
         userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
         Calendar calendar = Calendar.getInstance();
@@ -61,16 +62,18 @@ public class BookTourActivity extends AppCompatActivity {
                     adults--;
                     bookTourBinding.tvQuantityAdults.setText(String.valueOf(adults));
                 }
-                thanhtien(tourId,0);
+                float disc = getDisc();
+                thanhtien(tourId,disc);
             }
         });
-        bookTourBinding.btnIncreaseAdults.setOnClickListener(new View.OnClickListener() {
+        bookTourBinding.btnPlusAdults.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int adults = Integer.parseInt(bookTourBinding.tvQuantityAdults.getText().toString());
                 adults++;
                 bookTourBinding.tvQuantityAdults.setText(String.valueOf(adults));
-                thanhtien(tourId,0);
+                float disc = getDisc();
+                thanhtien(tourId,disc);
             }
         });
         bookTourBinding.btnDecreaseChilds.setOnClickListener(new View.OnClickListener() {
@@ -81,16 +84,18 @@ public class BookTourActivity extends AppCompatActivity {
                     childs--;
                     bookTourBinding.tvQuantityChilds.setText(String.valueOf(childs));
                 }
-                thanhtien(tourId,0);
+                float disc = getDisc();
+                thanhtien(tourId,disc);
             }
         });
-        bookTourBinding.btnIncreaseChilds.setOnClickListener(new View.OnClickListener() {
+        bookTourBinding.btnPlusChilds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int childs = Integer.parseInt(bookTourBinding.tvQuantityChilds.getText().toString());
                 childs++;
                 bookTourBinding.tvQuantityChilds.setText(String.valueOf(childs));
-                thanhtien(tourId,0);
+                float disc = getDisc();
+                thanhtien(tourId,disc);
             }
         });
         bookTourBinding.btnBack.setOnClickListener(new View.OnClickListener() {
@@ -134,12 +139,18 @@ public class BookTourActivity extends AppCompatActivity {
                 for (VoucherModel voucherModel : voucherModels) {
                     if (voucherModel.getVoucherCode().equals(code)) {
                         discount = voucherModel.getVoucherDiscount();
+                        long giam= (long) (discount*100);
+                        bookTourBinding.tvGiaDuocGiam.setText("Giảm"+" "+giam+"%"+" do áp dụng mã giảm giá");
                         break;
                     }
                 }
+                if(discount==0){
+                    Toast.makeText(BookTourActivity.this, "Mã giảm giá không hợp lệ", Toast.LENGTH_SHORT).show();
+                    bookTourBinding.tvGiaDuocGiam.setText("");
+                }
                 thanhtien(tourId,discount);
-                long giam= (long) (discount*100);
-                bookTourBinding.tvGiaDuocGiam.setText("Giảm"+" "+giam+"%"+" do áp dụng mã giảm giá");
+
+
             }
         });
     }
@@ -181,33 +192,44 @@ public class BookTourActivity extends AppCompatActivity {
         }
         return false;
     }
-    private void handleBottomNavigation() {
-        bookTourBinding.navigation.setItemIconTintList(null);
-        bookTourBinding.navigation.setSelectedItemId(R.id.navigation_home);
-        bookTourBinding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Intent intent = null;
-                int id = item.getItemId();
-                if (id == R.id.navigation_home) {
-                    return true;
-                } else if (id == R.id.navigation_favorite) {
-                    intent = new Intent(BookTourActivity.this, FavoriteActivity.class);
-                } else if (id == R.id.navigation_map) {
-                    intent = new Intent(BookTourActivity.this, DestinationActivity.class);
-                }else if (id == R.id.navigation_translate) {
-                    intent = new Intent(BookTourActivity.this, MapsActivity2.class);
-                }
-                else if (id == R.id.navigation_profile) {
-                    intent = new Intent(BookTourActivity.this, AccountActivity.class);
-                }
-                if (intent != null) {
-                    startActivity(intent);
-                    finish();
-                }
-                return true;
+    public float getDisc(){
+        VoucherDAO voucherDAO = new VoucherDAO();
+        float disc=0;
+        List<VoucherModel> voucherModels = voucherDAO.getAllVouchers();
+        for (VoucherModel voucherModel : voucherModels) {
+            if (bookTourBinding.edtMaGiamGia.getText().toString().equals(voucherModel.getVoucherCode())) {
+                disc = voucherModel.getVoucherDiscount();
             }
-        });
+        }
+        return disc;
     }
+//    private void handleBottomNavigation() {
+//        bookTourBinding.navigation.setItemIconTintList(null);
+//        bookTourBinding.navigation.setSelectedItemId(R.id.navigation_home);
+//        bookTourBinding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                Intent intent = null;
+//                int id = item.getItemId();
+//                if (id == R.id.navigation_home) {
+//                    return true;
+//                } else if (id == R.id.navigation_favorite) {
+//                    intent = new Intent(BookTourActivity.this, FavoriteActivity.class);
+//                } else if (id == R.id.navigation_map) {
+//                    intent = new Intent(BookTourActivity.this, DestinationActivity.class);
+//                }else if (id == R.id.navigation_translate) {
+//                    intent = new Intent(BookTourActivity.this, MapsActivity2.class);
+//                }
+//                else if (id == R.id.navigation_profile) {
+//                    intent = new Intent(BookTourActivity.this, AccountActivity.class);
+//                }
+//                if (intent != null) {
+//                    startActivity(intent);
+//                    finish();
+//                }
+//                return true;
+//            }
+//        });
+//    }
 
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -43,7 +44,6 @@ public class BookHotelActivity extends AppCompatActivity {
         setContentView(bookHotelBinding.getRoot());
         userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
         Calendar calendar = Calendar.getInstance();
-        this.handleBottomNavigation();
         Date today = calendar.getTime();
         calendar.add(Calendar.DAY_OF_YEAR, 1);
         Date tomorrow = calendar.getTime();
@@ -67,7 +67,8 @@ public class BookHotelActivity extends AppCompatActivity {
                     room--;
                     bookHotelBinding.tvQuantityRoom.setText(String.valueOf(room));
                 }
-                thanhtien(hotelId,0);
+                float disc = getDisc();
+                thanhtien(hotelId,disc);
             }
         });
         bookHotelBinding.btnBack.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +83,8 @@ public class BookHotelActivity extends AppCompatActivity {
                 int room = Integer.parseInt(bookHotelBinding.tvQuantityRoom.getText().toString());
                 room++;
                 bookHotelBinding.tvQuantityRoom.setText(String.valueOf(room));
-                thanhtien(hotelId,0);
+                float disc = getDisc();
+                thanhtien(hotelId,disc);
             }
         });
         bookHotelBinding.btnDecreaseAdults.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +95,8 @@ public class BookHotelActivity extends AppCompatActivity {
                     adults--;
                     bookHotelBinding.tvQuantityAdults.setText(String.valueOf(adults));
                 }
-                thanhtien(hotelId,0);
+
+
             }
         });
         bookHotelBinding.btnPlusAdults.setOnClickListener(new View.OnClickListener() {
@@ -106,8 +109,9 @@ public class BookHotelActivity extends AppCompatActivity {
                 {
                     adults=slnl*2;
                 }
+
                 bookHotelBinding.tvQuantityAdults.setText(String.valueOf(adults));
-                thanhtien(hotelId,0);
+
             }
         });
         bookHotelBinding.btnDecreaseChilds.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +122,8 @@ public class BookHotelActivity extends AppCompatActivity {
                     childs--;
                     bookHotelBinding.tvQuantityChilds.setText(String.valueOf(childs));
                 }
-                thanhtien(hotelId,0);
+
+
             }
         });
         bookHotelBinding.btnPlusChilds.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +137,7 @@ public class BookHotelActivity extends AppCompatActivity {
                     childs=slte;
                 }
                 bookHotelBinding.tvQuantityChilds.setText(String.valueOf(childs));
-                thanhtien(hotelId,0);
+
             }
         });
         bookHotelBinding.btnThanhToan.setOnClickListener(new View.OnClickListener() {
@@ -164,14 +169,22 @@ public class BookHotelActivity extends AppCompatActivity {
             public void onClick(View view) {
                 VoucherDAO voucherDAO = new VoucherDAO();
                 List<VoucherModel> voucherModels = voucherDAO.getAllVouchers();
+                String code = bookHotelBinding.edtMaGiamGia.getText().toString();
+                float discount = 0;
                 for (VoucherModel voucherModel : voucherModels) {
-                    if (bookHotelBinding.edtMaGiamGia.getText().toString().equals(voucherModel.getVoucherCode())) {
-                        float disc = voucherModel.getVoucherDiscount();
-                        thanhtien(hotelId,disc);
-                        long giam= (long) (disc*100);
+                    if (voucherModel.getVoucherCode().equals(code)) {
+                        discount = voucherModel.getVoucherDiscount();
+                        long giam= (long) (discount*100);
                         bookHotelBinding.tvGiaDuocGiam.setText("Giảm"+" "+giam+"%"+" do áp dụng mã giảm giá");
+                        break;
                     }
                 }
+                if(discount==0){
+                    Toast.makeText(BookHotelActivity.this, "Mã giảm giá không hợp lệ", Toast.LENGTH_SHORT).show();
+                    bookHotelBinding.tvGiaDuocGiam.setText("");
+                }
+                thanhtien(hotelId,discount);
+
             }
         });
     }
@@ -208,31 +221,20 @@ public class BookHotelActivity extends AppCompatActivity {
         }
         return false;
     }
-    private void handleBottomNavigation() {
-        bookHotelBinding.navigation.setItemIconTintList(null);
-        bookHotelBinding.navigation.setSelectedItemId(R.id.navigation_home);
-        bookHotelBinding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Intent intent = null;
-                int id = item.getItemId();
-                if (id == R.id.navigation_home) {
-                    return true;
-                } else if (id == R.id.navigation_favorite) {
-                    intent = new Intent(BookHotelActivity.this, FavoriteActivity.class);
-                } else if (id == R.id.navigation_map) {
-                    intent = new Intent(BookHotelActivity.this, DestinationActivity.class);
-                }else if (id == R.id.navigation_translate) {
-                    intent = new Intent(BookHotelActivity.this, MapsActivity2.class);
-                }else if (id == R.id.navigation_profile) {
-                    intent = new Intent(BookHotelActivity.this, AccountActivity.class);
-                }
-                if (intent != null) {
-                    startActivity(intent);
-                    finish();
-                }
-                return true;
-            }
-        });
+    public void reset(){
+        bookHotelBinding.edtMaGiamGia.setText("");
+        bookHotelBinding.tvGiaDuocGiam.setText("");
     }
+    public float getDisc(){
+        VoucherDAO voucherDAO = new VoucherDAO();
+        float disc=0;
+        List<VoucherModel> voucherModels = voucherDAO.getAllVouchers();
+        for (VoucherModel voucherModel : voucherModels) {
+            if (bookHotelBinding.edtMaGiamGia.getText().toString().equals(voucherModel.getVoucherCode())) {
+                disc = voucherModel.getVoucherDiscount();
+            }
+        }
+        return disc;
+    }
+
 }

@@ -68,7 +68,8 @@ public class BookFlightActivity extends AppCompatActivity {
                     quantityA--;
                     bookFlightBinding.tvQuantityAdults.setText(String.valueOf(quantityA));
                 }
-                thanhtien(flightId,0);
+                float disc = getDisc();
+                thanhtien(flightId,disc);
             }
         });
         bookFlightBinding.btnBack.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +84,8 @@ public class BookFlightActivity extends AppCompatActivity {
                 int quantityA = Integer.parseInt(bookFlightBinding.tvQuantityAdults.getText().toString());
                 quantityA++;
                 bookFlightBinding.tvQuantityAdults.setText(String.valueOf(quantityA));
-                thanhtien(flightId,0);
+                float disc = getDisc();
+                thanhtien(flightId,disc);
             }
 
         });
@@ -95,7 +97,8 @@ public class BookFlightActivity extends AppCompatActivity {
                     quantityC--;
                     bookFlightBinding.tvQuantityChilds.setText(String.valueOf(quantityC));
                 }
-                thanhtien(flightId,0);
+                float disc = getDisc();
+                thanhtien(flightId,disc);
             }
         });
         bookFlightBinding.btnPlusChilds.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +107,8 @@ public class BookFlightActivity extends AppCompatActivity {
                 int quantityC = Integer.parseInt(bookFlightBinding.tvQuantityChilds.getText().toString());
                 quantityC++;
                 bookFlightBinding.tvQuantityChilds.setText(String.valueOf(quantityC));
-                thanhtien(flightId,0);
+                float disc = getDisc();
+                thanhtien(flightId,disc);
             }
         });
 
@@ -142,14 +146,23 @@ public class BookFlightActivity extends AppCompatActivity {
             public void onClick(View view) {
                 VoucherDAO voucherDAO = new VoucherDAO();
                 List<VoucherModel> voucherModels = voucherDAO.getAllVouchers();
+                String code = bookFlightBinding.edtMaGiamGia.getText().toString();
+                float discount = 0;
                 for (VoucherModel voucherModel : voucherModels) {
-                    if (bookFlightBinding.edtMaGiamGia.getText().toString().equals(voucherModel.getVoucherCode())) {
-                        float disc = voucherModel.getVoucherDiscount();
-                        thanhtien(flightId,disc);
-                        long giam= (long) (disc*100);
+                    if (voucherModel.getVoucherCode().equals(code)) {
+                        discount = voucherModel.getVoucherDiscount();
+                        long giam= (long) (discount*100);
                         bookFlightBinding.tvGiaDuocGiam.setText("Giảm"+" "+giam+"%"+" do áp dụng mã giảm giá");
+                        break;
                     }
                 }
+                if(discount==0){
+                    Toast.makeText(BookFlightActivity.this, "Mã giảm giá không hợp lệ", Toast.LENGTH_SHORT).show();
+                    bookFlightBinding.tvGiaDuocGiam.setText("");
+                }
+                thanhtien(flightId,discount);
+
+
             }
         });
     }
@@ -203,5 +216,16 @@ public class BookFlightActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+    public float getDisc(){
+        VoucherDAO voucherDAO = new VoucherDAO();
+        float disc=0;
+        List<VoucherModel> voucherModels = voucherDAO.getAllVouchers();
+        for (VoucherModel voucherModel : voucherModels) {
+            if (bookFlightBinding.edtMaGiamGia.getText().toString().equals(voucherModel.getVoucherCode())) {
+                disc = voucherModel.getVoucherDiscount();
+            }
+        }
+        return disc;
     }
 }

@@ -4,12 +4,15 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.travel.App;
 import com.travel.Database.BookFlightDAO;
 import com.travel.Database.BookHotelDAO;
@@ -20,6 +23,7 @@ import com.travel.Model.BookFlightModel;
 import com.travel.Model.FlightModel;
 import com.travel.Model.TypeOfFlightModel;
 import com.travel.Model.UserModel;
+import com.travel.R;
 import com.travel.databinding.ActivityCheckoutBinding;
 
 import java.util.ArrayList;
@@ -39,6 +43,7 @@ public class CheckoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         checkoutBinding = ActivityCheckoutBinding.inflate(getLayoutInflater());
         setContentView(checkoutBinding.getRoot());
+        this.handleBottomNavigation();
         checkoutBinding.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,7 +66,6 @@ public class CheckoutActivity extends AppCompatActivity {
         checkoutBinding.edtEmail.setText(bundle.getString("email"));
         checkoutBinding.edtSoDienThoai.setText(bundle.getString("soDienThoai"));
         checkoutBinding.tvTongTien.setText(String.valueOf(bundle.getLong("total")));
-        checkoutBinding.GiaTu.setText(bundle.getString("txtgia"));
         checkoutBinding.tvGiaDuocGiam.setText(bundle.getString("txtgiamgia"));
         checkoutBinding.btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,5 +109,32 @@ public class CheckoutActivity extends AppCompatActivity {
         intent1.putExtra("value",bundle);
         startActivity(intent1);
     }
-
+    private void handleBottomNavigation() {
+        checkoutBinding.navigation.setItemIconTintList(null);
+        checkoutBinding.navigation.setSelectedItemId(R.id.navigation_home);
+        checkoutBinding.navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent = null;
+                int id = item.getItemId();
+               if (id == R.id.navigation_home) {
+                   return true;
+                } else if (id == R.id.navigation_favorite) {
+                    intent = new Intent(CheckoutActivity.this, FavoriteActivity.class);
+                } else if (id == R.id.navigation_map) {
+                    intent = new Intent(CheckoutActivity.this, DestinationActivity.class);
+                }else if (id == R.id.navigation_translate) {
+                    intent = new Intent(CheckoutActivity.this, MapsActivity2.class);
+                }
+                else if (id == R.id.navigation_profile) {
+                    intent = new Intent(CheckoutActivity.this, AccountActivity.class);
+                }
+                if (intent != null) {
+                    startActivity(intent);
+                    finish();
+                }
+                return true;
+            }
+        });
+    }
 }
