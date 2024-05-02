@@ -66,10 +66,15 @@ public class DetailRestaurantActivity extends AppCompatActivity {
         wishlistDAO=new WishlistDAO(this);
         restaurantModel = restaurantDAO.getRestaurantById(restaurantId);
         reviewList = reviewDAO.getReviewsForHotel(restaurantId);
+        for (ReviewModel reviewModel:reviewList){
+            System.out.println(reviewModel.getReview()+" test");
+        }
         setRestaurant(restaurantModel);
+        reviewList=reviewDAO.getReviewsForRestaurant(restaurantId);
+        reviewAdapter=new ReviewAdapter(this,reviewList);
+        restaurantBinding.recyclerViewDanhGia.setAdapter(reviewAdapter);
         setRating((int) ratingAverage(reviewList));
         setupRestaurantRecyclerView(restaurantModel);
-        setUpRecyclerView(restaurantModel);
         restaurantBinding.lyMap.setOnClickListener(v -> navigateToLocation(restaurantModel));
         restaurantBinding.button.setOnClickListener(v -> navigateToBooking(restaurantModel));
         isFavorite = wishlistDAO.checkFavoriteRestaurant(restaurantModel.getRestaurantId(), userModel.getUserId());
@@ -82,7 +87,6 @@ public class DetailRestaurantActivity extends AppCompatActivity {
                 intent.putExtra("destinationId",destinationId);
                 startActivity(intent);*/
                 onBackPressed();
-                finish();
             }
         });
     }
@@ -143,13 +147,6 @@ public class DetailRestaurantActivity extends AppCompatActivity {
         List<RestaurantModel> restaurants = restaurantDAO.getNearDestinationExcludingCurrent(restaurantModel.getDestination().getDestinationId(), restaurantModel.getRestaurantId());
         DetailDestinationAdapter<RestaurantModel> restaurantAdapter = new DetailDestinationAdapter<>(restaurants, this);
         restaurantBinding.recyclerViewRestaurantNearby.setAdapter(restaurantAdapter);
-    }
-    public void setUpRecyclerView(RestaurantModel restaurantModel){
-        LinearLayoutManager layoutManagerHotel = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        restaurantBinding.recyclerViewRestaurantNearby.setLayoutManager(layoutManagerHotel);
-        reviewList=reviewDAO.getReviewsForHotel(restaurantModel.getRestaurantId());
-        reviewAdapter=new ReviewAdapter(this,reviewList);
-        restaurantBinding.recyclerViewDanhGia.setAdapter(reviewAdapter);
     }
     private void setHeartColor(ImageView imageView, boolean isHeartRed) {
         if (isHeartRed) {
