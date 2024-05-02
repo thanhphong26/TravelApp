@@ -41,6 +41,7 @@ public class RatingHistoryActivity extends AppCompatActivity {
         list.addAll(listResTaurant);
         list.addAll(listTour);
         adapter = new HistoryRatingAdapter(this, R.layout.item_rating, list);
+
         ratingHistoryBinding.lvRatingHistory.setAdapter(adapter);
         ratingHistoryBinding.imgBack.setOnClickListener(v -> {
             finish();

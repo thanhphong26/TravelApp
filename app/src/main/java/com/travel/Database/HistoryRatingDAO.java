@@ -16,9 +16,15 @@ public class HistoryRatingDAO {
 
     public Cursor getReviewTourByUserId(int userId) {
         database=databaseHelper.openDatabase();
-        String query = "SELECT tours.name, tours.description, tours.image, reviews.rating, reviews.review,reviews.reviewDate " +
-                "FROM reviews JOIN tours ON reviews.item_id = tours.tour_id " +
-                "WHERE reviews.user_id = ? and reviews.review_type='tour'";
+        String query = "SELECT tours.name, tours.description, tours.image, A1.rating, A1.review, A1.reviewDate \n" +
+                "                FROM tours \n" +
+                "                JOIN (\n" +
+                "                   SELECT tour_bookings.booking_id,tour_bookings.tour_id, reviews.rating, reviews.review, reviews.reviewDate \n" +
+                "                    FROM reviews \n" +
+                "                    JOIN tour_bookings ON reviews.item_id = tour_bookings.booking_id \n" +
+                "                    WHERE reviews.user_id = ? and review_type=\"tour\"\n" +
+                "                ) AS A1 \n" +
+                "                ON A1.tour_id = tours.tour_id;";
         String[] selectionArgs = {String.valueOf(userId)};
         return database.rawQuery(query, selectionArgs);
     }
@@ -39,9 +45,15 @@ public class HistoryRatingDAO {
     }
     public Cursor getReviewHotelByUserId(int userId) {
         database=databaseHelper.openDatabase();
-        String query = "SELECT hotels.name, hotels.description, hotels.image, reviews.rating, reviews.review,reviews.reviewDate " +
-                "FROM reviews JOIN hotels ON reviews.item_id = hotels.hotel_id " +
-                "WHERE reviews.user_id = ? and reviews.review_type='hotel'";
+        String query = "SELECT hotels.name, hotels.description, hotels.image, A1.rating, A1.review, A1.reviewDate \n" +
+                "                FROM hotels\n" +
+                "                JOIN (\n" +
+                "                   SELECT hotel_bookings.booking_id,hotel_bookings.hotel_id, reviews.rating, reviews.review, reviews.reviewDate \n" +
+                "                    FROM reviews \n" +
+                "                    JOIN hotel_bookings ON reviews.item_id = hotel_bookings.booking_id \n" +
+                "                    WHERE reviews.user_id = ? and review_type=\"hotel\"\n" +
+                "                ) AS A1 \n" +
+                "                ON A1.hotel_id = hotels.hotel_id;";
         String[] selectionArgs = {String.valueOf(userId)};
         return database.rawQuery(query, selectionArgs);
     }
@@ -62,9 +74,15 @@ public class HistoryRatingDAO {
     }
     public Cursor getReviewRestaurantByUserId(int userId) {
         database=databaseHelper.openDatabase();
-        String query = "SELECT restaurant.name, restaurant.description, restaurant.image, reviews.rating, reviews.review,reviews.reviewDate " +
-                "FROM reviews JOIN restaurant ON reviews.item_id = restaurant.restaurant_id " +
-                "WHERE reviews.user_id = ? and reviews.review_type='restaurant'";
+        String query = "SELECT restaurant.name, restaurant.description, restaurant.image, A1.rating, A1.review, A1.reviewDate\n" +
+                "       FROM restaurant\n" +
+                "                      JOIN (\n" +
+                "                       SELECT restaurant_bookings.booking_id,restaurant_bookings.restaurant_id, reviews.rating, reviews.review, reviews.reviewDate\n" +
+                "                              FROM reviews \n" +
+                "                              JOIN restaurant_bookings ON reviews.item_id = restaurant_bookings.booking_id \n" +
+                "                                 WHERE reviews.user_id = ? and review_type=\"restaurant\"\n" +
+                "                               ) AS A1 \n" +
+                "                               ON A1.restaurant_id = restaurant.restaurant_id; ";
         String[] selectionArgs = {String.valueOf(userId)};
         return database.rawQuery(query, selectionArgs);
     }
