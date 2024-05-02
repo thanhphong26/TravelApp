@@ -29,7 +29,7 @@ public class HotelBookingDAO {
         if (database != null) {
             Cursor cursor = null;
             try {
-                String query = "SELECT hotel_bookings.*, reviews.*,hotels.* FROM hotel_bookings JOIN hotels ON hotel_bookings.hotel_id = hotels.hotel_id LEFT JOIN reviews ON hotels.hotel_id = reviews.item_id AND reviews.review_type = ? WHERE hotel_bookings.user_Id = ?;";
+                String query = "SELECT hotel_bookings.*, reviews.*,hotels.* FROM hotel_bookings JOIN hotels ON hotel_bookings.hotel_id = hotels.hotel_id LEFT JOIN reviews ON hotel_bookings.booking_id = reviews.item_id AND reviews.review_type = ? WHERE hotel_bookings.user_Id = ?;";
                 cursor = database.rawQuery(query, new String[]{ReviewType.HOTEL.toString(), String.valueOf(userId)});
                 if (cursor.moveToFirst()) {
                     do {
