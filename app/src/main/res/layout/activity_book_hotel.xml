@@ -31,7 +31,7 @@
     </androidx.appcompat.widget.Toolbar>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="595dp">
+        android:layout_height="590dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

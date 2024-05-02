@@ -61,7 +61,8 @@ public class BookTourActivity extends AppCompatActivity {
                     adults--;
                     bookTourBinding.tvQuantityAdults.setText(String.valueOf(adults));
                 }
-                thanhtien(tourId,0);
+                float disc = getDisc();
+                thanhtien(tourId,disc);
             }
         });
         bookTourBinding.btnPlusAdults.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +71,8 @@ public class BookTourActivity extends AppCompatActivity {
                 int adults = Integer.parseInt(bookTourBinding.tvQuantityAdults.getText().toString());
                 adults++;
                 bookTourBinding.tvQuantityAdults.setText(String.valueOf(adults));
-                thanhtien(tourId,0);
+                float disc = getDisc();
+                thanhtien(tourId,disc);
             }
         });
         bookTourBinding.btnDecreaseChilds.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +83,8 @@ public class BookTourActivity extends AppCompatActivity {
                     childs--;
                     bookTourBinding.tvQuantityChilds.setText(String.valueOf(childs));
                 }
-                thanhtien(tourId,0);
+                float disc = getDisc();
+                thanhtien(tourId,disc);
             }
         });
         bookTourBinding.btnPlusChilds.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +93,8 @@ public class BookTourActivity extends AppCompatActivity {
                 int childs = Integer.parseInt(bookTourBinding.tvQuantityChilds.getText().toString());
                 childs++;
                 bookTourBinding.tvQuantityChilds.setText(String.valueOf(childs));
-                thanhtien(tourId,0);
+                float disc = getDisc();
+                thanhtien(tourId,disc);
             }
         });
         bookTourBinding.btnBack.setOnClickListener(new View.OnClickListener() {
@@ -180,6 +184,17 @@ public class BookTourActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+    public float getDisc(){
+        VoucherDAO voucherDAO = new VoucherDAO();
+        float disc=0;
+        List<VoucherModel> voucherModels = voucherDAO.getAllVouchers();
+        for (VoucherModel voucherModel : voucherModels) {
+            if (bookTourBinding.edtMaGiamGia.getText().toString().equals(voucherModel.getVoucherCode())) {
+                disc = voucherModel.getVoucherDiscount();
+            }
+        }
+        return disc;
     }
 //    private void handleBottomNavigation() {
 //        bookTourBinding.navigation.setItemIconTintList(null);
