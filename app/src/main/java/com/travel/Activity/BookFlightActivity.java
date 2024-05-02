@@ -68,7 +68,8 @@ public class BookFlightActivity extends AppCompatActivity {
                     quantityA--;
                     bookFlightBinding.tvQuantityAdults.setText(String.valueOf(quantityA));
                 }
-                thanhtien(flightId,0);
+                float disc = getDisc();
+                thanhtien(flightId,disc);
             }
         });
         bookFlightBinding.btnBack.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +84,8 @@ public class BookFlightActivity extends AppCompatActivity {
                 int quantityA = Integer.parseInt(bookFlightBinding.tvQuantityAdults.getText().toString());
                 quantityA++;
                 bookFlightBinding.tvQuantityAdults.setText(String.valueOf(quantityA));
-                thanhtien(flightId,0);
+                float disc = getDisc();
+                thanhtien(flightId,disc);
             }
 
         });
@@ -95,7 +97,8 @@ public class BookFlightActivity extends AppCompatActivity {
                     quantityC--;
                     bookFlightBinding.tvQuantityChilds.setText(String.valueOf(quantityC));
                 }
-                thanhtien(flightId,0);
+                float disc = getDisc();
+                thanhtien(flightId,disc);
             }
         });
         bookFlightBinding.btnPlusChilds.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +107,8 @@ public class BookFlightActivity extends AppCompatActivity {
                 int quantityC = Integer.parseInt(bookFlightBinding.tvQuantityChilds.getText().toString());
                 quantityC++;
                 bookFlightBinding.tvQuantityChilds.setText(String.valueOf(quantityC));
-                thanhtien(flightId,0);
+                float disc = getDisc();
+                thanhtien(flightId,disc);
             }
         });
 
@@ -203,5 +207,16 @@ public class BookFlightActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+    public float getDisc(){
+        VoucherDAO voucherDAO = new VoucherDAO();
+        float disc=0;
+        List<VoucherModel> voucherModels = voucherDAO.getAllVouchers();
+        for (VoucherModel voucherModel : voucherModels) {
+            if (bookFlightBinding.edtMaGiamGia.getText().toString().equals(voucherModel.getVoucherCode())) {
+                disc = voucherModel.getVoucherDiscount();
+            }
+        }
+        return disc;
     }
 }

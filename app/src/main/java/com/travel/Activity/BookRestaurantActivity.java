@@ -7,13 +7,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.travel.Database.BookRestaurantDAO;
+import com.travel.Database.VoucherDAO;
 import com.travel.Model.UserModel;
+import com.travel.Model.VoucherModel;
 import com.travel.Utils.SharePreferencesHelper;
 import com.travel.databinding.ActivityBookRestaurantBinding;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
 public class BookRestaurantActivity extends AppCompatActivity {
     ActivityBookRestaurantBinding bookRestaurantBinding;
     BookRestaurantDAO bookRestaurantDAO;
@@ -35,6 +39,7 @@ public class BookRestaurantActivity extends AppCompatActivity {
         loadUser(userId);
         loadInfor(restaurantId);
         String img=bookRestaurantDAO.getInfor(restaurantId).getImage();
+        bookRestaurantBinding.btnThanhToan.setEnabled(false);
         Glide.with(this).load(img).into(bookRestaurantBinding.imgRestaurant);
 
         bookRestaurantBinding.btnDecreaseAdults.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +50,7 @@ public class BookRestaurantActivity extends AppCompatActivity {
                     adults--;
                     bookRestaurantBinding.tvQuantityAdults.setText(String.valueOf(adults));
                 }
+                thanhtien(restaurantId);
 
             }
         });
@@ -54,6 +60,7 @@ public class BookRestaurantActivity extends AppCompatActivity {
                 int adults = Integer.parseInt(bookRestaurantBinding.tvQuantityAdults.getText().toString());
                 adults++;
                 bookRestaurantBinding.tvQuantityAdults.setText(String.valueOf(adults));
+                thanhtien(restaurantId);
 
             }
         });
@@ -65,6 +72,7 @@ public class BookRestaurantActivity extends AppCompatActivity {
                     childs--;
                     bookRestaurantBinding.tvQuantityChilds.setText(String.valueOf(childs));
                 }
+                thanhtien(restaurantId);
 
             }
         });
@@ -74,7 +82,7 @@ public class BookRestaurantActivity extends AppCompatActivity {
                 int childs = Integer.parseInt(bookRestaurantBinding.tvQuantityChilds.getText().toString());
                 childs++;
                 bookRestaurantBinding.tvQuantityChilds.setText(String.valueOf(childs));
-
+                thanhtien(restaurantId);
             }
         });
         bookRestaurantBinding.btnThanhToan.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +101,7 @@ public class BookRestaurantActivity extends AppCompatActivity {
                 bundle.putString("ten",bookRestaurantBinding.tvTenRestaurant.getText().toString());
                 bundle.putString("moTa",bookRestaurantBinding.tvMoTa.getText().toString());
                 bundle.putString("img",img);
-                bundle.putString("txtgia","Giá từ");
+                bundle.putLong("total",Long.parseLong(bookRestaurantBinding.tvThanhTien.getText().toString()));
                 bundle.putInt("id",3);
                 bundle.putLong("total",Long.parseLong(bookRestaurantBinding.tvThanhTien.getText().toString()));
                 intent.putExtra("package",bundle);
@@ -106,6 +114,7 @@ public class BookRestaurantActivity extends AppCompatActivity {
                 finish();
             }
         });
+
     }
     public void loadUser(int userId)
     {
@@ -121,7 +130,21 @@ public class BookRestaurantActivity extends AppCompatActivity {
         bookRestaurantBinding.tvTenRestaurant.setText(bookRestaurantDAO.getInfor(restaurantId).getName());
         bookRestaurantBinding.tvMoTa.setText(bookRestaurantDAO.getInfor(restaurantId).getDescription());
         long price = (long) bookRestaurantDAO.getInfor(restaurantId).getPrice();
-        bookRestaurantBinding.tvThanhTien.setText(String.valueOf(price));
+    }
+    public void thanhtien(int restaurantId)
+    {
+        int sl_treEm=Integer.parseInt(bookRestaurantBinding.tvQuantityChilds.getText().toString());
+        int sl_nguoiLon=Integer.parseInt(bookRestaurantBinding.tvQuantityAdults.getText().toString());
+        long gia=(long) bookRestaurantDAO.getInfor(restaurantId).getPrice();
+        long tongtien=(long)(((sl_nguoiLon*gia)+(sl_treEm*gia)));
+        bookRestaurantBinding.tvThanhTien.setText(String.valueOf(tongtien));
+        if(checkPrice(Long.parseLong(bookRestaurantBinding.tvThanhTien.getText().toString())))
+        {
+            bookRestaurantBinding.btnThanhToan.setEnabled(true);
+        }
+        else{
+            bookRestaurantBinding.btnThanhToan.setEnabled(false);
+        }
     }
     public boolean checkPrice(float price){
         if(price>0.0){
@@ -129,5 +152,4 @@ public class BookRestaurantActivity extends AppCompatActivity {
         }
         return false;
     }
-
 }

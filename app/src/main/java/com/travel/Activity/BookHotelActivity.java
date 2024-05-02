@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -66,7 +67,8 @@ public class BookHotelActivity extends AppCompatActivity {
                     room--;
                     bookHotelBinding.tvQuantityRoom.setText(String.valueOf(room));
                 }
-                thanhtien(hotelId,0);
+                float disc = getDisc();
+                thanhtien(hotelId,disc);
             }
         });
         bookHotelBinding.btnBack.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +83,8 @@ public class BookHotelActivity extends AppCompatActivity {
                 int room = Integer.parseInt(bookHotelBinding.tvQuantityRoom.getText().toString());
                 room++;
                 bookHotelBinding.tvQuantityRoom.setText(String.valueOf(room));
-                thanhtien(hotelId,0);
+                float disc = getDisc();
+                thanhtien(hotelId,disc);
             }
         });
         bookHotelBinding.btnDecreaseAdults.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +95,8 @@ public class BookHotelActivity extends AppCompatActivity {
                     adults--;
                     bookHotelBinding.tvQuantityAdults.setText(String.valueOf(adults));
                 }
-                thanhtien(hotelId,0);
+
+
             }
         });
         bookHotelBinding.btnPlusAdults.setOnClickListener(new View.OnClickListener() {
@@ -105,8 +109,9 @@ public class BookHotelActivity extends AppCompatActivity {
                 {
                     adults=slnl*2;
                 }
+
                 bookHotelBinding.tvQuantityAdults.setText(String.valueOf(adults));
-                thanhtien(hotelId,0);
+
             }
         });
         bookHotelBinding.btnDecreaseChilds.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +122,8 @@ public class BookHotelActivity extends AppCompatActivity {
                     childs--;
                     bookHotelBinding.tvQuantityChilds.setText(String.valueOf(childs));
                 }
-                thanhtien(hotelId,0);
+
+
             }
         });
         bookHotelBinding.btnPlusChilds.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +137,7 @@ public class BookHotelActivity extends AppCompatActivity {
                     childs=slte;
                 }
                 bookHotelBinding.tvQuantityChilds.setText(String.valueOf(childs));
-                thanhtien(hotelId,0);
+
             }
         });
         bookHotelBinding.btnThanhToan.setOnClickListener(new View.OnClickListener() {
@@ -206,6 +212,21 @@ public class BookHotelActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+    public void reset(){
+        bookHotelBinding.edtMaGiamGia.setText("");
+        bookHotelBinding.tvGiaDuocGiam.setText("");
+    }
+    public float getDisc(){
+        VoucherDAO voucherDAO = new VoucherDAO();
+        float disc=0;
+        List<VoucherModel> voucherModels = voucherDAO.getAllVouchers();
+        for (VoucherModel voucherModel : voucherModels) {
+            if (bookHotelBinding.edtMaGiamGia.getText().toString().equals(voucherModel.getVoucherCode())) {
+                disc = voucherModel.getVoucherDiscount();
+            }
+        }
+        return disc;
     }
 
 }
