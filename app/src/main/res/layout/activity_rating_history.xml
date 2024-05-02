@@ -3,34 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
     android:orientation="vertical"
     android:background="@drawable/backgroud_checkout">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_collapseMode="pin">
 
-        <ImageView
-            android:id="@+id/btn_back"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            app:srcCompat="@drawable/icon_back" />
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:text="Lịch sử đánh giá"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-    </androidx.appcompat.widget.Toolbar>
-=======
-    android:orientation="vertical">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
@@ -80,7 +55,6 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
->>>>>>> 503840d (TA-25 | Add policy, fix layout rating_history)
     <ListView
         android:id="@+id/lvRatingHistory"
         android:layout_width="match_parent"
