@@ -177,10 +177,12 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
         userModel.setAvatar(imageUrl);
         Glide.with(this).load(userModel.getAvatar()).error(R.drawable.profile_user).into(binding.editAvt);
         userModelDAO.updateImageProfile(userModel);
+        updateUserReference();
     }
 
     @Override
     public void onUploadSuccess(String imageUrl) {
+        this.saveImageUrlToDatabase(imageUrl);
     }
 
     @Override
@@ -201,6 +203,7 @@ public class PersonalInfoActivity extends AppCompatActivity implements GooogleCl
         binding.phoneNum.setText(userModel.getPhoneNumber());
         binding.area.setText(userModel.getAddress());
     }
+
 
     private void updateUsername() {
         final Dialog dialog = new Dialog(PersonalInfoActivity.this);
