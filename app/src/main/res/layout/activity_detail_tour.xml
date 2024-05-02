@@ -160,32 +160,6 @@
                         android:layout_marginBottom="5dp"
                         android:inputType="textMultiLine"
                         android:text="The sun was shining brightly as the birds chirped merrily in the trees. A gentle breeze rustled the leaves, creating a soothing melody that filled the air. The flowers bloomed in a riot of colors, painting the landscape with vibrant hues. It was a perfect day to be outside, enjoying the beauty of nature and soaking in the warmth of the sun. Everything seemed to be in harmony, as if the world itself was celebrating the joy of life." />
-                </LinearLayout>
-
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="horizontal"></LinearLayout>
-                </HorizontalScrollView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Thông tin lịch trình"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -310,6 +284,32 @@
                             android:textColor="@color/black"
                             app:backgroundTint="@null" />
                     </LinearLayout>
+                </LinearLayout>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="15dp"
+                        android:orientation="horizontal"></LinearLayout>
+                </HorizontalScrollView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Thông tin lịch trình"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -393,8 +393,6 @@
                             android:layout_height="wrap_content"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
                     </LinearLayout>
-
-
                 </LinearLayout>
 
             </LinearLayout>
