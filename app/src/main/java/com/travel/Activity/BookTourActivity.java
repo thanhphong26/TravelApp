@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -138,12 +139,18 @@ public class BookTourActivity extends AppCompatActivity {
                 for (VoucherModel voucherModel : voucherModels) {
                     if (voucherModel.getVoucherCode().equals(code)) {
                         discount = voucherModel.getVoucherDiscount();
+                        long giam= (long) (discount*100);
+                        bookTourBinding.tvGiaDuocGiam.setText("Giảm"+" "+giam+"%"+" do áp dụng mã giảm giá");
                         break;
                     }
                 }
+                if(discount==0){
+                    Toast.makeText(BookTourActivity.this, "Mã giảm giá không hợp lệ", Toast.LENGTH_SHORT).show();
+                    bookTourBinding.tvGiaDuocGiam.setText("");
+                }
                 thanhtien(tourId,discount);
-                long giam= (long) (discount*100);
-                bookTourBinding.tvGiaDuocGiam.setText("Giảm"+" "+giam+"%"+" do áp dụng mã giảm giá");
+
+
             }
         });
     }
