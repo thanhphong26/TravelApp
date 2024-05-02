@@ -27,11 +27,8 @@ public class ReviewDAO {
         ArrayList<ReviewModel> reviewList = new ArrayList<>();
         Cursor cursor = null;
         try {
-            cursor = database.query("reviews",
-                    new String[]{"review_id", "user_id", "review_type", "item_id", "review", "rating", "reviewDate"},
-                    "review_type='tour' and item_id = ?",
-                    new String[]{String.valueOf(tourId)},
-                    null, null, null);
+            String query = "SELECT * FROM reviews LEFT JOIN tour_bookings ON reviews.item_id = tour_bookings.booking_id WHERE reviews.review_type = ? AND tour_bookings.tour_id = ?;";
+            cursor = database.rawQuery(query, new String[]{ReviewType.TOUR.toString(), String.valueOf(tourId)});
             if (cursor != null && cursor.moveToFirst()) {
                 do {
                     @SuppressLint("Range") int reviewId = cursor.getInt(cursor.getColumnIndex("review_id"));
@@ -77,11 +74,8 @@ public class ReviewDAO {
         ArrayList<ReviewModel> reviewList = new ArrayList<>();
         Cursor cursor = null;
         try {
-            cursor = database.query("reviews",
-                    new String[]{"review_id", "user_id", "review_type", "item_id", "review", "rating", "reviewDate"},
-                    "review_type='hotel' and item_id = ?",
-                    new String[]{String.valueOf(hotelId)},
-                    null, null, null);
+            String query = "SELECT * FROM reviews LEFT JOIN hotel_bookings ON reviews.item_id = hotel_bookings.booking_id WHERE reviews.review_type = ? AND hotel_bookings.hotel_id = ?;";
+            cursor = database.rawQuery(query, new String[]{ReviewType.HOTEL.toString(), String.valueOf(hotelId)});
             if (cursor != null && cursor.moveToFirst()) {
                 do {
                     @SuppressLint("Range") int reviewId = cursor.getInt(cursor.getColumnIndex("review_id"));
@@ -119,11 +113,8 @@ public class ReviewDAO {
         ArrayList<ReviewModel> reviewList = new ArrayList<>();
         Cursor cursor = null;
         try {
-            cursor = database.query("reviews",
-                    new String[]{"review_id", "user_id", "review_type", "item_id", "review", "rating", "reviewDate"},
-                    "review_type='restaurant' and item_id = ?",
-                    new String[]{String.valueOf(restaurantId)},
-                    null, null, null);
+            String query = "SELECT * FROM reviews LEFT JOIN restaurant_bookings ON reviews.item_id = restaurant_bookings.booking_id WHERE reviews.review_type = ? AND restaurant_bookings.restaurant_id = ?;";
+            cursor = database.rawQuery(query, new String[]{ReviewType.RESTAURANT.toString(), String.valueOf(restaurantId)});
             if (cursor != null && cursor.moveToFirst()) {
                 do {
                     @SuppressLint("Range") int reviewId = cursor.getInt(cursor.getColumnIndex("review_id"));

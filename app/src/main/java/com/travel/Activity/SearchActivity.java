@@ -148,7 +148,7 @@ public class SearchActivity extends AppCompatActivity {
                     intent = new Intent(SearchActivity.this, MapsActivity2.class);
                 }
                 else if (id == R.id.navigation_profile) {
-                    intent = new Intent(SearchActivity.this, PersonalInforActivity.class);
+                    intent = new Intent(SearchActivity.this, AccountActivity.class);
                 }
                 if (intent != null) {
                     startActivity(intent);

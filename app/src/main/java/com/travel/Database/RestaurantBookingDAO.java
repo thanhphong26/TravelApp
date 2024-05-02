@@ -29,7 +29,7 @@ public class RestaurantBookingDAO {
             Cursor cursor = null;
             try {
                 // get restaurant bookings by user id
-                String query = "SELECT restaurant_bookings.*, reviews.*, restaurant.* FROM restaurant_bookings JOIN restaurant ON restaurant_bookings.restaurant_id = restaurant.restaurant_id LEFT JOIN reviews ON restaurant.restaurant_id = reviews.item_id AND reviews.review_type = ? WHERE restaurant_bookings.user_Id = ?;";
+                String query = "SELECT restaurant_bookings.*, reviews.*, restaurant.* FROM restaurant_bookings JOIN restaurant ON restaurant_bookings.restaurant_id = restaurant.restaurant_id LEFT JOIN reviews ON restaurant_bookings.booking_id = reviews.item_id AND reviews.review_type = ? WHERE restaurant_bookings.user_Id = ?;";
                 cursor = database.rawQuery(query, new String[]{ReviewType.RESTAURANT.toString(), String.valueOf(userId)});
                 if (cursor.moveToFirst()) {
                     do {

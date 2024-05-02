@@ -37,9 +37,10 @@ public class DetailHotelActivity extends AppCompatActivity {
     HotelModel hotelModel=new HotelModel();
     ReviewDAO reviewDAO=new ReviewDAO();
     List<ReviewModel> reviewList=new ArrayList<ReviewModel>();
-    ReviewAdapter reviewAdapter;
+
     WishlistDAO wishlistDAO;
     private boolean isFavorite;
+    ReviewAdapter reviewAdapter;
     int destinationId;
     UserModel userModel;
     private int REQUEST_CODE_DETAIL_HOTEL=Constants.REQUEST_CODE_DETAIL_HOTEL;
@@ -68,11 +69,15 @@ public class DetailHotelActivity extends AppCompatActivity {
         wishlistDAO=new WishlistDAO(this);
         hotelModel = hotelDAO.getHotelById(hotelId);
         userModel = SharePreferencesHelper.getInstance().get("user", UserModel.class);
-        reviewList = reviewDAO.getReviewsForHotel(hotelId);
+        reviewList=reviewDAO.getReviewsForHotel(hotelId);
+        for (ReviewModel reviewModel:reviewList){
+            System.out.println(reviewModel.getReview()+" test");
+        }
+        reviewAdapter = new ReviewAdapter(this,reviewList);
+        detailHotelBinding.recyclerViewDanhGia.setAdapter(reviewAdapter);
         setHotelModel(hotelModel);
         setRating((int) ratingAverage(reviewList));
         setupHotelRecyclerView(hotelModel);
-        setUpRecyclerView(hotelModel);
         detailHotelBinding.lyMap.setOnClickListener(v -> navigateToLocation(hotelModel));
         detailHotelBinding.button.setOnClickListener(v -> navigateToBooking(hotelModel));
         isFavorite = wishlistDAO.checkFavoriteHotel(hotelModel.getHotelId(), userModel.getUserId());
@@ -88,7 +93,6 @@ public class DetailHotelActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     onBackPressed();
-                    finish();
                 }
             });
         }
@@ -173,13 +177,6 @@ public class DetailHotelActivity extends AppCompatActivity {
         List<HotelModel> hotels = hotelDAO.getNearDestinationExcludingCurrent(hotelModel.getDestination().getDestinationId(), hotelModel.getHotelId());
         DetailDestinationAdapter<HotelModel> hotelAdapter = new DetailDestinationAdapter<>(hotels, this);
         detailHotelBinding.recyclerViewHotelNearby.setAdapter(hotelAdapter);
-    }
-    public void setUpRecyclerView(HotelModel hotelModel){
-        LinearLayoutManager layoutManagerHotel = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        detailHotelBinding.recyclerViewHotelNearby.setLayoutManager(layoutManagerHotel);
-        reviewList=reviewDAO.getReviewsForHotel(hotelModel.getHotelId());
-        reviewAdapter=new ReviewAdapter(this,reviewList);
-        detailHotelBinding.recyclerViewDanhGia.setAdapter(reviewAdapter);
     }
     private void setHeartColor(ImageView imageView, boolean isHeartRed) {
         if (isHeartRed) {
