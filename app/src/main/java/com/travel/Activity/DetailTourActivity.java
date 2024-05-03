@@ -164,6 +164,9 @@ public class DetailTourActivity extends AppCompatActivity {
     }
     public float ratingAverage(List<ReviewModel> reviewList){
         float totalRating=0;
+        if (reviewList.isEmpty()){
+            return 0;
+        }
         for (ReviewModel reviewModel:reviewList){
             totalRating+=reviewModel.getRating();
         }
