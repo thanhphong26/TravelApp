@@ -64,9 +64,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 }
             });
             verifyOtpactivityBinding.btnBack.setOnClickListener(v -> {
-                Intent intent = new Intent(VerifyOTPActivity.this, SignUpActivity.class);
-                startActivity(intent);
-                finish();
+                onBackPressed();
             });
             verifyOtpactivityBinding.btnResend.setOnClickListener(v -> {
                 Random otpResend = new Random();
