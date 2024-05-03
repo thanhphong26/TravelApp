@@ -23,10 +23,12 @@
             android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
-            <com.makeramen.roundedimageview.RoundedImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imgUser"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:scaleType="fitXY"
+                app:shapeAppearanceOverlay="@style/circular"
                 android:src="@drawable/avatar"
                 app:riv_border_color="#000"/>
 
