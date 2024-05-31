@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="175dp"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="10dp"
+    android:background="@drawable/tour_card_background"
+    android:orientation="vertical"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="10dp">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:elevation="10dp"
+        android:foregroundGravity="bottom"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="10dp"
+        app:cardCornerRadius="8dp">
+
+        <ImageView
+            android:id="@+id/imgCity"
+            android:layout_width="153dp"
+            android:layout_height="110dp"
+            android:layout_gravity="bottom"
+            android:background="@color/white"
+            android:foregroundGravity="bottom"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_ha_giang" />
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtCity"
+            android:layout_width="215dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="Hà Giang"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:textAlignment="textEnd">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/icon_star" />
+
+            <TextView
+                android:id="@+id/txtRating"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="5.0"
+                android:textColor="@color/black"
+                android:textAlignment="textStart" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Từ 200,000 đ"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:textStyle="italic"
+            android:textColor="@color/black" />
+    </LinearLayout>
+</LinearLayout>

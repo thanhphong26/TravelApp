@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_gradient_blue">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_collapseMode="pin">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:srcCompat="@drawable/icon_back" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="Đặt phòng khách sạn"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+    </androidx.appcompat.widget.Toolbar>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="590dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input_search_background"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/tvNgaynhan"
+                            android:layout_width="119dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:text="1/1/2024"
+                            android:textAlignment="center"
+                            android:textStyle="bold"></TextView>
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginRight="30dp"
+
+                            android:src="@drawable/to_btn"></ImageView>
+                        <TextView
+                            android:id="@+id/tvNgaytra"
+                            android:layout_width="119dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:text="2/1/2024"
+                            android:textAlignment="center"
+                            android:textStyle="bold"></TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent">
+                            <TextView
+                                android:id="@+id/tvTenHotel"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="Phòng đôi 1 giường cỡ queen, không cửa sổ"
+                                android:textSize="13sp"
+                                android:textStyle="bold"></TextView>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp">
+
+                                <com.makeramen.roundedimageview.RoundedImageView
+                                    android:id="@+id/imgHotel"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="80dp"
+                                    android:src="@drawable/img_hotel1"
+                                    app:riv_corner_radius="10dp"></com.makeramen.roundedimageview.RoundedImageView>
+                            </LinearLayout>
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/tvMoTa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Phòng dành cho người lớn, có 1 giường đôi, không phục vụ bữa sáng"
+                        android:textSize="11sp"></TextView>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/input_search_background"
+                android:gravity="fill_horizontal"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Thông tin đặt phòng"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:textStyle="normal|bold"
+                    android:visibility="visible"></TextView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="3dp"
+                            android:text="Số lượng phòng: "
+                            android:textSize="14sp"
+                            android:textStyle="normal|bold"></TextView>
+
+                        <ImageButton
+                            android:id="@+id/btnDecreaseRoom"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/button_decrease"></ImageButton>
+
+                        <TextView
+                            android:id="@+id/tvQuantityRoom"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="2dp"
+                            android:text="0"
+                            android:textAlignment="center"
+                            android:textSize="12sp"></TextView>
+
+                        <ImageButton
+                            android:id="@+id/btnPlusRoom"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/button_plus"></ImageButton>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="3dp"
+                            android:text="Người lớn: "
+                            android:textSize="14sp"
+                            android:textStyle="normal|italic"></TextView>
+
+                        <ImageButton
+                            android:id="@+id/btnDecreaseAdults"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/button_decrease"></ImageButton>
+
+                        <TextView
+                            android:id="@+id/tvQuantityAdults"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="2dp"
+                            android:text="0"
+                            android:textAlignment="center"
+                            android:textSize="12sp"></TextView>
+
+                        <ImageButton
+                            android:id="@+id/btnPlusAdults"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/button_plus"></ImageButton>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="3dp"
+                            android:text="Trẻ em: "
+                            android:textSize="14sp"
+                            android:textStyle="normal|italic"></TextView>
+
+                        <ImageButton
+                            android:id="@+id/btnDecreaseChilds"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/button_decrease"></ImageButton>
+
+                        <TextView
+                            android:id="@+id/tvQuantityChilds"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="2dp"
+                            android:text="0"
+                            android:textAlignment="center"
+                            android:textSize="12sp"></TextView>
+
+                        <ImageButton
+                            android:id="@+id/btnPlusChilds"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/button_plus"></ImageButton>
+                    </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#DAD6D6"></View>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Thông tin người nhận "
+                    android:textSize="14sp"
+                    android:textStyle="normal|bold"></TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Họ và tên người nhận"></TextView>
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtHoTen"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/black"
+                    android:textStyle="italic" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Số điện liên hệ"></TextView>
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtSoDienThoai"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/black"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Email liên hệ"></TextView>
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/black"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginTop="2dp"
+                    android:text="Mã giảm giá"></TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtMaGiamGia"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/black"
+                        android:textStyle="italic" />
+                    <Button
+                        android:id="@+id/btnApply"
+                        android:layout_width="100dp"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="1dp"
+                        app:backgroundTint="@color/blue"
+                        android:background="@drawable/button_background_blue"
+                        android:text="Áp dụng"
+                        android:textSize="11sp"
+                        android:textStyle="bold">
+                    </Button>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="10dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="13sp"
+                        android:text="Thành tiền"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/tvThanhTien"
+                        android:layout_width="194dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="25dp"
+                        android:text="0"
+                        android:textColor="#0FAEC3"
+                        android:textSize="20sp"></TextView>
+
+                    <TextView
+                        android:id="@+id/tvGiaDuocGiam"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:text=""
+                        android:textColor="@color/blue"
+                        android:textSize="12sp"
+                        android:layout_marginBottom="5dp"
+                        android:textStyle="bold"></TextView>
+                </LinearLayout>
+                <Button
+                    android:id="@+id/btnThanhToan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="37dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="@color/blue"
+                    android:text="Đặt ngay"
+                    android:layout_weight="1"
+                    app:backgroundTint="@color/blue"
+                    android:background="@drawable/button_background_blue"
+                    android:textStyle="bold">
+                </Button>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

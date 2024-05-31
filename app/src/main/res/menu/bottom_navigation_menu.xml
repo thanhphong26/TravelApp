@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_home"
+        android:enabled="true"
+        android:icon="@drawable/icon_home"
+        android:iconTint="#31a6d4"
+        android:title="" />
+    <item
+        android:id="@+id/navigation_map"
+        android:enabled="true"
+        android:icon="@drawable/icon_compass"
+        android:title="" />
+
+    <item
+        android:id="@+id/navigation_favorite"
+        android:enabled="true"
+        android:icon="@drawable/icon_favorite"
+        android:title="" />
+
+    <item
+        android:id="@+id/navigation_translate"
+        android:enabled="true"
+        android:icon="@drawable/icon_destination"
+        android:title="" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:enabled="true"
+        android:icon="@drawable/icon_profile"
+        android:title="" />
+</menu>

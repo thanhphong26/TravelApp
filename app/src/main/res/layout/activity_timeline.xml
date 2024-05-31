@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".Activity.TimeLineActivity">
+    <Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:id="@+id/toolbar">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/icon_back"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lịch trình"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"
+            android:gravity="center"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+    </Toolbar>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+           <androidx.recyclerview.widget.RecyclerView
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+               android:id="@+id/recyclerViewTimeline"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

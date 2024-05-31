@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">TravelApp</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_destination">DestinationActivity</string>
+    <string name="app_name1">Dropdown Menu</string>
+    <string name="select">Select Item</string>
+    <string name="select_area">Chọn khu vực của bạn</string>
+    <string name="select_language">Chọn ngôn ngữ của bạn</string>
+    <string name="title_activity_maps2">MapsActivity2</string>
+    <string name="policy_text">
+    <![CDATA[
+        Chào mừng bạn đến với ứng dụng di động du lịch! Trước khi bạn bắt đầu sử dụng ứng dụng, vui lòng đọc kỹ và hiểu rõ các điều khoản và quy định dưới đây. Việc sử dụng ứng dụng của chúng tôi đồng nghĩa với việc bạn chấp nhận và tuân thủ các điều khoản này. Nếu bạn không đồng ý với bất kỳ điều khoản nào, vui lòng không sử dụng ứng dụng của chúng tôi.\n
+
+        1. Quyền sở hữu trí tuệ: Tất cả các quyền sở hữu trí tuệ liên quan đến ứng dụng di động du lịch, bao gồm nhưng không giới hạn đến bản quyền, thương hiệu và logo, thuộc quyền sở hữu của chúng tôi hoặc các bên sở hữu khác. Bạn không được sao chép, sửa đổi, phân phối hoặc sử dụng bất kỳ tài liệu trên ứng dụng này mà không có sự cho phép trước bằng văn bản từ chúng tôi.\n
+
+        2. Sử dụng cá nhân: Ứng dụng di động du lịch chỉ được sử dụng cho mục đích cá nhân và phi thương mại. Bạn không được phép sử dụng ứng dụng này để thu thập thông tin cá nhân của người khác hoặc thực hiện bất kỳ hành vi vi phạm pháp luật nào.\n
+        3. Bảo mật thông tin: Chúng tôi cam kết bảo vệ thông tin cá nhân của bạn và không chia sẻ thông tin này với bất kỳ bên thứ ba nào. Bạn có thể xem chi tiết về chính sách bảo mật của chúng tôi tại mục "Chính sách bảo mật" trên ứng dụng.\n
+        4. Trách nhiệm người dùng: Bạn chịu trách nhiệm duy nhất đối với việc sử dụng ứng dụng di động du lịch và đảm bảo rằng bạn tuân thủ các quy định và quy tắc của chúng tôi. Bạn không được sử dụng ứng dụng này để gửi hoặc chia sẻ nội dung vi phạm pháp luật, đồi trụy, hay có tính xâm phạm đến quyền riêng tư của người khác.\n
+        5. Thay đổi và chấm dứt: Chúng tôi có quyền thay đổi, cập nhật hoặc chấm dứt ứng dụng di động du lịch bất cứ lúc nào mà không cần thông báo trước. Chúng tôi cũng có quyền từ chối hoặc hạn chế quyền truy cập của bạn vào ứng dụng mà không cần giải thích hay chịu trách nhiệm đối với bất kỳ tổn thất nào phát sinh từ việc đó.\n
+        6. Bồi thường: Bạn đồng ý bồi thường và miễn trừ chúng tôi khỏi bất kỳ trách nhiệm, thiệt hại, chi phí hoặặc tranh chấp nào phát sinh từ việc sử dụng ứng dụng di động du lịch của chúng tôi.\n
+        7. Liên kết đến bên thứ ba: Ứng dụng di động du lịch có thể chứa các liên kết đến các trang web hoặc dịch vụ của bên thứ ba. Chúng tôi không chịu trách nhiệm và không kiểm soát được nội dung hoặc chính sách bảo mật của các trang web hoặc dịch vụ này. Việc sử dụng các liên kết đến bên thứ ba là tùy ý của bạn và bạn chịu trách nhiệm về rủi ro khi sử dụng chúng.\n
+        8. Bản quyền và sở hữu trí tuệ của người khác: Chúng tôi tôn trọng quyền sở hữu trí tuệ của người khác và yêu cầu bạn cũng làm như vậy. Nếu bạn cho rằng nội dung nào trên ứng dụng của chúng tôi vi phạm quyền sở hữu trí tuệ của bạn, vui lòng liên hệ với chúng tôi để yêu cầu loại bỏ nội dung đó.\n
+        9. Điều khoản và quy định có hiệu lực: Các điều khoản và quy định này có hiệu lực từ ngày bạn bắt đầu sử dụng ứng dụng di động du lịch và tiếp tục áp dụng cho đến khi bạn ngừng sử dụng ứng dụng hoặc chúng tôi chấm dứt quyền truy cập của bạn. Các điều khoản và quy định này sẽ không bị ảnh hưởng bởi việc chấm dứt một phần của ứng dụng hoặc sự thay đổi của chúng.\n
+        Chúng tôi hy vọng rằng bạn sẽ có trải nghiệm tuyệt vời khi sử dụng ứng dụng di động du lịch của chúng tôi. Nếu bạn có bất kỳ câu hỏi hoặc yêu cầu nào về chính sách và quy định này, vui lòng liên hệ với chúng tôi.
+    ]]>
+</string>
+
 </resources>
